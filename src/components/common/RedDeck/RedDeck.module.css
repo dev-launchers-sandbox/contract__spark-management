@@ -1,0 +1,9 @@
+.RedDeck {
+  padding: 2;
+  border-radius: 10px;
+  background-color: #961a1e;
+  box-shadow: 0px 2.7141px 2.7141px rgba(0, 0, 0, 0.25);
+}
+img {
+  width: 10%;
+}
