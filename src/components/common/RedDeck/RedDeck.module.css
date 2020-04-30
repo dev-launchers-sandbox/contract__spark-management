@@ -1,12 +1,15 @@
 .RedDeck {
+  position: absolute;
   width: 126.88px;
   height: 126.88px;
-  padding: 2;
-  border-radius: 10px;
+  margin-right: 25%;
+  margin-left: 54%;
+  top: 60px;
+  border-radius: 3.39262px;
   background-color: #961a1e;
   box-shadow: 0px 2.7141px 2.7141px rgba(0, 0, 0, 0.25);
 }
-img {
+.RedDeck img {
   width: 114.67px;
   height: 113.31px;
   display: block;
@@ -18,7 +21,7 @@ img {
   text-transform: uppercase;
   font-style: normal;
   font-weight: normal;
-  font-size: 25px;
+  font-size: 20px;
   line-height: 24px;
   color: #ebe8c5;
 }

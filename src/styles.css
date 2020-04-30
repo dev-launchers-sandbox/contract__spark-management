@@ -4,6 +4,7 @@
   font-family: "SueEllenFrancisco";
   text-align: left;
   background-color: #d9fff4;
+  min-height: 100vh;
 }
 
 h1 {

@@ -2,13 +2,23 @@
   position: absolute;
   width: 128px;
   height: 55px;
+  margin-left: 23%;
+  top: 150px;
+
   font-family: Sue Ellen Francisco;
   font-style: normal;
   font-weight: normal;
-  font-size: 10px;
+  font-size: 13.8px;
   line-height: 19px;
-  text-align: center;
   display: flex;
-  color: black;
-  margin-bottom: 20%;
+  align-items: center;
+  text-align: center;
+}
+
+.Logo img {
+  margin-left: 26%;
+  width: 114.67px;
+  height: 113.31px;
+  position: relative;
+  top: 45px;
 }
