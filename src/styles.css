@@ -16,3 +16,16 @@ h1 {
 h2 {
   font-family: "SueEllenFrancisco";
 }
+.App p {
+  position: absolute;
+  width: 16 8.53px;
+  height: 16.96px;
+  font-family: Nunito;
+  font-size: 18px;
+  left: 42%;
+  bottom: 14%;
+  line-height: 17px;
+  /* identical to box height */
+
+  color: #000000;
+}

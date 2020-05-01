@@ -3,12 +3,12 @@
   width: 128px;
   height: 55px;
   margin-left: 23%;
-  top: 150px;
+  top: 170px;
 
   font-family: Sue Ellen Francisco;
   font-style: normal;
   font-weight: normal;
-  font-size: 13.8px;
+  font-size: 13px;
   line-height: 19px;
   display: flex;
   align-items: center;
@@ -20,5 +20,5 @@
   width: 114.67px;
   height: 113.31px;
   position: relative;
-  top: 45px;
+  top: 75px;
 }

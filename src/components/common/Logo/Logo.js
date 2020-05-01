@@ -8,9 +8,9 @@ export default class Logo extends React.Component {
     return (
       <div className={style.Logo}>
         <img src={RedLogo} alt="Logo" />
-        <p className={style.logoText}>
+        <h1 className={style.logoText}>
           MORE THAN A GAME. IT’S A LIFE CHANGING EXPERIENCE
-        </p>
+        </h1>
       </div>
     );
   }
