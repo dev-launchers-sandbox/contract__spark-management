@@ -3,7 +3,8 @@
 .App {
   font-family: "SueEllenFrancisco";
   text-align: left;
-  background-color: #d9fff4;
+  /* background-color: #d9fff4; */
+  background-color: white;
   min-height: 100vh;
 }
 
@@ -16,16 +17,14 @@ h1 {
 h2 {
   font-family: "SueEllenFrancisco";
 }
-.App p {
-  position: absolute;
-  width: 16 8.53px;
-  height: 16.96px;
-  font-family: Nunito;
-  font-size: 18px;
-  left: 42%;
-  bottom: 14%;
-  line-height: 17px;
-  /* identical to box height */
 
-  color: #000000;
+.upperRow {
+  margin-top: 2.5%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  justify-content: space-around;
 }

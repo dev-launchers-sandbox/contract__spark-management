@@ -1,0 +1,29 @@
+[
+  { "question": "para mí _________ es alegría pura" },
+  { "question": "__________ se mejora con el paso del tiempo" },
+  { "question": "_________ me da energía" },
+  { "question": "___________: mi vida en pocas palabras" },
+  { "question": "__________ me mantiene despierto/a por las noches " },
+  { "question": "Mi poder secreto es ____________" },
+  { "question": "Las figuras de autoridad son como ___________" },
+  {
+    "question": "Cuando las cosas se dificultan, _________ me mantiene motivado(a)"
+  },
+  {
+    "question": "Cuando tengo que pedirle ayuda a alguien (y realmente no quiero hacerlo) es como________"
+  },
+  { "question": "Siempre mantengo la esperanza para ___________" },
+  { "question": "Se titulará mi primer album o libro ___________" },
+  { "question": "Siempre lucharé por __________" },
+  { "question": "Ojalá pudiera hacer algo en cuanto a _______" },
+  { "question": "Nunca dejaré de creer en el poder de ______" },
+  { "question": "Tengo miedo de_____" },
+  { "question": "Me inspira(n) __________" },
+  { "question": "Si no hay esperanza, no hay _______." },
+  { "question": "El momento más mágico de mi vida fue como ________" },
+  { "question": "Mis valores principales son como ______" },
+  { "question": "Me siento triste cuando pienso en____" },
+  { "question": "Me siento feliz cuando pienso en ____" },
+  { "question": "Aquella vez cuando todo se cambió fue como _____" },
+  { "question": "para mí __________ es curativo" }
+]

@@ -1,5 +1,5 @@
-.discardHandButton {
-  position: absolute;
+.resetDecksButton {
+  flex: 1;
   width: 79.39px;
   height: 73.96px;
   background: #961a1e;
@@ -13,11 +13,8 @@
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
-  position: absolute;
-  left: 50%;
-  top: 85%;
 }
-.discardHandButton:hover {
+.resetDecksButton:hover {
   cursor: pointer;
   transform: scale(1.1);
 }

@@ -6,19 +6,16 @@ import PageBody from "./components/common/PageBody/PageBody";
 import RedDeck from "./components/common/RedDeck/RedDeck";
 import Logo from "./components/common/Logo/Logo";
 import Hand from "./components/common/Hand/Hand";
-import DiscardHandButton from "./components/common/DiscardHandButton/DiscardHandButton";
-import ResetDecksButton from "./components/common/ResetDecksButton/ResetDecksButton";
 
 function App() {
   return (
     <div className="App">
       <PageBody>
-        <Logo />
-        <RedDeck />
+        <div className="upperRow">
+          <Logo />
+          <RedDeck />
+        </div>
         <Hand />
-        <p className={style.becauseParagraph}>I chose this card because </p>
-        <DiscardHandButton />
-        <ResetDecksButton />
       </PageBody>
     </div>
   );

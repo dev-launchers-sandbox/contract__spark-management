@@ -1,3 +1,20 @@
+.OrangeCards {
+  position: relative;
+  margin: 1%;
+  padding: 1%;
+  width: 10vw;
+  height: 10vw;
+  min-width: 9rem;
+  min-height: 9rem;
+
+  background-color: #fdbd32;
+  color: black;
+  box-shadow: 0px 2.7141px 2.7141px rgba(0, 0, 0, 0.25);
+  border-radius: 3.39262px;
+
+  cursor: pointer;
+}
+
 .OrangeCards h1 {
   font-family: Sue Ellen Francisco;
   text-transform: uppercase;
@@ -7,12 +24,27 @@
   line-height: 24px;
   color: black;
 }
-.OrangeCards {
-  margin: 1%;
-  width: 127.56px;
-  height: 126.88px;
-  background-color: #fdbd32;
-  color: black;
-  box-shadow: 0px 2.7141px 2.7141px rgba(0, 0, 0, 0.25);
-  border-radius: 3.39262px;
+.OrangeCards:hover {
+  transform: scale(1.1);
+}
+
+.CopyToClipboardImage {
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  width: 15%;
+  opacity: 0.25;
+}
+.CopyToClipboardImage:hover {
+  opacity: 0.75;
+}
+.selectCardImage {
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  width: 15%;
+  opacity: 0.25;
+}
+.selectCardImage:hover {
+  opacity: 0.75;
 }
