@@ -1,0 +1,10 @@
+.selectCardIcon {
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  width: 15%;
+  opacity: 0.25;
+}
+.selectCardIcon:hover {
+  opacity: 0.75;
+}

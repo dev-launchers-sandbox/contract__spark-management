@@ -27,24 +27,3 @@
 .OrangeCards:hover {
   transform: scale(1.1);
 }
-
-.CopyToClipboardImage {
-  position: absolute;
-  bottom: 10%;
-  left: 10%;
-  width: 15%;
-  opacity: 0.25;
-}
-.CopyToClipboardImage:hover {
-  opacity: 0.75;
-}
-.selectCardImage {
-  position: absolute;
-  bottom: 10%;
-  right: 10%;
-  width: 15%;
-  opacity: 0.25;
-}
-.selectCardImage:hover {
-  opacity: 0.75;
-}

@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import style from "./styles.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import PageBody from "./components/common/PageBody/PageBody";
 import RedDeck from "./components/common/RedDeck/RedDeck";

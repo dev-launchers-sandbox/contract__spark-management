@@ -4,14 +4,14 @@ import style from "./Hand.module.css";
 import ResetDecksButton from "./ResetDecksButton/ResetDecksButton";
 import useDeck from "./../useDeck/useDeck";
 import YellowCard from "./../YellowCard/YellowCard";
-import YellowCardInfo from "/../../../../public/Data/YellowCards.json";
+import CommunityDeckYellow from "/../../../../public/Data/CommunityDeck/CommunityDeckYellow.json";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
 const NUM_CARDS_IN_HAND = 8;
 
 export default function Hand(props) {
   const [cards, setCards] = useState([]);
 
-  const { resetDecks, shuffleCards, drawCard } = useDeck(YellowCardInfo);
+  const { resetDecks, shuffleCards, drawCard } = useDeck(CommunityDeckYellow);
 
   // populateHand() : Draws NUM_CARDS_IN_HAND cards into the hand
   const populateCards = () => {
@@ -24,7 +24,6 @@ export default function Hand(props) {
 
   // disardHand() : Discards all cards from the hand
   const discardCards = () => {
-    console.log("it run");
     setCards([]);
   };
 
@@ -51,7 +50,6 @@ export default function Hand(props) {
     <div>
       <div className={style.Hand}>
         {cards.map(card => {
-          console.log("in map", cards);
           return (
             <YellowCard
               answer={card.answer}
