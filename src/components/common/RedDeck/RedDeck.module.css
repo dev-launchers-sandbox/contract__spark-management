@@ -46,3 +46,7 @@
 .CopyToClipboardImage:hover {
   opacity: 0.75;
 }
+.deckLogoArea {
+  width: 100%;
+  height: 100%;
+}

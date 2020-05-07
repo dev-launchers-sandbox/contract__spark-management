@@ -6,7 +6,7 @@ import SelectCardIcon from "./../Icons/SelectCardIcon/SelectCardIcon";
 
 export default function YellowCard(props) {
   return (
-    <div className={style.OrangeCards}>
+    <div className={style.YellowCards}>
       <div>
         <h1>{props.answer}</h1>
       </div>

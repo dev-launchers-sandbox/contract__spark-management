@@ -13,7 +13,7 @@ const notify = () => {
     position: toast.POSITION.BOTTOM_RIGHT,
     autoClose: 2500,
     className: css({
-      background: "transparent"
+      background: "white"
     }),
     bodyClassName: css({
       fontSize: "20px",

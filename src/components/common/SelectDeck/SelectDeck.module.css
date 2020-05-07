@@ -1,4 +1,12 @@
-.YellowCards {
+.selectDeckContainer {
+  margin-top: 5%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.selection {
   position: relative;
   margin: 1%;
   padding: 1%;
@@ -6,16 +14,12 @@
   height: 10vw;
   min-width: 9rem;
   min-height: 9rem;
-
-  background-color: #fdbd32;
   color: black;
   box-shadow: 0px 2.7141px 2.7141px rgba(0, 0, 0, 0.25);
   border-radius: 3.39262px;
-
   cursor: pointer;
 }
-
-.YellowCards h1 {
+.selection h1 {
   font-family: Sue Ellen Francisco;
   text-transform: uppercase;
   font-style: normal;
@@ -24,6 +28,9 @@
   line-height: 24px;
   color: black;
 }
-.YellowCards:hover {
+.selection:hover {
   transform: scale(1.1);
+}
+.Link {
+  text-decoration: none;
 }

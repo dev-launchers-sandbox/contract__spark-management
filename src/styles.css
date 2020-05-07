@@ -3,9 +3,8 @@
 .App {
   font-family: "SueEllenFrancisco";
   text-align: left;
-  /* background-color: #d9fff4; */
   background-color: white;
-  min-height: 100vh;
+  min-height: 80vh;
 }
 
 h1 {

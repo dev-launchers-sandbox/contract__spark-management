@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import style from "./Hand.module.css";
 
-import ResetDecksButton from "./ResetDecksButton/ResetDecksButton";
+import ResetButton from "./ResetButton/ResetButton";
 import useDeck from "./../useDeck/useDeck";
 import YellowCard from "./../YellowCard/YellowCard";
-import CommunityDeckYellow from "/../../../../public/Data/CommunityDeck/CommunityDeckYellow.json";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
 const NUM_CARDS_IN_HAND = 8;
 
 export default function Hand(props) {
-  const [cards, setCards] = useState([]);
-
-  const { resetDecks, shuffleCards, drawCard } = useDeck(CommunityDeckYellow);
+  const [cards, setCards] = useState([]); //Cards holds all of the cards that the hand is displaying
+  const { drawCard } = useDeck(props.deck); //Custom hook
 
   // populateHand() : Draws NUM_CARDS_IN_HAND cards into the hand
   const populateCards = () => {
@@ -62,7 +60,7 @@ export default function Hand(props) {
         })}
       </div>
       <div className={style.buttonHolder}>
-        <ResetDecksButton />
+        <ResetButton />
         <DiscardHandButton
           populateCards={populateCards}
           discardCards={discardCards}

@@ -1,23 +1,23 @@
 [
-  { "answer": "_____ makes me very happy" },
-  { "answer": "_____ heals me" },
-  { "answer": "________ gets better with age" },
-  { "answer": "I'm afraid of…" },
-  { "answer": "I'm inspired by..." },
-  { "answer": "I wish my superpower was" },
-  { "answer": "My secret power is..." },
-  { "answer": "When I am accepted it feels like _________" },
+  { "question": "_____ makes me very happy" },
+  { "question": "_____ heals me" },
+  { "question": "________ gets better with age" },
+  { "question": "I'm afraid of…" },
+  { "question": "I'm inspired by..." },
+  { "question": "I wish my superpower was" },
+  { "question": "My secret power is..." },
+  { "question": "When I am accepted it feels like _________" },
   {
-    "answer": "When I have to ask for help (and I don't want to) it feels like..."
+    "question": "When I have to ask for help (and I don't want to) it feels like..."
   },
-  { "answer": "Without hope, we don't have ____. " },
-  { "answer": "A very special moment in my life felt like..." },
-  { "answer": "The title for the movie about my life would be called…" },
-  { "answer": "My beliefs and values are like…" },
-  { "answer": "I feel sad when I think of..." },
-  { "answer": "I feel happy when I think of... " },
-  { "answer": "Big changes feel like… " },
-  { "answer": "When someone listens to me, it feels like... " },
-  { "answer": "When there is a surprise in my life it feels like... " },
-  { "answer": "I dream of..." }
+  { "question": "Without hope, we don't have ____. " },
+  { "question": "A very special moment in my life felt like..." },
+  { "question": "The title for the movie about my life would be called…" },
+  { "question": "My beliefs and values are like…" },
+  { "question": "I feel sad when I think of..." },
+  { "question": "I feel happy when I think of... " },
+  { "question": "Big changes feel like… " },
+  { "question": "When someone listens to me, it feels like... " },
+  { "question": "When there is a surprise in my life it feels like... " },
+  { "question": "I dream of..." }
 ]

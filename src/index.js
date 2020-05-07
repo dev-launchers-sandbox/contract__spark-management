@@ -3,22 +3,40 @@ import ReactDOM from "react-dom";
 import style from "./styles.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import PageBody from "./components/common/PageBody/PageBody";
-import RedDeck from "./components/common/RedDeck/RedDeck";
-import Logo from "./components/common/Logo/Logo";
-import Hand from "./components/common/Hand/Hand";
+import SelectDeck from "./components/common/SelectDeck/SelectDeck";
+
+import CommunityDeckRoute from "./routes/CommunityDeck.js";
+import ConversationalDeckRoute from "./routes/CommunityDeck.js";
+import SpanishDeckRoute from "./routes/SpanishDeck.js";
+import TeenDeckRoute from "./routes/TeenDeck.js";
 
 function App() {
   return (
-    <div className="App">
-      <PageBody>
-        <div className="upperRow">
-          <Logo />
-          <RedDeck />
-        </div>
-        <Hand />
-      </PageBody>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <SelectDeck />
+          </Route>
+
+          <Route path="/CommunityDeck">
+            <CommunityDeckRoute />
+          </Route>
+
+          <Route exact path="/ConversationalDeck">
+            <ConversationalDeckRoute />
+          </Route>
+
+          <Route exact path="/SpanishDeck">
+            <SpanishDeckRoute />
+          </Route>
+
+          <Route exact path="/TeenDeck">
+            <TeenDeckRoute />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
