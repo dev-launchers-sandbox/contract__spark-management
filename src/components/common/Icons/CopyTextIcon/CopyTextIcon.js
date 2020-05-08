@@ -5,8 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-const copyTextIcon =
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Toicon-icon-stone-copy.svg/1024px-Toicon-icon-stone-copy.svg.png";
+import clipboardIcon from "./../../../../../public/Images/clipboard-icon.png";
 
 const notify = () => {
   toast("Text Copied to Clipboard!", {
@@ -32,7 +31,7 @@ export default function CopyTextIcon(props) {
       <CopyToClipboard text={props.text}>
         <img
           className={style.CopyToClipboardIcon}
-          src={copyTextIcon}
+          src={clipboardIcon}
           alt="copy text"
           onClick={notify}
         />

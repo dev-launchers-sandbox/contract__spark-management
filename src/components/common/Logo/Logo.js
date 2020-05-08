@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Logo.module.css";
 
-import RedLogo from "/../../../../public/Images/spark-logo-alpha--red.png";
+import RedLogo from "/../../../../public/Images/red-spark-logo.png";
 
 export default class Logo extends React.Component {
   render() {

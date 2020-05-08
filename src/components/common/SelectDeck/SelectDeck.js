@@ -2,48 +2,81 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./SelectDeck.module.css";
 
+import Logo from "../Logo/Logo.js";
 import PageBody from "../PageBody/PageBody.js";
+
+import RedLogo from "/../../../../public/Images/red-spark-logo.png";
 
 export default function SelectDeck() {
   return (
     <PageBody>
-      <div className={style.selectDeckContainer}>
-        <Link className={style.Link} to="/CommunityDeck">
-          <div
-            style={{ backgroundColor: "#fdbd32" }}
-            className={style.selection}
-          >
-            <h1>Community Deck </h1>
-          </div>
-        </Link>
-
-        <Link className={style.Link} to="/ConversationalDeck">
-          <div
-            style={{ backgroundColor: "#961a1e" }}
-            className={style.selection}
-          >
-            <h1> Conversational Deck </h1>
-          </div>
-        </Link>
-
-        <Link className={style.Link} to="/SpanishDeck">
-          <div
-            style={{ backgroundColor: "#961a1e" }}
-            className={style.selection}
-          >
-            <h1> Spanish Deck </h1>
-          </div>
-        </Link>
-
-        <Link className={style.Link} to="/TeenDeck">
-          <div
-            style={{ backgroundColor: "#fdbd32" }}
-            className={style.selection}
-          >
-            <h1>Teen Deck </h1>
-          </div>
-        </Link>
+      <div className={style.upperRow}>
+        <a className={style.logo} href="https://spark4community.com/">
+          <img
+            src="https://spark4community.com/wp-content/uploads/2020/02/logo-wide-400w.png"
+            alt="logo"
+          />
+        </a>
+        <div className={style.tagline}>
+          The game that connects communities, one conversation at a time.
+        </div>
       </div>
+      <div className={style.selectDeckContainer}>
+        <div className={style.decksHolder}>
+          <Link className={style.Link} to="/CommunityDeck">
+            <div
+              style={{ backgroundColor: "#9f112a" }}
+              className={style.selection}
+            >
+              <span>Community Deck</span>
+            </div>
+          </Link>
+          <Link className={style.Link} to="/ConversationalDeck">
+            <div
+              style={{ backgroundColor: "#9f112a" }}
+              className={style.selection}
+            >
+              <span>Conversational Deck</span>{" "}
+            </div>
+          </Link>
+          <Link className={style.Link} to="/SpanishDeck">
+            <div
+              style={{ backgroundColor: "#9f112a" }}
+              className={style.selection}
+            >
+              <span>Spanish Deck</span>{" "}
+            </div>
+          </Link>
+          <Link className={style.Link} to="/TeenDeck">
+            <div
+              style={{ backgroundColor: "#9f112a" }}
+              className={style.selection}
+            >
+              <span>Teen Deck</span>
+            </div>
+          </Link>
+        </div>
+      </div>
+      <div className={style.descriptionArea}>
+        <div>
+          <h1>Ready to S.P.A.R.K. a connection?</h1>
+        </div>
+        <p>
+          S.P.A.R.K. is an interactive card game that facilitates a fun,
+          community building experience.
+        </p>
+        <p>
+          The game was designed to help create conditions for equity/inclusion
+          work, normalizing that relational trust is required for progress.
+        </p>
+        <p>
+          {" "}
+          With a unique structure, S.P.A.R.K. encourages listening with
+          curiosity, which in turn allows us to better empathize with others
+          across difference.
+        </p>
+      </div>
+      <div className={style.footer}>S.P.A.R.K. 2020 ©</div>
     </PageBody>
   );
 }

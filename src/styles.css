@@ -1,14 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Sue+Ellen+Francisco&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap");
+
+body {
+  background-color: #fff9ef;
+}
 
 .App {
   font-family: "SueEllenFrancisco";
   text-align: left;
-  background-color: white;
   min-height: 80vh;
 }
 
 h1 {
-  font-family: "SueEllenFrancisco";
+  font-family: "Nunito Sans", sans-serif;
   line-height: 1em;
   text-align: center;
 }
