@@ -8,6 +8,8 @@ import Hand from "../components/common/Hand/Hand";
 import TeenDeckYellow from "../../public/Data/TeenDeck/TeenDeckYellow.json";
 import TeenDeckRed from "../../public/Data/TeenDeck/TeenDeckRed.json";
 
+//This makes the code cleaner by returning the teen deck route that will get called on index.js
+
 export default function TeenDeck() {
   return (
     <PageBody>

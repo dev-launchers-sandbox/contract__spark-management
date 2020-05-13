@@ -6,7 +6,8 @@ import { css } from "glamor";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import clipboardIcon from "./../../../../../public/Images/clipboard-icon.png";
-
+// this is the notifications that will appear when the text is coppied to the clipboard.
+// This is using the React toastify package.
 const notify = () => {
   toast("Text Copied to Clipboard!", {
     position: toast.POSITION.BOTTOM_RIGHT,

@@ -8,6 +8,8 @@ import Hand from "../components/common/Hand/Hand";
 import SpanishDeckYellow from "../../public/Data/SpanishDeck/SpanishDeckYellow.json";
 import SpanishDeckRed from "../../public/Data/SpanishDeck/SpanishDeckRed.json";
 
+//This makes the code cleaner by returning the spanish deck route that will get called on index.js
+
 export default function SpanishDeck() {
   return (
     <PageBody>

@@ -7,7 +7,7 @@ import CopyTextIcon from "./../Icons/CopyTextIcon/CopyTextIcon";
 import SelectCardIcon from "./../Icons/SelectCardIcon/SelectCardIcon";
 
 export default function YellowCard(props) {
-  //if (props.isFlipped) alert("flipped");
+  //styling for all of the CardFlip properties
   return (
     <ReactCardFlip
       containerStyle={{ margin: "2%" }}
@@ -17,6 +17,7 @@ export default function YellowCard(props) {
       isFlipped={props.isFlipped}
     >
       <div
+        // the key is what makes the ReactCardFlip package to know which part is the front or back part.
         key="front"
         style={{ transformStyle: "initial" }}
         className={style.YellowCard}
@@ -31,6 +32,7 @@ export default function YellowCard(props) {
       </div>
 
       <div
+        //The key is what makes the ReactCardFlip package to know which part is the front or back part.
         key="back"
         style={{ transformStyle: "initial" }}
         className={style.YellowCard}

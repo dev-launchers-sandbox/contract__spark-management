@@ -35,7 +35,7 @@ export default function Hand(props) {
       populateCards();
     }, 1000);
   };
-
+  // flipCard() : It flips the card.
   const flipCard = (cardIndex, flipState) => {
     let flipStatesCopy = [...flipStates];
     flipStatesCopy[cardIndex] = flipState;
@@ -43,12 +43,13 @@ export default function Hand(props) {
     // Add new card to the hand and set to state
     setFlipStates([...flipStatesCopy]);
   };
-
+  //  hideAllCards(): Hides all of the cards by fliping them.
   const hideAllCards = () => {
     let hiddenFlipStates = [];
     for (let i = 0; i < NUM_CARDS_IN_HAND; i++) hiddenFlipStates.push(true);
     setFlipStates(hiddenFlipStates);
   };
+  // revealAllCards(): Reveals all cards by fliping them.
   const revealAllCards = () => {
     setFlipStates(initialFlipStates);
   };

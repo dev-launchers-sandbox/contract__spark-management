@@ -8,9 +8,11 @@ import PageBody from "../PageBody/PageBody.js";
 import RedLogo from "/../../../../public/Images/red-spark-logo.png";
 
 export default function SelectDeck() {
+  // This is what will first appear and it will redirect the user into the selected deck.
   return (
     <PageBody>
       <div className={style.upperRow}>
+        {/* When the logo gets clicked, it wll open the sparkcommunity webpage */}
         <a className={style.logo} href="https://spark4community.com/">
           <img
             src="https://spark4community.com/wp-content/uploads/2020/02/logo-wide-400w.png"
@@ -24,6 +26,7 @@ export default function SelectDeck() {
       <div className={style.selectDeckContainer}>
         <div className={style.decksHolder}>
           <Link className={style.Link} to="/CommunityDeck">
+            {/*Links you to the community deck*/}
             <div
               style={{ backgroundColor: "#9f112a" }}
               className={style.selection}
@@ -32,6 +35,7 @@ export default function SelectDeck() {
             </div>
           </Link>
           <Link className={style.Link} to="/ConversationalDeck">
+            {/*Links you to the Conversational Deck*/}
             <div
               style={{ backgroundColor: "#9f112a" }}
               className={style.selection}
@@ -40,6 +44,7 @@ export default function SelectDeck() {
             </div>
           </Link>
           <Link className={style.Link} to="/SpanishDeck">
+            {/*Links you to the Spanish deck*/}
             <div
               style={{ backgroundColor: "#9f112a" }}
               className={style.selection}
@@ -48,6 +53,7 @@ export default function SelectDeck() {
             </div>
           </Link>
           <Link className={style.Link} to="/TeenDeck">
+            {/*Links you to the Youth deck*/}
             <div
               style={{ backgroundColor: "#9f112a" }}
               className={style.selection}

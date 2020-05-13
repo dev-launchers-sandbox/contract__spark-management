@@ -8,6 +8,8 @@ import Hand from "../components/common/Hand/Hand";
 import ConversationalDeckYellow from "../../public/Data/ConversationalDeck/ConversationalDeckYellow.json";
 import ConversationalDeckRed from "../../public/Data/ConversationalDeck/ConversationalDeckRed.json";
 
+//This makes the code cleaner by returning the conversational deck route that will get called on index.js
+
 export default function ConversationalDeck() {
   return (
     <PageBody>

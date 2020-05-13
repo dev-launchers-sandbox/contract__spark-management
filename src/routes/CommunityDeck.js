@@ -8,6 +8,8 @@ import Hand from "../components/common/Hand/Hand";
 import CommunityDeckYellow from "../../public/Data/CommunityDeck/CommunityDeckYellow.json";
 import CommunityDeckRed from "../../public/Data/CommunityDeck/CommunityDeckRed.json";
 
+//This makes the code cleaner by returning the community deck route that will get called on index.js
+
 export default function CommunityDeck() {
   return (
     <PageBody>
