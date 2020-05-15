@@ -31,7 +31,7 @@ export default function SelectDeck() {
               style={{ backgroundColor: "#9f112a" }}
               className={style.selection}
             >
-              <span>Community Deck</span>
+              <span>Community Deck </span>
             </div>
           </Link>
           <Link className={style.Link} to="/ConversationalDeck">
@@ -52,13 +52,13 @@ export default function SelectDeck() {
               <span>Spanish Deck</span>{" "}
             </div>
           </Link>
-          <Link className={style.Link} to="/TeenDeck">
+          <Link className={style.Link} to="/YouthDeck">
             {/*Links you to the Youth deck*/}
             <div
               style={{ backgroundColor: "#9f112a" }}
               className={style.selection}
             >
-              <span>Teen Deck</span>
+              <span>Youth Deck</span>
             </div>
           </Link>
         </div>
@@ -67,6 +67,7 @@ export default function SelectDeck() {
         <div>
           <h1>Ready to S.P.A.R.K. a connection?</h1>
         </div>
+
         <p>
           S.P.A.R.K. is an interactive card game that facilitates a fun,
           community building experience.

@@ -24,21 +24,28 @@ export default function useDeck(cardArray) {
   };
 
   const drawCard = () => {
-    // This returns a new card that has been "popped" from the corresponding deck.
+    // This returns a new card that has been "popped" from the corresponding deck
     const newCard = cards.pop();
     return newCard;
   };
 
   const shuffleCards = () => {
     //this will return a new version of the deck, but shuffled.
-    for (let i = 0; i < cards.length * 2; i++) {
-      let randIndex = parseInt(Math.random() * cards.length);
-      cards.push(cards.splice(randIndex, 1)[0]);
-    }
-
+    shuffle(cards);
     setCards(cards);
-    console.log("cards", cards);
   };
   // creates the useDeck Custom Hook
   return { resetCards, shuffleCards, drawCard };
+}
+
+// Fisher-Yates shuffling algorithm (called in shuffleCards())
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+
+    // swap elements array[i] and array[j]
+    // we use "destructuring assignment" syntax to achieve that
+    // let t = array[i]; array[i] = array[j]; array[j] = t
+    [array[i], array[j]] = [array[j], array[i]];
+  }
 }

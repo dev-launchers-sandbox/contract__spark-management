@@ -9,8 +9,12 @@ import WhiteLogo from "/../../../../public/Images/white-spark-logo.png";
 
 export default function RedDeck(props) {
   const { drawCard } = useDeck(props.deck); // uses the useDeck
-  const [card, setCard] = useState(drawCard().question); //Card that is being dislplayed
+  const [card, setCard] = useState(""); //Card that is being dislplayed
   const [isFlipped, setIsFlipped] = useState(true);
+
+  React.useEffect(() => {
+    setCard(drawCard().question);
+  }, []);
 
   function onClick() {
     // when the deck is clicked it checks whether the deck is showing a card or the deck.

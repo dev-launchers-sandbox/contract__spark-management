@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import PageBody from "../components/common/PageBody/PageBody";
 import RedDeck from "../components/common/RedDeck/RedDeck";
@@ -11,6 +11,9 @@ import CommunityDeckRed from "../../public/Data/CommunityDeck/CommunityDeckRed.j
 //This makes the code cleaner by returning the community deck route that will get called on index.js
 
 export default function CommunityDeck() {
+  useEffect(() => {
+    console.log("CommunityDeck Mounted!");
+  }, []);
   return (
     <PageBody>
       <div className="upperRow">

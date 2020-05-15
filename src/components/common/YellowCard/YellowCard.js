@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./YellowCard.module.css";
 import ReactCardFlip from "react-card-flip";
 
@@ -24,7 +24,9 @@ export default function YellowCard(props) {
       >
         <div style={{ width: "100%", height: "100%" }}>
           <div>
-            <h1>{props.answer}</h1>
+            <h1 style={{ fontSize: props.emoji ? "4rem" : "1.2rem" }}>
+              {props.answer}
+            </h1>
           </div>
           <CopyTextIcon text={props.answer} />
           <SelectCardIcon onClick={props.onClick} />

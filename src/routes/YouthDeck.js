@@ -5,19 +5,19 @@ import RedDeck from "../components/common/RedDeck/RedDeck";
 import Logo from "../components/common/Logo/Logo";
 import Hand from "../components/common/Hand/Hand";
 
-import TeenDeckYellow from "../../public/Data/TeenDeck/TeenDeckYellow.json";
-import TeenDeckRed from "../../public/Data/TeenDeck/TeenDeckRed.json";
+import YouthDeckYellow from "../../public/Data/YouthDeck/YouthDeckYellow.json";
+import YouthDeckRed from "../../public/Data/YouthDeck/YouthDeckRed.json";
 
 //This makes the code cleaner by returning the teen deck route that will get called on index.js
 
-export default function TeenDeck() {
+export default function YouthDeck() {
   return (
     <PageBody>
       <div className="upperRow">
         <Logo />
-        <RedDeck deck={TeenDeckRed} />
+        <RedDeck deck={YouthDeckRed} />
       </div>
-      <Hand deck={TeenDeckYellow} />
+      <Hand deck={YouthDeckYellow} />
     </PageBody>
   );
 }

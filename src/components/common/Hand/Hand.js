@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import style from "./Hand.module.css";
 
-import ResetButton from "./ResetButton/ResetButton";
 import useDeck from "./../useDeck/useDeck";
 import YellowCard from "./../YellowCard/YellowCard";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
@@ -91,17 +90,23 @@ export default function Hand(props) {
                 //flipCard(card);
                 discardCardAndDraw(card);
               }}
+              emoji={card.isEmoji}
               key={card.answer} // Stops React unique key error
             />
           );
         })}
       </div>
       <div className={style.buttonHolder}>
-        <ResetButton />
         <DiscardHandButton
           populateCards={populateCards}
           discardCards={discardCards}
         />
+      </div>
+      <div className={style.instructionLikHolder}>
+        <a href="https://spark4community.com/playing-remotely">
+          {" "}
+          Intructions!{" "}
+        </a>
       </div>
     </div>
   );
