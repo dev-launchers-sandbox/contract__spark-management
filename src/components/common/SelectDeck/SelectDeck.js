@@ -5,7 +5,7 @@ import style from "./SelectDeck.module.css";
 import Logo from "../Logo/Logo.js";
 import PageBody from "../PageBody/PageBody.js";
 
-import RedLogo from "/../../../../public/Images/red-spark-logo.png";
+import RedLogo from "./../../../images/red-spark-logo.png";
 
 export default function SelectDeck() {
   // This is what will first appear and it will redirect the user into the selected deck.

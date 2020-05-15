@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "./YellowCard.module.css";
 import ReactCardFlip from "react-card-flip";
 
-import RedLogo from "/../../../../public/Images/red-spark-logo.png";
+import RedLogo from "./../../../images/red-spark-logo.png";
 import CopyTextIcon from "./../Icons/CopyTextIcon/CopyTextIcon";
 import SelectCardIcon from "./../Icons/SelectCardIcon/SelectCardIcon";
 
