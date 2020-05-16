@@ -10,9 +10,12 @@ import ConversationalDeckRoute from "./routes/ConversationalDeck.js";
 import SpanishDeckRoute from "./routes/SpanishDeck.js";
 import YouthDeckRoute from "./routes/YouthDeck.js";
 
+// Allows us to serve up the app from any arbitrary directory on a server
+const getBasename = path => path.substr(0, path.lastIndexOf('/'));
+
 function App() {
   return (
-    <Router>
+    <Router basename={getBasename(window.location.pathname)}>
       <div className="App">
         <Switch>
           <Route exact path="/">

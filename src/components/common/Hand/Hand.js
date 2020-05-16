@@ -61,7 +61,9 @@ export default function Hand(props) {
 
     flipCard(index, true);
     setTimeout(() => {
-      cardsCopy[index].answer = drawCard().answer;
+      let newCard = drawCard();
+      cardsCopy[index].answer = newCard.answer;
+      cardsCopy[index].isEmoji = newCard.isEmoji;
 
       // Add new card to the hand and set to state
       setCards([...cardsCopy]);
