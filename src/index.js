@@ -11,7 +11,7 @@ import SpanishDeckRoute from "./routes/SpanishDeck.js";
 import YouthDeckRoute from "./routes/YouthDeck.js";
 
 // Allows us to serve up the app from any arbitrary directory on a server
-const getBasename = path => path.substr(0, path.lastIndexOf('/'));
+const getBasename = path => path.substr(0, path.lastIndexOf("/"));
 
 function App() {
   return (

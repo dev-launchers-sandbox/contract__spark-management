@@ -5,7 +5,7 @@ import style from "./SelectDeck.module.css";
 import Logo from "../Logo/Logo.js";
 import PageBody from "../PageBody/PageBody.js";
 
-import RedLogo from "./../../../images/red-spark-logo.png";
+import TransparentLogo from "./../../../images/spark_app_logo_transparent.png";
 
 export default function SelectDeck() {
   // This is what will first appear and it will redirect the user into the selected deck.
@@ -14,10 +14,7 @@ export default function SelectDeck() {
       <div className={style.upperRow}>
         {/* When the logo gets clicked, it wll open the sparkcommunity webpage */}
         <a className={style.logo} href="https://spark4community.com/">
-          <img
-            src="https://spark4community.com/wp-content/uploads/2020/02/logo-wide-400w.png"
-            alt="logo"
-          />
+          <img src={TransparentLogo} alt="logo" />
         </a>
         <div className={style.tagline}>
           The game that connects communities, one conversation at a time.
