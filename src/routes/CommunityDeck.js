@@ -4,6 +4,7 @@ import PageBody from "../components/common/PageBody/PageBody";
 import RedDeck from "../components/common/RedDeck/RedDeck";
 import Logo from "../components/common/Logo/Logo";
 import Hand from "../components/common/Hand/Hand";
+import { Link, useParams } from "react-router-dom";
 
 import CommunityDeckYellow from "../data/CommunityDeck/CommunityDeckYellow.json";
 import CommunityDeckRed from "../data/CommunityDeck/CommunityDeckRed.json";
@@ -11,13 +12,14 @@ import CommunityDeckRed from "../data/CommunityDeck/CommunityDeckRed.json";
 //This makes the code cleaner by returning the community deck route that will get called on index.js
 
 export default function CommunityDeck() {
+  let { code } = useParams();
   useEffect(() => {
     console.log("CommunityDeck Mounted!");
   }, []);
   return (
     <PageBody>
       <div className="upperRow">
-        <Logo />
+        <Logo marginTop="4%" />
         <RedDeck deck={CommunityDeckRed} />
       </div>
       <Hand deck={CommunityDeckYellow} />

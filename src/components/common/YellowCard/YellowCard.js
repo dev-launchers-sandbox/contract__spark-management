@@ -44,3 +44,6 @@ export default function YellowCard(props) {
     </ReactCardFlip>
   );
 }
+YellowCard.defaultProps = {
+  emoji: false
+};
