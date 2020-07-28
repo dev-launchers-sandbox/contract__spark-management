@@ -19,6 +19,7 @@ import ConversationalDeckRoute from "./routes/ConversationalDeck.js";
 import SpanishDeckRoute from "./routes/SpanishDeck.js";
 import YouthDeckRoute from "./routes/YouthDeck.js";
 import LoginPageRoute from "../src/routes/LoginPage/LoginPage.js";
+import AdminLoginPage from "../src/routes/AdminLoginPage/AdminLoginPage.js";
 
 import Footer from "../src/components/common/Footer/Footer.js";
 
@@ -54,6 +55,9 @@ function App() {
           <Route exact path="/">
             {/*When the app if 1st started, we want the user to be able to select the deck.*/}
             <LoginPageRoute />
+          </Route>
+          <Route exact path="/AdminLoginPage">
+            <AdminLoginPage />
           </Route>
           <Route exact path="/:code">
             <SelectDeck />

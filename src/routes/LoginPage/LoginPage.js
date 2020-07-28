@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import style from "./LoginPage.module.css";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Link,
@@ -18,6 +18,7 @@ import Logo from "../../components/common/Logo/Logo.js";
 import SelectDeck from "../../components/common/SelectDeck/SelectDeck.js";
 import LoadingOverlay from "react-loading-overlay";
 import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
+import sparkLogo from "../../images/spark_app_logo_transparent.png";
 
 function LoginPage(props) {
   let [form, setForm] = useState({ code: "" });
@@ -149,7 +150,7 @@ function LoginPage(props) {
         <div className={style.loginPage}>
           <EULAModal />
           <div className={style.brandedLogo}>
-            <Logo />
+            <img className={style.sparkLogo} src={sparkLogo} alt="logo" />
           </div>
 
           <h1 style={{ fontFamily: "Sue Ellen Francisco" }}>
