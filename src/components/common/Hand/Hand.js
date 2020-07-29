@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import style from "./Hand.module.css";
-
+import { BrowserRouter as Router, Redirect, useParams } from "react-router-dom";
 import useDeck from "./../useDeck/useDeck";
 import YellowCard from "./../YellowCard/YellowCard";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
@@ -10,6 +10,7 @@ let initialFlipStates = [];
 for (let i = 0; i < NUM_CARDS_IN_HAND; i++) initialFlipStates.push(false);
 
 export default function Hand(props) {
+  let { code } = useParams();
   const { drawCard } = useDeck(props.deck); //Custom hook
   const [cards, setCards] = useState([]); //Cards holds all of the cards that the hand is displaying
   const [flipStates, setFlipStates] = useState(initialFlipStates);
@@ -56,6 +57,7 @@ export default function Hand(props) {
   // discardCardAndDraw() : Discards the supplied card and replaces it with a new one
   const discardCardAndDraw = card => {
     // Remove card from the hand
+    console.log(card);
     let cardsCopy = [...cards];
     const index = cardsCopy.indexOf(card);
 
@@ -110,6 +112,8 @@ export default function Hand(props) {
           Intructions!{" "}
         </a>
       </div>
+      {/* Checks if the code has been verified*/}
+      {sessionStorage.getItem(code) === null && <Redirect to="/" />}
     </div>
   );
 }

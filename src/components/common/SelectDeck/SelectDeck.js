@@ -1,13 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import ReactModal from "react-modal";
+import { Link, useParams, Redirect } from "react-router-dom";
 import style from "./SelectDeck.module.css";
-
+import axios from "axios";
 import Logo from "../Logo/Logo.js";
 import PageBody from "../PageBody/PageBody.js";
+import EULAModal from "../EULAModal/EULAModal.js";
 
 import TransparentLogo from "./../../../images/spark_app_logo_transparent.png";
 
-export default function SelectDeck() {
+export default function SelectDeck(props) {
+  const [statusCode, setStatusCode] = useState();
+  let { code } = useParams();
+  console.log("params code: ", code);
   // This is what will first appear and it will redirect the user into the selected deck.
   return (
     <PageBody>
@@ -16,13 +21,15 @@ export default function SelectDeck() {
         <a className={style.logo} href="https://spark4community.com/">
           <img src={TransparentLogo} alt="logo" />
         </a>
-        <div className={style.tagline}>
-          The game that connects communities, one conversation at a time.
-        </div>
+        <Link to="/">
+          <div className={style.tagline}>
+            The game that connects communities, one conversation at a time.
+          </div>
+        </Link>
       </div>
       <div className={style.selectDeckContainer}>
         <div className={style.decksHolder}>
-          <Link className={style.Link} to="/CommunityDeck">
+          <Link className={style.Link} to={`/${code}/CommunityDeck`}>
             {/*Links you to the community deck*/}
             <div
               style={{ backgroundColor: "#9f112a" }}
@@ -31,7 +38,7 @@ export default function SelectDeck() {
               <span>Community Deck </span>
             </div>
           </Link>
-          <Link className={style.Link} to="/ConversationalDeck">
+          <Link className={style.Link} to={`/${code}/ConversationalDeck`}>
             {/*Links you to the Conversational Deck*/}
             <div
               style={{ backgroundColor: "#9f112a" }}
@@ -40,7 +47,7 @@ export default function SelectDeck() {
               <span>Conversational Deck</span>{" "}
             </div>
           </Link>
-          <Link className={style.Link} to="/SpanishDeck">
+          <Link className={style.Link} to={`/${code}/SpanishDeck`}>
             {/*Links you to the Spanish deck*/}
             <div
               style={{ backgroundColor: "#9f112a" }}
@@ -49,7 +56,7 @@ export default function SelectDeck() {
               <span>Spanish Deck</span>{" "}
             </div>
           </Link>
-          <Link className={style.Link} to="/YouthDeck">
+          <Link className={style.Link} to={`/${code}/YouthDeck`}>
             {/*Links you to the Youth deck*/}
             <div
               style={{ backgroundColor: "#9f112a" }}
@@ -80,7 +87,8 @@ export default function SelectDeck() {
           across difference.
         </p>
       </div>
-      <div className={style.footer}>S.P.A.R.K. 2020 ©</div>
+      {/* Checks if the code has been verified*/}
+      {sessionStorage.getItem(code) === null && <Redirect to="/" />}
     </PageBody>
   );
 }

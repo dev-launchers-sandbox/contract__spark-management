@@ -1,0 +1,61 @@
+.adminLoginPage {
+  min-height: 100vh;
+}
+
+.logo {
+  height: 9vh;
+}
+
+.loginContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.loginPopup {
+  width: 50vh;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10%;
+  background-color: #912123;
+  border-radius: 0.5em;
+}
+
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.button {
+  background-color: #f3e8cb;
+  color: black;
+  width: 16.5em;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.signUpTag {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.signUpTag a {
+  color: #912123;
+  text-decoration: none;
+}
+
+.signUpTag a:hover {
+  text-decoration: underline;
+}
