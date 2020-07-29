@@ -109,7 +109,6 @@ function AdminLoginPage() {
                   onChange={handleChange}
                 />
                 <br />
-                <br />
                 <label>Password:</label>
                 <br />
                 <input
