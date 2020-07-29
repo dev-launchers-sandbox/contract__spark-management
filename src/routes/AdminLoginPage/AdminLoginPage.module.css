@@ -46,21 +46,6 @@
   border-radius: 6px;
 }
 
-.signUpTag {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.signUpTag a {
-  color: #912123;
-  text-decoration: none;
-}
-
-.signUpTag a:hover {
-  text-decoration: underline;
-}
-
 input[type="password"] {
   width: 16.9vw;
   height: 6vh;

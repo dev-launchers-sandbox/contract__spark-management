@@ -21,6 +21,31 @@ function AdminLoginPage() {
   const [redirect, setRedirect] = useState(false);
 
   const [userAccounts, setUserAccounts] = useState([]);
+  // This sets the mock adapter on the default instance
+  var mock = new MockAdapter(axios);
+
+  // Mock any GET request to /users
+  // arguments for reply are (status, data, headers)
+  mock.onGet("/users").reply(200, {
+    users: [
+      {
+        userName: "Alejandro",
+        password: 54223
+      },
+      {
+        userName: "Guillermo",
+        password: 3333
+      },
+      {
+        userName: "Kris",
+        password: 4444
+      },
+      {
+        userName: "Luis",
+        password: 7777
+      }
+    ]
+  });
 
   useEffect(() => {
     const getMockData = async () => {
@@ -42,7 +67,7 @@ function AdminLoginPage() {
     });
   };
 
-  //when the log in button this is called
+  //when the log in button is pressed this is called
   const handleSubmit = event => {
     //prevents the page from refreshing when submitting
     event.preventDefault();
@@ -62,11 +87,6 @@ function AdminLoginPage() {
         form.userName === account.userName &&
         form.password === account.password.toString()
       ) {
-        console.log("form username: ", form.userName);
-        console.log("form password: ", form.password);
-        console.log("account username: ", account.userName);
-        console.log("account password: ", account.password);
-        console.log("true");
         setRedirect(true);
         return;
       }

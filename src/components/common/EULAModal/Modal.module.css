@@ -9,6 +9,10 @@
   margin-top: 1.5em;
 }
 
+label {
+  font-family: none;
+}
+
 .checkBox {
   margin-right: 2.2em;
 }
