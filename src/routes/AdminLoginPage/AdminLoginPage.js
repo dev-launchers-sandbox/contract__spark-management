@@ -20,17 +20,20 @@ function AdminLoginPage() {
 
   const [redirect, setRedirect] = useState(false);
 
-  const userAccounts = [
-    {
-      userName: "Alejandro",
-      password: 54223
-    },
-    {
-      userName: "Guillermo",
-      password: 3333
-    }
-  ];
+  const [userAccounts, setUserAccounts] = useState([]);
 
+  useEffect(() => {
+    const getMockData = async () => {
+      //gets the response from the get request
+      const response = await axios.get("/users");
+
+      //sets the users array that we get from the get request to the userAccounts
+      setUserAccounts(response.data.users);
+    };
+    getMockData();
+  }, []);
+
+  //updates state when form is updated
   const handleChange = event => {
     const { name, value } = event.target;
     setForm({
@@ -39,11 +42,20 @@ function AdminLoginPage() {
     });
   };
 
+  //when the log in button this is called
   const handleSubmit = event => {
+    //prevents the page from refreshing when submitting
     event.preventDefault();
 
+    checkIfUserExists();
     console.log("func is being called");
+  };
 
+  const checkIfUserExists = () => {
+    /*
+     loops through the userAccounts array and checks if the username
+     and password the user inputted equals the username and password in the array
+    */
     for (let i = 0; i < userAccounts.length; i++) {
       let account = userAccounts[i];
       if (
@@ -56,20 +68,14 @@ function AdminLoginPage() {
         console.log("account password: ", account.password);
         console.log("true");
         setRedirect(true);
-        break;
-      } else {
-        console.log("form username: ", form.userName);
-        console.log("form password: ", form.password);
-        console.log("account username: ", account.userName);
-        console.log("account password: ", account.password);
-        console.log("false");
-        setRedirect(false);
-        notify();
-        break;
+        return;
       }
     }
+    //notifies the user if they inputted the wrong username and password
+    notify();
   };
 
+  //gets called when the user inputs the wrong username and password
   const notify = () => {
     toast("Account doesn't exist", {
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -122,12 +128,8 @@ function AdminLoginPage() {
             </div>
           </div>
         </div>
-        <div className={style.signUpTag}>
-          <p>
-            Don't have an account? <a href="#example">Sign up</a>
-          </p>
-        </div>
       </div>
+      {/*if true redirect the user to the main page */}
       {redirect ? <Redirect to="/" /> : ""}
     </PageBody>
   );
