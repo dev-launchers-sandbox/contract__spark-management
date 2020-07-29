@@ -188,6 +188,7 @@ function EULAModal() {
 
   return (
     <div className={style.modalContainer}>
+      {/*<button onClick={handleOpenModal}>open</button>*/}
       {/*if the user hasn't accepted the terms then it will display the modal.
         if the user did accept the the terms then it won't display the model
     */}
