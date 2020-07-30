@@ -21,6 +21,7 @@ import SpanishDeckRoute from "./routes/SpanishDeck.js";
 import YouthDeckRoute from "./routes/YouthDeck.js";
 import LoginPageRoute from "../src/routes/LoginPage/LoginPage.js";
 import AdminLoginPage from "../src/routes/AdminLoginPage/AdminLoginPage.js";
+import mockData from "../src/mockData/MockData.js";
 
 import Footer from "../src/components/common/Footer/Footer.js";
 
@@ -31,6 +32,8 @@ function App() {
   ReactModal.setAppElement("#root");
   let [statusCode, setStatusCode] = useState(null);
 
+  //creates the mock requests
+  mockData();
   /*
   useEffect(() => {
     const asyncFunc = async () => {
