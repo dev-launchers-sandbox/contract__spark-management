@@ -8,6 +8,7 @@ import { Link, useParams } from "react-router-dom";
 
 import YouthDeckYellow from "../data/YouthDeck/YouthDeckYellow.json";
 import YouthDeckRed from "../data/YouthDeck/YouthDeckRed.json";
+import InstructionButton from "../components/common/InstructionButton/InstructionButton";
 
 //This makes the code cleaner by returning the teen deck route that will get called on index.js
 
@@ -18,6 +19,7 @@ export default function YouthDeck() {
       <div className="upperRow">
         <Logo marginTop="4%" />
         <RedDeck deck={YouthDeckRed} />
+        <InstructionButton />
       </div>
       <Hand deck={YouthDeckYellow} />
     </PageBody>

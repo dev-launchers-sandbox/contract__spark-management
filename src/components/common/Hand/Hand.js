@@ -106,12 +106,6 @@ export default function Hand(props) {
           discardCards={discardCards}
         />
       </div>
-      <div className={style.instructionLikHolder}>
-        <a href="https://spark4community.com/playing-remotely">
-          {" "}
-          Intructions!{" "}
-        </a>
-      </div>
       {/* Checks if the code has been verified*/}
       {sessionStorage.getItem(code) === null && <Redirect to="/" />}
     </div>
