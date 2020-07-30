@@ -3,6 +3,7 @@
   min-height: 100vh;
   width: 100%;
   height: 100%;
+  color: #500c22;
 }
 
 .logo {
@@ -17,7 +18,7 @@
 }
 
 .sparkLogo {
-  height: 10vh;
+  height: 20vh;
 }
 
 .codeContainer {

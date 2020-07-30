@@ -1,0 +1,23 @@
+.instructionLinkHolder {
+  display: flex;
+  font-size: 1vw;
+  justify-content: center;
+  border: solid 2px;
+  height: 2em;
+  text-align: center;
+  margin-top: 5em;
+  background-color: #b05928;
+  border-radius: 10px;
+  align-items: center;
+  padding: 1rem;
+  margin-left: 5em;
+  word-wrap: break-word;
+}
+.instructionLinkHolder a {
+  text-decoration: none;
+  color: black;
+}
+.instructionLinkHolder:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}

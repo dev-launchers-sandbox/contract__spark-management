@@ -8,6 +8,7 @@ import { Link, useParams } from "react-router-dom";
 
 import ConversationalRedDeck from "../data/ConversationalDeck/ConversationalDeckRed";
 import ConversationalYellowDeck from "../data/ConversationalDeck/ConversationalDeckYellow";
+import InstructionButton from "../components/common/InstructionButton/InstructionButton";
 //This makes the code cleaner by returning the conversational deck route that will get called on index.js
 
 export default function ConversationalDeck() {
@@ -20,6 +21,7 @@ export default function ConversationalDeck() {
       <div className="upperRow">
         <Logo marginTop="4%" />
         <RedDeck deck={ConversationalRedDeck} />
+        <InstructionButton />
       </div>
       <Hand deck={ConversationalYellowDeck} />
     </PageBody>
