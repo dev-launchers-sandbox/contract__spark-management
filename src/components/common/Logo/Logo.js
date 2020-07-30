@@ -16,9 +16,14 @@ export default function Logo(props) {
   return (
     <div className={style.logo} style={{ marginTop: props.marginTop }}>
       <div className={style.brandedLogoContainer}>
-        <Link to={`/`}>
+        <a
+          href="https://spark4community.com/2052-2/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src={RedLogo} className={style.sparkLogo} alt="Logo" />
-        </Link>
+        </a>
+
         {doesImageExist ? (
           <p className={style.brandedLogoText}>IN PARTNERSHIP WITH</p>
         ) : (

@@ -9,6 +9,10 @@
   margin-top: 1.5em;
 }
 
+label {
+  font-family: none;
+}
+
 .checkBox {
   margin-right: 2.2em;
 }
@@ -29,12 +33,19 @@
   border-style: inset;
 }
 
+.textBoxContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .buttonContainer {
   width: 40%;
   height: 40%;
   display: flex;
   justify-content: flex-end;
   margin-top: 0.3em;
+  margin-left: 2em;
 }
 
 .declineButton {
@@ -59,7 +70,7 @@
 
 .formContainer form label {
   font-size: 0.6em;
-  padding-left: 0.4em;
+  margin-left: 0.4em;
   color: #ebe8c5;
 }
 

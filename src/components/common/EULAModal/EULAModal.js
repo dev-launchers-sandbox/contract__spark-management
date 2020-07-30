@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
 import header from "../../../../";
+import TextBox from "../EULAModal/TextBox/TextBox.js";
 
 import style from "./Modal.module.css";
 
@@ -103,7 +104,7 @@ function EULAModal() {
       top: "50%",
       left: "50%",
       width: "50vw",
-      height: "73vh",
+      height: "78vh",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       backgroundColor: "#961a1e",
@@ -124,11 +125,9 @@ function EULAModal() {
       </p>
       <div className={style.formContainer}>
         <form>
-          <textarea
-            className={style.modalTextArea}
-            value={termsOfAgreement}
-            readOnly
-          />
+          <div className={style.textBoxContainer}>
+            <TextBox />
+          </div>
           <br />
           <div className={style.container}>
             <div className={style.checkBox}>
@@ -188,6 +187,7 @@ function EULAModal() {
 
   return (
     <div className={style.modalContainer}>
+      {/*<button onClick={handleOpenModal}>open</button>*/}
       {/*if the user hasn't accepted the terms then it will display the modal.
         if the user did accept the the terms then it won't display the model
     */}
