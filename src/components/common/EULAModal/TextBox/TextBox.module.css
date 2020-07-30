@@ -1,0 +1,24 @@
+.textBox {
+  width: 40vw;
+  height: 48vh;
+  background-color: white;
+  border-style: inset;
+  overflow: auto;
+}
+
+.textBox p {
+  font-size: 0.7em;
+}
+
+.list {
+  font-size: 0.7em;
+}
+
+.link {
+  color: #912123;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

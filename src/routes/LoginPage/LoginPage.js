@@ -150,7 +150,13 @@ function LoginPage(props) {
         <div className={style.loginPage}>
           <EULAModal />
           <div className={style.brandedLogo}>
-            <img className={style.sparkLogo} src={sparkLogo} alt="logo" />
+            <a
+              href="https://spark4community.com/2052-2/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img className={style.sparkLogo} src={sparkLogo} alt="logo" />
+            </a>
           </div>
 
           <h1 style={{ fontFamily: "Sue Ellen Francisco" }}>
@@ -181,8 +187,33 @@ function LoginPage(props) {
                 </button>
               </div>
             </form>
-          </div>
+            <RandomQuote />
 
+            <div className={style.blurbText}>
+              <p>
+                New to this site and/or don't have a code?{" "}
+                <a
+                  href="https://spark4community.com/2052-2/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={style.link}
+                >
+                  Learn more about the S.P.A.R.K. App™ here
+                </a>{" "}
+                and/or{" "}
+                <a
+                  href="https://spark4community.com/digital-deck-waitlist/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={style.link}
+                >
+                  get on our waitlist
+                </a>{" "}
+                to partner with us and purchase your license in the fall/winter
+                of 2020!
+              </p>
+            </div>
+          </div>
           {/*If the status code is 200 redirect the user to the game with the code they submitted */}
           {statusCode === 200 ? (
             <Redirect to={`/${form.code.substring(1)}/${deckUsing}`} />
@@ -194,8 +225,6 @@ function LoginPage(props) {
           ) : (
             ""
           )}
-
-          <RandomQuote />
         </div>
       </PageBody>
     </LoadingOverlay>
