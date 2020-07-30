@@ -24,6 +24,7 @@
 .codeContainer {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   width: 100%;
   height: 50%;
 }
@@ -69,4 +70,21 @@ input[type="text"] {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.link {
+  text-decoration: none;
+  color: #912123;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.blurbText {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: "nunito sans";
+  font-size: 0.7em;
 }

@@ -18,7 +18,12 @@ export default function SelectDeck(props) {
     <PageBody>
       <div className={style.upperRow}>
         {/* When the logo gets clicked, it wll open the sparkcommunity webpage */}
-        <a className={style.logo} href="https://spark4community.com/">
+        <a
+          className={style.logo}
+          href="https://spark4community.com/2052-2/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src={TransparentLogo} alt="logo" />
         </a>
         <Link to="/">

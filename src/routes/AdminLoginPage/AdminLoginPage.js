@@ -15,38 +15,15 @@ import {
   useParams,
   Redirect
 } from "react-router-dom";
+import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
 function AdminLoginPage() {
   let [form, setForm] = useState({ userName: "", password: "" });
 
   const [redirect, setRedirect] = useState(false);
 
   const [userAccounts, setUserAccounts] = useState([]);
-  // This sets the mock adapter on the default instance
-  var mock = new MockAdapter(axios);
 
-  // Mock any GET request to /users
-  // arguments for reply are (status, data, headers)
-  mock.onGet("/users").reply(200, {
-    users: [
-      {
-        userName: "Alejandro",
-        password: 54223
-      },
-      {
-        userName: "Guillermo",
-        password: 3333
-      },
-      {
-        userName: "Kris",
-        password: 4444
-      },
-      {
-        userName: "Luis",
-        password: 7777
-      }
-    ]
-  });
-
+  //when component mounts get the mock data
   useEffect(() => {
     const getMockData = async () => {
       //gets the response from the get request
@@ -132,7 +109,7 @@ function AdminLoginPage() {
                 <label>Password:</label>
                 <br />
                 <input
-                  type="text"
+                  type="password"
                   name="password"
                   value={form.password}
                   onChange={handleChange}
@@ -147,9 +124,10 @@ function AdminLoginPage() {
             </div>
           </div>
         </div>
+        <RandomQuote />
       </div>
       {/*if true redirect the user to the main page */}
-      {redirect ? <Redirect to="/" /> : ""}
+      {redirect && <Redirect to="/" />}
     </PageBody>
   );
 }
