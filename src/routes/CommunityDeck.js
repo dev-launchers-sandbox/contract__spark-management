@@ -22,6 +22,10 @@ export default function CommunityDeck() {
         <Logo marginTop="4%" />
         <RedDeck deck={CommunityDeckRed} />
         <InstructionButton />
+        {/*
+        <div className={"buttonContainer"}>
+          <button className={"button"}>PLEASE WORK</button>
+        </div>*/}
       </div>
       <Hand deck={CommunityDeckYellow} />
     </PageBody>

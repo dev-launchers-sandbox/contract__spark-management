@@ -31,3 +31,28 @@ h2 {
   flex-wrap: no-wrap;
   justify-content: space-around;
 }
+
+.buttonContainer {
+  width: 5%;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 5em;
+  margin-top: 1.5em;
+}
+
+.button {
+  width: 20%;
+  height: 60%;
+  background-color: #f3e8cb;
+  color: black;
+  width: 16.5em;
+  border: solid 2px;
+  padding: 0.4em;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.5em;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 6px;
+  font-family: "Sue Ellen Francisco";
+}
