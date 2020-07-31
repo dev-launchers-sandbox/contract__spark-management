@@ -32,7 +32,7 @@ export default function Logo(props) {
         {doesImageExist ? (
           <Link to={`/`}>
             <img
-              src={"/images/branded-logo.png"}
+              src={process.env.PUBLIC_URL + "/images/branded-logo.png"}
               className={style.brandedLogo}
               alt="Logo"
               onError={addDefaultSrc}
