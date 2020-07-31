@@ -1,23 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Sue+Ellen+Francisco&display=swap");
+
 .instructionLinkHolder {
+  width: 100;
   display: flex;
-  font-size: 1vw;
-  justify-content: center;
-  border: solid 2px;
-  height: 2em;
-  text-align: center;
-  margin-top: 5em;
-  background-color: #b05928;
-  border-radius: 10px;
-  align-items: center;
-  padding: 1rem;
-  margin-left: 5em;
-  word-wrap: break-word;
+  flex-direction: row;
+  margin-left: 1em;
+  margin-top: 2.5em;
 }
+
 .instructionLinkHolder a {
   text-decoration: none;
   color: black;
 }
-.instructionLinkHolder:hover {
+
+.instructionLinkHolder button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 2px;
+  text-align: center;
+  background-color: #b05928;
+  border-radius: 10px;
+  font-family: "Sue Ellen Francisco";
+  padding: 5%;
+  min-width: 5rem;
+  min-height: 2rem;
+  /*width: 7vw;
+    font-size: 1vw;
+  */
+}
+.instructionLinkHolder button:hover {
   transform: scale(1.1);
   cursor: pointer;
 }

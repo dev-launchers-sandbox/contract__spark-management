@@ -6,9 +6,10 @@ export default function InstructionButton() {
       <a
         className={style.test}
         href="https://spark4community.com/playing-remotely"
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        {" "}
-        How to play{" "}
+        <button>HOW TO PLAY</button>
       </a>
     </div>
   );
