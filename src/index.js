@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import style from "./styles.css";
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Switch,
   Route,
   useParams,
@@ -34,24 +34,9 @@ function App() {
 
   //creates the mock requests
   mockData();
-  /*
-  useEffect(() => {
-    const asyncFunc = async () => {
-      try {
-        //if(code !== null)
-        const data = await axios.get(
-          `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${code}`
-        );
-        console.log("status code: ", data.status);
-        setStatusCode(data.status);
-      } catch (error) {
-        //redirect user to the input code page
-        setStatusCode(404);
-      }
-    };
-    asyncFunc();
-  }, []);
-  */
+
+  console.log("subdirectory: ", getBasename(window.location.pathname));
+  console.log("window: ", window.location.pathname);
 
   return (
     <Router basename={getBasename(window.location.pathname)}>
