@@ -16,27 +16,34 @@ import {
   Redirect
 } from "react-router-dom";
 import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
+import GenerateCode from "../../components/common/GenerateCode/GenerateCode.js";
+import GenerateClient from "../../components/common/GenerateClient/GenerateClient.js";
 function AdminLoginPage() {
-  let [form, setForm] = useState({ userName: "", password: "" });
+  let [form, setForm] = useState({ email: "", password: "" });
 
   const [redirect, setRedirect] = useState(false);
 
   const [userAccounts, setUserAccounts] = useState([]);
 
+  let [showGenerateCodeModal, setShowGenerateCodeModal] = useState(false);
+  let [showGenerateClientModal, setShowGenerateClientModal] = useState(false);
+
+  /*
   //when component mounts get the mock data
   useEffect(() => {
-    const getMockData = async () => {
+    const getUserData = async () => {
       //gets the response from the get request
       const response = await axios.get("/users");
 
       //sets the users array that we get from the get request to the userAccounts
       setUserAccounts(response.data.users);
     };
-    getMockData();
+    getUserData();
   }, []);
+  */
 
   //updates state when form is updated
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
       ...form,
@@ -45,7 +52,7 @@ function AdminLoginPage() {
   };
 
   //when the log in button is pressed this is called
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     //prevents the page from refreshing when submitting
     event.preventDefault();
 
@@ -53,23 +60,23 @@ function AdminLoginPage() {
     console.log("func is being called");
   };
 
-  const checkIfUserExists = () => {
-    /*
-     loops through the userAccounts array and checks if the username
-     and password the user inputted equals the username and password in the array
-    */
-    for (let i = 0; i < userAccounts.length; i++) {
-      let account = userAccounts[i];
-      if (
-        form.userName === account.userName &&
-        form.password === account.password.toString()
-      ) {
+  const checkIfUserExists = async () => {
+    const userData = {
+      email: form.email,
+      password: form.password
+    };
+
+    try {
+      const response = await axios.post("/users", userData);
+
+      if (response.status === 200) {
         setRedirect(true);
-        return;
       }
+      console.log("user response: ", response);
+    } catch (err) {
+      console.error("error posting user data: ", err);
+      notify();
     }
-    //notifies the user if they inputted the wrong username and password
-    notify();
   };
 
   //gets called when the user inputs the wrong username and password
@@ -89,31 +96,79 @@ function AdminLoginPage() {
       })
     });
   };
+
+  /*
+
+  const handleGenerateCodeShowModal = () => {
+    setShowGenerateCodeModal(true);
+    console.log("bool: ", showGenerateCodeModal);
+  };
+
+  const handleGenerateClientShowModal = () => {
+    setShowGenerateClientModal(true);
+  };
+  */
+
   return (
     <PageBody>
       <div className={style.adminLoginPage}>
+        {/*}
+        <button onClick={handleGenerateCodeShowModal}>open GenerateCode</button>
+        <button onClick={handleGenerateClientShowModal}>
+  
+          open GenerateDistrict
+        </button>
+        {*/}
+        <GenerateCode
+          showModal={showGenerateCodeModal}
+          handleCloseModal={() => {
+            setShowGenerateCodeModal(false);
+          }}
+        />
+        <GenerateClient
+          showModal={showGenerateClientModal}
+          handleCloseModal={() => {
+            setShowGenerateClientModal(false);
+          }}
+        />
         <div className={style.loginContainer}>
           <div className={style.loginPopup}>
             <img className={style.logo} src={logo} alt="logo" />
             <div className={style.formContainer}>
               <form>
-                <label>Username:</label>
+                <label
+                  style={{
+                    fontFamily: "Sue Ellen Francisco",
+                    fontWeight: "normal"
+                  }}
+                >
+                  Email:
+                </label>
                 <br />
                 <input
-                  type="text"
-                  name="userName"
-                  value={form.userName}
+                  type="email"
+                  name="email"
+                  value={form.email}
                   onChange={handleChange}
                 />
                 <br />
-                <label>Password:</label>
+                <label
+                  style={{
+                    fontFamily: "Sue Ellen Francisco",
+                    fontWeight: "normal"
+                  }}
+                >
+                  Password:
+                </label>
                 <br />
-                <input
-                  type="password"
-                  name="password"
-                  value={form.password}
-                  onChange={handleChange}
-                />
+                <div className={style.passwordContainer}>
+                  <input
+                    type="password"
+                    name="password"
+                    value={form.password}
+                    onChange={handleChange}
+                  />
+                </div>
                 <br />
                 <div className={style.buttonContainer}>
                   <button className={style.button} onClick={handleSubmit}>

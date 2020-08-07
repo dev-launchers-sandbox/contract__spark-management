@@ -39,7 +39,7 @@ function LoginPage(props) {
   }, []);
   */
   //it's called when users inputs data into the form
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
       ...form,
@@ -48,7 +48,7 @@ function LoginPage(props) {
   };
 
   //gets called when enter button is clicked
-  const handleClick = event => {
+  const handleClick = (event) => {
     //prevens page from reloading when pressing the button
     event.preventDefault();
     //sets is loading to true
@@ -76,9 +76,7 @@ function LoginPage(props) {
   };
   const verifyIfSelection = async () => {
     try {
-      const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${
-        form.code
-      }/`;
+      const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${form.code}/`;
       //sets isLoading to false
       const data = await axios.get(
         `https://spark4community.com/Digital/${form.code}/`
@@ -118,14 +116,14 @@ function LoginPage(props) {
       //props.correctDeck(deckLetter);
       //sets isLoading to false
       if (deckLetter === "c") {
-        setDeckUsing("CommunityDeck/");
+        setDeckUsing("CommunityDeck");
       } else if (deckLetter === "s") {
-        setDeckUsing("SpanishDeck/");
+        setDeckUsing("SpanishDeck");
         console.log("spanish");
       } else if (deckLetter === "o") {
-        setDeckUsing("ConversationalDeck/");
+        setDeckUsing("ConversationalDeck");
       } else if (deckLetter === "y") {
-        setDeckUsing("YouthDeck/");
+        setDeckUsing("YouthDeck");
       } else {
         setForm({
           ...form,
@@ -148,6 +146,7 @@ function LoginPage(props) {
       console.log("error here");
     }
   };
+
   toast.configure();
   return (
     <LoadingOverlay active={isLoading} spinner text="Verifying Code...">
@@ -226,7 +225,7 @@ function LoginPage(props) {
             ""
           )}
           {statusCode === "specialCase" ? (
-            <Redirect to={`/${form.code}/`} />
+            <Redirect to={`/${form.code}`} />
           ) : (
             ""
           )}

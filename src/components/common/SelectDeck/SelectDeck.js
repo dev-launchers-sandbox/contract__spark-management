@@ -8,11 +8,16 @@ import PageBody from "../PageBody/PageBody.js";
 import EULAModal from "../EULAModal/EULAModal.js";
 
 import TransparentLogo from "./../../../images/spark_app_logo_transparent.png";
+const getBasename = path => path.substr(0, path.lastIndexOf("/"));
 
 export default function SelectDeck(props) {
   const [statusCode, setStatusCode] = useState();
   let { code } = useParams();
   console.log("params code: ", code);
+  useEffect(() => {
+    console.log("subdirectory: ", getBasename(window.location.pathname));
+    console.log("window: ", window.location.pathname);
+  }, []);
   // This is what will first appear and it will redirect the user into the selected deck.
   return (
     <PageBody>
