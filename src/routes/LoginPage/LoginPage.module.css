@@ -88,3 +88,23 @@ input[type="text"] {
   font-family: "nunito sans";
   font-size: 0.7em;
 }
+
+.classLink {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+  font-size: 1rem;
+  text-decoration: none;
+  font-family: "nunito sans";
+  color: #912123;
+}
+
+.classLink:hover {
+  text-decoration: underline;
+}
+@media (orientation: portrait) {
+  .sparkLogo {
+    height: 10vh;
+  }
+}
+

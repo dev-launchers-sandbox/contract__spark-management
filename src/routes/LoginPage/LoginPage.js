@@ -19,6 +19,7 @@ import SelectDeck from "../../components/common/SelectDeck/SelectDeck.js";
 import LoadingOverlay from "react-loading-overlay";
 import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../images/spark_app_logo_transparent.png";
+import HelpButton from "../../components/common/HelpButton/HelpButton.js";
 
 function LoginPage(props) {
   let [form, setForm] = useState({ code: "" });
@@ -39,7 +40,7 @@ function LoginPage(props) {
   }, []);
   */
   //it's called when users inputs data into the form
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
       ...form,
@@ -48,7 +49,7 @@ function LoginPage(props) {
   };
 
   //gets called when enter button is clicked
-  const handleClick = event => {
+  const handleClick = (event) => {
     //prevens page from reloading when pressing the button
     event.preventDefault();
     //sets is loading to true
@@ -76,11 +77,12 @@ function LoginPage(props) {
   };
   const verifyIfSelection = async () => {
     try {
-      const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${
-        form.code
-      }/`;
+      const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${form.code}/`;
       //sets isLoading to false
-      const data = await axios.get(link);
+      const data = await axios.get(
+        `https://spark4community.com/Digital/${form.code}/`
+      );
+      console.log("spark data: ", data);
       sessionStorage.setItem(form.code, true);
       setDeckUsing("");
       setIsLoading(false);
@@ -106,21 +108,23 @@ function LoginPage(props) {
       //stores the url and the code the user inputs without the letter of the deck on top
       const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${codeWithoutDeckLetter}/`;
       //gets the response data from the url using a GET request
-      const data = await axios.get(link);
+      const data = await axios.get(
+        `https://spark4community.com/Digital/${codeWithoutDeckLetter}/`
+      );
       console.log("status code: ", data.status);
       //marks the code as verified and saves it in sessionStorage
       sessionStorage.setItem(form.code.substring(1), true);
       //props.correctDeck(deckLetter);
       //sets isLoading to false
       if (deckLetter === "c") {
-        setDeckUsing("CommunityDeck/");
+        setDeckUsing("CommunityDeck");
       } else if (deckLetter === "s") {
-        setDeckUsing("SpanishDeck/");
+        setDeckUsing("SpanishDeck");
         console.log("spanish");
       } else if (deckLetter === "o") {
-        setDeckUsing("ConversationalDeck/");
+        setDeckUsing("ConversationalDeck");
       } else if (deckLetter === "y") {
-        setDeckUsing("YouthDeck/");
+        setDeckUsing("YouthDeck");
       } else {
         setForm({
           ...form,
@@ -143,6 +147,7 @@ function LoginPage(props) {
       console.log("error here");
     }
   };
+
   toast.configure();
   return (
     <LoadingOverlay active={isLoading} spinner text="Verifying Code...">
@@ -160,7 +165,7 @@ function LoginPage(props) {
           </div>
 
           <h1 style={{ fontFamily: "Sue Ellen Francisco" }}>
-            READY TO S.P.A.R.K A CONNECTION?
+            READY TO SPARK A CONNECTION?
           </h1>
           <br />
           <div className={style.headerText}>
@@ -186,6 +191,14 @@ function LoginPage(props) {
                   enter
                 </button>
               </div>
+              <a
+                href="https://spark4community.com/contact/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={style.classLink}
+              >
+                Do you need help? Contact us
+              </a>
             </form>
             <RandomQuote />
 
@@ -221,7 +234,7 @@ function LoginPage(props) {
             ""
           )}
           {statusCode === "specialCase" ? (
-            <Redirect to={`/${form.code}/`} />
+            <Redirect to={`/${form.code}`} />
           ) : (
             ""
           )}

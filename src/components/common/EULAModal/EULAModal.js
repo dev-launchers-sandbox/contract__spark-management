@@ -70,7 +70,7 @@ function EULAModal() {
   };
 
   //notifies the user when the decline button is pressed
-  const notify = event => {
+  const notify = (event) => {
     event.preventDefault();
     toast("You must accept to continue", {
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -89,7 +89,7 @@ function EULAModal() {
   };
 
   //updates state accordingly when users input things
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, checked } = event.target;
 
     setIsChecked({

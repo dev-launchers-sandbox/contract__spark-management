@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import style from "./styles.css";
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Switch,
   Route,
   useParams,
@@ -13,6 +13,7 @@ import {
 import SelectDeck from "./components/common/SelectDeck/SelectDeck";
 import ReactModal from "react-modal";
 import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
 
 import CommunityDeckRoute from "./routes/CommunityDeck.js";
 import ConversationalDeckRoute from "./routes/ConversationalDeck.js";
@@ -20,6 +21,7 @@ import SpanishDeckRoute from "./routes/SpanishDeck.js";
 import YouthDeckRoute from "./routes/YouthDeck.js";
 import LoginPageRoute from "../src/routes/LoginPage/LoginPage.js";
 import AdminLoginPage from "../src/routes/AdminLoginPage/AdminLoginPage.js";
+import mockData from "../src/mockData/MockData.js";
 
 import Footer from "../src/components/common/Footer/Footer.js";
 
@@ -29,24 +31,12 @@ const getBasename = path => path.substr(0, path.lastIndexOf("/"));
 function App() {
   ReactModal.setAppElement("#root");
   let [statusCode, setStatusCode] = useState(null);
-  /*
-  useEffect(() => {
-    const asyncFunc = async () => {
-      try {
-        //if(code !== null)
-        const data = await axios.get(
-          `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${code}`
-        );
-        console.log("status code: ", data.status);
-        setStatusCode(data.status);
-      } catch (error) {
-        //redirect user to the input code page
-        setStatusCode(404);
-      }
-    };
-    asyncFunc();
-  }, []);
-  */
+
+  //creates the mock requests
+  mockData();
+
+  console.log("subdirectory: ", getBasename(window.location.pathname));
+  console.log("window: ", window.location.pathname);
 
   return (
     <Router basename={getBasename(window.location.pathname)}>

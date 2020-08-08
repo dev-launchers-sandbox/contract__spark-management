@@ -33,33 +33,32 @@ export default function RedDeck(props) {
   return (
     // styling for the properties of the cardFlip.
     <div>
-      <div stlye={style.container}>
-        <ReactCardFlip
-          containerStyle={{ margin: "1%" }}
-          flipSpeedBackToFront="1"
-          flipSpeedFrontToBack="1"
-          flipDirection="vertical"
-          isFlipped={isFlipped}
-        >
-          <div key="front" className={style.RedDeck}>
-            {/* the key is what makes the ReactCardFlip package to know which part is the front or back part.*/}
-            <div>
-              <h1> {card} </h1>
-              <CopyTextIcon text={card} />
-              <SelectCardIcon onClick={onClick} />
-            </div>
+      <ReactCardFlip
+        containerStyle={{ margin: "1%" }}
+        flipSpeedBackToFront="1"
+        flipSpeedFrontToBack="1"
+        flipDirection="vertical"
+        isFlipped={isFlipped}
+      >
+        <div key="front" className={style.RedDeck}>
+          {/* the key is what makes the ReactCardFlip package to know which part is the front or back part.*/}
+          <div>
+            <h1> {card} </h1>
+            <CopyTextIcon text={card} />
+            <SelectCardIcon onClick={onClick} />
           </div>
+        </div>
 
-          <div
-            key="back"
-            style={{ transformStyle: "initial" }}
-            className={style.RedDeck}
-            onClick={onClick}
-          >
-            <img className={style.whiteLogo} src={WhiteLogo} alt="logo" />
-          </div>
-        </ReactCardFlip>
-      </div>
+        <div
+          key="back"
+          style={{ transformStyle: "initial" }}
+          className={style.RedDeck}
+          onClick={onClick}
+        >
+          <img className={style.whiteLogo} src={WhiteLogo} alt="logo" />
+        </div>
+      </ReactCardFlip>
+
     </div>
   );
 }

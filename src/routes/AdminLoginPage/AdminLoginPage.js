@@ -15,23 +15,36 @@ import {
   useParams,
   Redirect
 } from "react-router-dom";
+import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
+import GenerateCode from "../../components/common/GenerateCode/GenerateCode.js";
+import GenerateClient from "../../components/common/GenerateClient/GenerateClient.js";
+import HelpButton from "../../components/common/HelpButton/HelpButton.js";
 function AdminLoginPage() {
-  let [form, setForm] = useState({ userName: "", password: "" });
+  let [form, setForm] = useState({ email: "", password: "" });
 
   const [redirect, setRedirect] = useState(false);
 
-  const userAccounts = [
-    {
-      userName: "Alejandro",
-      password: 54223
-    },
-    {
-      userName: "Guillermo",
-      password: 3333
-    }
-  ];
+  const [userAccounts, setUserAccounts] = useState([]);
 
-  const handleChange = event => {
+  let [showGenerateCodeModal, setShowGenerateCodeModal] = useState(false);
+  let [showGenerateClientModal, setShowGenerateClientModal] = useState(false);
+
+  /*
+  //when component mounts get the mock data
+  useEffect(() => {
+    const getUserData = async () => {
+      //gets the response from the get request
+      const response = await axios.get("/users");
+
+      //sets the users array that we get from the get request to the userAccounts
+      setUserAccounts(response.data.users);
+    };
+    getUserData();
+  }, []);
+  */
+
+  //updates state when form is updated
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
       ...form,
@@ -39,37 +52,35 @@ function AdminLoginPage() {
     });
   };
 
-  const handleSubmit = event => {
+  //when the log in button is pressed this is called
+  const handleSubmit = (event) => {
+    //prevents the page from refreshing when submitting
     event.preventDefault();
 
+    checkIfUserExists();
     console.log("func is being called");
+  };
 
-    for (let i = 0; i < userAccounts.length; i++) {
-      let account = userAccounts[i];
-      if (
-        form.userName === account.userName &&
-        form.password === account.password.toString()
-      ) {
-        console.log("form username: ", form.userName);
-        console.log("form password: ", form.password);
-        console.log("account username: ", account.userName);
-        console.log("account password: ", account.password);
-        console.log("true");
+  const checkIfUserExists = async () => {
+    const userData = {
+      email: form.email,
+      password: form.password
+    };
+
+    try {
+      const response = await axios.post("/users", userData);
+
+      if (response.status === 200) {
         setRedirect(true);
-        break;
-      } else {
-        console.log("form username: ", form.userName);
-        console.log("form password: ", form.password);
-        console.log("account username: ", account.userName);
-        console.log("account password: ", account.password);
-        console.log("false");
-        setRedirect(false);
-        notify();
-        break;
       }
+      console.log("user response: ", response);
+    } catch (err) {
+      console.error("error posting user data: ", err);
+      notify();
     }
   };
 
+  //gets called when the user inputs the wrong username and password
   const notify = () => {
     toast("Account doesn't exist", {
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -86,32 +97,74 @@ function AdminLoginPage() {
       })
     });
   };
+
+  const handleGenerateCodeShowModal = () => {
+    setShowGenerateCodeModal(true);
+    console.log("bool: ", showGenerateCodeModal);
+  };
+
+  const handleGenerateClientShowModal = () => {
+    setShowGenerateClientModal(true);
+  };
+
   return (
     <PageBody>
       <div className={style.adminLoginPage}>
+        <button onClick={handleGenerateCodeShowModal}>open GenerateCode</button>
+        <button onClick={handleGenerateClientShowModal}>
+          open GenerateDistrict
+        </button>
+
+        <GenerateCode
+          showModal={showGenerateCodeModal}
+          handleCloseModal={() => {
+            setShowGenerateCodeModal(false);
+          }}
+        />
+        <GenerateClient
+          showModal={showGenerateClientModal}
+          handleCloseModal={() => {
+            setShowGenerateClientModal(false);
+          }}
+        />
         <div className={style.loginContainer}>
           <div className={style.loginPopup}>
             <img className={style.logo} src={logo} alt="logo" />
             <div className={style.formContainer}>
               <form>
-                <label>Username:</label>
+                <label
+                  style={{
+                    fontFamily: "Sue Ellen Francisco",
+                    fontWeight: "normal"
+                  }}
+                >
+                  Email:
+                </label>
                 <br />
                 <input
-                  type="text"
-                  name="userName"
-                  value={form.userName}
+                  type="email"
+                  name="email"
+                  value={form.email}
                   onChange={handleChange}
                 />
                 <br />
+                <label
+                  style={{
+                    fontFamily: "Sue Ellen Francisco",
+                    fontWeight: "normal"
+                  }}
+                >
+                  Password:
+                </label>
                 <br />
-                <label>Password:</label>
-                <br />
-                <input
-                  type="text"
-                  name="password"
-                  value={form.password}
-                  onChange={handleChange}
-                />
+                <div className={style.passwordContainer}>
+                  <input
+                    type="password"
+                    name="password"
+                    value={form.password}
+                    onChange={handleChange}
+                  />
+                </div>
                 <br />
                 <div className={style.buttonContainer}>
                   <button className={style.button} onClick={handleSubmit}>
@@ -122,13 +175,11 @@ function AdminLoginPage() {
             </div>
           </div>
         </div>
-        <div className={style.signUpTag}>
-          <p>
-            Don't have an account? <a href="#example">Sign up</a>
-          </p>
-        </div>
+        <RandomQuote />
+        <HelpButton />
       </div>
-      {redirect ? <Redirect to="/" /> : ""}
+      {/*if true redirect the user to the main page */}
+      {redirect && <Redirect to="/" />}
     </PageBody>
   );
 }
