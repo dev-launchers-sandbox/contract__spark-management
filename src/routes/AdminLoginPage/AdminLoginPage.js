@@ -18,6 +18,7 @@ import {
 import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
 import GenerateCode from "../../components/common/GenerateCode/GenerateCode.js";
 import GenerateClient from "../../components/common/GenerateClient/GenerateClient.js";
+import HelpButton from "../../components/common/HelpButton/HelpButton.js";
 function AdminLoginPage() {
   let [form, setForm] = useState({ email: "", password: "" });
 
@@ -97,8 +98,6 @@ function AdminLoginPage() {
     });
   };
 
-  /*
-
   const handleGenerateCodeShowModal = () => {
     setShowGenerateCodeModal(true);
     console.log("bool: ", showGenerateCodeModal);
@@ -107,18 +106,15 @@ function AdminLoginPage() {
   const handleGenerateClientShowModal = () => {
     setShowGenerateClientModal(true);
   };
-  */
 
   return (
     <PageBody>
       <div className={style.adminLoginPage}>
-        {/*}
         <button onClick={handleGenerateCodeShowModal}>open GenerateCode</button>
         <button onClick={handleGenerateClientShowModal}>
-  
           open GenerateDistrict
         </button>
-        {*/}
+
         <GenerateCode
           showModal={showGenerateCodeModal}
           handleCloseModal={() => {
@@ -180,6 +176,7 @@ function AdminLoginPage() {
           </div>
         </div>
         <RandomQuote />
+        <HelpButton />
       </div>
       {/*if true redirect the user to the main page */}
       {redirect && <Redirect to="/" />}
