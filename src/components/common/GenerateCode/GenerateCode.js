@@ -63,12 +63,11 @@ function GenerateCode(props) {
     console.log("option selected: ", formClient);
   };
 
-  //sends the codeBatch data to the path /code_batch via post request
-  const sendCodeData = async () => {
-    /*
+  /*
       checks if the client form, expiration date form, and checks if all deck forms are empty
-      if so notify the user they need to input something for each form
+      if so return false 
     */
+  const formValidation = () => {
     if (
       (formClient.length !== 0 &&
         form.expirationDate.length !== 0 &&
@@ -77,6 +76,15 @@ function GenerateCode(props) {
       parseInt(form.spanishDeck, 0) !== 0 ||
       parseInt(form.youthDeck, 0) !== 0
     ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  //sends the codeBatch data to the path /code_batch via post request
+  const sendCodeData = async () => {
+    if (formValidation() === true) {
       const codeBatch = {
         client_name: formClient.value,
         expiration_date: form.expirationDate,

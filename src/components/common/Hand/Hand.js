@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Redirect, useParams } from "react-router-dom";
 import useDeck from "./../useDeck/useDeck";
 import YellowCard from "./../YellowCard/YellowCard";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
+import HelpButton from "../HelpButton/HelpButton.js";
 
 const NUM_CARDS_IN_HAND = 8;
 let initialFlipStates = [];
@@ -55,7 +56,7 @@ export default function Hand(props) {
   };
 
   // discardCardAndDraw() : Discards the supplied card and replaces it with a new one
-  const discardCardAndDraw = card => {
+  const discardCardAndDraw = (card) => {
     // Remove card from the hand
     console.log(card);
     let cardsCopy = [...cards];
@@ -105,6 +106,7 @@ export default function Hand(props) {
           populateCards={populateCards}
           discardCards={discardCards}
         />
+        <HelpButton />
       </div>
       <div className={style.instructionLikHolder}>
         <a href="https://spark4community.com/playing-remotely">

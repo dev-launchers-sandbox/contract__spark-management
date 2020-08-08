@@ -19,6 +19,7 @@ import SelectDeck from "../../components/common/SelectDeck/SelectDeck.js";
 import LoadingOverlay from "react-loading-overlay";
 import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../images/spark_app_logo_transparent.png";
+import HelpButton from "../../components/common/HelpButton/HelpButton.js";
 
 function LoginPage(props) {
   let [form, setForm] = useState({ code: "" });
@@ -164,7 +165,7 @@ function LoginPage(props) {
           </div>
 
           <h1 style={{ fontFamily: "Sue Ellen Francisco" }}>
-            READY TO S.P.A.R.K A CONNECTION?
+            READY TO SPARK A CONNECTION?
           </h1>
           <br />
           <div className={style.headerText}>
@@ -190,6 +191,14 @@ function LoginPage(props) {
                   enter
                 </button>
               </div>
+              <a
+                href="https://spark4community.com/contact/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={style.classLink}
+              >
+                Do you need help? Contact us
+              </a>
             </form>
             <RandomQuote />
 

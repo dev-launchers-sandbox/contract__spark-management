@@ -133,3 +133,9 @@
 .footer a:hover {
   color: #912123;
 }
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2%;
+}
