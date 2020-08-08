@@ -14,7 +14,10 @@ export default function Logo(props) {
   };
   // Logo Component and text underneath it.
   return (
-    <div className={style.logo} style={{ marginTop: props.marginTop }}>
+    <div
+      className={style.logo}
+      style={{ marginTop: props.marginTop, marginLeft: "2.5em" }}
+    >
       <div className={style.brandedLogoContainer}>
         <a
           href="https://spark4community.com/2052-2/"
@@ -23,6 +26,7 @@ export default function Logo(props) {
         >
           <img src={RedLogo} className={style.sparkLogo} alt="Logo" />
         </a>
+
         {doesImageExist ? (
           <p className={style.brandedLogoText}>IN PARTNERSHIP WITH</p>
         ) : (
@@ -31,7 +35,7 @@ export default function Logo(props) {
         {doesImageExist ? (
           <Link to={`/`}>
             <img
-              src={"/images/branded-logo.png"}
+              src={process.env.PUBLIC_URL + "/images/branded-logo.png"}
               className={style.brandedLogo}
               alt="Logo"
               onError={addDefaultSrc}

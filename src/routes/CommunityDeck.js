@@ -8,7 +8,7 @@ import { Link, useParams, Redirect } from "react-router-dom";
 
 import CommunityDeckYellow from "../data/CommunityDeck/CommunityDeckYellow.json";
 import CommunityDeckRed from "../data/CommunityDeck/CommunityDeckRed.json";
-
+import InstructionButton from "../components/common/InstructionButton/InstructionButton";
 //This makes the code cleaner by returning the community deck route that will get called on index.js
 const getBasename = path => path.substr(0, path.lastIndexOf("/"));
 export default function CommunityDeck() {
@@ -23,6 +23,11 @@ export default function CommunityDeck() {
       <div className="upperRow">
         <Logo marginTop="4%" />
         <RedDeck deck={CommunityDeckRed} />
+        <InstructionButton />
+        {/*
+        <div className={"buttonContainer"}>
+          <button className={"button"}>PLEASE WORK</button>
+        </div>*/}
       </div>
       <Hand deck={CommunityDeckYellow} />
     </PageBody>
