@@ -22,6 +22,7 @@ function GenerateCode(props) {
 
   let [formClient, setFormClient] = useState("");
 
+  //gets the client data when the componenet mounts
   useEffect(() => {
     const getClientData = async () => {
       const clientData = await axios.get("/clients");
@@ -41,6 +42,7 @@ function GenerateCode(props) {
     });
   };
 
+  //notifies the user
   const notify = (text) => {
     toast(text, {
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -58,6 +60,7 @@ function GenerateCode(props) {
     });
   };
 
+  //gets called when the Select component changes
   const handleSelectChange = (formClient) => {
     setFormClient(formClient);
     console.log("option selected: ", formClient);
@@ -112,12 +115,18 @@ function GenerateCode(props) {
     }
   };
 
+  //gets called when user click the Generate Code(s) button
   const handleSubmit = (events) => {
     //prevents page from refreshing
     events.preventDefault();
     sendCodeData();
   };
 
+  /*
+   loops through the client data from the useEffect
+   and creates an array of options from the client data
+   to be used in the select component
+  */
   const selectOptions = () => {
     let newOptions = [];
     for (let i = 0; i < client.length; i++) {

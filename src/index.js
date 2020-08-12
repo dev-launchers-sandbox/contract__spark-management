@@ -26,11 +26,19 @@ import mockData from "../src/mockData/MockData.js";
 import Footer from "../src/components/common/Footer/Footer.js";
 
 // Allows us to serve up the app from any arbitrary directory on a server
-const getBasename = path => path.substr(0, path.lastIndexOf("/"));
+const getBasename = (path) => path.substr(0, path.lastIndexOf("/"));
 
 function App() {
   ReactModal.setAppElement("#root");
   let [statusCode, setStatusCode] = useState(null);
+  let [formCode, setFormCode] = useState("");
+
+  const changeFormCode = (formCodeVal) => {
+    setFormCode(formCodeVal);
+    console.log("form code (inside a function): ", formCodeVal);
+    console.log("form code (inside a function): ", formCode);
+  };
+  console.log("form code (outside a function): ", formCode);
 
   //creates the mock requests
   mockData();
@@ -44,7 +52,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             {/*When the app if 1st started, we want the user to be able to select the deck.*/}
-            <LoginPageRoute />
+            <LoginPageRoute changeFormCode={changeFormCode} />
           </Route>
           <Route exact path="/AdminLoginPage">
             <AdminLoginPage />
@@ -54,23 +62,23 @@ function App() {
           </Route>
           <Route exact path="/:code/CommunityDeck">
             {/*When the community deck is selected, we want to show all of the things the deck should show*/}
-            <CommunityDeckRoute />
+            <CommunityDeckRoute code={formCode} />
           </Route>
 
           <Route exact path="/:code/ConversationalDeck">
             {/*When the conversational deck is selected, we want to show all of the things the deck should show*/}
-            <ConversationalDeckRoute />
+            <ConversationalDeckRoute code={formCode} />
           </Route>
 
           <Route exact path="/:code/SpanishDeck">
             {/*When the spanish deck is selected, we want to show all of the things the deck should show*/}
 
-            <SpanishDeckRoute />
+            <SpanishDeckRoute code={formCode} />
           </Route>
 
           <Route exact path="/:code/YouthDeck">
             {/*When the youth deck is selected, we want to show all of the things the deck should show*/}
-            <YouthDeckRoute />
+            <YouthDeckRoute code={formCode} />
           </Route>
         </Switch>
       </div>
