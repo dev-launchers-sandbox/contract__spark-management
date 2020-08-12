@@ -20,12 +20,18 @@ import LoadingOverlay from "react-loading-overlay";
 import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../images/spark_app_logo_transparent.png";
 import HelpButton from "../../components/common/HelpButton/HelpButton.js";
+import GenerateCode from "../../components/common/GenerateCode/GenerateCode.js";
+import GenerateClient from "../../components/common/GenerateClient/GenerateClient.js";
+import EditModal from "../../components/common/EditModal/EditModal.js";
 
 function LoginPage(props) {
   let [form, setForm] = useState({ code: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [deckUsing, setDeckUsing] = useState("");
+  let [showGenerateCodeModal, setShowGenerateCodeModal] = useState(false);
+  let [showGenerateClientModal, setShowGenerateClientModal] = useState(false);
+  let [showEditModal, setShowEditModal] = useState(false);
 
   //it's called when users inputs data into the form
   const handleChange = (event) => {
@@ -34,6 +40,18 @@ function LoginPage(props) {
       ...form,
       [name]: value
     });
+  };
+
+  const handleGenerateCodeShowModal = () => {
+    setShowGenerateCodeModal(true);
+    console.log("bool: ", showGenerateCodeModal);
+  };
+
+  const handleGenerateClientShowModal = () => {
+    setShowGenerateClientModal(true);
+  };
+  const handleEditShowModal = () => {
+    setShowEditModal(true);
   };
 
   //gets called when enter button is clicked
@@ -144,6 +162,30 @@ function LoginPage(props) {
     <LoadingOverlay active={isLoading} spinner text="Verifying Code...">
       <PageBody>
         <div className={style.loginPage}>
+        <button onClick={handleGenerateCodeShowModal}>open GenerateCode</button>
+        <button onClick={handleGenerateClientShowModal}>
+          open GenerateDistrict
+        </button>
+        <button onClick={handleEditShowModal}>open EditModal</button>
+
+        <GenerateCode
+          showModal={showGenerateCodeModal}
+          handleCloseModal={() => {
+            setShowGenerateCodeModal(false);
+          }}
+        />
+        <GenerateClient
+          showModal={showGenerateClientModal}
+          handleCloseModal={() => {
+            setShowGenerateClientModal(false);
+          }}
+        />
+        <EditModal
+          showModal={showEditModal}
+          handleCloseModal={() => {
+            setShowEditModal(false);
+          }}
+        />
           <EULAModal />
           <div className={style.brandedLogo}>
             <a

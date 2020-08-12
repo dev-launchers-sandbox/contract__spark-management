@@ -16,9 +16,7 @@ import {
   Redirect
 } from "react-router-dom";
 import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
-import GenerateCode from "../../components/common/GenerateCode/GenerateCode.js";
-import GenerateClient from "../../components/common/GenerateClient/GenerateClient.js";
-import EditModal from "../../components/common/EditModal/EditModal.js";
+
 import HelpButton from "../../components/common/HelpButton/HelpButton.js";
 function AdminLoginPage() {
   let [form, setForm] = useState({ email: "", password: "" });
@@ -27,9 +25,7 @@ function AdminLoginPage() {
 
   const [userAccounts, setUserAccounts] = useState([]);
 
-  let [showGenerateCodeModal, setShowGenerateCodeModal] = useState(false);
-  let [showGenerateClientModal, setShowGenerateClientModal] = useState(false);
-  let [showEditModal, setShowEditModal] = useState(false);
+
 
   /*
   //when component mounts get the mock data
@@ -70,7 +66,7 @@ function AdminLoginPage() {
     };
 
     try {
-      const response = await axios.post("/users", userData);
+      const response = await axios.post("http://192.232.212.61:8080/login", userData);
 
       if (response.status === 200) {
         setRedirect(true);
@@ -100,45 +96,12 @@ function AdminLoginPage() {
     });
   };
 
-  const handleGenerateCodeShowModal = () => {
-    setShowGenerateCodeModal(true);
-    console.log("bool: ", showGenerateCodeModal);
-  };
 
-  const handleGenerateClientShowModal = () => {
-    setShowGenerateClientModal(true);
-  };
-  const handleEditShowModal = () => {
-    setShowEditModal(true);
-  };
 
   return (
     <PageBody>
       <div className={style.adminLoginPage}>
-        <button onClick={handleGenerateCodeShowModal}>open GenerateCode</button>
-        <button onClick={handleGenerateClientShowModal}>
-          open GenerateDistrict
-        </button>
-        <button onClick={handleEditShowModal}>open EditModal</button>
 
-        <GenerateCode
-          showModal={showGenerateCodeModal}
-          handleCloseModal={() => {
-            setShowGenerateCodeModal(false);
-          }}
-        />
-        <GenerateClient
-          showModal={showGenerateClientModal}
-          handleCloseModal={() => {
-            setShowGenerateClientModal(false);
-          }}
-        />
-        <EditModal
-          showModal={showEditModal}
-          handleCloseModal={() => {
-            setShowEditModal(false);
-          }}
-        />
         <div className={style.loginContainer}>
           <div className={style.loginPopup}>
             <img className={style.logo} src={logo} alt="logo" />

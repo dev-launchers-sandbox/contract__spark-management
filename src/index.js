@@ -41,7 +41,7 @@ function App() {
   console.log("form code (outside a function): ", formCode);
 
   //creates the mock requests
-  mockData();
+//  mockData();
 
   console.log("subdirectory: ", getBasename(window.location.pathname));
   console.log("window: ", window.location.pathname);

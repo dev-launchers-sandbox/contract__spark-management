@@ -25,7 +25,7 @@ function GenerateCode(props) {
   //gets the client data when the componenet mounts
   useEffect(() => {
     const getClientData = async () => {
-      const clientData = await axios.get("/clients");
+      const clientData = await axios.get("http://192.232.212.61:8080/clients");
 
       console.log(clientData);
       setClient(clientData.data);
@@ -68,7 +68,7 @@ function GenerateCode(props) {
 
   /*
       checks if the client form, expiration date form, and checks if all deck forms are empty
-      if so return false 
+      if so return false
     */
   const formValidation = () => {
     if (
@@ -101,7 +101,7 @@ function GenerateCode(props) {
       try {
         console.log(codeBatch);
         //sends the data to /code_batch
-        const data = await axios.post("/code_batch", codeBatch);
+        const data = await axios.post("http://192.232.212.61:8080/code_batches", codeBatch);
         notify("Data has been sent!");
 
         console.log("config: ", data.config.data);
