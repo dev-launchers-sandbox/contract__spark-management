@@ -18,6 +18,7 @@ import {
 import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
 import GenerateCode from "../../components/common/GenerateCode/GenerateCode.js";
 import GenerateClient from "../../components/common/GenerateClient/GenerateClient.js";
+import EditModal from "../../components/common/EditModal/EditModal.js";
 import HelpButton from "../../components/common/HelpButton/HelpButton.js";
 function AdminLoginPage() {
   let [form, setForm] = useState({ email: "", password: "" });
@@ -28,6 +29,7 @@ function AdminLoginPage() {
 
   let [showGenerateCodeModal, setShowGenerateCodeModal] = useState(false);
   let [showGenerateClientModal, setShowGenerateClientModal] = useState(false);
+  let [showEditModal, setShowEditModal] = useState(false);
 
   /*
   //when component mounts get the mock data
@@ -106,6 +108,9 @@ function AdminLoginPage() {
   const handleGenerateClientShowModal = () => {
     setShowGenerateClientModal(true);
   };
+  const handleEditShowModal = () => {
+    setShowEditModal(true);
+  };
 
   return (
     <PageBody>
@@ -114,6 +119,7 @@ function AdminLoginPage() {
         <button onClick={handleGenerateClientShowModal}>
           open GenerateDistrict
         </button>
+        <button onClick={handleEditShowModal}>open EditModal</button>
 
         <GenerateCode
           showModal={showGenerateCodeModal}
@@ -125,6 +131,12 @@ function AdminLoginPage() {
           showModal={showGenerateClientModal}
           handleCloseModal={() => {
             setShowGenerateClientModal(false);
+          }}
+        />
+        <EditModal
+          showModal={showEditModal}
+          handleCloseModal={() => {
+            setShowEditModal(false);
           }}
         />
         <div className={style.loginContainer}>

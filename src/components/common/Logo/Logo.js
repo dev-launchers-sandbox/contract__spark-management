@@ -8,7 +8,7 @@ import BrandedLogo from "../../../images/mcneil-logo.png";
 export default function Logo(props) {
   const [doesImageExist, setDoesImageExist] = useState(true);
 
-  const addDefaultSrc = event => {
+  const addDefaultSrc = (event) => {
     event.target.src = null;
     setDoesImageExist(false);
   };
@@ -35,7 +35,7 @@ export default function Logo(props) {
         {doesImageExist ? (
           <Link to={`/`}>
             <img
-              src={process.env.PUBLIC_URL + "/images/branded-logo.png"}
+              src={props.logoUrl}
               className={style.brandedLogo}
               alt="Logo"
               onError={addDefaultSrc}

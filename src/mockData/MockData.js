@@ -77,6 +77,13 @@ const mockData = () => {
       client: "idk any more districts lol"
     }
   ]);
+  mock.onPut("/codes", { params: { id: 1 } }).reply(200);
+
+  mock.onGet("/codes/validate", { params: { code: "75W6d" } }).reply(200, {
+    valid: true,
+    logo_url: ""
+  });
+  mock.onPut("/product", { id: 4, name: "foo" }).reply(204);
 };
 
 export default mockData;
