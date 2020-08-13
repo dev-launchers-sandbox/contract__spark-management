@@ -1,0 +1,22 @@
+.manageCodesPage {
+  display: flex;
+  flex-direction: column;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin: 0.5em;
+}
+.buttonContainer button {
+  background: #91413c;
+  border-radius: 2px;
+  font-size: 1.2vw;
+  border: 2px;
+  margin: 1em;
+  width: 10em;
+  height: 2em;
+}
+.manageCodesPage button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
