@@ -12,10 +12,14 @@ function EditModal(props) {
     spanishDeck: 0,
     youthDeck: 0,
     client: "",
-    expirationDate: ""
+    expirationDate: "",
+    subClient: ""
   });
 
   let [formClient, setFormClient] = useState("");
+  let [deckForm, setDeckForm] = useState("")
+
+  let [deck, setDeck] = useState([]);
 
   useEffect(() => {
     /*
@@ -30,9 +34,14 @@ function EditModal(props) {
     const getClientData = async () => {
     const clientData = await axios.get("http://192.232.212.61:8080/clients");
 
+    const deckData = await axios.get("http://192.232.212.61:8080/decks")
+    console.log("deck name: ", deckData)
+    setDeck(deckData.data)
       console.log("clients: ", clientData);
       setClient(clientData.data);
+
     };
+
     getClientData();
     //getCodeData();
   }, []);
@@ -40,6 +49,11 @@ function EditModal(props) {
   const handleSelectChange = (formClient) => {
     setFormClient(formClient);
     console.log("option selected: ", formClient);
+  };
+
+  const handleDeckSelectChange = (deckForm) => {
+    setDeckForm(deckForm);
+    console.log("option deck selected: ", deckForm);
   };
 
   //it's called when users inputs data into the form
@@ -62,22 +76,20 @@ function EditModal(props) {
   const updateCodeData = async () => {
     if (formValidation() === true) {
       const codeBatch = {
+        deck_name: deckForm.value,
         client_name: formClient.value,
-        expiration_date: form.expirationDate
+        expiration_date: form.expirationDate,
+        sub_client_name: form.subClient
       };
       try {
         console.log(codeBatch);
+
         //sends the data to /code_batch
-        const data = await axios.put(
-          "/code_batch",
-          { params: { id: 1 } },
-          codeBatch
-        );
+        const response = await axios.put(`http://192.232.212.61:8080/codes/9gMYfchJJ`, codeBatch);
+        console.log("updated datd: ", response)
         console.log("Data has been sent!");
 
-        console.log("config: ", data.config.data);
-        console.log("Data: ", data.data);
-        console.log("Response: ", data);
+
       } catch (err) {
         console.error(err);
       }
@@ -91,20 +103,23 @@ function EditModal(props) {
     updateCodeData();
   };
 
-  const selectOptions = () => {
+  const selectOptions = (data) => {
     let newOptions = [];
-    for (let i = 0; i < client.length; i++) {
-      let currentClient = client[i];
+    for (let i = 0; i < data.length; i++) {
+      let currentData = data[i];
 
       const options = {
-        value: currentClient.client,
-        label: currentClient.client
+        value: currentData.name,
+        label: currentData.name
       };
 
       newOptions.push(options);
     }
     return newOptions;
   };
+
+
+
 
   return (
     <div className={style.editModal}>
@@ -121,6 +136,34 @@ function EditModal(props) {
           </div>
           <div className={style.formContainer}>
             <form className={style.form} onSubmit={handleSubmit}>
+            <div className={style.decks}>
+
+                <label>Deck</label>
+
+                  <div className={style.deckSelects}>
+                    <Select
+                      value={deckForm}
+                      isSearchable={true}
+                      maxMenuHeight={190}
+                      className={style.select}
+                      onChange={handleDeckSelectChange}
+                      placeholder="Choose a Deck"
+                      options={selectOptions(deck)}
+                    />
+
+                <br />
+                <div className={style.row}>
+                  <label>Sub Client</label>
+                  <input
+                    name="subClient"
+                    onChange={handleChange}
+                    value={form.subClient}
+                    type="text"
+                    placeholder="sub client"
+                  />
+                </div>
+              </div>
+            </div>
               <div className={style.clientContainer}>
                 <div className={style.selectContainer}>
                   <div className={style.clientTextContainer}>
@@ -134,7 +177,7 @@ function EditModal(props) {
                       className={style.select}
                       onChange={handleSelectChange}
                       placeholder="Choose a client"
-                      options={selectOptions()}
+                      options={selectOptions(client)}
                     />
                   </div>
                 </div>

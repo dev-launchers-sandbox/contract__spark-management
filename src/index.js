@@ -21,7 +21,7 @@ import SpanishDeckRoute from "./routes/SpanishDeck.js";
 import YouthDeckRoute from "./routes/YouthDeck.js";
 import LoginPageRoute from "./pages/LoginPage/LoginPage";
 import AdminLoginPage from "./pages/AdminPortal/AdminLoginPage/AdminLoginPage";
-import mockData from "../src/mockData/MockData.js";
+//import mockData from "../src/mockData/MockData.js";
 import ManageCodesPage from "./pages/AdminPortal/ManageCodesPage/ManageCodesPage";
 
 import Footer from "../src/components/common/Footer/Footer.js";
@@ -42,7 +42,7 @@ function App() {
   console.log("form code (outside a function): ", formCode);
 
   //creates the mock requests
-  //  mockData();
+  //mockData();
 
   console.log("subdirectory: ", getBasename(window.location.pathname));
   console.log("window: ", window.location.pathname);
@@ -63,18 +63,15 @@ function App() {
           </Route>
           <Route exact path="/:code">
             <SelectDeck />
-            <CommunityDeckRoute code={formCode} />
           </Route>
           <Route exact path="/:code/CommunityDeck">
             {/*When the community deck is selected, we want to show all of the things the deck should show*/}
             <CommunityDeckRoute code={formCode} />
-            <ConversationalDeckRoute code={formCode} />
           </Route>
 
           <Route exact path="/:code/ConversationalDeck">
             {/*When the conversational deck is selected, we want to show all of the things the deck should show*/}
             <ConversationalDeckRoute code={formCode} />
-            <SpanishDeckRoute code={formCode} />
           </Route>
 
           <Route exact path="/:code/SpanishDeck">

@@ -98,6 +98,7 @@ form label {
   width: 50%;
   display: flex;
   flex-direction: column;
+  background-color: red;
 }
 
 .buttonContainer {
@@ -139,6 +140,11 @@ form label {
 
 .selects {
   width: 100%;
+  height: 50%;
+}
+
+.deckSelects{
+  width: 70%;
   height: 50%;
 }
 

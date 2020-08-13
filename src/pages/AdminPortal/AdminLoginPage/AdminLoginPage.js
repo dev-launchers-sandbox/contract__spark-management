@@ -25,12 +25,15 @@ function AdminLoginPage() {
 
   const [userAccounts, setUserAccounts] = useState([]);
 
+
+
   /*
   //when component mounts get the mock data
   useEffect(() => {
     const getUserData = async () => {
       //gets the response from the get request
       const response = await axios.get("/users");
+
       //sets the users array that we get from the get request to the userAccounts
       setUserAccounts(response.data.users);
     };
@@ -63,7 +66,7 @@ function AdminLoginPage() {
     };
 
     try {
-      const response = await axios.post("/users", userData);
+      const response = await axios.post("http://192.232.212.61:8080/login", userData);
 
       if (response.status === 200) {
         setRedirect(true);
@@ -93,9 +96,12 @@ function AdminLoginPage() {
     });
   };
 
+
+
   return (
     <PageBody>
       <div className={style.adminLoginPage}>
+
         <div className={style.loginContainer}>
           <div className={style.loginPopup}>
             <img className={style.logo} src={logo} alt="logo" />

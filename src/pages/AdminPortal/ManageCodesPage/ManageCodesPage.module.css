@@ -1,6 +1,7 @@
 .manageCodesPage {
   display: flex;
   flex-direction: column;
+  
 }
 .buttonContainer {
   display: flex;
