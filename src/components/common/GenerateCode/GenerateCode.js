@@ -27,7 +27,7 @@ function GenerateCode(props) {
     const getClientData = async () => {
       const clientData = await axios.get("http://192.232.212.61:8080/clients");
 
-      console.log(clientData);
+      console.log("this is the client data: ",clientData.data);
       setClient(clientData.data);
     };
     getClientData();
@@ -133,8 +133,8 @@ function GenerateCode(props) {
       let currentClient = client[i];
 
       const options = {
-        value: currentClient.client,
-        label: currentClient.client
+        value: currentClient.name,
+        label: currentClient.name
       };
 
       newOptions.push(options);

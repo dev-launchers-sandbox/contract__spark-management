@@ -13,9 +13,12 @@ import axios from "axios";
 //This makes the code cleaner by returning the community deck route that will get called on index.js
 const getBasename = (path) => path.substr(0, path.lastIndexOf("/"));
 export default function CommunityDeck(props) {
+  /*
   const [logoUrl, setLogoUrl] = useState("");
 
   useEffect(() => {
+    //let mounted = true
+
     if (props.code === "") {
       return;
     }
@@ -31,11 +34,15 @@ export default function CommunityDeck(props) {
       }
     };
     getClientLogoUrl();
+
+    //return () => mounted = false;
+
   }, [props.code]);
+  */
   return (
     <PageBody>
       <div className="upperRow">
-        <Logo marginTop="4%" logoUrl={logoUrl} />
+        <Logo marginTop="4%" code={props.code} />
         <RedDeck deck={CommunityDeckRed} />
         <InstructionButton />
         {/*

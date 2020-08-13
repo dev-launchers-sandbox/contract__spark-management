@@ -66,7 +66,7 @@ function AdminLoginPage() {
     };
 
     try {
-      const response = await axios.post("http://192.232.212.61:8080/login", userData);
+      const response = await axios.post("https://cors-anywhere.herokuapp.com/http://api.spark4community.com/login", userData);
 
       if (response.status === 200) {
         setRedirect(true);

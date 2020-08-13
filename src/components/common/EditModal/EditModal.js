@@ -28,7 +28,7 @@ function EditModal(props) {
     };
     */
     const getClientData = async () => {
-      const clientData = await axios.get("/clients");
+    const clientData = await axios.get("http://192.232.212.61:8080/clients");
 
       console.log("clients: ", clientData);
       setClient(clientData.data);

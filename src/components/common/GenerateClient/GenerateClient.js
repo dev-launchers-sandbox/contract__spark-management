@@ -49,15 +49,16 @@ function GenerateClient(props) {
       console.log("client length: ", form.client.length);
       console.log("logo url length: ", form.logoUrl.length);
       try {
-        /*
+
         const response = await axios.post("http://192.232.212.61:8080/clients", clientData);
         notify("Data has been sent!");
-        */
 
+        /*
         const userResponse = await axios.get("http://192.232.212.61:8080/users/current");
         console.log("current user: ", userResponse)
+        */
 
-      //  console.log("client data: ", response);
+      console.log("client data: ", response);
       } catch (err) {
         console.error(err);
       }

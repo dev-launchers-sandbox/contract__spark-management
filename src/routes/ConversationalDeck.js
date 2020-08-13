@@ -14,18 +14,18 @@ import axios from "axios";
 //This makes the code cleaner by returning the conversational deck route that will get called on index.js
 
 export default function ConversationalDeck(props) {
+  /*
   const [logoUrl, setLogoUrl] = useState("");
 
   useEffect(() => {
+    //let mounted = true;
     if (props.code === "") {
       return;
     }
     const getClientLogoUrl = async () => {
       try {
         console.log("spanish form code: ", props.code);
-        const response = await axios.get("/codes/validate", {
-          params: { code: props.code }
-        });
+        const response = await axios.get(`http://192.232.212.61:8080/codes/${props.code}/validate`);
         setLogoUrl(response.data.logo_url);
 
         console.log("logo url: ", response);
@@ -34,11 +34,14 @@ export default function ConversationalDeck(props) {
       }
     };
     getClientLogoUrl();
+    //return () => mounted = false;
+
   }, [props.code]);
+  */
   return (
     <PageBody>
       <div className="upperRow">
-        <Logo marginTop="4%" logoUrl={logoUrl} />
+        <Logo marginTop="4%" code={props.code} />
         <RedDeck deck={ConversationalRedDeck} />
         <InstructionButton />
       </div>

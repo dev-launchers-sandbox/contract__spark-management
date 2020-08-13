@@ -85,9 +85,7 @@ function LoginPage(props) {
     try {
       const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${form.code}/`;
       //sets isLoading to false
-      const data = await axios.get("/codes/validate", {
-        params: { code: form.code }
-      });
+      const data = await axios.get(`http://192.232.212.61:8080/codes/${form.code}/validate`);
       console.log("spark data: ", data);
       sessionStorage.setItem(form.code, true);
       setDeckUsing("");
@@ -114,23 +112,24 @@ function LoginPage(props) {
       //stores the url and the code the user inputs without the letter of the deck on top
       const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${codeWithoutDeckLetter}/`;
       //gets the response data from the url using a GET request
-      const data = await axios.get("/codes/validate", {
-        params: { code: codeWithoutDeckLetter }
-      });
+      const data = await axios.get(`http://192.232.212.61:8080/codes/${form.code}/validate`);
       console.log("status code: ", data.status);
+
+      const codeData = await axios.get(`http://192.232.212.61:8080/codes/${form.code}`);
+        console.log("code data in login page: ", codeData)
       //marks the code as verified and saves it in sessionStorage
-      sessionStorage.setItem(form.code.substring(1), true);
+      sessionStorage.setItem(form.code, true);
       //props.correctDeck(deckLetter);
       //sets isLoading to false
 
-      if (deckLetter === "c") {
+      if (codeData.data.code.deck_name === "community") {
         setDeckUsing("CommunityDeck");
-      } else if (deckLetter === "s") {
+      } else if (codeData.data.code.deck_name === "spanish") {
         setDeckUsing("SpanishDeck");
         console.log("spanish");
-      } else if (deckLetter === "o") {
+      } else if (codeData.data.code.deck_name === "conversational") {
         setDeckUsing("ConversationalDeck");
-      } else if (deckLetter === "y") {
+      } else if (codeData.data.code.deck_name === "youth") {
         setDeckUsing("YouthDeck");
       } else {
         setForm({
@@ -147,7 +146,7 @@ function LoginPage(props) {
       */
       if (data.data.valid) {
         setRedirect(true);
-        props.changeFormCode(codeWithoutDeckLetter);
+        props.changeFormCode(form.code);
       }
 
       //props.correctDeck(deckLetter);
@@ -267,7 +266,7 @@ function LoginPage(props) {
           </div>
           {/*If the status code is 200 redirect the user to the game with the code they submitted */}
           {redirect ? (
-            <Redirect to={`/${form.code.substring(1)}/${deckUsing}`} />
+            <Redirect to={`/${form.code}/${deckUsing}`} />
           ) : (
             ""
           )}
