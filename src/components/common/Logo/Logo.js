@@ -12,6 +12,7 @@ export default function Logo(props) {
   const [logoUrl, setLogoUrl] = useState("");
 
   useEffect(() => {
+    console.log("compononent mounted");
     //let mounted = true;
     if (props.code === "") {
       return;
