@@ -71,7 +71,7 @@ function LoginPage(props) {
     try {
       const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${form.code}/`;
       //sets isLoading to false
-      const data = await axios.get(`http://192.232.212.61:8080/codes/${form.code}/validate`);
+      const data = await axios.get(`http://192.232.212.61:80/codes/${form.code}/validate`);
       console.log("spark data: ", data);
       sessionStorage.setItem(form.code, true);
       setDeckUsing("");
@@ -98,10 +98,10 @@ function LoginPage(props) {
       //stores the url and the code the user inputs without the letter of the deck on top
       const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${codeWithoutDeckLetter}/`;
       //gets the response data from the url using a GET request
-      const data = await axios.get(`http://192.232.212.61:8080/codes/${form.code}/validate`);
+      const data = await axios.get(`http://192.232.212.61:80/codes/${form.code}/validate`);
       console.log("status code: ", data.status);
 
-      const codeData = await axios.get(`http://192.232.212.61:8080/codes/${form.code}`);
+      const codeData = await axios.get(`http://192.232.212.61:80/codes/${form.code}`);
         console.log("code data in login page: ", codeData)
       //marks the code as verified and saves it in sessionStorage
       sessionStorage.setItem(form.code, true);

@@ -25,7 +25,7 @@ function GenerateCode(props) {
   //gets the client data when the componenet mounts
   useEffect(() => {
     const getClientData = async () => {
-      const clientData = await axios.get("http://192.232.212.61:8080/clients");
+      const clientData = await axios.get("http://192.232.212.61:80/clients");
 
       console.log("this is the client data: ",clientData.data);
       setClient(clientData.data);
@@ -101,7 +101,7 @@ function GenerateCode(props) {
       try {
         console.log(codeBatch);
         //sends the data to /code_batch
-        const data = await axios.post("http://192.232.212.61:8080/code_batches", codeBatch);
+        const data = await axios.post("http://192.232.212.61:80/code_batches", codeBatch);
         notify("Data has been sent!");
 
         console.log("config: ", data.config.data);
