@@ -14,35 +14,6 @@ import axios from "axios";
 //This makes the code cleaner by returning the teen deck route that will get called on index.js
 
 export default function YouthDeck(props) {
-  /*
-  const [logoUrl, setLogoUrl] = useState("");
-
-  useEffect(() => {
-    //let mounted = true
-
-    if (props.code === "") {
-      return;
-    }
-    const getClientLogoUrl = async () => {
-      try {
-        console.log("spanish form code: ", props.code);
-        const response = await axios.get(`http://192.232.212.61:8080/codes/${props.code}/validate`)
-
-        setLogoUrl(response.data.logo_url);
-
-
-
-        console.log("logo url: ", response);
-      } catch (err) {
-        console.error("this is the error", err);
-      }
-    };
-    getClientLogoUrl();
-
-    //return () => mounted = false;
-
-  }, [props.code]);
-  */
   return (
     <PageBody>
       <div className="upperRow">

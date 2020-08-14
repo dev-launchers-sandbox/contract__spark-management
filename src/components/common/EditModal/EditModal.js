@@ -28,6 +28,7 @@ function EditModal(props) {
 
   let [deck, setDeck] = useState([]);
 
+
   const getClientData = async () => {
     const clientData = await axios.get("http://192.232.212.61:80/clients");
       console.log("clients: ", clientData);

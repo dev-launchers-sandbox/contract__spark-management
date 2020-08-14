@@ -8,9 +8,11 @@ import Modal from "../Modal/Modal.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
-
+import CodesGenerated from "../CodesGenerated/CodesGenerated"
 function GenerateCode(props) {
   let [client, setClient] = useState([]);
+  let [showGeneratedCodesModal, setShowGeneratedCodesModal] = useState(false);
+  let [generatedCodes, setGeneratedCodes] = useState();
   let [form, setForm] = useState({
     communityDeck: 0,
     conversationalDeck: 0,
@@ -103,7 +105,9 @@ function GenerateCode(props) {
         //sends the data to /code_batch
         const data = await axios.post("http://192.232.212.61:80/code_batches", codeBatch);
         notify("Data has been sent!");
-
+        setGeneratedCodes(codeBatch);
+        props.handleCloseModal();
+        setShowGeneratedCodesModal(true);
         console.log("config: ", data.config.data);
         console.log("Data: ", data.data);
         console.log("Response: ", data);
@@ -241,6 +245,14 @@ function GenerateCode(props) {
           </div>
         </div>
       </Modal>
+      <CodesGenerated
+        showModal={showGeneratedCodesModal}
+        handleCloseModal={() => {
+          setShowGeneratedCodesModal(false);
+        }}
+        generatedCodes={generatedCodes}
+        openGenerateCode={props.openGenerateCode}
+      />
     </div>
   );
 }

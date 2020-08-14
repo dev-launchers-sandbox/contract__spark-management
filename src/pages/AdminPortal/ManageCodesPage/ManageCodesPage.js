@@ -7,7 +7,7 @@ import DataGridComponent from "../../../components/common/DataGrid/DataGrid";
 import GenerateCode from "../../../components/common/GenerateCode/GenerateCode.js";
 import GenerateClient from "../../../components/common/GenerateClient/GenerateClient.js";
 import EditModal from "../../../components/common/EditModal/EditModal.js";
-//import SortByDropdowns from "./Dropdowns/SortBy/SortBy";
+import SortByDropdowns from "./Dropdowns/SortBy/SortBy";
 
 function ManageCodesPage() {
   let [showGenerateCodeModal, setShowGenerateCodeModal] = useState(false);
@@ -34,6 +34,7 @@ function ManageCodesPage() {
           handleCloseModal={() => {
             setShowGenerateCodeModal(false);
           }}
+            openGenerateCode={handleGenerateCodeShowModal}
         />
         <GenerateClient
           showModal={showGenerateClientModal}
@@ -57,11 +58,9 @@ function ManageCodesPage() {
         </div>
       </div>
       <DataGridComponent />
-      {/*}
       <div className={style.dropdownsContainer}>
         <SortByDropdowns />
       </div>
-      {*/}
 
     </div>
   );

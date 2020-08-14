@@ -1,7 +1,7 @@
 .manageCodesPage {
   display: flex;
   flex-direction: column;
-  
+
 }
 .buttonContainer {
   display: flex;
@@ -10,6 +10,7 @@
 }
 .buttonContainer button {
   background: #91413c;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   border-radius: 2px;
   font-size: 1.2vw;
   border: 2px;
