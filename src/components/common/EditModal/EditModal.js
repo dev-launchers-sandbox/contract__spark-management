@@ -6,6 +6,13 @@ import Select from "react-select";
 
 function EditModal(props) {
   let [client, setClient] = useState([]);
+  let [codeData, setCodeData] = useState({
+    clientName: "",
+    expirationDate: "",
+    deckName: "",
+    subClientName: ""
+  })
+
   let [form, setForm] = useState({
     communityDeck: 0,
     conversationalDeck: 0,
@@ -21,29 +28,43 @@ function EditModal(props) {
 
   let [deck, setDeck] = useState([]);
 
-  useEffect(() => {
-    /*
-    const getCodeData = async () => {
-      const response = await axios.get("/codes", {
-        params: { id: 1 }
-      });
-
-      console.log("specific code data: ", response.data);
-    };
-    */
-    const getClientData = async () => {
-    const clientData = await axios.get("http://192.232.212.61:8080/clients");
-
-    const deckData = await axios.get("http://192.232.212.61:8080/decks")
-    console.log("deck name: ", deckData)
-    setDeck(deckData.data)
+  const getClientData = async () => {
+    const clientData = await axios.get("http://192.232.212.61:80/clients");
       console.log("clients: ", clientData);
       setClient(clientData.data);
+      console.log("end of getClient func")
 
-    };
+  };
+
+  const getDeckData = async () => {
+
+    const deckData = await axios.get("http://192.232.212.61:80/decks")
+    console.log("deck name: ", deckData)
+    setDeck(deckData.data)
+    console.log("end of getDeck func")
+
+  }
+
+  const getCodeData = async () => {
+
+    const codeDataResponse = await axios.get("http://192.232.212.61:80/codes/9gMYfchJJ")
+    console.log("code data: ", codeDataResponse);
+    console.log("end of getDeck func")
+    setCodeData({
+      ...codeData,
+      clientName: codeDataResponse.data.code.client_name,
+      expirationDate: codeDataResponse.data.code.expiration_date,
+      deckName: codeDataResponse.data.code.deck_name,
+      subClientName: codeDataResponse.data.code.sub_client_name
+    })
+
+  }
+  useEffect(() => {
+    console.log("edit modal mounted");
 
     getClientData();
-    //getCodeData();
+    getDeckData()
+    getCodeData()
   }, []);
 
   const handleSelectChange = (formClient) => {
@@ -85,7 +106,7 @@ function EditModal(props) {
         console.log(codeBatch);
 
         //sends the data to /code_batch
-        const response = await axios.put(`http://192.232.212.61:8080/codes/9gMYfchJJ`, codeBatch);
+        const response = await axios.put(`http://192.232.212.61:80/codes/9gMYfchJJ`, codeBatch);
         console.log("updated datd: ", response)
         console.log("Data has been sent!");
 
@@ -118,7 +139,15 @@ function EditModal(props) {
     return newOptions;
   };
 
+  const onBlur = (events) => {
+    console.log("onBlur function is being called");
+    events.target.type = "text";
+  }
 
+  const onFocus = (events) => {
+    console.log("onFocus function is being called");
+    events.target.type = "date";
+  }
 
 
   return (
@@ -137,31 +166,31 @@ function EditModal(props) {
           <div className={style.formContainer}>
             <form className={style.form} onSubmit={handleSubmit}>
             <div className={style.decks}>
-
+            <div className={style.selectContainer}>
                 <label>Deck</label>
-
-                  <div className={style.deckSelects}>
+                <div className={style.selectsDeck}>
                     <Select
                       value={deckForm}
                       isSearchable={true}
                       maxMenuHeight={190}
                       className={style.select}
                       onChange={handleDeckSelectChange}
-                      placeholder="Choose a Deck"
+                      placeholder={codeData.deckName}
                       options={selectOptions(deck)}
                     />
-
-                <br />
-                <div className={style.row}>
-                  <label>Sub Client</label>
-                  <input
-                    name="subClient"
-                    onChange={handleChange}
-                    value={form.subClient}
-                    type="text"
-                    placeholder="sub client"
-                  />
+                  </div>
                 </div>
+              <br />
+              <div className={style.row}>
+                <label>Sub Client</label>
+                <input
+                  name="subClient"
+                  onChange={handleChange}
+                  className={style.subClientText}
+                  value={form.subClient}
+                  type="text"
+                  placeholder={codeData.subClientName}
+                />
               </div>
             </div>
               <div className={style.clientContainer}>
@@ -176,7 +205,7 @@ function EditModal(props) {
                       maxMenuHeight={190}
                       className={style.select}
                       onChange={handleSelectChange}
-                      placeholder="Choose a client"
+                      placeholder={codeData.clientName}
                       options={selectOptions(client)}
                     />
                   </div>
@@ -186,10 +215,14 @@ function EditModal(props) {
                     <label>Exp.Date</label>
                   </div>
                   <input
+                    type="text"
+                    className={style.expirationDateText}
+                    onBlur={onBlur}
+                    onFocus={onFocus}
                     name="expirationDate"
                     onChange={handleChange}
                     value={form.expirationDate}
-                    type="date"
+                    placeholder={codeData.expirationDate.substr(0, 10)}
                   />
                 </div>
               </div>

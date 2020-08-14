@@ -8,7 +8,7 @@ function Header() {
   const [username, setUsername] = useState("");
   useEffect(() => {
     const fetchUser = async () => {
-      let userUsername = await axios.get("http://192.232.212.61:8080/users/current");
+      let userUsername = await axios.get("http://192.232.212.61:80/users/current");
       console.log("current user: ", userUsername)
       setUsername(userUsername.data.full_name);
     };
