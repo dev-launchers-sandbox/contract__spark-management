@@ -47,16 +47,16 @@ function EditModal(props) {
   }
 
   const getCodeData = async () => {
-
-    const codeDataResponse = await axios.get("http://192.232.212.61:80/codes/9gMYfchJJ")
-    console.log("code data: ", codeDataResponse);
-    console.log("end of getDeck func")
-    setCodeData({
-      ...codeData,
-      clientName: codeDataResponse.data.code.client_name,
-      expirationDate: codeDataResponse.data.code.expiration_date,
-      deckName: codeDataResponse.data.code.deck_name,
-      subClientName: codeDataResponse.data.code.sub_client_name
+    if(!props.rowToEdit) return;
+      const codeDataResponse = await axios.get(`http://192.232.212.61:80/codes/${props.rowToEdit._id}`)
+        console.log("code data: ", codeDataResponse);
+        console.log("end of getDeck func")
+        setCodeData({
+        ...codeData,
+        clientName: codeDataResponse.data.code.client_name,
+        expirationDate: codeDataResponse.data.code.expiration_date,
+        deckName: codeDataResponse.data.code.deck_name,
+        subClientName: codeDataResponse.data.code.sub_client_name
     })
 
   }
@@ -65,9 +65,10 @@ function EditModal(props) {
 
     getClientData();
     getDeckData()
-    getCodeData()
   }, []);
-
+useEffect(() => {
+  getCodeData()
+}, [props.rowToEdit])
   const handleSelectChange = (formClient) => {
     setFormClient(formClient);
     console.log("option selected: ", formClient);
@@ -107,11 +108,11 @@ function EditModal(props) {
         console.log(codeBatch);
 
         //sends the data to /code_batch
-        const response = await axios.put(`http://192.232.212.61:80/codes/9gMYfchJJ`, codeBatch);
+        const response = await axios.put(`http://192.232.212.61:80/codes/${props.rowToEdit._id}`, codeBatch);
         console.log("updated datd: ", response)
         console.log("Data has been sent!");
-
-
+        props.handleCloseModal()
+        props.updateRows()
       } catch (err) {
         console.error(err);
       }

@@ -106,11 +106,11 @@ function GenerateCode(props) {
         const data = await axios.post("http://192.232.212.61:80/code_batches", codeBatch);
         notify("Data has been sent!");
         setGeneratedCodes(codeBatch);
+        console.log("dota", data)
+        props.updateRows()
         props.handleCloseModal();
         setShowGeneratedCodesModal(true);
-        console.log("config: ", data.config.data);
-        console.log("Data: ", data.data);
-        console.log("Response: ", data);
+
       } catch (err) {
         console.error(err);
       }
