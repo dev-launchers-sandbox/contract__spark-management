@@ -19,7 +19,7 @@ export default function Logo(props) {
     const getClientLogoUrl = async () => {
       try {
         console.log("spanish form code: ", props.code);
-        const response = await axios.get(`http://192.232.212.61:8080/codes/${props.code}/validate`);
+        const response = await axios.get(`http://192.232.212.61:80/codes/${props.code}/validate`);
         setLogoUrl(response.data.logo_url);
 
         console.log("logo url: ", response.data.logo_url);

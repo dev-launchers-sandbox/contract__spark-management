@@ -50,11 +50,11 @@ function GenerateClient(props) {
       console.log("logo url length: ", form.logoUrl.length);
       try {
 
-        const response = await axios.post("http://192.232.212.61:8080/clients", clientData);
+        const response = await axios.post("http://192.232.212.61:80/clients", clientData);
         notify("Data has been sent!");
 
         /*
-        const userResponse = await axios.get("http://192.232.212.61:8080/users/current");
+        const userResponse = await axios.get("http://192.232.212.61:80/users/current");
         console.log("current user: ", userResponse)
         */
 

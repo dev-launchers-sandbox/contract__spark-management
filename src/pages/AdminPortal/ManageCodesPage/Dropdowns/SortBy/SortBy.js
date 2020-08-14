@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import style from "./SortBy.module.css";
 
-export default function sortBy() {
+export default function SortBy() {
   const [sortBy, setSortBy] = useState({ column: "None", type: "Ascending" });
   const handleChange = (event) => {
     const { name, value } = event.target;

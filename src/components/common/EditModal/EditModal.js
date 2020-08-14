@@ -32,9 +32,9 @@ function EditModal(props) {
     };
     */
     const getClientData = async () => {
-    const clientData = await axios.get("http://192.232.212.61:8080/clients");
+    const clientData = await axios.get("http://192.232.212.61:80/clients");
 
-    const deckData = await axios.get("http://192.232.212.61:8080/decks")
+    const deckData = await axios.get("http://192.232.212.61:80/decks")
     console.log("deck name: ", deckData)
     setDeck(deckData.data)
       console.log("clients: ", clientData);
@@ -85,7 +85,7 @@ function EditModal(props) {
         console.log(codeBatch);
 
         //sends the data to /code_batch
-        const response = await axios.put(`http://192.232.212.61:8080/codes/9gMYfchJJ`, codeBatch);
+        const response = await axios.put(`http://192.232.212.61:80/codes/9gMYfchJJ`, codeBatch);
         console.log("updated datd: ", response)
         console.log("Data has been sent!");
 

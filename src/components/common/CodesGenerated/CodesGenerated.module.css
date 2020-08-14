@@ -1,0 +1,21 @@
+.buttonContainer button {
+  background: #91413c;
+  border-radius: 2px;
+  font-size: 1.2vw;
+  border: 2px;
+  margin: 1em;
+  width: 10em;
+  height: 2em;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+.buttonContainer button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.modalP {
+  font-family: "Nunito Sans", serif;
+  text-align: center;
+}

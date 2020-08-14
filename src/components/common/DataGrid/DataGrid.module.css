@@ -5,6 +5,3 @@
   text-align: center;
   border: solid;
 }
-.react-grid-Row:nth-last-child(-n + 6) .rdg-cell-action-menu {
-  background-color: red;
-}
