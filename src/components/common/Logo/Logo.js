@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 import BrandedLogo from "../../../images/mcneil-logo.png";
 import axios from "axios"
 export default function Logo(props) {
-  const [doesImageExist, setDoesImageExist] = useState(false);
+  const [doesImageExist, setDoesImageExist] = useState(true);
 
-  const [logoUrl, setLogoUrl] = useState("");
+  const [logoUrl, setLogoUrl] = useState(null);
 
   useEffect(() => {
     console.log("compononent mounted");
@@ -23,7 +23,8 @@ export default function Logo(props) {
         const response = await axios.get(`http://192.232.212.61:80/codes/${props.code}/validate`);
         setLogoUrl(response.data.logo_url);
 
-        console.log("logo url: ", response.data.logo_url);
+        console.log("response logo url: ", response.data.logo_url);
+        console.log("logo url: ", logoUrl);
       } catch (err) {
         console.error("this is the error", err);
       }
@@ -35,6 +36,7 @@ export default function Logo(props) {
 
   const addDefaultSrc = (event) => {
     console.log("image does not exist")
+    console.log("logo url in onError event: ", logoUrl);
     event.target.src = null;
     setDoesImageExist(false);
   };
