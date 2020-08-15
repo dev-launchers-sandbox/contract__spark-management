@@ -3,15 +3,15 @@ import Modal from "../Modal/Modal.js";
 import ReactDataGrid from "react-data-grid";
 import "react-data-grid/dist/react-data-grid.css";
 import style from "./CodesGenerated.module.css";
-
+import axios from "axios"
 export default function CodesGenerated(props) {
-  const [rows, setRows] = useState();
+  const [rows, setRows] = useState("");
   const columns = [
-    { key: "code", name: "Code" },
+    { key: "_id", name: "Code" },
     { key: "client_name", name: "Client" },
-    { key: "deck", name: "Deck" },
-    { key: "username", name: "Created By" },
-    { key: "created_at", name: "Created At" },
+    { key: "deck_name", name: "Deck" },
+    { key: "user_creator_name", name: "Created By" },
+    { key: "createdAt", name: "Created At" },
     { key: "expiration_date", name: "Exp. Date" }
   ];
   const generateMoreCodes = () => {
@@ -19,30 +19,14 @@ export default function CodesGenerated(props) {
     props.handleCloseModal();
   };
   useEffect(() => {
-    console.log("props", props);
+    async function getNewCodes(){
     if (props.generatedCodes) {
-      let generatedCodes = props.generatedCodes;
-      let client = generatedCodes.client_name || "None";
-      let expiration_date = generatedCodes.expiration_date || "None";
-      let decks = generatedCodes.decks;
-      let _id = "LALAL";
-      let newCodes = [];
-      for (let deck in decks) {
-        for (let i = 0; i < decks[deck]; i++) {
-          let newCode = {
-            code: _id,
-            client_name: client,
-            deck: deck,
-            username: "username",
-            created_at: "IDK",
-            expiration_date: expiration_date
-          };
-          newCodes.push(newCode);
-        }
+      let codesGenerated = ""
+      await axios.get(`http://192.232.212.61/codes?code_batch_id=${props.generatedCodes}`).then(newCodes => codesGenerated = newCodes.data)
+      setRows(codesGenerated)
       }
-
-      setRows(newCodes);
     }
+    getNewCodes()
   }, [props.generatedCodes]);
   return (
     <div>
