@@ -105,8 +105,7 @@ function GenerateCode(props) {
         //sends the data to /code_batch
         const data = await axios.post("http://192.232.212.61:80/code_batches", codeBatch);
         notify("Data has been sent!");
-        setGeneratedCodes(codeBatch);
-        console.log("dota", data)
+        setGeneratedCodes(data.data.code_batch._id);
         props.updateRows()
         props.handleCloseModal();
         setShowGeneratedCodesModal(true);
