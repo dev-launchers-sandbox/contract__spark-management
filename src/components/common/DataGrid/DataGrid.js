@@ -31,7 +31,7 @@ function DataTable() {
   const [codes, setCodes] = useState("");
 
   async function updateRows() {
-    let codesFetch = await axios.get("http://192.232.212.61:80/codes?limit=80");
+    let codesFetch = await axios.get("https://api.spark4community.com/codes?limit=80");
     let codeArray = codesFetch.data;
     setCodes(codeArray);
   console.log("all the codes: ", codesFetch)

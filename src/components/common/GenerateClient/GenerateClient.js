@@ -41,31 +41,28 @@ function GenerateClient(props) {
 
   //sends the clienData to the path /clients via post request
   const sendClientData = async () => {
-    if (form.client.length !== 0 && form.logoUrl.length !== 0) {
+      if(form.client.length !== 0){
       const clientData = {
         name: form.client,
         logo_url: form.logoUrl
       };
       console.log("client length: ", form.client.length);
       console.log("logo url length: ", form.logoUrl.length);
+      console.log("client data:  ", clientData)
       try {
 
-        const response = await axios.post("http://192.232.212.61:80/clients", clientData);
+        //const response = await axios.post("https://api.spark4community.com/clients", clientData);
         notify("Data has been sent!");
+        props.handleCloseModal();
 
-        /*
-        const userResponse = await axios.get("http://192.232.212.61:80/users/current");
-        console.log("current user: ", userResponse)
-        */
-
-      console.log("client data: ", response);
+        //console.log("client data: ", response);
       } catch (err) {
         console.error(err);
       }
-    } else {
-      notify("Forms can't be empty!");
-      console.log("form is empty");
+    }else{
+      notify("Client form can't be empty!")
     }
+
   };
 
   //gets called when the user clicks the Generate Client button
@@ -96,6 +93,7 @@ function GenerateClient(props) {
               name="client"
               onChange={handleChange}
               value={form.client}
+              required
             />
           </div>
           <div className={style.logoUrlContainer}>

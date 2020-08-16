@@ -42,7 +42,7 @@ export default function CommunityDeck(props) {
   return (
     <PageBody>
       <div className="upperRow">
-        <Logo marginTop="4%" code={props.code} />
+        <Logo marginTop="4%"/>
         <RedDeck deck={CommunityDeckRed} />
         <InstructionButton />
         {/*
