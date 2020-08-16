@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
 import axios from "axios";
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Switch,
   Route,
   useParams,
