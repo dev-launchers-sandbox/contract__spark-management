@@ -35,11 +35,11 @@ function ManageCodesPage() {
   const handleEditShowModal = () => {
     setShowEditModal(true);
   };
-  
+
   const handleEditClientModal = () => {
     setShowEditClientModal(true)
   }
-  
+
   const updateCodeToEdit = (value) => {
     setRowToEdit(value);
   };
@@ -47,7 +47,7 @@ function ManageCodesPage() {
     let codesFetch = await axios.get(
       `http://192.232.212.61:80/codes?skip=${
         page * NUM_ROWS_PER_PAGE
-      }&limit=3&sort=-createdAt`
+      }&limit=${NUM_ROWS_PER_PAGE}&sort=-createdAt`
     );
     let codeArray = codesFetch.data;
     setCodes(codeArray);
@@ -114,6 +114,7 @@ function ManageCodesPage() {
         <div className={style.buttonContainer}>
           <button onClick={handleGenerateCodeShowModal}>+ Code</button>
           <button onClick={handleGenerateClientShowModal}>+ Client</button>
+          <button onClick={handleEditClientModal}>open edit client modal</button>
         </div>
       </div>
       <DataGridComponent
@@ -128,16 +129,19 @@ function ManageCodesPage() {
         <FilterByDropdowns updateRows={updateRows} />
       </div>
       <div className={style.changePageButtons}>
-        {page > 0 && (
-          <button className={style.lastPageButton} onClick={substractPage}>
-            {" Last Page"}
-          </button>
-        )}
-        {codes.length === NUM_ROWS_PER_PAGE && (
-          <button className={style.nextPageButton} onClick={addPage}>
-            {" Next Page"}
-          </button>
-        )}
+        <div className={style.buttonHolder}>
+          {page > 0 && (
+            <button className={style.lastPageButton} onClick={substractPage}>
+              {" Last Page"}
+            </button>
+          )}
+          {codes.length === NUM_ROWS_PER_PAGE && (
+
+              <button className={style.nextPageButton} onClick={addPage}>
+                {" Next Page"}
+              </button>
+          )}
+        </div>
       </div>
     </div>
   );

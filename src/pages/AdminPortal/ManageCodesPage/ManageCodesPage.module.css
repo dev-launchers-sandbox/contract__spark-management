@@ -20,6 +20,7 @@
 .changePageButtons {
   display: flex;
   justify-content: space-between;
+  justify-content: center;
 }
 .changePageButtons button {
   display: flex;
@@ -47,4 +48,10 @@
 }
 .lastPageButton {
   display: flex;
+}
+
+.buttonHolder{
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

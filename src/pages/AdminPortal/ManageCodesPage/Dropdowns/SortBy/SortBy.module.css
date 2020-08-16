@@ -22,6 +22,11 @@
   width: 10em;
   height: 2em;
 }
+
+.sortBy select:hover{
+  cursor: pointer;
+}
+
 .button {
   display: flex;
   justify-content: center;

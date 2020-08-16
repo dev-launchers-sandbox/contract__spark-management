@@ -71,7 +71,7 @@ function LoginPage(props) {
     try {
       const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${form.code}/`;
       //sets isLoading to false
-      const data = await axios.get(`https://api.spark4community.com/${form.code}/validate`);
+      const data = await axios.get(`https://api.spark4community.com/codes/${form.code}/validate`);
       console.log("spark data: ", data);
       sessionStorage.setItem(form.code, true);
       setDeckUsing("");
@@ -101,7 +101,7 @@ function LoginPage(props) {
       const data = await axios.get(`https://api.spark4community.com/codes/${form.code}/validate`);
       console.log("status code: ", data.status);
 
-      const codeData = await axios.get(`https://api.spark4community.com/${form.code}`);
+      const codeData = await axios.get(`https://api.spark4community.com/codes/${form.code}`);
         console.log("code data in login page: ", codeData)
       //marks the code as verified and saves it in sessionStorage
       sessionStorage.setItem(form.code, true);

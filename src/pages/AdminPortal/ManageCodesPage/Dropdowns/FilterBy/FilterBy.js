@@ -37,7 +37,7 @@ export default function FilterBy() {
         />
       </div>
       <div className={style.applyFilter}>
-        <button onClick={handleSubmit}> Appy Filter </button>
+        <button onClick={handleSubmit} className={style.button}> Appy Filter </button>
       </div>
     </div>
   );

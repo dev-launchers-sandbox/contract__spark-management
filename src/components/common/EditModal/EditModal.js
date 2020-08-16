@@ -3,6 +3,9 @@ import style from "./EditModal.module.css";
 import Modal from "../Modal/Modal.js";
 import axios from "axios";
 import Select from "react-select";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { css } from "glamor";
 
 function EditModal(props) {
   let [client, setClient] = useState([]);
@@ -45,9 +48,27 @@ function EditModal(props) {
 
   }
 
+  //gets called when the user inputs the wrong username and password
+  const notify = (text) => {
+    toast(text, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 2500,
+      className: css({
+        background: "white"
+      }),
+      bodyClassName: css({
+        fontSize: "20px",
+        color: "black"
+      }),
+      progressClassName: css({
+        background: "repeating-radial-gradient( transparent, transparent )"
+      })
+    });
+  };
+
   const getCodeData = async () => {
 
-    const codeDataResponse = await axios.get("https://api.spark4community.com/codes/rUxinE")
+    const codeDataResponse = await axios.get(`https://api.spark4community.com/codes/${props.rowToEdit._id}`)
     console.log("code data: ", codeDataResponse);
     console.log("end of getDeck func")
     console.log("code expiration date: ", codeDataResponse.data.code.expiration_date)
@@ -79,6 +100,7 @@ function EditModal(props) {
   }, []);
 
 useEffect(() => {
+  if(!props.rowToEdit) return;
   getCodeData()
 }, [props.rowToEdit])
 
@@ -136,10 +158,12 @@ useEffect(() => {
         const response = await axios.put(`http://192.232.212.61:80/codes/${props.rowToEdit._id}`, codeBatch);
         console.log("updated datd: ", response)
         console.log("Data has been sent!");
+        notify("Code Data has been updated!")
         props.handleCloseModal()
         props.updateRows()
       } catch (err) {
         console.error(err);
+        notify("something went wrong with sending the data")
       }
 
   };
