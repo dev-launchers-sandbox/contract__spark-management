@@ -8,7 +8,7 @@ import { css } from "glamor";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Link,

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "./Header.module.css";
 import SparkLogo from "../../../images/spark_app_logo_transparent.png";
 import axios from "axios";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { HashRouter as Router, Link } from "react-router-dom";
 
 function Header() {
   const [username, setUsername] = useState("");

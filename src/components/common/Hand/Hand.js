@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import style from "./Hand.module.css";
-import { BrowserRouter as Router, Redirect, useParams } from "react-router-dom";
+import { HashRouter as Router, Redirect, useParams } from "react-router-dom";
 import useDeck from "./../useDeck/useDeck";
 import YellowCard from "./../YellowCard/YellowCard";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
