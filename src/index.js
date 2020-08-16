@@ -7,27 +7,65 @@ import {
   Route,
   useParams,
   Redirect,
-  useRouterHistory
+  useRouterHistory,
 } from "react-router-dom";
-//comment
-import SelectDeck from "./components/common/SelectDeck/SelectDeck";
 import ReactModal from "react-modal";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 
+import ResetPassword from "./pages/AdminPortal/ResetPassword/ResetPassword";
 import CommunityDeckRoute from "./routes/CommunityDeck.js";
 import ConversationalDeckRoute from "./routes/ConversationalDeck.js";
 import SpanishDeckRoute from "./routes/SpanishDeck.js";
 import YouthDeckRoute from "./routes/YouthDeck.js";
 import LoginPageRoute from "./pages/LoginPage/LoginPage";
 import AdminLoginPage from "./pages/AdminPortal/AdminLoginPage/AdminLoginPage";
-//import mockData from "../src/mockData/MockData.js";
 import ManageCodesPage from "./pages/AdminPortal/ManageCodesPage/ManageCodesPage";
-
 import Footer from "../src/components/common/Footer/Footer.js";
-
+import SelectDeck from "./components/common/SelectDeck/SelectDeck";
 // Allows us to serve up the app from any arbitrary directory on a server
-const getBasename = (path) => path.substr(0, path.lastIndexOf("/"));
+let routes = [
+  {
+    path: "/",
+    component: LoginPageRoute,
+  },
+  {
+    path: "/AdminLoginPage",
+    component: AdminLoginPage,
+  },
+  {
+    path: "/ManageCodes",
+    component: ManageCodesPage,
+  },
+  {
+    path: "/ResetPassword/:token",
+    component: ResetPassword,
+  },
+  {
+    path: "/:code/CommunityDeck",
+    component: CommunityDeckRoute,
+  },
+  {
+    path: "/:code/ConversationalDeck",
+    component: ConversationalDeckRoute,
+  },
+  {
+    path: "/:code/SpanishDeck",
+    component: SpanishDeckRoute,
+  },
+  {
+    path: "/:code/YouthDeck",
+    component: YouthDeckRoute,
+  },
+];
+const getBasename = (path) => {
+  // TODO: Not a perfect solution, doesn't account for routes that begin with dynamic parameters
+  path = path.substr(0, path.lastIndexOf("/"));
+  routes.map((entry) => {
+    path = path.substr(0, path.lastIndexOf(entry.path));
+  });
+  return path;
+};
 
 function App() {
   ReactModal.setAppElement("#root");
@@ -46,45 +84,15 @@ function App() {
 
   console.log("subdirectory: ", getBasename(window.location.pathname));
   console.log("window: ", window.location.pathname);
+  //
+  let routeComponents = routes.map(({ path, component }, key) => (
+    <Route exact path={path} component={component} key={key} />
+  ));
 
   return (
     <Router basename={getBasename(window.location.pathname)}>
       <div className="App">
-        <Switch>
-          <Route exact path="/">
-            {/*When the app if 1st started, we want the user to be able to select the deck.*/}
-            <LoginPageRoute changeFormCode={changeFormCode} />
-          </Route>
-          <Route exact path="/AdminLoginPage">
-            <AdminLoginPage />
-          </Route>
-          <Route exact path="/ManageCodes">
-            <ManageCodesPage />
-          </Route>
-          <Route exact path="/:code">
-            <SelectDeck />
-          </Route>
-          <Route exact path="/:code/CommunityDeck">
-            {/*When the community deck is selected, we want to show all of the things the deck should show*/}
-            <CommunityDeckRoute code={formCode} />
-          </Route>
-
-          <Route exact path="/:code/ConversationalDeck">
-            {/*When the conversational deck is selected, we want to show all of the things the deck should show*/}
-            <ConversationalDeckRoute code={formCode} />
-          </Route>
-
-          <Route exact path="/:code/SpanishDeck">
-            {/*When the spanish deck is selected, we want to show all of the things the deck should show*/}
-
-            <SpanishDeckRoute code={formCode} />
-          </Route>
-
-          <Route exact path="/:code/YouthDeck">
-            {/*When the youth deck is selected, we want to show all of the things the deck should show*/}
-            <YouthDeckRoute code={formCode} />
-          </Route>
-        </Switch>
+        <Switch> {routeComponents} </Switch>
       </div>
       <Footer />
       {statusCode === 200 && <Redirect to="/" />}

@@ -14,10 +14,6 @@ function EditModal(props) {
   })
 
   let [form, setForm] = useState({
-    communityDeck: 0,
-    conversationalDeck: 0,
-    spanishDeck: 0,
-    youthDeck: 0,
     client: "",
     expirationDate: "",
     subClient: ""
@@ -66,9 +62,11 @@ function EditModal(props) {
     getClientData();
     getDeckData()
   }, []);
+
 useEffect(() => {
   getCodeData()
 }, [props.rowToEdit])
+
   const handleSelectChange = (formClient) => {
     setFormClient(formClient);
     console.log("option selected: ", formClient);

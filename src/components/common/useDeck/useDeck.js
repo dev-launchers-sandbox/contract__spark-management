@@ -25,8 +25,13 @@ export default function useDeck(cardArray) {
 
   const drawCard = () => {
     // This returns a new card that has been "popped" from the corresponding deck
-    const newCard = cards.pop();
-    return newCard;
+    // TODO:
+    let temp = [...cards];
+    let toReturn = temp.pop();
+    setCards(temp);
+    console.log("cardArray", cardArray);
+    console.log("cards", cards);
+    return toReturn;
   };
 
   const shuffleCards = () => {

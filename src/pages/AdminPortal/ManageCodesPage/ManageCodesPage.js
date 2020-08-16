@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./ManageCodesPage.module.css";
 
 import MockAdapter from "axios-mock-adapter";
@@ -9,15 +9,19 @@ import GenerateClient from "../../../components/common/GenerateClient/GenerateCl
 import EditModal from "../../../components/common/EditModal/EditModal.js";
 import SortByDropdowns from "./Dropdowns/SortBy/SortBy";
 
-import axios from "axios"
+import axios from "axios";
+
+const NUM_ROWS_PER_PAGE = 50;
 
 function ManageCodesPage() {
   let [showGenerateCodeModal, setShowGenerateCodeModal] = useState(false);
   let [showGenerateClientModal, setShowGenerateClientModal] = useState(false);
   let [showEditModal, setShowEditModal] = useState(false);
-  let [rowToEdit,setRowToEdit] = useState()
-  const [codes, setCodes] = useState("");
-
+  let [rowToEdit, setRowToEdit] = useState();
+  let [codes, setCodes] = useState("");
+  let [gridHeight, setGridHeight] = useState();
+  let [showArrows, setShowArrows] = useState({ front: false });
+  let [page, setPage] = useState(0);
   const handleGenerateCodeShowModal = () => {
     setShowGenerateCodeModal(true);
     console.log("bool: ", showGenerateCodeModal);
@@ -28,14 +32,33 @@ function ManageCodesPage() {
   const handleEditShowModal = () => {
     setShowEditModal(true);
   };
-  const updateCodeToEdit = value => {
-    setRowToEdit(value)
-  }
+  const updateCodeToEdit = (value) => {
+    setRowToEdit(value);
+  };
   async function updateRows() {
-    let codesFetch = await axios.get("http://192.232.212.61:80/codes?limit=80&sort=-createdAt");
+    let codesFetch = await axios.get(
+      `http://192.232.212.61:80/codes?skip=${
+        page * NUM_ROWS_PER_PAGE
+      }&limit=3&sort=-createdAt`
+    );
     let codeArray = codesFetch.data;
     setCodes(codeArray);
   }
+  const addPage = () => {
+    setPage(page + 1);
+  };
+  const substractPage = () => {
+    setPage(page - 1);
+  };
+  useEffect(() => {
+    updateRows();
+  }, [page]);
+
+  useEffect(() => {
+    let numberOfRows = codes.length + 1;
+    if (codes.length < 10) numberOfRows = 10;
+    setGridHeight(numberOfRows * 35 + 5);
+  }, [codes]);
 
   return (
     <div>
@@ -46,8 +69,8 @@ function ManageCodesPage() {
           handleCloseModal={() => {
             setShowGenerateCodeModal(false);
           }}
-            openGenerateCode={handleGenerateCodeShowModal}
-            updateRows={updateRows}
+          openGenerateCode={handleGenerateCodeShowModal}
+          updateRows={updateRows}
         />
         <GenerateClient
           showModal={showGenerateClientModal}
@@ -65,22 +88,32 @@ function ManageCodesPage() {
           updateRows={updateRows}
         />
         <div className={style.buttonContainer}>
-        <button onClick={handleGenerateCodeShowModal}>+ Code</button>
-        <button onClick={handleGenerateClientShowModal}>
-          + Client
-        </button>
+          <button onClick={handleGenerateCodeShowModal}>+ Code</button>
+          <button onClick={handleGenerateClientShowModal}>+ Client</button>
         </div>
       </div>
       <DataGridComponent
-      updateRows={updateRows}
-      handleEditShowModal={handleEditShowModal}
-      updateCodeToEdit={updateCodeToEdit}
-      codes={codes}
+        updateRows={updateRows}
+        handleEditShowModal={handleEditShowModal}
+        updateCodeToEdit={updateCodeToEdit}
+        codes={codes}
+        gridHeight={gridHeight}
       />
       <div className={style.dropdownsContainer}>
         <SortByDropdowns />
       </div>
-
+      <div className={style.changePageButtons}>
+        {page > 0 && (
+          <button className={style.lastPageButton} onClick={substractPage}>
+            {" Last Page"}
+          </button>
+        )}
+        {codes.length === NUM_ROWS_PER_PAGE && (
+          <button className={style.nextPageButton} onClick={addPage}>
+            {" Next Page"}
+          </button>
+        )}
+      </div>
     </div>
   );
 }
