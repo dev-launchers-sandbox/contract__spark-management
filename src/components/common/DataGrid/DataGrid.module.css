@@ -29,3 +29,9 @@
   display: flex;
   justify-content: center;
 }
+.editClientFormatter {
+  display: flex;
+}
+.editClientFormatter p {
+  background-color: purple;
+}
