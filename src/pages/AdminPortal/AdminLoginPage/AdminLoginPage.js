@@ -19,8 +19,6 @@ import RandomQuote from "../../../components/common/RandomQuote/RandomQuote.js";
 
 import HelpButton from "../../../components/common/HelpButton/HelpButton.js";
 function AdminLoginPage() {
-  alert("Test 1");
-
   let [form, setForm] = useState({ email: "", password: "" });
 
   const [redirect, setRedirect] = useState(false);
