@@ -46,3 +46,6 @@
 .clientActionsContainer span:hover {
   cursor: pointer;
 }
+.actionsContainer span:hover {
+  cursor: pointer;
+}

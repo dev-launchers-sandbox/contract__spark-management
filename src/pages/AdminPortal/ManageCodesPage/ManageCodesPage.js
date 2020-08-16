@@ -7,7 +7,7 @@ import DataGridComponent from "../../../components/common/DataGrid/DataGrid";
 import GenerateCode from "../../../components/common/GenerateCode/GenerateCode.js";
 import GenerateClient from "../../../components/common/GenerateClient/GenerateClient.js";
 import EditModal from "../../../components/common/EditModal/EditModal.js";
-import EditClientModal from "../../../components/common/EditClient/EditClient.js"
+import EditClientModal from "../../../components/common/EditClient/EditClient.js";
 
 import SortByDropdowns from "./Dropdowns/SortBy/SortBy";
 import FilterByDropdowns from "./Dropdowns/FilterBy/FilterBy";
@@ -105,7 +105,7 @@ function ManageCodesPage() {
           rowToEdit={rowToEdit}
           updateRows={updateRows}
         />
-         <EditClientModal
+        <EditClientModal
           showModal={showEditClientModal}
           handleCloseModal={() => {
             setShowEditClientModal(false);
