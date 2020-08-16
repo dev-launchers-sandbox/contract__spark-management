@@ -35,3 +35,14 @@
 .editClientFormatter p {
   background-color: purple;
 }
+.actionsContainer {
+  display: flex;
+  justify-content: space-around;
+}
+.clientActionsContainer {
+  display: flex;
+  justify-content: center;
+}
+.clientActionsContainer span:hover {
+  cursor: pointer;
+}
