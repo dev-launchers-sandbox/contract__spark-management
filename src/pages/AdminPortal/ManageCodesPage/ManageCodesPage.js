@@ -45,7 +45,7 @@ function ManageCodesPage() {
   };
   async function updateRows() {
     let codesFetch = await axios.get(
-      `http://192.232.212.61:80/codes?skip=${
+      `https://api.spark4community.com/codes?skip=${
         page * NUM_ROWS_PER_PAGE
       }&limit=${NUM_ROWS_PER_PAGE}&sort=-createdAt`
     );
