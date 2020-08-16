@@ -76,8 +76,11 @@ function EditModal(props) {
 
     getClientData();
     getDeckData()
-    getCodeData()
   }, []);
+
+useEffect(() => {
+  getCodeData()
+}, [props.rowToEdit])
 
   const handleSelectChange = (formClient) => {
     setFormClient(formClient);
@@ -129,11 +132,12 @@ function EditModal(props) {
         console.log(codeBatch);
 
         //sends the data to /code_batch
-        const response = await axios.put(`https://api.spark4community.com/codes/rUxinE`, codeBatch);
+
+        const response = await axios.put(`http://192.232.212.61:80/codes/${props.rowToEdit._id}`, codeBatch);
         console.log("updated datd: ", response)
         console.log("Data has been sent!");
-
-
+        props.handleCloseModal()
+        props.updateRows()
       } catch (err) {
         console.error(err);
       }

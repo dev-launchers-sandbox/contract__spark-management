@@ -1,7 +1,6 @@
 .manageCodesPage {
   display: flex;
   flex-direction: column;
-
 }
 .buttonContainer {
   display: flex;
@@ -10,7 +9,23 @@
 }
 .buttonContainer button {
   background: #91413c;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  border-radius: 2px;
+  font-size: 1.2vw;
+  border: 2px;
+  margin: 1em;
+  width: 10em;
+  height: 2em;
+  color: #ffffff;
+}
+.changePageButtons {
+  display: flex;
+  justify-content: space-between;
+}
+.changePageButtons button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #91413c;
   border-radius: 2px;
   font-size: 1.2vw;
   border: 2px;
@@ -18,7 +33,18 @@
   width: 10em;
   height: 2em;
 }
+.changePageButtons button:hover {
+  transform: scale(1.1);
+  font-weight: bold;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer; /*repeated code*/
+}
 .manageCodesPage button:hover {
   transform: scale(1.1);
+  font-weight: bold;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
+}
+.lastPageButton {
+  display: flex;
 }

@@ -106,12 +106,11 @@ function GenerateCode(props) {
         //sends the data to /code_batch
         const data = await axios.post("https://api.spark4community.com/code_batches", codeBatch);
         notify("Data has been sent!");
-        setGeneratedCodes(codeBatch);
+        setGeneratedCodes(data.data.code_batch._id);
+        props.updateRows()
         props.handleCloseModal();
         setShowGeneratedCodesModal(true);
-        console.log("config: ", data.config.data);
-        console.log("Data: ", data.data);
-        console.log("Response: ", data);
+
       } catch (err) {
         console.error(err);
       }
