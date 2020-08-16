@@ -5,36 +5,28 @@ import RedLogo from "./../../../images/spark_app_logo_transparent.png";
 //import BrandedLogo from "../../../images/branded-logo.png";
 import { Link, useParams } from "react-router-dom";
 import BrandedLogo from "../../../images/mcneil-logo.png";
-import axios from "axios"
+import axios from "axios";
 export default function Logo(props) {
   const [doesImageExist, setDoesImageExist] = useState(true);
 
   const [logoUrl, setLogoUrl] = useState(null);
   let { code } = useParams();
   useEffect(() => {
-    console.log("compononent mounted");
-
-
     const getClientLogoUrl = async () => {
       try {
-        console.log("spanish form code: ", code);
-        const response = await axios.get(`https://api.spark4community.com/codes/${code}/validate`);
+        const response = await axios.get(
+          `https://api.spark4community.com/codes/${code}/validate`
+        );
         setLogoUrl(response.data.logo_url);
-
-        console.log("response logo url: ", response.data.logo_url);
-        console.log("logo url: ", logoUrl);
       } catch (err) {
         console.error("this is the error", err);
       }
     };
     getClientLogoUrl();
     //return () => mounted = false;
-
   }, [code]);
 
   const addDefaultSrc = (event) => {
-    console.log("image does not exist")
-    console.log("logo url in onError event: ", logoUrl);
     event.target.src = null;
     setDoesImageExist(false);
   };

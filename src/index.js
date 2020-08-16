@@ -20,7 +20,7 @@ import SpanishDeckRoute from "./routes/SpanishDeck.js";
 import YouthDeckRoute from "./routes/YouthDeck.js";
 import LoginPageRoute from "./pages/LoginPage/LoginPage";
 import AdminLoginPage from "./pages/AdminPortal/AdminLoginPage/AdminLoginPage";
-import ForgotPasswordRoute from "./pages/AdminPortal/ForgotPassword/ForgotPassword.js"
+import ForgotPasswordRoute from "./pages/AdminPortal/ForgotPassword/ForgotPassword.js";
 //import mockData from "../src/mockData/MockData.js";
 
 import ManageCodesPage from "./pages/AdminPortal/ManageCodesPage/ManageCodesPage";
@@ -41,7 +41,7 @@ let routes = [
     component: ManageCodesPage,
   },
   {
-    path: "/ResetPassword/:token",
+    path: "/ResetPassword?token=:token",
     component: ResetPassword,
   },
   {
@@ -62,8 +62,8 @@ let routes = [
   },
   {
     path: "/ForgotPassword",
-    component: ForgotPasswordRoute
-  }
+    component: ForgotPasswordRoute,
+  },
 ];
 const getBasename = (path) => {
   // TODO: Not a perfect solution, doesn't account for routes that begin with dynamic parameters
@@ -78,7 +78,6 @@ function App() {
   ReactModal.setAppElement("#root");
   let [statusCode, setStatusCode] = useState(null);
   let [formCode, setFormCode] = useState("");
-
 
   console.log("form code (outside a function): ", formCode);
 

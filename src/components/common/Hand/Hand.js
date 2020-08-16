@@ -58,7 +58,6 @@ export default function Hand(props) {
   // discardCardAndDraw() : Discards the supplied card and replaces it with a new one
   const discardCardAndDraw = (card) => {
     // Remove card from the hand
-    console.log(card);
     let cardsCopy = [...cards];
     const index = cardsCopy.indexOf(card);
 

@@ -7,7 +7,7 @@ import DataGridComponent from "../../../components/common/DataGrid/DataGrid";
 import GenerateCode from "../../../components/common/GenerateCode/GenerateCode.js";
 import GenerateClient from "../../../components/common/GenerateClient/GenerateClient.js";
 import EditModal from "../../../components/common/EditModal/EditModal.js";
-import EditClientModal from "../../../components/common/EditClient/EditClient.js"
+import EditClientModal from "../../../components/common/EditClient/EditClient.js";
 
 import SortByDropdowns from "./Dropdowns/SortBy/SortBy";
 import FilterByDropdowns from "./Dropdowns/FilterBy/FilterBy";
@@ -35,11 +35,11 @@ function ManageCodesPage() {
   const handleEditShowModal = () => {
     setShowEditModal(true);
   };
-  
+
   const handleEditClientModal = () => {
-    setShowEditClientModal(true)
-  }
-  
+    setShowEditClientModal(true);
+  };
+
   const updateCodeToEdit = (value) => {
     setRowToEdit(value);
   };
@@ -47,7 +47,7 @@ function ManageCodesPage() {
     let codesFetch = await axios.get(
       `http://192.232.212.61:80/codes?skip=${
         page * NUM_ROWS_PER_PAGE
-      }&limit=3&sort=-createdAt`
+      }&limit=${NUM_ROWS_PER_PAGE}&sort=-createdAt`
     );
     let codeArray = codesFetch.data;
     setCodes(codeArray);
@@ -105,7 +105,7 @@ function ManageCodesPage() {
           rowToEdit={rowToEdit}
           updateRows={updateRows}
         />
-         <EditClientModal
+        <EditClientModal
           showModal={showEditClientModal}
           handleCloseModal={() => {
             setShowEditClientModal(false);

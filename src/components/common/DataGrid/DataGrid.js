@@ -99,8 +99,12 @@ function DataTable(props) {
 
   const handleDelete = (type, row) => {
     setType(type);
-    if (type === "code") setRowToDelete(row);
-    if (type === "client") setClientToDelete(row);
+    if (type === "code") {
+      setRowToDelete(row);
+    }
+    if (type === "client") {
+      setClientToDelete(row);
+    }
     setShowDeleteConfirmationModal(true);
   };
   const handleCopy = () => {
@@ -117,7 +121,7 @@ function DataTable(props) {
   const deleteCode = async () => {
     let row = rowToDelete;
     try {
-      await axios.delete(`http://192.232.212.61:80/codes/${row._id}`);
+      await axios.delete(`https://api.spark4community.com/codes/${row._id}`);
       props.updateRows();
       handleCloseModal();
     } catch (err) {
@@ -127,13 +131,18 @@ function DataTable(props) {
   };
 
   const deleteClient = async () => {
-    let row = clientToDelete;
-    let clients = await axios.get(`https://api.spark4community.com/clients`);
-    let clientToDelete = clients.find((client) => client.name === row.name);
+    let fetchClients = await axios.get(
+      `https://api.spark4community.com/clients`
+    );
+    let clients = fetchClients.data;
+    let clientFound = clients.find(
+      (client) => client.name === clientToDelete.client_name
+    );
     try {
       await axios.delete(
-        `http://192.232.212.61:80/clients/${clientToDelete._id}`
+        `https://api.spark4community.com/clients/${clientFound._id}`
       );
+      props.updateRows();
     } catch {
       alert("There was an error while deleting the client");
     }
@@ -150,7 +159,9 @@ function DataTable(props) {
     alert(numberOfCodes * 35);
     return numberOfCodes * 35;
   };
-  // fhbg
+  useEffect(() => {
+    console.log("CLIENT TO DELETE", clientToDelete);
+  }, [clientToDelete]);
   return (
     <div>
       <div className={style.DataGrid}>
@@ -170,7 +181,7 @@ function DataTable(props) {
         >
           <p className={style.modalP}>
             {" "}
-            Are you sure you want to delete this code?
+            Are you sure you want to delete this {type}?
           </p>
           <div className={style.buttonContainer}>
             <button onClick={redirectDelete}> Yes </button>
