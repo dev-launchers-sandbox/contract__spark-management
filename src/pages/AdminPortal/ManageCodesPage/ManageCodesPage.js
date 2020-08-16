@@ -7,6 +7,8 @@ import DataGridComponent from "../../../components/common/DataGrid/DataGrid";
 import GenerateCode from "../../../components/common/GenerateCode/GenerateCode.js";
 import GenerateClient from "../../../components/common/GenerateClient/GenerateClient.js";
 import EditModal from "../../../components/common/EditModal/EditModal.js";
+import EditClientModal from "../../../components/common/EditClient/EditClient.js"
+
 import SortByDropdowns from "./Dropdowns/SortBy/SortBy";
 
 import axios from "axios";
@@ -17,6 +19,7 @@ function ManageCodesPage() {
   let [showGenerateCodeModal, setShowGenerateCodeModal] = useState(false);
   let [showGenerateClientModal, setShowGenerateClientModal] = useState(false);
   let [showEditModal, setShowEditModal] = useState(false);
+  let [showEditClientModal, setShowEditClientModal] = useState(false);
   let [rowToEdit, setRowToEdit] = useState();
   let [codes, setCodes] = useState("");
   let [gridHeight, setGridHeight] = useState();
@@ -32,6 +35,11 @@ function ManageCodesPage() {
   const handleEditShowModal = () => {
     setShowEditModal(true);
   };
+  
+  const handleEditClientModal = () => {
+    setShowEditClientModal(true)
+  }
+  
   const updateCodeToEdit = (value) => {
     setRowToEdit(value);
   };
@@ -86,6 +94,12 @@ function ManageCodesPage() {
           }}
           rowToEdit={rowToEdit}
           updateRows={updateRows}
+        />
+         <EditClientModal
+          showModal={showEditClientModal}
+          handleCloseModal={() => {
+            setShowEditClientModal(false);
+          }}
         />
         <div className={style.buttonContainer}>
           <button onClick={handleGenerateCodeShowModal}>+ Code</button>

@@ -16,7 +16,8 @@ function EditModal(props) {
   let [form, setForm] = useState({
     client: "",
     expirationDate: "",
-    subClient: ""
+    subClient: "",
+    deckName: ""
   });
 
   let [formClient, setFormClient] = useState("");
@@ -24,9 +25,11 @@ function EditModal(props) {
 
   let [deck, setDeck] = useState([]);
 
+  let [hasChanged, setHasChanged] = useState(false)
+
 
   const getClientData = async () => {
-    const clientData = await axios.get("http://192.232.212.61:80/clients");
+    const clientData = await axios.get("https://api.spark4community.com/clients");
       console.log("clients: ", clientData);
       setClient(clientData.data);
       console.log("end of getClient func")
@@ -35,7 +38,7 @@ function EditModal(props) {
 
   const getDeckData = async () => {
 
-    const deckData = await axios.get("http://192.232.212.61:80/decks")
+    const deckData = await axios.get("https://api.spark4community.com/decks")
     console.log("deck name: ", deckData)
     setDeck(deckData.data)
     console.log("end of getDeck func")
@@ -43,21 +46,33 @@ function EditModal(props) {
   }
 
   const getCodeData = async () => {
-    if(!props.rowToEdit) return;
-      const codeDataResponse = await axios.get(`http://192.232.212.61:80/codes/${props.rowToEdit._id}`)
-        console.log("code data: ", codeDataResponse);
-        console.log("end of getDeck func")
-        setCodeData({
-        ...codeData,
-        clientName: codeDataResponse.data.code.client_name,
-        expirationDate: codeDataResponse.data.code.expiration_date,
-        deckName: codeDataResponse.data.code.deck_name,
-        subClientName: codeDataResponse.data.code.sub_client_name
-    })
+
+    const codeDataResponse = await axios.get("https://api.spark4community.com/codes/rUxinE")
+    console.log("code data: ", codeDataResponse);
+    console.log("end of getDeck func")
+    console.log("code expiration date: ", codeDataResponse.data.code.expiration_date)
+    /*
+    setCodeData({
+      ...codeData,
+      clientName: codeDataResponse.data.code.client_name,
+      expirationDate: codeDataResponse.data.code.expiration_date,
+      deckName: codeDataResponse.data.code.deck_name,
+      subClientName: codeDataResponse.data.code.sub_client_name
+    });
+    */
+    setForm({
+      ...form,
+      client: codeDataResponse.data.code.client_name,
+      expirationDate: codeDataResponse.data.code.expiration_date.substr(0, 10),
+      subClient: codeDataResponse.data.code.sub_client_name,
+      deckName: codeDataResponse.data.code.deck_name
+    });
+    console.log("codeData value in edit modal: ", codeData)
 
   }
   useEffect(() => {
     console.log("edit modal mounted");
+
 
     getClientData();
     getDeckData()
@@ -78,12 +93,24 @@ useEffect(() => {
   };
 
   //it's called when users inputs data into the form
-  const handleChange = (event) => {
+  const handleSubClientChange = (event) => {
     const { name, value } = event.target;
+
     setForm({
       ...form,
-      [name]: value
+      subClient: value,
     });
+    console.log(form)
+  };
+
+  const handleExpirationDateChange = (event) => {
+    const { name, value } = event.target;
+
+    setForm({
+      ...form,
+      expirationDate: value,
+    });
+    console.log(form)
   };
 
   const formValidation = () => {
@@ -95,7 +122,6 @@ useEffect(() => {
   };
 
   const updateCodeData = async () => {
-    if (formValidation() === true) {
       const codeBatch = {
         deck_name: deckForm.value,
         client_name: formClient.value,
@@ -106,6 +132,7 @@ useEffect(() => {
         console.log(codeBatch);
 
         //sends the data to /code_batch
+
         const response = await axios.put(`http://192.232.212.61:80/codes/${props.rowToEdit._id}`, codeBatch);
         console.log("updated datd: ", response)
         console.log("Data has been sent!");
@@ -114,14 +141,15 @@ useEffect(() => {
       } catch (err) {
         console.error(err);
       }
-    } else {
-      console.log("Forms can't be empty!");
-    }
+
   };
   const handleSubmit = (events) => {
+    console.log("calling handleSubmit function")
     //prevents page from refreshing
     events.preventDefault();
+
     updateCodeData();
+
   };
 
   const selectOptions = (data) => {
@@ -161,35 +189,34 @@ useEffect(() => {
       >
         <div className={style.editModal}>
           <div className={style.headerHolder}>
-            <h2>Edit Code/Client</h2>
+            <b>Edit Code/Client</b>
           </div>
           <div className={style.formContainer}>
             <form className={style.form} onSubmit={handleSubmit}>
             <div className={style.decks}>
-            <div className={style.selectContainer}>
-                <label>Deck</label>
-                <div className={style.selectsDeck}>
-                    <Select
-                      value={deckForm}
-                      isSearchable={true}
-                      maxMenuHeight={190}
-                      className={style.select}
-                      onChange={handleDeckSelectChange}
-                      placeholder={codeData.deckName}
-                      options={selectOptions(deck)}
-                    />
-                  </div>
+              <div className={style.selectContainer}>
+                  <label>Deck</label>
+                  <div className={style.selectsDeck}>
+                      <Select
+                        value={deckForm}
+                        isSearchable={true}
+                        maxMenuHeight={190}
+                        className={style.select}
+                        onChange={handleDeckSelectChange}
+                        options={selectOptions(deck)}
+                        placeholder={form.deckName}
+                      />
+                    </div>
                 </div>
               <br />
               <div className={style.row}>
                 <label>Sub Client</label>
                 <input
                   name="subClient"
-                  onChange={handleChange}
+                  onChange={handleSubClientChange}
                   className={style.subClientText}
                   value={form.subClient}
                   type="text"
-                  placeholder={codeData.subClientName}
                 />
               </div>
             </div>
@@ -205,8 +232,8 @@ useEffect(() => {
                       maxMenuHeight={190}
                       className={style.select}
                       onChange={handleSelectChange}
-                      placeholder={codeData.clientName}
                       options={selectOptions(client)}
+                      placeholder={form.client}
                     />
                   </div>
                 </div>
@@ -215,14 +242,11 @@ useEffect(() => {
                     <label>Exp.Date</label>
                   </div>
                   <input
-                    type="text"
+                    type="date"
                     className={style.expirationDateText}
-                    onBlur={onBlur}
-                    onFocus={onFocus}
                     name="expirationDate"
-                    onChange={handleChange}
+                    onChange={handleExpirationDateChange}
                     value={form.expirationDate}
-                    placeholder={codeData.expirationDate.substr(0, 10)}
                   />
                 </div>
               </div>

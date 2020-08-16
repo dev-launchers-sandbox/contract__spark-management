@@ -27,13 +27,13 @@ function GenerateCode(props) {
   //gets the client data when the componenet mounts
   useEffect(() => {
     const getClientData = async () => {
-      const clientData = await axios.get("http://192.232.212.61:80/clients");
+      const clientData = await axios.get("https://api.spark4community.com/clients");
 
       console.log("this is the client data: ",clientData.data);
       setClient(clientData.data);
     };
     getClientData();
-  }, []);
+  }, [props.showModal]);
 
   //it's called when users inputs data into the form
   const handleChange = (event) => {
@@ -73,8 +73,9 @@ function GenerateCode(props) {
       if so return false
     */
   const formValidation = () => {
+    console.log("formClient length: ", formClient)
     if (
-      (formClient.length !== 0 &&
+      ((formClient.length !== 0 || formClient.value !== undefined) &&
         form.expirationDate.length !== 0 &&
         parseInt(form.communityDeck, 0) !== 0) ||
       parseInt(form.conversationalDeck, 0) !== 0 ||
@@ -103,7 +104,7 @@ function GenerateCode(props) {
       try {
         console.log(codeBatch);
         //sends the data to /code_batch
-        const data = await axios.post("http://192.232.212.61:80/code_batches", codeBatch);
+        const data = await axios.post("https://api.spark4community.com/code_batches", codeBatch);
         notify("Data has been sent!");
         setGeneratedCodes(data.data.code_batch._id);
         props.updateRows()

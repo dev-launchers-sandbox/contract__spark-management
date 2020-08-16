@@ -66,7 +66,7 @@ function AdminLoginPage() {
     };
 
     try {
-      const response = await axios.post("http://192.232.212.61:80/login", userData);
+      const response = await axios.post("https://api.spark4community.com/login", userData);
 
       if (response.status === 200) {
         setRedirect(true);
@@ -147,6 +147,9 @@ function AdminLoginPage() {
                   </button>
                 </div>
               </form>
+              <div className={style.forgotPasswordText}>
+                <p style={{fontFamily: "nunito sans", fontSize: "1rem"}}>Forgot password? <Link className={style.forgotPasswordLink} to="/ForgotPassword">Click Here</Link></p>
+              </div>
             </div>
           </div>
         </div>
@@ -154,7 +157,7 @@ function AdminLoginPage() {
         <HelpButton />
       </div>
       {/*if true redirect the user to the main page */}
-      {redirect && <Redirect to="/" />}
+      {redirect && <Redirect to="/ManageCodes" />}
     </PageBody>
   );
 }

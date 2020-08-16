@@ -20,6 +20,9 @@ import SpanishDeckRoute from "./routes/SpanishDeck.js";
 import YouthDeckRoute from "./routes/YouthDeck.js";
 import LoginPageRoute from "./pages/LoginPage/LoginPage";
 import AdminLoginPage from "./pages/AdminPortal/AdminLoginPage/AdminLoginPage";
+import ForgotPasswordRoute from "./pages/AdminPortal/ForgotPassword/ForgotPassword.js"
+//import mockData from "../src/mockData/MockData.js";
+
 import ManageCodesPage from "./pages/AdminPortal/ManageCodesPage/ManageCodesPage";
 import Footer from "../src/components/common/Footer/Footer.js";
 import SelectDeck from "./components/common/SelectDeck/SelectDeck";
@@ -57,6 +60,10 @@ let routes = [
     path: "/:code/YouthDeck",
     component: YouthDeckRoute,
   },
+  {
+    path: "/ForgotPassword",
+    component: ForgotPasswordRoute
+  }
 ];
 const getBasename = (path) => {
   // TODO: Not a perfect solution, doesn't account for routes that begin with dynamic parameters
@@ -72,11 +79,7 @@ function App() {
   let [statusCode, setStatusCode] = useState(null);
   let [formCode, setFormCode] = useState("");
 
-  const changeFormCode = (formCodeVal) => {
-    setFormCode(formCodeVal);
-    console.log("form code (inside a function): ", formCodeVal);
-    console.log("form code (inside a function): ", formCode);
-  };
+
   console.log("form code (outside a function): ", formCode);
 
   //creates the mock requests
