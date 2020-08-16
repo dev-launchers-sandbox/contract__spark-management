@@ -21,10 +21,12 @@ function ManageCodesPage() {
   let [showEditModal, setShowEditModal] = useState(false);
   let [showEditClientModal, setShowEditClientModal] = useState(false);
   let [rowToEdit, setRowToEdit] = useState();
+  let [clientToEdit, setClientToEdit] = useState();
   let [codes, setCodes] = useState("");
   let [gridHeight, setGridHeight] = useState();
   let [showArrows, setShowArrows] = useState({ front: false });
   let [page, setPage] = useState(0);
+  let [currentChanges, setCurrentChanges] = useState();
   const handleGenerateCodeShowModal = () => {
     setShowGenerateCodeModal(true);
     console.log("bool: ", showGenerateCodeModal);
@@ -43,12 +45,34 @@ function ManageCodesPage() {
   const updateCodeToEdit = (value) => {
     setRowToEdit(value);
   };
-  async function updateRows() {
-    let codesFetch = await axios.get(
-      `http://192.232.212.61:80/codes?skip=${
-        page * NUM_ROWS_PER_PAGE
-      }&limit=${NUM_ROWS_PER_PAGE}&sort=-createdAt`
-    );
+  const updateClientToEdit = (id) => {
+    setClientToEdit(id);
+  };
+  async function updateRows(changes) {
+    let codesFetch;
+    if (changes) {
+      codesFetch = await axios.get(
+        `https://api.spark4community.com/codes?skip=${
+          page * NUM_ROWS_PER_PAGE
+        }&limit=${NUM_ROWS_PER_PAGE}${changes}`
+      );
+      setCurrentChanges(changes);
+    } else {
+      if (currentChanges && currentChanges !== "") {
+        codesFetch = await axios.get(
+          `https://api.spark4community.com/codes?skip=${
+            page * NUM_ROWS_PER_PAGE
+          }&limit=${NUM_ROWS_PER_PAGE}${currentChanges}`
+        );
+        console.log("codes", codesFetch);
+      } else {
+        codesFetch = await axios.get(
+          `https://api.spark4community.com/codes?skip=${
+            page * NUM_ROWS_PER_PAGE
+          }&limit=${NUM_ROWS_PER_PAGE}&sort=-createdAt`
+        );
+      }
+    }
     let codeArray = codesFetch.data;
     setCodes(codeArray);
   }
@@ -64,10 +88,15 @@ function ManageCodesPage() {
 }
 
   */
-
+  const resetFiltersAndSorts = () => {
+    setCurrentChanges();
+  };
   const substractPage = () => {
     setPage(page - 1);
   };
+  useEffect(() => {
+    updateRows();
+  }, [currentChanges]);
   useEffect(() => {
     updateRows();
   }, [page]);
@@ -110,6 +139,7 @@ function ManageCodesPage() {
           handleCloseModal={() => {
             setShowEditClientModal(false);
           }}
+          clientToEdit={clientToEdit}
         />
         <div className={style.buttonContainer}>
           <button onClick={handleGenerateCodeShowModal}>+ Code</button>
@@ -122,10 +152,15 @@ function ManageCodesPage() {
         updateCodeToEdit={updateCodeToEdit}
         codes={codes}
         gridHeight={gridHeight}
+        handleEditClientModal={handleEditClientModal}
+        updateClientToEdit={updateClientToEdit}
       />
       <div className={style.dropdownsContainer}>
         <SortByDropdowns updateRows={updateRows} />
         <FilterByDropdowns updateRows={updateRows} />
+        <div className={style.resetFiltersAndSorts}>
+          <button onClick={resetFiltersAndSorts}>Reset</button>
+        </div>
       </div>
       <div className={style.changePageButtons}>
         {page > 0 && (

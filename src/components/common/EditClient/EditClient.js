@@ -152,21 +152,7 @@ function EditClient(props) {
           <form className={style.formContainer} onSubmit={handleSubmit}>
             <div className={style.clientContainer}>
               <label className={style.label}>Client Name</label>
-              {/*}
-              <div className={style.selects}>
-                <Select
-                  value={formClient}
-                  isSearchable={true}
-                  maxMenuHeight={190}
-                  className={style.select}
-                  onChange={handleSelectChange}
-                  placeholder={specificClientData.clientName}
-                  options={selectOptions(client)}
-                />
 
-
-              </div>
-              {*/}
               <input
                 type="text"
                 name="client"
