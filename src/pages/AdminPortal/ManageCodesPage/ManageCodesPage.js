@@ -8,7 +8,7 @@ import GenerateCode from "../../../components/common/GenerateCode/GenerateCode.j
 import GenerateClient from "../../../components/common/GenerateClient/GenerateClient.js";
 import EditModal from "../../../components/common/EditModal/EditModal.js";
 import SortByDropdowns from "./Dropdowns/SortBy/SortBy";
-
+import FilterByDropdowns from "./Dropdowns/FilterBy/FilterBy";
 import axios from "axios";
 
 const NUM_ROWS_PER_PAGE = 50;
@@ -44,9 +44,19 @@ function ManageCodesPage() {
     let codeArray = codesFetch.data;
     setCodes(codeArray);
   }
+
   const addPage = () => {
     setPage(page + 1);
   };
+
+  /*
+  ok lets think of I do
+  updateRows(parame) {
+    axios.get(parame + state for past)
+}
+
+  */
+
   const substractPage = () => {
     setPage(page - 1);
   };
@@ -100,7 +110,8 @@ function ManageCodesPage() {
         gridHeight={gridHeight}
       />
       <div className={style.dropdownsContainer}>
-        <SortByDropdowns />
+        <SortByDropdowns updateRows={updateRows} />
+        <FilterByDropdowns updateRows={updateRows} />
       </div>
       <div className={style.changePageButtons}>
         {page > 0 && (

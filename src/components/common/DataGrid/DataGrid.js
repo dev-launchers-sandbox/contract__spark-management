@@ -33,13 +33,33 @@ function DataTable(props) {
   ] = useState(false);
   const [codes, setCodes] = useState("");
   const [rowToDelete, setRowToDelete] = useState();
+  const [clientToDelete, setClientToDelete] = useState();
+  const [type, setType] = useState();
 
+  const ClientActions = (value) => {
+    return (
+      <div className={style.clientActionsContainer}>
+        {value.row.client_name}
+        <span
+          onClick={() => handleDelete("client", value.row)}
+          className={style.deleteIcon}
+          role="img"
+          aria-label="delete"
+        >
+          ️ 🗑️
+        </span>
+        <span className={style.deleteIcon} role="img" aria-label="delete">
+          ️ ️📝
+        </span>
+      </div>
+    );
+  };
   const Actions = ({ value, row }) => {
     return (
-      <div className={style.buttonContainer}>
+      <div className={style.actionsContainer}>
         <span
           className={style.deleteIcon}
-          onClick={() => handleDelete(row)}
+          onClick={() => handleDelete("code", row)}
           role="img"
           aria-label="delete"
         >
@@ -68,7 +88,7 @@ function DataTable(props) {
   };
   const columns = [
     { key: "_id", name: "Code" },
-    { key: "client_name", name: "Client" },
+    { key: "client_name", name: "Client", formatter: ClientActions },
     { key: "sub_client_name", name: "Sub Client" },
     { key: "expiration_date", name: "Expiration Date" },
     { key: "createdAt", name: "Created On" },
@@ -77,8 +97,10 @@ function DataTable(props) {
     { key: "button", name: "", formatter: Actions },
   ];
 
-  const handleDelete = (row) => {
-    setRowToDelete(row);
+  const handleDelete = (type, row) => {
+    setType(type);
+    if (type === "code") setRowToDelete(row);
+    if (type === "client") setClientToDelete(row);
     setShowDeleteConfirmationModal(true);
   };
   const handleCopy = () => {
@@ -87,6 +109,10 @@ function DataTable(props) {
   const handleEdit = (row) => {
     props.handleEditShowModal();
     props.updateCodeToEdit(row);
+  };
+  const redirectDelete = () => {
+    if (type === "code") deleteCode();
+    if (type === "client") deleteClient();
   };
   const deleteCode = async () => {
     let row = rowToDelete;
@@ -97,6 +123,19 @@ function DataTable(props) {
     } catch (err) {
       alert("There was an error while deleting the code");
       props.updateRows();
+    }
+  };
+
+  const deleteClient = async () => {
+    let row = clientToDelete;
+    let clients = await axios.get(`https://api.spark4community.com/clients`);
+    let clientToDelete = clients.find((client) => client.name === row.name);
+    try {
+      await axios.delete(
+        `http://192.232.212.61:80/clients/${clientToDelete._id}`
+      );
+    } catch {
+      alert("There was an error while deleting the client");
     }
   };
 
@@ -111,6 +150,7 @@ function DataTable(props) {
     alert(numberOfCodes * 35);
     return numberOfCodes * 35;
   };
+  // fhbg
   return (
     <div>
       <div className={style.DataGrid}>
@@ -133,7 +173,7 @@ function DataTable(props) {
             Are you sure you want to delete this code?
           </p>
           <div className={style.buttonContainer}>
-            <button onClick={deleteCode}> Yes </button>
+            <button onClick={redirectDelete}> Yes </button>
             <button onClick={handleCloseModal}> No </button>
           </div>
         </Modal>
