@@ -26,9 +26,9 @@ function Header() {
 
   return (
     <div className={style.Header}>
-      // Needed to allow us to programmatically redirect
+      {/*} Needed to allow us to programmatically redirect{*/}
       {doRedirect ? <Redirect to="/AdminLoginPage" /> : ""}
-      // Actual visual body:
+      {/*}Actual visual body: {*/}
       <img className={style.sparkLogo} src={SparkLogo} alt="sparkLogo" />
       <h1>{username.toUpperCase()}</h1>
       <button onClick={logout}>LOG OUT</button>
