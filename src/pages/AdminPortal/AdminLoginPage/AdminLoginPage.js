@@ -13,7 +13,7 @@ import {
   Route,
   Link,
   useParams,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 import RandomQuote from "../../../components/common/RandomQuote/RandomQuote.js";
 
@@ -24,8 +24,6 @@ function AdminLoginPage() {
   const [redirect, setRedirect] = useState(false);
 
   const [userAccounts, setUserAccounts] = useState([]);
-
-
 
   /*
   //when component mounts get the mock data
@@ -46,7 +44,7 @@ function AdminLoginPage() {
     const { name, value } = event.target;
     setForm({
       ...form,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -62,11 +60,15 @@ function AdminLoginPage() {
   const checkIfUserExists = async () => {
     const userData = {
       email: form.email,
-      password: form.password
+      password: form.password,
     };
 
     try {
-      const response = await axios.post("https://api.spark4community.com/login", userData);
+      const response = await axios.post(
+        "https://api.spark4community.com/login",
+        userData,
+        { withCredentials: true }
+      );
 
       if (response.status === 200) {
         setRedirect(true);
@@ -84,24 +86,21 @@ function AdminLoginPage() {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 2500,
       className: css({
-        background: "white"
+        background: "white",
       }),
       bodyClassName: css({
         fontSize: "20px",
-        color: "black"
+        color: "black",
       }),
       progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )"
-      })
+        background: "repeating-radial-gradient( transparent, transparent )",
+      }),
     });
   };
-
-
 
   return (
     <PageBody>
       <div className={style.adminLoginPage}>
-
         <div className={style.loginContainer}>
           <div className={style.loginPopup}>
             <img className={style.logo} src={logo} alt="logo" />
@@ -110,7 +109,7 @@ function AdminLoginPage() {
                 <label
                   style={{
                     fontFamily: "Sue Ellen Francisco",
-                    fontWeight: "normal"
+                    fontWeight: "normal",
                   }}
                 >
                   Email:
@@ -126,7 +125,7 @@ function AdminLoginPage() {
                 <label
                   style={{
                     fontFamily: "Sue Ellen Francisco",
-                    fontWeight: "normal"
+                    fontWeight: "normal",
                   }}
                 >
                   Password:
@@ -148,7 +147,15 @@ function AdminLoginPage() {
                 </div>
               </form>
               <div className={style.forgotPasswordText}>
-                <p style={{fontFamily: "nunito sans", fontSize: "1rem"}}>Forgot password? <Link className={style.forgotPasswordLink} to="/ForgotPassword">Click Here</Link></p>
+                <p style={{ fontFamily: "nunito sans", fontSize: "1rem" }}>
+                  Forgot password?{" "}
+                  <Link
+                    className={style.forgotPasswordLink}
+                    to="/ForgotPassword"
+                  >
+                    Click Here
+                  </Link>
+                </p>
               </div>
             </div>
           </div>

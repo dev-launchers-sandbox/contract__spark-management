@@ -26,6 +26,10 @@ import ForgotPasswordRoute from "./pages/AdminPortal/ForgotPassword/ForgotPasswo
 import ManageCodesPage from "./pages/AdminPortal/ManageCodesPage/ManageCodesPage";
 import Footer from "../src/components/common/Footer/Footer.js";
 import SelectDeck from "./components/common/SelectDeck/SelectDeck";
+
+// Change axios defaults, to fix cookies being sent (may need a better solution)
+axios.defaults.withCredentials = true;
+
 // Allows us to serve up the app from any arbitrary directory on a server
 let routes = [
   {

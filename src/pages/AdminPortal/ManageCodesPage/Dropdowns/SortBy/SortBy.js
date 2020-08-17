@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import style from "./SortBy.module.css";
 
-export default function SortBy() {
+export default function SortBy(props) {
   const [sortBy, setSortBy] = useState({ column: "_id", type: "+" });
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -12,7 +12,7 @@ export default function SortBy() {
   };
   const applySort = () => {
     let sort = `&sort=${sortBy.type}${sortBy.column}`;
-    //props.updateRows(sort);
+    props.updateRows(sort);
   };
   return (
     <div className={style.sortBy}>

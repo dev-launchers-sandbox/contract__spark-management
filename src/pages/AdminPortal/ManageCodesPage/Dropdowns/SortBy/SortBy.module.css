@@ -23,7 +23,7 @@
   height: 2em;
 }
 
-.sortBy select:hover{
+.sortBy select:hover {
   cursor: pointer;
 }
 

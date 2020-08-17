@@ -8,8 +8,8 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 import { css } from "glamor";
 
-const notify = () => {
-  toast("Code Copied To Clipboard!", {
+const notify = (text) => {
+  toast(text, {
     position: toast.POSITION.BOTTOM_RIGHT,
     autoClose: 2500,
     className: css({
@@ -48,7 +48,12 @@ function DataTable(props) {
         >
           ️ 🗑️
         </span>
-        <span className={style.deleteIcon} role="img" aria-label="delete">
+        <span
+          onClick={() => handleEditClient(value.row)}
+          className={style.editIcon}
+          role="img"
+          aria-label="delete"
+        >
           ️ ️📝
         </span>
       </div>
@@ -108,11 +113,24 @@ function DataTable(props) {
     setShowDeleteConfirmationModal(true);
   };
   const handleCopy = () => {
-    notify();
+    notify("Code Copied To Clipboard!");
   };
   const handleEdit = (row) => {
     props.handleEditShowModal();
     props.updateCodeToEdit(row);
+  };
+  const handleEditClient = async (row) => {
+    let clientFetch = await axios.get(
+      `https://api.spark4community.com/clients`
+    );
+    let clients = clientFetch.data;
+    let clientToEdit = clients.find(
+      (client) => client.name === row.client_name
+    );
+    if (!clientToEdit) return notify("This client does not exist anymore");
+    console.log(clientToEdit._id);
+    props.updateClientToEdit(clientToEdit._id);
+    props.handleEditClientModal();
   };
   const redirectDelete = () => {
     if (type === "code") deleteCode();
@@ -159,9 +177,7 @@ function DataTable(props) {
     alert(numberOfCodes * 35);
     return numberOfCodes * 35;
   };
-  useEffect(() => {
-    console.log("CLIENT TO DELETE", clientToDelete);
-  }, [clientToDelete]);
+  useEffect(() => {}, [clientToDelete]);
   return (
     <div>
       <div className={style.DataGrid}>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "./Header.module.css";
 import SparkLogo from "../../../images/spark_app_logo_transparent.png";
 import axios from "axios";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 
 function Header() {
   const [username, setUsername] = useState("");
@@ -15,13 +15,23 @@ function Header() {
     };
     fetchUser();
   });
+
+  // Logout logic
+  const [doRedirect, setDoRedirect] = React.useState(false);
+  const logout = () => {
+    axios.post("https://api.spark4community.com/logout").then((res) => {
+      setDoRedirect(true); // redirect back to login page when we get a response from the server
+    });
+  };
+
   return (
     <div className={style.Header}>
+      {/*} Needed to allow us to programmatically redirect{*/}
+      {doRedirect ? <Redirect to="/AdminLoginPage" /> : ""}
+      {/*}Actual visual body: {*/}
       <img className={style.sparkLogo} src={SparkLogo} alt="sparkLogo" />
       <h1>{username.toUpperCase()}</h1>
-      <Link to="/AdminLoginPage">
-        <button>LOG OUT</button>
-      </Link>
+      <button onClick={logout}>LOG OUT</button>
     </div>
   );
 }
