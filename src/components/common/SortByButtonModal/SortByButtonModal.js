@@ -21,6 +21,7 @@ function SortyByButtonModal(props) {
           <div className={style.dropdownsContainer}>
             <div className={style.sortByTypeDropdownContainer}>
               <SortByDropdowns
+                resetPage={props.resetPage}
                 updateRows={props.updateRows}
                 handleCloseModal={props.handleCloseModal}
               />

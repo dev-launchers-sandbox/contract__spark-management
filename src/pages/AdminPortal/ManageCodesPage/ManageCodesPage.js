@@ -62,6 +62,9 @@ function ManageCodesPage() {
   const updateClientToEdit = (id) => {
     setClientToEdit(id);
   };
+  const resetPage = () => {
+    setPage(0);
+  };
   async function updateRows(changes) {
     let codesFetch;
     if (changes) {
@@ -168,6 +171,7 @@ function ManageCodesPage() {
         />
         <FilterButtonModal
           showModal={showFilterButtonModal}
+          resetPage={resetPage}
           handleCloseModal={() => {
             setShowFilterButtonModal(false);
           }}
@@ -195,6 +199,7 @@ function ManageCodesPage() {
           addPage={addPage}
           substractPage={substractPage}
           NUM_ROWS_PER_PAGE={NUM_ROWS_PER_PAGE}
+          resetPage={resetPage}
         />
         <div className={style.buttonContainer}>
           <button onClick={handleGenerateCodeShowModal}>+ Code</button>
