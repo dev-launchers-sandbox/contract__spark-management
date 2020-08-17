@@ -178,7 +178,18 @@ function ManageCodesPage() {
         updateClientToEdit={updateClientToEdit}
       />
       <div className={style.buttonContainer}>
-        <button onClick={handleButtonHolderModal}>Grid Actions</button>
+        <button onClick={handleButtonHolderModal}>Sort/Filter</button>
+        {page > 0 && (
+          <button className={style.lastPageButton} onClick={substractPage}>
+            {" Last Page"}
+          </button>
+        )}
+        {codes.length === NUM_ROWS_PER_PAGE && (
+
+            <button className={style.nextPageButton} onClick={addPage}>
+              {" Next Page"}
+            </button>
+        )}
       </div>
     </div>
   );

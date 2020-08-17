@@ -62,10 +62,12 @@ export default function SortBy(props) {
           </select>
         </div>
       </div>
-      <button onClick={applySort} className={style.button}>
-        {" "}
-        Apply{" "}
-      </button>
+      <div className={style.buttonHolder}>
+        <button onClick={applySort} className={style.button}>
+          {" "}
+          Apply{" "}
+        </button>
+      </div>
     </div>
   );
 }

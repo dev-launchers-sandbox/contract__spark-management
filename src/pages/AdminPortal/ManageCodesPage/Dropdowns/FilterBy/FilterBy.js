@@ -61,6 +61,7 @@ export default function FilterBy(props) {
           value={filterBy.input}
           style={{width: "11.9vw"}}
           onChange={handleChange}
+          placeholder="add necessary data here"
         />
       </div>
       <div className={style.applyFilter}>

@@ -3,8 +3,10 @@
 
 }
 
+
+
 .sortBy select {
-  background: #91413c;
+  background: white;
   border-radius: 2px;
   font-size: 1.2vw;
   border: 2px;
@@ -19,7 +21,6 @@
 }
 
 .button {
-  
   background: #91413c;
   border-radius: 2px;
   font-size: 1.2vw;
@@ -29,6 +30,7 @@
   width: 10em;
   height: 2em;
 }
+
 .button:hover {
   transform: scale(1.1);
   cursor: pointer;
