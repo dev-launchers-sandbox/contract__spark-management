@@ -39,8 +39,8 @@ function ManageCodesPage() {
   };
 
   const handleEditClientModal = () => {
-    setShowEditClientModal(true);
-  };
+    setShowEditClientModal(true)
+  }
 
   const updateCodeToEdit = (value) => {
     setRowToEdit(value);
@@ -145,6 +145,7 @@ function ManageCodesPage() {
         <div className={style.buttonContainer}>
           <button onClick={handleGenerateCodeShowModal}>+ Code</button>
           <button onClick={handleGenerateClientShowModal}>+ Client</button>
+          <button onClick={handleEditClientModal}>open edit client modal</button>
         </div>
       </div>
       <DataGridComponent
@@ -164,16 +165,19 @@ function ManageCodesPage() {
         </div>
       </div>
       <div className={style.changePageButtons}>
-        {page > 0 && (
-          <button className={style.lastPageButton} onClick={substractPage}>
-            {" Last Page"}
-          </button>
-        )}
-        {codes.length === NUM_ROWS_PER_PAGE && (
-          <button className={style.nextPageButton} onClick={addPage}>
-            {" Next Page"}
-          </button>
-        )}
+        <div className={style.buttonHolder}>
+          {page > 0 && (
+            <button className={style.lastPageButton} onClick={substractPage}>
+              {" Last Page"}
+            </button>
+          )}
+          {codes.length === NUM_ROWS_PER_PAGE && (
+
+              <button className={style.nextPageButton} onClick={addPage}>
+                {" Next Page"}
+              </button>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -61,7 +61,7 @@ export default function FilterBy(props) {
         />
       </div>
       <div className={style.applyFilter}>
-        <button onClick={handleSubmit}> Apply Filter </button>
+        <button className={style.button} onClick={handleSubmit}> Apply Filter </button>
       </div>
     </div>
   );

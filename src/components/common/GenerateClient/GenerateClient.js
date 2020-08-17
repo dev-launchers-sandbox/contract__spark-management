@@ -51,7 +51,7 @@ function GenerateClient(props) {
       console.log("client data:  ", clientData)
       try {
 
-        //const response = await axios.post("https://api.spark4community.com/clients", clientData);
+        const response = await axios.post("https://api.spark4community.com/clients", clientData);
         notify("Data has been sent!");
         props.handleCloseModal();
 

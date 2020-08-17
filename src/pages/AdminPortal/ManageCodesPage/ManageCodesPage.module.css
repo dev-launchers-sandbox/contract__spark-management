@@ -20,6 +20,7 @@
 .changePageButtons {
   display: flex;
   justify-content: space-between;
+  justify-content: center;
 }
 .changePageButtons button {
   display: flex;
@@ -68,3 +69,10 @@
   cursor: pointer;
   transform: scale(1.1);
 }
+
+.buttonHolder{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+

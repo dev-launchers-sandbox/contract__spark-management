@@ -3,6 +3,9 @@ import style from "./EditModal.module.css";
 import Modal from "../Modal/Modal.js";
 import axios from "axios";
 import Select from "react-select";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { css } from "glamor";
 
 function EditModal(props) {
   let [client, setClient] = useState([]);
@@ -43,10 +46,26 @@ function EditModal(props) {
     console.log("end of getDeck func");
   };
 
+  //gets called when the user inputs the wrong username and password
+  const notify = (text) => {
+    toast(text, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 2500,
+      className: css({
+        background: "white"
+      }),
+      bodyClassName: css({
+        fontSize: "20px",
+        color: "black"
+      }),
+      progressClassName: css({
+        background: "repeating-radial-gradient( transparent, transparent )"
+      })
+    });
+  };
+
   const getCodeData = async () => {
-    const codeDataResponse = await axios.get(
-      "https://api.spark4community.com/codes/rUxinE"
-    );
+    const codeDataResponse = await axios.get(`https://api.spark4community.com/codes/${props.rowToEdit._id}`)
     console.log("code data: ", codeDataResponse);
     console.log("end of getDeck func");
     console.log(
@@ -78,9 +97,11 @@ function EditModal(props) {
     getDeckData();
   }, []);
 
-  useEffect(() => {
-    getCodeData();
-  }, [props.rowToEdit]);
+useEffect(() => {
+  if(!props.rowToEdit) return;
+  getCodeData()
+}, [props.rowToEdit])
+
 
   const handleSelectChange = (formClient) => {
     setFormClient(formClient);
@@ -122,28 +143,29 @@ function EditModal(props) {
   };
 
   const updateCodeData = async () => {
-    const codeBatch = {
-      deck_name: deckForm.value,
-      client_name: formClient.value,
-      expiration_date: form.expirationDate,
-      sub_client_name: form.subClient,
-    };
-    try {
-      console.log(codeBatch);
 
-      //sends the data to /code_batch
+      const codeBatch = {
+        deck_name: deckForm.value,
+        client_name: formClient.value,
+        expiration_date: form.expirationDate,
+        sub_client_name: form.subClient
+      };
+      try {
+        console.log(codeBatch);
 
-      const response = await axios.put(
-        `https://api.spark4community.com/codes/${props.rowToEdit._id}`,
-        codeBatch
-      );
-      console.log("updated datd: ", response);
-      console.log("Data has been sent!");
-      props.handleCloseModal();
-      props.updateRows();
-    } catch (err) {
-      console.error(err);
-    }
+        //sends the data to /code_batch
+
+        const response = await axios.put(`http://192.232.212.61:80/codes/${props.rowToEdit._id}`, codeBatch);
+        console.log("updated datd: ", response)
+        console.log("Data has been sent!");
+        notify("Code Data has been updated!")
+        props.handleCloseModal()
+        props.updateRows()
+      } catch (err) {
+        console.error(err);
+        notify("something went wrong with sending the data")
+      }
+
   };
   const handleSubmit = (events) => {
     console.log("calling handleSubmit function");

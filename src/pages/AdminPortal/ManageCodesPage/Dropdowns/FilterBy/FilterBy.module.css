@@ -1,3 +1,4 @@
+
 .filterBy {
   font-family: "Nunito Sans", serif;
   width: 100%;
@@ -6,6 +7,7 @@
   justify-content: center;
   align-items: center;
 }
+
 
 .filterByColumnDropdown select {
   display: flex;
@@ -19,7 +21,8 @@
   height: 2em;
 }
 
-.filterByColumnDropdown select:hover {
+
+.filterByColumnDropdown select:hover{
   cursor: pointer;
 }
 
@@ -39,6 +42,7 @@
   transform: scale(1.1);
   cursor: pointer;
 }
+
 .applyFilter button {
   display: flex;
   justify-content: center;

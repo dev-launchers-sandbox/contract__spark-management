@@ -32,7 +32,7 @@ function EditClient(props) {
         "https://api.spark4community.com/clients/5f3821cb23b46077aa600607"
       );
 
-      console.log("client data in edit client modal: ", response.data);
+      console.log("client data in edit client modal: ", response)
       /*
       setSpecificClientData({
         ...setSpecificClientData,
@@ -42,11 +42,13 @@ function EditClient(props) {
       */
       setForm({
         ...form,
-        clientName: response.data.client.name,
-        logoUrl: response.data.client.name,
-      });
-    } catch (err) {
-      console.error("We got an error trying to get client by id", err);
+        client: response.data.client.name,
+        logoUrl: response.data.client.logo_url
+      }
+      )
+    }
+    catch(err){
+      console.error("We got an error trying to get client by id", err)
     }
   };
 
@@ -62,6 +64,7 @@ function EditClient(props) {
       ...form,
       client: value,
     });
+    console.log("client value: ",  form.client)
   };
 
   //it's called when users inputs data into the form
@@ -71,6 +74,7 @@ function EditClient(props) {
       ...form,
       logoUrl: value,
     });
+    console.log("logo url: ", form.logoUrl)
   };
 
   //gets called when the user inputs the wrong username and password
@@ -114,16 +118,16 @@ function EditClient(props) {
   const updateClientData = async () => {
     const clientData = {
       name: formClient.value,
-      logo_url: form.logoUrl,
-    };
-    try {
-      console.log("new client data: ", clientData);
-      const response = await axios.put(
-        "https://api.spark4community.com/clients/5f3821cb23b46077aa600607",
-        clientData
-      );
-      console.log("response data: ", response);
-    } catch (err) {
+      logo_url: form.logoUrl
+    }
+    try{
+      console.log("new client data: ", clientData)
+      const response = await axios.put("https://api.spark4community.com/clients/5f389a4123b46077aa600612", clientData);
+      console.log("response data: ", response )
+      notify("client has been updated!");
+      props.handleCloseModal();
+    }
+    catch(err){
       console.error("got an error trying to update the client data: ", err);
       notify("You can't change it to a client that already exists!");
     }

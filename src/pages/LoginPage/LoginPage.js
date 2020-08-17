@@ -7,7 +7,7 @@ import {
   Route,
   Link,
   useParams,
-  Redirect,
+  Redirect
 } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,20 +21,24 @@ import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../images/spark_app_logo_transparent.png";
 import HelpButton from "../../components/common/HelpButton/HelpButton.js";
 
+
 function LoginPage(props) {
   let [form, setForm] = useState({ code: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [deckUsing, setDeckUsing] = useState("");
 
+
   //it's called when users inputs data into the form
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
       ...form,
-      [name]: value,
+      [name]: value
     });
   };
+
+
 
   //gets called when enter button is clicked
   const handleClick = (event) => {
@@ -52,24 +56,23 @@ function LoginPage(props) {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 2500,
       className: css({
-        background: "white",
+        background: "white"
       }),
       bodyClassName: css({
         fontSize: "20px",
-        color: "black",
+        color: "black"
       }),
       progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )",
-      }),
+        background: "repeating-radial-gradient( transparent, transparent )"
+      })
     });
   };
   const verifyIfSelection = async () => {
     try {
       const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${form.code}/`;
       //sets isLoading to false
-      const data = await axios.get(
-        `https://api.spark4community.com/${form.code}/validate`
-      );
+      const data = await axios.get(`https://api.spark4community.com/codes/${form.code}/validate`);
+      console.log("spark data: ", data);
       sessionStorage.setItem(form.code, true);
       setDeckUsing("");
       setIsLoading(false);
@@ -83,7 +86,7 @@ function LoginPage(props) {
       setIsLoading(false);
       setForm({
         ...form,
-        code: "",
+        code: ""
       });
     }
   };
@@ -95,15 +98,11 @@ function LoginPage(props) {
       //stores the url and the code the user inputs without the letter of the deck on top
       const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${codeWithoutDeckLetter}/`;
       //gets the response data from the url using a GET request
-      const data = await axios.get(
-        `https://api.spark4community.com/codes/${form.code}/validate`
-      );
+      const data = await axios.get(`https://api.spark4community.com/codes/${form.code}/validate`);
       console.log("status code: ", data.status);
 
-      const codeData = await axios.get(
-        `https://api.spark4community.com/${form.code}`
-      );
-      console.log("code data in login page: ", codeData);
+      const codeData = await axios.get(`https://api.spark4community.com/codes/${form.code}`);
+        console.log("code data in login page: ", codeData)
       //marks the code as verified and saves it in sessionStorage
       sessionStorage.setItem(form.code, true);
       //props.correctDeck(deckLetter);
@@ -121,7 +120,7 @@ function LoginPage(props) {
       } else {
         setForm({
           ...form,
-          code: "",
+          code: ""
         });
         setIsLoading(false);
         notify();
@@ -147,6 +146,9 @@ function LoginPage(props) {
     <LoadingOverlay active={isLoading} spinner text="Verifying Code...">
       <PageBody>
         <div className={style.loginPage}>
+
+
+
           <EULAModal />
           <div className={style.brandedLogo}>
             <a
@@ -227,7 +229,11 @@ function LoginPage(props) {
             </div>
           </div>
           {/*If the status code is 200 redirect the user to the game with the code they submitted */}
-          {redirect ? <Redirect to={`/${form.code}/${deckUsing}`} /> : ""}
+          {redirect ? (
+            <Redirect to={`/${form.code}/${deckUsing}`} />
+          ) : (
+            ""
+          )}
           {redirect === "specialCase" ? <Redirect to={`/${form.code}`} /> : ""}
         </div>
       </PageBody>
