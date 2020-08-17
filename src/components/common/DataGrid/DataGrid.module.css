@@ -42,10 +42,10 @@
 .clientActionsContainer {
   display: flex;
   justify-content: center;
+  text-decoration: underline;
 }
 .clientActionsContainer:hover {
   cursor: pointer;
-  text-decoration: underline;
 }
 .actionsContainer span:hover {
   cursor: pointer;

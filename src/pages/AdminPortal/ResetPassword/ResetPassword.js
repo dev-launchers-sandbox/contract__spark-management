@@ -10,10 +10,13 @@ import {
   Switch,
   Route,
   useParams,
+  useLocation,
   Redirect,
   useRouterHistory,
 } from "react-router-dom";
+
 toast.configure();
+
 function ResetPassword() {
   let { token } = useParams();
   const [form, setForm] = useState({

@@ -81,9 +81,16 @@ function ManageCodesPage() {
       }
     }
     let codeArray = codesFetch.data;
+    codeArray.forEach((code) => {
+      let shortExp = code.expiration_date.substring(0, 10);
+      code.expiration_date = shortExp;
+    });
+    codeArray.forEach((code) => {
+      let shortCreated = code.createdAt.substring(0, 10);
+      code.createdAt = shortCreated;
+    });
     setCodes(codeArray);
   }
-
   const addPage = () => {
     setPage(page + 1);
   };
