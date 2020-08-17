@@ -161,7 +161,6 @@ function AdminLoginPage() {
           </div>
         </div>
         <RandomQuote />
-        <HelpButton />
       </div>
       {/*if true redirect the user to the main page */}
       {redirect && <Redirect to="/ManageCodes" />}
