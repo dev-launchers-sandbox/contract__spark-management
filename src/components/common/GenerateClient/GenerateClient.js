@@ -39,6 +39,20 @@ function GenerateClient(props) {
     });
   };
 
+  //clears state after the modal closes
+  const clearState = () => {
+
+      setForm({
+        ...form,
+        client: "",
+        logoUrl: ""
+      })
+    }
+
+    useEffect(() => {
+      clearState();
+    }, [props.showModal])
+
   //sends the clienData to the path /clients via post request
   const sendClientData = async () => {
       if(form.client.length !== 0){

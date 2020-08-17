@@ -1,18 +1,9 @@
 .sortBy {
   font-family: "Nunito Sans", serif;
-  display: flex;
-  justify-content: center;
+
 }
-.sortByColumnContainer {
-  display: flex;
-  justify-content: center;
-}
-.sortByTypeContainer {
-  display: flex;
-  justify-content: center;
-}
+
 .sortBy select {
-  display: flex;
   background: #91413c;
   border-radius: 2px;
   font-size: 1.2vw;
@@ -28,9 +19,7 @@
 }
 
 .button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  
   background: #91413c;
   border-radius: 2px;
   font-size: 1.2vw;

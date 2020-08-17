@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import style from "./SortBy.module.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { css } from "glamor";
+
 
 export default function SortBy(props) {
   const [sortBy, setSortBy] = useState({ column: "_id", type: "+" });
@@ -10,9 +14,29 @@ export default function SortBy(props) {
       [name]: value,
     });
   };
+
+  const notify = (text) => {
+    toast(text, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 2500,
+      className: css({
+        background: "white",
+      }),
+      bodyClassName: css({
+        fontSize: "20px",
+        color: "black",
+      }),
+      progressClassName: css({
+        background: "repeating-radial-gradient( transparent, transparent )",
+      }),
+    });
+  };
+
   const applySort = () => {
     let sort = `&sort=${sortBy.type}${sortBy.column}`;
     props.updateRows(sort);
+    notify("Applied!")
+    props.handleCloseModal()
   };
   return (
     <div className={style.sortBy}>
