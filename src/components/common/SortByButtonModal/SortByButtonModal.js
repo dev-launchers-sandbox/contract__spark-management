@@ -17,7 +17,7 @@ function SortyByButtonModal(props){
     <div className={style.buttonHolder}>
     <Modal
       overlayClick={true}
-      height="45vh"
+      height="53vh"
       color="#f3e8cb"
       showModal={props.showModal}
       handleCloseModal={props.handleCloseModal}

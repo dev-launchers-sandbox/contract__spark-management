@@ -127,7 +127,7 @@ function ManageCodesPage() {
   useEffect(() => {
     let numberOfRows = codes.length + 1;
     if (codes.length < 10) numberOfRows = 10;
-    setGridHeight(numberOfRows * 35 + 5);
+    setGridHeight(numberOfRows * 36 + 5);
   }, [codes]);
 
   return (
