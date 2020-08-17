@@ -8,7 +8,7 @@ import Modal from "../Modal/Modal.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
-import CodesGenerated from "../CodesGenerated/CodesGenerated"
+import CodesGenerated from "../CodesGenerated/CodesGenerated";
 function GenerateCode(props) {
   let [client, setClient] = useState([]);
   let [showGeneratedCodesModal, setShowGeneratedCodesModal] = useState(false);
@@ -19,32 +19,32 @@ function GenerateCode(props) {
     spanishDeck: 0,
     youthDeck: 0,
     client: "",
-    expirationDate: ""
+    expirationDate: "",
   });
 
   let [formClient, setFormClient] = useState("");
 
   //clears state after the modal closes
   const clearState = () => {
+    setForm({
+      ...form,
+      communityDeck: 0,
+      conversationalDeck: 0,
+      spanishDeck: 0,
+      youthDeck: 0,
+      client: "",
+      expirationDate: "",
+    });
 
-      setForm({
-        ...form,
-        communityDeck: 0,
-        conversationalDeck: 0,
-        spanishDeck: 0,
-        youthDeck: 0,
-        client: "",
-        expirationDate: ""
-      })
-
-      setFormClient("")
-    }
+    setFormClient("");
+  };
   //gets the client data when the componenet mounts
   useEffect(() => {
     const getClientData = async () => {
-      const clientData = await axios.get("https://api.spark4community.com/clients");
+      const clientData = await axios.get(
+        "https://api.spark4community.com/clients"
+      );
 
-      console.log("this is the client data: ",clientData.data);
       setClient(clientData.data);
     };
     getClientData();
@@ -56,12 +56,9 @@ function GenerateCode(props) {
     const { name, value } = event.target;
     setForm({
       ...form,
-      [name]: value
+      [name]: value,
     });
   };
-
-
-
 
   //notifies the user
   const notify = (text) => {
@@ -69,15 +66,15 @@ function GenerateCode(props) {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 2500,
       className: css({
-        background: "white"
+        background: "white",
       }),
       bodyClassName: css({
         fontSize: "20px",
-        color: "black"
+        color: "black",
       }),
       progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )"
-      })
+        background: "repeating-radial-gradient( transparent, transparent )",
+      }),
     });
   };
 
@@ -92,7 +89,7 @@ function GenerateCode(props) {
       if so return false
     */
   const formValidation = () => {
-    console.log("formClient length: ", formClient.length)
+    console.log("formClient length: ", formClient.length);
     if (
       ((formClient.length !== 0 || formClient.length !== 0) &&
         form.expirationDate.length !== 0 &&
@@ -109,7 +106,11 @@ function GenerateCode(props) {
 
   //sends the codeBatch data to the path /code_batch via post request
   const sendCodeData = async () => {
-    if (formValidation() === true && formClient.length !== 0 && form.expirationDate.length) {
+    if (
+      formValidation() === true &&
+      formClient.length !== 0 &&
+      form.expirationDate.length
+    ) {
       const codeBatch = {
         client_name: formClient.value,
         expiration_date: form.expirationDate,
@@ -117,19 +118,20 @@ function GenerateCode(props) {
           community: parseInt(form.communityDeck, 0),
           conversational: parseInt(form.conversationalDeck, 0),
           youth: parseInt(form.youthDeck, 0),
-          spanish: parseInt(form.spanishDeck, 0)
-        }
+          spanish: parseInt(form.spanishDeck, 0),
+        },
       };
       try {
-        console.log(codeBatch);
         //sends the data to /code_batch
-        const data = await axios.post("https://api.spark4community.com/code_batches", codeBatch);
+        const data = await axios.post(
+          "https://api.spark4community.com/code_batches",
+          codeBatch
+        );
         notify("Data has been sent!");
         setGeneratedCodes(data.data.code_batch._id);
-        props.updateRows()
+        props.updateRows();
         props.handleCloseModal();
         setShowGeneratedCodesModal(true);
-
       } catch (err) {
         console.error(err);
       }
@@ -157,7 +159,7 @@ function GenerateCode(props) {
 
       const options = {
         value: currentClient.name,
-        label: currentClient.name
+        label: currentClient.name,
       };
 
       newOptions.push(options);

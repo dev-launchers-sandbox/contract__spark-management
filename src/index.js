@@ -83,13 +83,9 @@ function App() {
   let [statusCode, setStatusCode] = useState(null);
   let [formCode, setFormCode] = useState("");
 
-  console.log("form code (outside a function): ", formCode);
-
   //creates the mock requests
   //mockData();
 
-  console.log("subdirectory: ", getBasename(window.location.pathname));
-  console.log("window: ", window.location.pathname);
   //
   let routeComponents = routes.map(({ path, component }, key) => (
     <Route exact path={path} component={component} key={key} />
