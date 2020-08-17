@@ -45,7 +45,7 @@ let routes = [
     component: ManageCodesPage,
   },
   {
-    path: "/ResetPassword?token=:token",
+    path: "/ResetPassword/:token",
     component: ResetPassword,
   },
   {
