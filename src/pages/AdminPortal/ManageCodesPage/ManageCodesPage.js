@@ -8,7 +8,9 @@ import GenerateCode from "../../../components/common/GenerateCode/GenerateCode.j
 import GenerateClient from "../../../components/common/GenerateClient/GenerateClient.js";
 import EditModal from "../../../components/common/EditModal/EditModal.js";
 import EditClientModal from "../../../components/common/EditClient/EditClient.js";
-import ButtonHolderModal from "../../../components/common/ButtonHolder/ButtonHolder.js";
+import FilterButtonModal from "../../../components/common/FilterButtonModal/FilterButtonModal.js";
+import SortByButtonModal from "../../../components/common/SortByButtonModal/SortByButtonModal.js";
+
 
 import SortByDropdowns from "./Dropdowns/SortBy/SortBy";
 import FilterByDropdowns from "./Dropdowns/FilterBy/FilterBy";
@@ -21,7 +23,9 @@ function ManageCodesPage() {
   let [showGenerateClientModal, setShowGenerateClientModal] = useState(false);
   let [showEditModal, setShowEditModal] = useState(false);
   let [showEditClientModal, setShowEditClientModal] = useState(false);
-  let [showButtonHolderModal, setShowButtonHolderModal] = useState(false);
+  let [showFilterButtonModal, setShowFilterButtonModal] = useState(false);
+  let [showSortByButtonModal, setShowSortByButtonModal] = useState(false);
+
   let [rowToEdit, setRowToEdit] = useState();
   let [clientToEdit, setClientToEdit] = useState();
   let [codes, setCodes] = useState("");
@@ -44,8 +48,13 @@ function ManageCodesPage() {
     setShowEditClientModal(true);
   };
 
-  const handleButtonHolderModal = () => {
-    setShowButtonHolderModal(true);
+
+  const handleFilterButtonModaal = () => {
+    setShowFilterButtonModal(true);
+  };
+
+  const handleSortByButtonModaal = () => {
+    setShowSortByButtonModal(true);
   };
 
   const updateCodeToEdit = (value) => {
@@ -155,10 +164,25 @@ function ManageCodesPage() {
           }}
           clientToEdit={clientToEdit}
         />
-        <ButtonHolderModal
-          showModal={showButtonHolderModal}
+        <FilterButtonModal
+          showModal={showFilterButtonModal}
           handleCloseModal={() => {
-            setShowButtonHolderModal(false);
+            setShowFilterButtonModal(false);
+          }}
+          clientToEdit={clientToEdit}
+          updateRows={updateRows}
+          resetFiltersAndSorts={resetFiltersAndSorts}
+          page={page}
+          substractPage={substractPage}
+          codes={codes}
+          addPage={addPage}
+          substractPage={substractPage}
+          NUM_ROWS_PER_PAGE={NUM_ROWS_PER_PAGE}
+        />
+        <SortByButtonModal
+          showModal={showSortByButtonModal}
+          handleCloseModal={() => {
+            setShowSortByButtonModal(false);
           }}
           clientToEdit={clientToEdit}
           updateRows={updateRows}
@@ -198,8 +222,12 @@ function ManageCodesPage() {
         )}
       </div>
       <div className={style.buttonContainer}>
-        <button onClick={handleButtonHolderModal}>Sort/Filter</button>
+        <button onClick={handleFilterButtonModaal}>Filter</button>
+        <button onClick={handleSortByButtonModaal}>Sort</button>
 
+      </div>
+      <div className={style.resetFiltersAndSorts}>
+        <button onClick={resetFiltersAndSorts}>Reset</button>
       </div>
     </div>
   );
