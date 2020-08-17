@@ -145,7 +145,6 @@ function ManageCodesPage() {
         <div className={style.buttonContainer}>
           <button onClick={handleGenerateCodeShowModal}>+ Code</button>
           <button onClick={handleGenerateClientShowModal}>+ Client</button>
-          <button onClick={handleEditClientModal}>open edit client modal</button>
         </div>
       </div>
       <DataGridComponent
