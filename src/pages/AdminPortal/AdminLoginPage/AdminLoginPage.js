@@ -25,21 +25,16 @@ function AdminLoginPage() {
 
   const [userAccounts, setUserAccounts] = useState([]);
 
-  /*
-  //when component mounts get the mock data
-  useEffect(() => {
-    const getUserData = async () => {
-      //gets the response from the get request
-      const response = await axios.get("/users");
-
-      //sets the users array that we get from the get request to the userAccounts
-      setUserAccounts(response.data.users);
-    };
-    getUserData();
-  }, []);
-  */
-
   //updates state when form is updated
+  useEffect(() => {
+    async function checkIfUserLoggedIn() {
+      try {
+        await axios.get("https://api.spark4community.com/users/current");
+        setRedirect(true);
+      } catch (error) {}
+    }
+    checkIfUserLoggedIn();
+  }, []);
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
