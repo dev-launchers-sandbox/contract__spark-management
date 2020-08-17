@@ -7,6 +7,10 @@
   justify-content: center;
   margin: 0.5em;
 }
+.pageButtons{
+  display: flex;
+  justify-content: center;
+}
 .buttonContainer button {
   background: #91413c;
   border-radius: 2px;
@@ -16,6 +20,24 @@
   width: 10em;
   height: 2em;
   color: #ffffff;
+}
+
+.pageButtons button{
+  background: #91413c;
+  border-radius: 2px;
+  font-size: 1.2vw;
+  border: 2px;
+  margin: 1em;
+  width: 8em;
+  height: 2em;
+  color: #ffffff;
+}
+
+.pageButtons button:hover{
+  transform: scale(1.1);
+  font-weight: bold;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer; /*repeated code*/
 }
 .changePageButtons {
   display: flex;

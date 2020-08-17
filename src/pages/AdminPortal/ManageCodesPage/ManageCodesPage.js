@@ -184,11 +184,10 @@ function ManageCodesPage() {
         handleEditClientModal={handleEditClientModal}
         updateClientToEdit={updateClientToEdit}
       />
-      <div className={style.buttonContainer}>
-        <button onClick={handleButtonHolderModal}>Sort/Filter</button>
+      <div className={style.pageButtons}>
         {page > 0 && (
           <button className={style.lastPageButton} onClick={substractPage}>
-            {" Last Page"}
+            {" Previous Page"}
           </button>
         )}
         {codes.length === NUM_ROWS_PER_PAGE && (
@@ -197,6 +196,10 @@ function ManageCodesPage() {
               {" Next Page"}
             </button>
         )}
+      </div>
+      <div className={style.buttonContainer}>
+        <button onClick={handleButtonHolderModal}>Sort/Filter</button>
+
       </div>
     </div>
   );
