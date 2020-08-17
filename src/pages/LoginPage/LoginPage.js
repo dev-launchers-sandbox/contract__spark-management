@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import style from "./LoginPage.module.css";
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Switch,
   Route,
   Link,
@@ -21,24 +21,14 @@ import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../images/spark_app_logo_transparent.png";
 import HelpButton from "../../components/common/HelpButton/HelpButton.js";
 
+
 function LoginPage(props) {
   let [form, setForm] = useState({ code: "" });
   const [isLoading, setIsLoading] = useState(false);
-  const [statusCode, setStatusCode] = useState(null);
-  const [deckUsing, setDeckUsing] = useState(
-    ""
-  ); /*
-  const [showingQuote, setShowingQuote] = useState("Error Quote");
+  const [redirect, setRedirect] = useState(false);
+  const [deckUsing, setDeckUsing] = useState("");
 
-  useEffect(() => {
-    //for some reason I could not get it to work in state
-    let quoteArray = ["Quote 0", "Quote 1", "Quote 2"];
-    let indexOfQuote = Math.floor(Math.random() * quoteArray.length);
-    console.log("index = ", indexOfQuote);
-    setShowingQuote(quoteArray[indexOfQuote]);
-    console.log(quoteArray[indexOfQuote]);
-  }, []);
-  */
+
   //it's called when users inputs data into the form
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -47,6 +37,8 @@ function LoginPage(props) {
       [name]: value
     });
   };
+
+
 
   //gets called when enter button is clicked
   const handleClick = (event) => {
@@ -79,15 +71,13 @@ function LoginPage(props) {
     try {
       const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${form.code}/`;
       //sets isLoading to false
-      const data = await axios.get(
-        `https://spark4community.com/Digital/${form.code}/`
-      );
+      const data = await axios.get(`https://api.spark4community.com/codes/${form.code}/validate`);
       console.log("spark data: ", data);
       sessionStorage.setItem(form.code, true);
       setDeckUsing("");
       setIsLoading(false);
-      if (data.status === 200) {
-        return setStatusCode("specialCase");
+      if (data.data.valid) {
+        return setRedirect("specialCase");
       }
     } catch (err) {
       //notifies the user that they have submitted the wrong code
@@ -108,22 +98,24 @@ function LoginPage(props) {
       //stores the url and the code the user inputs without the letter of the deck on top
       const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${codeWithoutDeckLetter}/`;
       //gets the response data from the url using a GET request
-      const data = await axios.get(
-        `https://spark4community.com/Digital/${codeWithoutDeckLetter}/`
-      );
+      const data = await axios.get(`https://api.spark4community.com/codes/${form.code}/validate`);
       console.log("status code: ", data.status);
+
+      const codeData = await axios.get(`https://api.spark4community.com/codes/${form.code}`);
+        console.log("code data in login page: ", codeData)
       //marks the code as verified and saves it in sessionStorage
-      sessionStorage.setItem(form.code.substring(1), true);
+      sessionStorage.setItem(form.code, true);
       //props.correctDeck(deckLetter);
       //sets isLoading to false
-      if (deckLetter === "c") {
+
+      if (codeData.data.code.deck_name === "community") {
         setDeckUsing("CommunityDeck");
-      } else if (deckLetter === "s") {
+      } else if (codeData.data.code.deck_name === "spanish") {
         setDeckUsing("SpanishDeck");
         console.log("spanish");
-      } else if (deckLetter === "o") {
+      } else if (codeData.data.code.deck_name === "conversational") {
         setDeckUsing("ConversationalDeck");
-      } else if (deckLetter === "y") {
+      } else if (codeData.data.code.deck_name === "youth") {
         setDeckUsing("YouthDeck");
       } else {
         setForm({
@@ -138,9 +130,10 @@ function LoginPage(props) {
       /*checks if the status from the GET request was a succes
         If it was a succes then it will set statusCode to 200
       */
-      if (data.status === 200) {
-        setStatusCode(200);
+      if (data.data.valid) {
+        setRedirect(true);
       }
+
       //props.correctDeck(deckLetter);
     } catch (error) {
       verifyIfSelection();
@@ -153,6 +146,9 @@ function LoginPage(props) {
     <LoadingOverlay active={isLoading} spinner text="Verifying Code...">
       <PageBody>
         <div className={style.loginPage}>
+
+
+
           <EULAModal />
           <div className={style.brandedLogo}>
             <a
@@ -191,14 +187,19 @@ function LoginPage(props) {
                   enter
                 </button>
               </div>
-              <a
-                href="https://spark4community.com/contact/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={style.classLink}
-              >
-                Do you need help? Contact us
-              </a>
+              <div className={style.contactLink}>
+                <p>
+                  Do you need help?{" "}
+                  <a
+                    href="https://spark4community.com/contact/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={style.classLink}
+                  >
+                    Contact us
+                  </a>
+                </p>
+              </div>
             </form>
             <RandomQuote />
 
@@ -228,16 +229,12 @@ function LoginPage(props) {
             </div>
           </div>
           {/*If the status code is 200 redirect the user to the game with the code they submitted */}
-          {statusCode === 200 ? (
-            <Redirect to={`/${form.code.substring(1)}/${deckUsing}`} />
+          {redirect ? (
+            <Redirect to={`/${form.code}/${deckUsing}`} />
           ) : (
             ""
           )}
-          {statusCode === "specialCase" ? (
-            <Redirect to={`/${form.code}`} />
-          ) : (
-            ""
-          )}
+          {redirect === "specialCase" ? <Redirect to={`/${form.code}`} /> : ""}
         </div>
       </PageBody>
     </LoadingOverlay>

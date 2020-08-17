@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import PageBody from "../components/common/PageBody/PageBody";
 import RedDeck from "../components/common/RedDeck/RedDeck";
@@ -9,19 +9,40 @@ import { Link, useParams, Redirect } from "react-router-dom";
 import CommunityDeckYellow from "../data/CommunityDeck/CommunityDeckYellow.json";
 import CommunityDeckRed from "../data/CommunityDeck/CommunityDeckRed.json";
 import InstructionButton from "../components/common/InstructionButton/InstructionButton";
+import axios from "axios";
 //This makes the code cleaner by returning the community deck route that will get called on index.js
-const getBasename = path => path.substr(0, path.lastIndexOf("/"));
-export default function CommunityDeck() {
-  let { code } = useParams();
+const getBasename = (path) => path.substr(0, path.lastIndexOf("/"));
+export default function CommunityDeck(props) {
+  /*
+  const [logoUrl, setLogoUrl] = useState("");
+
   useEffect(() => {
-    console.log("CommunityDeck Mounted!");
-    console.log("subdirectory: ", getBasename(window.location.pathname));
-    console.log("window: ", window.location.pathname);
-  }, []);
+    //let mounted = true
+
+    if (props.code === "") {
+      return;
+    }
+    const getClientLogoUrl = async () => {
+      try {
+        console.log("spanish form code: ", props.code);
+        const response = await axios.get(`https://api.spark4community.com/codes/${props.code}/validate`)
+        setLogoUrl(response.data.logo_url);
+
+        console.log("logo url: ", response);
+      } catch (err) {
+        console.error("this is the error", err);
+      }
+    };
+    getClientLogoUrl();
+
+    //return () => mounted = false;
+
+  }, [props.code]);
+  */
   return (
     <PageBody>
       <div className="upperRow">
-        <Logo marginTop="4%" />
+        <Logo marginTop="4%"/>
         <RedDeck deck={CommunityDeckRed} />
         <InstructionButton />
         {/*

@@ -37,9 +37,7 @@
   margin-right: 0.5em;
 }
 
-input[type="text"] {
-  height: 5vh;
-}
+
 
 .buttonContainer {
   display: flex;
@@ -48,6 +46,14 @@ input[type="text"] {
   justify-content: flex-end;
   align-items: flex-end;
   margin-top: 10%;
+}
+
+input[type="text"] {
+  width: 20vw;
+  height: 5vh;
+  font-family: "Nunito Sans";
+  text-align: center;
+  font-weight: bold;
 }
 
 .button {

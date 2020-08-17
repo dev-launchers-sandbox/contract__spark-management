@@ -3,12 +3,30 @@ import style from "./Logo.module.css";
 
 import RedLogo from "./../../../images/spark_app_logo_transparent.png";
 //import BrandedLogo from "../../../images/branded-logo.png";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import BrandedLogo from "../../../images/mcneil-logo.png";
+import axios from "axios";
 export default function Logo(props) {
   const [doesImageExist, setDoesImageExist] = useState(true);
 
-  const addDefaultSrc = event => {
+  const [logoUrl, setLogoUrl] = useState(null);
+  let { code } = useParams();
+  useEffect(() => {
+    const getClientLogoUrl = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.spark4community.com/codes/${code}/validate`
+        );
+        setLogoUrl(response.data.logo_url);
+      } catch (err) {
+        console.error("this is the error", err);
+      }
+    };
+    getClientLogoUrl();
+    //return () => mounted = false;
+  }, [code]);
+
+  const addDefaultSrc = (event) => {
     event.target.src = null;
     setDoesImageExist(false);
   };
@@ -35,7 +53,7 @@ export default function Logo(props) {
         {doesImageExist ? (
           <Link to={`/`}>
             <img
-              src={process.env.PUBLIC_URL + "/images/branded-logo.png"}
+              src={logoUrl}
               className={style.brandedLogo}
               alt="Logo"
               onError={addDefaultSrc}

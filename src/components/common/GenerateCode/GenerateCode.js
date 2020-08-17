@@ -8,9 +8,11 @@ import Modal from "../Modal/Modal.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
-
+import CodesGenerated from "../CodesGenerated/CodesGenerated"
 function GenerateCode(props) {
   let [client, setClient] = useState([]);
+  let [showGeneratedCodesModal, setShowGeneratedCodesModal] = useState(false);
+  let [generatedCodes, setGeneratedCodes] = useState();
   let [form, setForm] = useState({
     communityDeck: 0,
     conversationalDeck: 0,
@@ -22,15 +24,32 @@ function GenerateCode(props) {
 
   let [formClient, setFormClient] = useState("");
 
+  //clears state after the modal closes
+  const clearState = () => {
+
+      setForm({
+        ...form,
+        communityDeck: 0,
+        conversationalDeck: 0,
+        spanishDeck: 0,
+        youthDeck: 0,
+        client: "",
+        expirationDate: ""
+      })
+
+      setFormClient("")
+    }
+  //gets the client data when the componenet mounts
   useEffect(() => {
     const getClientData = async () => {
-      const clientData = await axios.get("/clients");
+      const clientData = await axios.get("https://api.spark4community.com/clients");
 
-      console.log(clientData);
+      console.log("this is the client data: ",clientData.data);
       setClient(clientData.data);
     };
     getClientData();
-  }, []);
+    clearState();
+  }, [props.showModal]);
 
   //it's called when users inputs data into the form
   const handleChange = (event) => {
@@ -41,6 +60,10 @@ function GenerateCode(props) {
     });
   };
 
+
+
+
+  //notifies the user
   const notify = (text) => {
     toast(text, {
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -58,6 +81,7 @@ function GenerateCode(props) {
     });
   };
 
+  //gets called when the Select component changes
   const handleSelectChange = (formClient) => {
     setFormClient(formClient);
     console.log("option selected: ", formClient);
@@ -65,11 +89,12 @@ function GenerateCode(props) {
 
   /*
       checks if the client form, expiration date form, and checks if all deck forms are empty
-      if so return false 
+      if so return false
     */
   const formValidation = () => {
+    console.log("formClient length: ", formClient.length)
     if (
-      (formClient.length !== 0 &&
+      ((formClient.length !== 0 || formClient.length !== 0) &&
         form.expirationDate.length !== 0 &&
         parseInt(form.communityDeck, 0) !== 0) ||
       parseInt(form.conversationalDeck, 0) !== 0 ||
@@ -84,7 +109,7 @@ function GenerateCode(props) {
 
   //sends the codeBatch data to the path /code_batch via post request
   const sendCodeData = async () => {
-    if (formValidation() === true) {
+    if (formValidation() === true && formClient.length !== 0 && form.expirationDate.length) {
       const codeBatch = {
         client_name: formClient.value,
         expiration_date: form.expirationDate,
@@ -98,12 +123,13 @@ function GenerateCode(props) {
       try {
         console.log(codeBatch);
         //sends the data to /code_batch
-        const data = await axios.post("/code_batch", codeBatch);
+        const data = await axios.post("https://api.spark4community.com/code_batches", codeBatch);
         notify("Data has been sent!");
+        setGeneratedCodes(data.data.code_batch._id);
+        props.updateRows()
+        props.handleCloseModal();
+        setShowGeneratedCodesModal(true);
 
-        console.log("config: ", data.config.data);
-        console.log("Data: ", data.data);
-        console.log("Response: ", data);
       } catch (err) {
         console.error(err);
       }
@@ -112,20 +138,26 @@ function GenerateCode(props) {
     }
   };
 
+  //gets called when user click the Generate Code(s) button
   const handleSubmit = (events) => {
     //prevents page from refreshing
     events.preventDefault();
     sendCodeData();
   };
 
+  /*
+   loops through the client data from the useEffect
+   and creates an array of options from the client data
+   to be used in the select component
+  */
   const selectOptions = () => {
     let newOptions = [];
     for (let i = 0; i < client.length; i++) {
       let currentClient = client[i];
 
       const options = {
-        value: currentClient.client,
-        label: currentClient.client
+        value: currentClient.name,
+        label: currentClient.name
       };
 
       newOptions.push(options);
@@ -232,6 +264,14 @@ function GenerateCode(props) {
           </div>
         </div>
       </Modal>
+      <CodesGenerated
+        showModal={showGeneratedCodesModal}
+        handleCloseModal={() => {
+          setShowGeneratedCodesModal(false);
+        }}
+        generatedCodes={generatedCodes}
+        openGenerateCode={props.openGenerateCode}
+      />
     </div>
   );
 }
