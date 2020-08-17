@@ -37,25 +37,13 @@ function DataTable(props) {
   const [type, setType] = useState();
 
   const ClientActions = (value) => {
+    console.log("value", value.row.client_name);
     return (
-      <div className={style.clientActionsContainer}>
+      <div
+        onClick={() => handleEditClient(value.row)}
+        className={style.clientActionsContainer}
+      >
         {value.row.client_name}
-        <span
-          onClick={() => handleDelete("client", value.row)}
-          className={style.deleteIcon}
-          role="img"
-          aria-label="delete"
-        >
-          ️ 🗑️
-        </span>
-        <span
-          onClick={() => handleEditClient(value.row)}
-          className={style.editIcon}
-          role="img"
-          aria-label="delete"
-        >
-          ️ ️📝
-        </span>
       </div>
     );
   };
@@ -99,7 +87,7 @@ function DataTable(props) {
     { key: "createdAt", name: "Created On" },
     { key: "deck_name", name: "Deck" },
     { key: "user_creator_name", name: "Created by" },
-    { key: "button", name: "", formatter: Actions },
+    { key: "code_actions", name: "", formatter: Actions },
   ];
 
   const handleDelete = (type, row) => {

@@ -8,7 +8,7 @@ import GenerateCode from "../../../components/common/GenerateCode/GenerateCode.j
 import GenerateClient from "../../../components/common/GenerateClient/GenerateClient.js";
 import EditModal from "../../../components/common/EditModal/EditModal.js";
 import EditClientModal from "../../../components/common/EditClient/EditClient.js";
-import ButtonHolderModal from "../../../components/common/ButtonHolder/ButtonHolder.js"
+import ButtonHolderModal from "../../../components/common/ButtonHolder/ButtonHolder.js";
 
 import SortByDropdowns from "./Dropdowns/SortBy/SortBy";
 import FilterByDropdowns from "./Dropdowns/FilterBy/FilterBy";
@@ -21,8 +21,8 @@ function ManageCodesPage() {
   let [showGenerateClientModal, setShowGenerateClientModal] = useState(false);
   let [showEditModal, setShowEditModal] = useState(false);
   let [showEditClientModal, setShowEditClientModal] = useState(false);
-  let [showButtonHolderModal, setShowButtonHolderModal] = useState(false)
-;  let [rowToEdit, setRowToEdit] = useState();
+  let [showButtonHolderModal, setShowButtonHolderModal] = useState(false);
+  let [rowToEdit, setRowToEdit] = useState();
   let [clientToEdit, setClientToEdit] = useState();
   let [codes, setCodes] = useState("");
   let [gridHeight, setGridHeight] = useState();
@@ -41,12 +41,12 @@ function ManageCodesPage() {
   };
 
   const handleEditClientModal = () => {
-    setShowEditClientModal(true)
-  }
+    setShowEditClientModal(true);
+  };
 
   const handleButtonHolderModal = () => {
-    setShowButtonHolderModal(true)
-  }
+    setShowButtonHolderModal(true);
+  };
 
   const updateCodeToEdit = (value) => {
     setRowToEdit(value);
@@ -162,7 +162,6 @@ function ManageCodesPage() {
           addPage={addPage}
           substractPage={substractPage}
           NUM_ROWS_PER_PAGE={NUM_ROWS_PER_PAGE}
-
         />
         <div className={style.buttonContainer}>
           <button onClick={handleGenerateCodeShowModal}>+ Code</button>
@@ -179,7 +178,7 @@ function ManageCodesPage() {
         updateClientToEdit={updateClientToEdit}
       />
       <div className={style.buttonContainer}>
-        <button onClick={handleButtonHolderModal}>Settings</button>
+        <button onClick={handleButtonHolderModal}>Grid Actions</button>
       </div>
     </div>
   );
