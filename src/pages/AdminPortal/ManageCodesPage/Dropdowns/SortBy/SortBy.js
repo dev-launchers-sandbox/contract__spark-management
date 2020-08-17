@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
 
-
 export default function SortBy(props) {
   const [sortBy, setSortBy] = useState({ column: "_id", type: "+" });
   const handleChange = (event) => {
@@ -35,8 +34,9 @@ export default function SortBy(props) {
   const applySort = () => {
     let sort = `&sort=${sortBy.type}${sortBy.column}`;
     props.updateRows(sort);
-    notify("Applied!")
-    props.handleCloseModal()
+    props.resetPage();
+    props.handleCloseModal();
+    notify("Applied!");
   };
   return (
     <div className={style.sortBy}>

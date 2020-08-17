@@ -22,6 +22,7 @@ function FilterButtonModal(props) {
             <FilterByDropdowns
               updateRows={props.updateRows}
               handleCloseModal={props.handleCloseModal}
+              resetPage={props.resetPage}
             />
           </div>
         </div>

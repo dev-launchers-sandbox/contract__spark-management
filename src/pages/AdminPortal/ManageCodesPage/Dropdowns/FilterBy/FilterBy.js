@@ -38,7 +38,8 @@ export default function FilterBy(props) {
     let input = filterBy.input.split(" ").join("%20");
     let filter = `&${filterBy.column}=${input}`;
     props.updateRows(filter);
-    notify("Applied!")
+    notify("Applied!");
+    props.resetPage();
     props.handleCloseModal();
   };
   return (
@@ -59,13 +60,16 @@ export default function FilterBy(props) {
           type="text"
           name="input"
           value={filterBy.input}
-          style={{width: "11.9vw"}}
+          style={{ width: "11.9vw" }}
           onChange={handleChange}
           placeholder="add necessary data here"
         />
       </div>
       <div className={style.applyFilter}>
-        <button className={style.button} onClick={handleSubmit}> Apply Filter </button>
+        <button className={style.button} onClick={handleSubmit}>
+          {" "}
+          Apply Filter{" "}
+        </button>
       </div>
     </div>
   );
