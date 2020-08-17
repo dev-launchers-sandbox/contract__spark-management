@@ -117,7 +117,7 @@ function EditClient(props) {
 
   const updateClientData = async () => {
     const clientData = {
-      name: formClient.value,
+      name: form.client,
       logo_url: form.logoUrl
     }
     try{
