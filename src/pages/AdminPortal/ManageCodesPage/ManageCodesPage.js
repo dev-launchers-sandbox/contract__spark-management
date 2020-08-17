@@ -45,6 +45,7 @@ function ManageCodesPage() {
   const updateCodeToEdit = (value) => {
     setRowToEdit(value);
   };
+
   const updateClientToEdit = (id) => {
     setClientToEdit(id);
   };

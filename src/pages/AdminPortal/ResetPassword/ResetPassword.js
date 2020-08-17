@@ -42,7 +42,7 @@ function ResetPassword() {
       verifiedPassword: form.confirmPassword,
     };
     try {
-      axios.post("http://192.232.212.61:80/reset-password", newInfo);
+      axios.post("https://api.spark4community.com/reset-password", newInfo);
     } catch (error) {
       alert("There was an error! Try again or come back in a few minutes");
     }
