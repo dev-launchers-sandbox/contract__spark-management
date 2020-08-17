@@ -11,7 +11,6 @@ import EditClientModal from "../../../components/common/EditClient/EditClient.js
 import FilterButtonModal from "../../../components/common/FilterButtonModal/FilterButtonModal.js";
 import SortByButtonModal from "../../../components/common/SortByButtonModal/SortByButtonModal.js";
 
-
 import SortByDropdowns from "./Dropdowns/SortBy/SortBy";
 import FilterByDropdowns from "./Dropdowns/FilterBy/FilterBy";
 import axios from "axios";
@@ -47,7 +46,6 @@ function ManageCodesPage() {
   const handleEditClientModal = () => {
     setShowEditClientModal(true);
   };
-
 
   const handleFilterButtonModaal = () => {
     setShowFilterButtonModal(true);
@@ -90,14 +88,18 @@ function ManageCodesPage() {
       }
     }
     let codeArray = codesFetch.data;
-    codeArray.forEach((code) => {
-      let shortExp = code.expiration_date.substring(0, 10);
-      code.expiration_date = shortExp;
-    });
-    codeArray.forEach((code) => {
-      let shortCreated = code.createdAt.substring(0, 10);
-      code.createdAt = shortCreated;
-    });
+    try {
+      codeArray.forEach((code) => {
+        let shortExp = code.expiration_date.substring(0, 10);
+        code.expiration_date = shortExp;
+      });
+      codeArray.forEach((code) => {
+        let shortCreated = code.createdAt.substring(0, 10);
+        code.createdAt = shortCreated;
+      });
+    } catch (err) {
+      console.log(err);
+    }
     setCodes(codeArray);
   }
   const addPage = () => {
@@ -215,16 +217,14 @@ function ManageCodesPage() {
           </button>
         )}
         {codes.length === NUM_ROWS_PER_PAGE && (
-
-            <button className={style.nextPageButton} onClick={addPage}>
-              {" Next Page"}
-            </button>
+          <button className={style.nextPageButton} onClick={addPage}>
+            {" Next Page"}
+          </button>
         )}
       </div>
       <div className={style.buttonContainer}>
         <button onClick={handleFilterButtonModaal}>Filter</button>
         <button onClick={handleSortByButtonModaal}>Sort</button>
-
       </div>
       <div className={style.resetFiltersAndSorts}>
         <button onClick={resetFiltersAndSorts}>Reset</button>

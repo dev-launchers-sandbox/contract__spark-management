@@ -7,30 +7,29 @@ import "react-data-grid/dist/react-data-grid.css";
 import style from "./SortByButtonModal.module.css";
 import axios from "axios";
 
-function SortyByButtonModal(props){
-  useEffect(() => {
-    console.log("props.page value: ", props.page)
-    console.log("props.codes length value: ", props.codes.length)
-  })
+function SortyByButtonModal(props) {
   return (
     <div className={style.buttonHolder}>
-    <div className={style.buttonHolder}>
-    <Modal
-      overlayClick={true}
-      height="53vh"
-      color="#f3e8cb"
-      showModal={props.showModal}
-      handleCloseModal={props.handleCloseModal}
-    >
-    <div className={style.dropdownsContainer}>
-      <div className={style.sortByTypeDropdownContainer}>
-        <SortByDropdowns updateRows={props.updateRows} handleCloseModal={props.handleCloseModal}/>
+      <div className={style.buttonHolder}>
+        <Modal
+          overlayClick={true}
+          height="53vh"
+          color="#f3e8cb"
+          showModal={props.showModal}
+          handleCloseModal={props.handleCloseModal}
+        >
+          <div className={style.dropdownsContainer}>
+            <div className={style.sortByTypeDropdownContainer}>
+              <SortByDropdowns
+                updateRows={props.updateRows}
+                handleCloseModal={props.handleCloseModal}
+              />
+            </div>
+          </div>
+        </Modal>
       </div>
     </div>
-    </Modal>
-    </div>
-    </div>
-  )
+  );
 }
 
 export default SortyByButtonModal;

@@ -10,14 +10,14 @@ import { css } from "glamor";
 function GenerateClient(props) {
   let [form, setForm] = useState({
     client: "",
-    logoUrl: ""
+    logoUrl: "",
   });
   //it's called when users inputs data into the form
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
       ...form,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -27,56 +27,51 @@ function GenerateClient(props) {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 2500,
       className: css({
-        background: "white"
+        background: "white",
       }),
       bodyClassName: css({
         fontSize: "20px",
-        color: "black"
+        color: "black",
       }),
       progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )"
-      })
+        background: "repeating-radial-gradient( transparent, transparent )",
+      }),
     });
   };
 
   //clears state after the modal closes
   const clearState = () => {
+    setForm({
+      ...form,
+      client: "",
+      logoUrl: "",
+    });
+  };
 
-      setForm({
-        ...form,
-        client: "",
-        logoUrl: ""
-      })
-    }
-
-    useEffect(() => {
-      clearState();
-    }, [props.showModal])
+  useEffect(() => {
+    clearState();
+  }, [props.showModal]);
 
   //sends the clienData to the path /clients via post request
   const sendClientData = async () => {
-      if(form.client.length !== 0){
+    if (form.client.length !== 0) {
       const clientData = {
         name: form.client,
-        logo_url: form.logoUrl
+        logo_url: form.logoUrl,
       };
-      console.log("client length: ", form.client.length);
-      console.log("logo url length: ", form.logoUrl.length);
-      console.log("client data:  ", clientData)
       try {
-
-        const response = await axios.post("https://api.spark4community.com/clients", clientData);
+        const response = await axios.post(
+          "https://api.spark4community.com/clients",
+          clientData
+        );
         notify("Data has been sent!");
         props.handleCloseModal();
-
-        //console.log("client data: ", response);
       } catch (err) {
         console.error(err);
       }
-    }else{
-      notify("Client form can't be empty!")
+    } else {
+      notify("Client form can't be empty!");
     }
-
   };
 
   //gets called when the user clicks the Generate Client button

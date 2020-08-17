@@ -37,7 +37,6 @@ function DataTable(props) {
   const [type, setType] = useState();
 
   const ClientActions = (value) => {
-    console.log("value", value.row.client_name);
     return (
       <div
         onClick={() => handleEditClient(value.row)}

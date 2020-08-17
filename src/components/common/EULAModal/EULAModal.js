@@ -37,7 +37,7 @@ function EULAModal() {
   }
   const [showModal, setShowModal] = useState(accepted);
   const [answer, setIsChecked] = useState({
-    isChecked: false
+    isChecked: false,
   });
 
   /*
@@ -76,15 +76,15 @@ function EULAModal() {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 2500,
       className: css({
-        background: "white"
+        background: "white",
       }),
       bodyClassName: css({
         fontSize: "20px",
-        color: "black"
+        color: "black",
       }),
       progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )"
-      })
+        background: "repeating-radial-gradient( transparent, transparent )",
+      }),
     });
   };
 
@@ -94,9 +94,8 @@ function EULAModal() {
 
     setIsChecked({
       ...answer,
-      [name]: checked
+      [name]: checked,
     });
-    console.log(answer);
   };
   //custom styles for the modal
   const customStyle = {
@@ -108,8 +107,8 @@ function EULAModal() {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       backgroundColor: "#961a1e",
-      borderRadius: "10px"
-    }
+      borderRadius: "10px",
+    },
   };
 
   const eulaModal = (
