@@ -24,6 +24,21 @@ function GenerateCode(props) {
 
   let [formClient, setFormClient] = useState("");
 
+  //clears state after the modal closes
+  const clearState = () => {
+
+      setForm({
+        ...form,
+        communityDeck: 0,
+        conversationalDeck: 0,
+        spanishDeck: 0,
+        youthDeck: 0,
+        client: "",
+        expirationDate: ""
+      })
+
+      setFormClient("")
+    }
   //gets the client data when the componenet mounts
   useEffect(() => {
     const getClientData = async () => {
@@ -33,6 +48,7 @@ function GenerateCode(props) {
       setClient(clientData.data);
     };
     getClientData();
+    clearState();
   }, [props.showModal]);
 
   //it's called when users inputs data into the form
@@ -43,6 +59,9 @@ function GenerateCode(props) {
       [name]: value
     });
   };
+
+
+
 
   //notifies the user
   const notify = (text) => {

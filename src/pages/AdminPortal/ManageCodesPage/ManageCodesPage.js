@@ -8,6 +8,7 @@ import GenerateCode from "../../../components/common/GenerateCode/GenerateCode.j
 import GenerateClient from "../../../components/common/GenerateClient/GenerateClient.js";
 import EditModal from "../../../components/common/EditModal/EditModal.js";
 import EditClientModal from "../../../components/common/EditClient/EditClient.js";
+import ButtonHolderModal from "../../../components/common/ButtonHolder/ButtonHolder.js"
 
 import SortByDropdowns from "./Dropdowns/SortBy/SortBy";
 import FilterByDropdowns from "./Dropdowns/FilterBy/FilterBy";
@@ -20,7 +21,8 @@ function ManageCodesPage() {
   let [showGenerateClientModal, setShowGenerateClientModal] = useState(false);
   let [showEditModal, setShowEditModal] = useState(false);
   let [showEditClientModal, setShowEditClientModal] = useState(false);
-  let [rowToEdit, setRowToEdit] = useState();
+  let [showButtonHolderModal, setShowButtonHolderModal] = useState(false)
+;  let [rowToEdit, setRowToEdit] = useState();
   let [clientToEdit, setClientToEdit] = useState();
   let [codes, setCodes] = useState("");
   let [gridHeight, setGridHeight] = useState();
@@ -40,6 +42,10 @@ function ManageCodesPage() {
 
   const handleEditClientModal = () => {
     setShowEditClientModal(true)
+  }
+
+  const handleButtonHolderModal = () => {
+    setShowButtonHolderModal(true)
   }
 
   const updateCodeToEdit = (value) => {
@@ -142,6 +148,22 @@ function ManageCodesPage() {
           }}
           clientToEdit={clientToEdit}
         />
+        <ButtonHolderModal
+          showModal={showButtonHolderModal}
+          handleCloseModal={() => {
+            setShowButtonHolderModal(false);
+          }}
+          clientToEdit={clientToEdit}
+          updateRows={updateRows}
+          resetFiltersAndSorts={resetFiltersAndSorts}
+          page={page}
+          substractPage={substractPage}
+          codes={codes}
+          addPage={addPage}
+          substractPage={substractPage}
+          NUM_ROWS_PER_PAGE={NUM_ROWS_PER_PAGE}
+
+        />
         <div className={style.buttonContainer}>
           <button onClick={handleGenerateCodeShowModal}>+ Code</button>
           <button onClick={handleGenerateClientShowModal}>+ Client</button>
@@ -156,27 +178,8 @@ function ManageCodesPage() {
         handleEditClientModal={handleEditClientModal}
         updateClientToEdit={updateClientToEdit}
       />
-      <div className={style.dropdownsContainer}>
-        <SortByDropdowns updateRows={updateRows} />
-        <FilterByDropdowns updateRows={updateRows} />
-        <div className={style.resetFiltersAndSorts}>
-          <button onClick={resetFiltersAndSorts}>Reset</button>
-        </div>
-      </div>
-      <div className={style.changePageButtons}>
-        <div className={style.buttonHolder}>
-          {page > 0 && (
-            <button className={style.lastPageButton} onClick={substractPage}>
-              {" Last Page"}
-            </button>
-          )}
-          {codes.length === NUM_ROWS_PER_PAGE && (
-
-              <button className={style.nextPageButton} onClick={addPage}>
-                {" Next Page"}
-              </button>
-          )}
-        </div>
+      <div className={style.buttonContainer}>
+        <button onClick={handleButtonHolderModal}>Settings</button>
       </div>
     </div>
   );
