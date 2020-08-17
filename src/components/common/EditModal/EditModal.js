@@ -84,7 +84,7 @@ function EditModal(props) {
     setForm({
       ...form,
       client: codeDataResponse.data.code.client_name,
-      expirationDate: codeDataResponse.data.code.expiration_date.substr(0, 10),
+      expirationDate: codeDataResponse.data.code.expiration_date === null ? "00/00/0000" : codeDataResponse.data.code.expiration_date.substr(0, 10),
       subClient: codeDataResponse.data.code.sub_client_name,
       deckName: codeDataResponse.data.code.deck_name,
     });
@@ -155,7 +155,7 @@ useEffect(() => {
 
         //sends the data to /code_batch
 
-        const response = await axios.put(`http://192.232.212.61:80/codes/${props.rowToEdit._id}`, codeBatch);
+        const response = await axios.put(`https://api.spark4community.com/codes/${props.rowToEdit._id}`, codeBatch);
         console.log("updated datd: ", response)
         console.log("Data has been sent!");
         notify("Code Data has been updated!")

@@ -92,9 +92,9 @@ function GenerateCode(props) {
       if so return false
     */
   const formValidation = () => {
-    console.log("formClient length: ", formClient)
+    console.log("formClient length: ", formClient.length)
     if (
-      ((formClient.length !== 0 || formClient.value !== undefined) &&
+      ((formClient.length !== 0 || formClient.length !== 0) &&
         form.expirationDate.length !== 0 &&
         parseInt(form.communityDeck, 0) !== 0) ||
       parseInt(form.conversationalDeck, 0) !== 0 ||
@@ -109,7 +109,7 @@ function GenerateCode(props) {
 
   //sends the codeBatch data to the path /code_batch via post request
   const sendCodeData = async () => {
-    if (formValidation() === true) {
+    if (formValidation() === true && formClient.length !== 0 && form.expirationDate.length) {
       const codeBatch = {
         client_name: formClient.value,
         expiration_date: form.expirationDate,
