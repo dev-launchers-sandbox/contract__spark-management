@@ -5,6 +5,11 @@
   text-align: center;
   border: solid;
 }
+
+.DataGrid > div:first-of-type {
+  overflow-x: hidden;
+}
+
 .buttonContainer span:hover {
   cursor: pointer;
 }
@@ -43,6 +48,8 @@
   display: flex;
   justify-content: center;
   text-decoration: underline;
+  color: #91413c;
+
 }
 .clientActionsContainer:hover {
   cursor: pointer;
