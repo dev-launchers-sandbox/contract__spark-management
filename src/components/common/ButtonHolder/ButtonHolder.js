@@ -32,21 +32,6 @@ function ButtonHolder(props){
     <div className={style.resetFiltersAndSorts}>
       <button onClick={props.resetFiltersAndSorts}>Reset</button>
     </div>
-    <div className={style.changePageButtons}>
-      <div className={style.buttonHolder}>
-        {props.page > 0 && (
-          <button className={style.lastPageButton} onClick={props.substractPage}>
-            {" Last Page"}
-          </button>
-        )}
-        {props.codes.length === props.NUM_ROWS_PER_PAGE && (
-
-            <button className={style.nextPageButton} onClick={props.addPage}>
-              {" Next Page"}
-            </button>
-        )}
-      </div>
-    </div>
     </Modal>
     </div>
   )
