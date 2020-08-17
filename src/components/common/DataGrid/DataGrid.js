@@ -47,6 +47,23 @@ function DataTable(props) {
       </div>
     );
   };
+  const CodeAction = (value) => {
+    return (
+      <div>
+        {value.row._id}
+        <CopyToClipboard text={value.row._id}>
+          <span
+            className={style.copyToClipBoard}
+            onClick={() => handleCopy()}
+            role="img"
+            aria-label="copy"
+          >
+            ️{"   📋"}
+          </span>
+        </CopyToClipboard>
+      </div>
+    );
+  };
   const Actions = ({ value, row }) => {
     return (
       <div className={style.actionsContainer}>
@@ -66,21 +83,11 @@ function DataTable(props) {
         >
           ️📝
         </span>
-        <CopyToClipboard text={row._id}>
-          <span
-            className={style.copyToClipBoard}
-            onClick={() => handleCopy()}
-            role="img"
-            aria-label="copy"
-          >
-            ️📋
-          </span>
-        </CopyToClipboard>
       </div>
     );
   };
   const columns = [
-    { key: "_id", name: "Code" },
+    { key: "_id", name: "Code", formatter: CodeAction },
     { key: "client_name", name: "Client", formatter: ClientActions },
     { key: "sub_client_name", name: "Sub Client" },
     { key: "expiration_date", name: "Expiration Date" },
