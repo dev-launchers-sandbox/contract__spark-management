@@ -29,7 +29,7 @@ function EditClient(props) {
   const getClientDataById = async () => {
     try {
       const response = await axios.get(
-        "https://api.spark4community.com/clients/5f3821cb23b46077aa600607"
+        `https://api.spark4community.com/clients/${props.clientToEdit}`
       );
 
       console.log("client data in edit client modal: ", response)
@@ -55,7 +55,7 @@ function EditClient(props) {
   useEffect(() => {
     getClientData();
     getClientDataById();
-  }, []);
+  }, [props.clientToEdit]);
 
   //it's called when users inputs data into the form
   const handleClientChange = (event) => {
@@ -122,7 +122,7 @@ function EditClient(props) {
     }
     try{
       console.log("new client data: ", clientData)
-      const response = await axios.put("https://api.spark4community.com/clients/5f389a4123b46077aa600612", clientData);
+      const response = await axios.put(`https://api.spark4community.com/clients/${props.clientToEdit}`, clientData);
       console.log("response data: ", response )
       notify("client has been updated!");
       props.handleCloseModal();
