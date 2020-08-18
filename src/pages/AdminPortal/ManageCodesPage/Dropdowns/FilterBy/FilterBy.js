@@ -23,7 +23,7 @@ const notify = (text) => {
 
 toast.configure();
 export default function FilterBy(props) {
-  const [filterBy, setFilterBy] = useState({ column: "_id", input: "" });
+  const [filterBy, setFilterBy] = useState({ column: "client_name", input: "" });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -47,8 +47,8 @@ export default function FilterBy(props) {
       <p> Filter By </p>
       <div className={style.filterByColumnDropdown}>
         <select name="column" value={filterBy.column} onChange={handleChange}>
-          <option value="_id"> Code </option>
           <option value="client_name"> Client </option>
+          <option value="_id"> Code </option>
           <option value="deck_name"> Deck </option>
           <option value="user_creator_name"> Created By </option>
           <option value="createdAt"> Created At </option>
