@@ -8,42 +8,16 @@ import { Link, useParams } from "react-router-dom";
 
 import ConversationalRedDeck from "../data/ConversationalDeck/ConversationalDeckRed";
 import ConversationalYellowDeck from "../data/ConversationalDeck/ConversationalDeckYellow";
-import InstructionButton from "../components/common/InstructionButton/InstructionButton";
 import axios from "axios";
 
 //This makes the code cleaner by returning the conversational deck route that will get called on index.js
 
 export default function ConversationalDeck(props) {
-  /*
-  const [logoUrl, setLogoUrl] = useState("");
-
-  useEffect(() => {
-    //let mounted = true;
-    if (props.code === "") {
-      return;
-    }
-    const getClientLogoUrl = async () => {
-      try {
-        console.log("spanish form code: ", props.code);
-        const response = await axios.get(`https://api.spark4community.com/codes/${props.code}/validate`);
-        setLogoUrl(response.data.logo_url);
-
-        console.log("logo url: ", response);
-      } catch (err) {
-        console.error("this is the error", err);
-      }
-    };
-    getClientLogoUrl();
-    //return () => mounted = false;
-
-  }, [props.code]);
-  */
   return (
     <PageBody>
       <div className="upperRow">
-        <Logo marginTop="4%"/>
+        <Logo marginTop="4%" />
         <RedDeck deck={ConversationalRedDeck} />
-        <InstructionButton />
       </div>
       <Hand deck={ConversationalYellowDeck} />
     </PageBody>

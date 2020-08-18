@@ -57,11 +57,11 @@ h2 {
   font-family: "Sue Ellen Francisco";
 }
 
-a{
+a {
   color: #912123;
   text-decoration: underline;
 }
 
-a:hover{
+a:hover {
   cursor: pointer;
 }

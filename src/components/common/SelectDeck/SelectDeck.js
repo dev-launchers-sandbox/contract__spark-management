@@ -93,9 +93,11 @@ export default function SelectDeck(props) {
           across difference.
         </p>
       </div>
+
       <div className={style.buttonContainer}>
         <HelpButton />
       </div>
+
       {/* Checks if the code has been verified*/}
       {sessionStorage.getItem(code) === null && <Redirect to="/" />}
     </PageBody>

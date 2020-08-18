@@ -15,7 +15,9 @@
 
 .brandedLogoText {
   margin-top: 1em;
-  font-family: Sue Ellen Francisco;
+  font-family: "Sue Ellen Francisco";
+  font-size: 1rem;
+  margin: 1em;
 }
 
 .logoText {
