@@ -31,7 +31,7 @@ function Header() {
       {/*}Actual visual body: {*/}
       <img className={style.sparkLogo} src={SparkLogo} alt="sparkLogo" />
       <h1>{username.toUpperCase()}</h1>
-      <a style={{textDecoration: "none", fontWeight: "bold"}}><Link to="/CreateNewUser" style={{textDecoration: "none"}}>Add New User</Link></a>
+      <a style={{textDecoration: "none", fontWeight: "bold"}}><Link to="/CreateNewUser" style={{textDecoration: "none"}}>👤 Add New User</Link></a>
       <a style={{textDecoration: "none", fontWeight: "bold"}}onClick={logout}>🚪 Log Out</a>
     </div>
   );
