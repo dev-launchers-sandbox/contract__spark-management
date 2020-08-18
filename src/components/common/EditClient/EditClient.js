@@ -126,6 +126,8 @@ function EditClient(props) {
       console.log("response data: ", response )
       notify("client has been updated!");
       props.handleCloseModal();
+      props.updateRows();
+
     }
     catch(err){
       console.error("got an error trying to update the client data: ", err);

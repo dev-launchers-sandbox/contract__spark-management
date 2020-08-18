@@ -3,6 +3,14 @@
   font-family: "Nunito Sans", serif;
 }
 
+.filterByContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: purple;
+  align-items: flex-end;
+}
+
 
 .filterByColumnDropdown select {
   background: white;

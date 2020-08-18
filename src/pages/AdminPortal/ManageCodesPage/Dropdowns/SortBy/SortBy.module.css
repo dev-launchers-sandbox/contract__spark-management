@@ -20,6 +20,12 @@
   cursor: pointer;
 }
 
+.sortByTextContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .button {
   background: #91413c;
   border-radius: 2px;

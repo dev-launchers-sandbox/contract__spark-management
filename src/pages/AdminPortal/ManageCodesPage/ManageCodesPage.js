@@ -168,6 +168,7 @@ function ManageCodesPage() {
             setShowEditClientModal(false);
           }}
           clientToEdit={clientToEdit}
+          updateRows={updateRows}
         />
         <FilterButtonModal
           showModal={showFilterButtonModal}
@@ -232,7 +233,7 @@ function ManageCodesPage() {
         <button onClick={handleSortByButtonModaal}>Sort</button>
       </div>
       <div className={style.resetFiltersAndSorts}>
-        <button onClick={resetFiltersAndSorts}>Reset</button>
+        <button onClick={resetFiltersAndSorts}>Reset View</button>
       </div>
     </div>
   );
