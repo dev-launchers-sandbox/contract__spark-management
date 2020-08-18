@@ -27,6 +27,18 @@ export default function CodesGenerated(props) {
             `https://api.spark4community.com/codes?code_batch_id=${props.generatedCodes}`
           )
           .then((newCodes) => (codesGenerated = newCodes.data));
+        try {
+          codesGenerated.forEach((code) => {
+            let shortExp = code.expiration_date.substring(0, 10);
+            code.expiration_date = shortExp;
+          });
+          codesGenerated.forEach((code) => {
+            let shortCreated = code.createdAt.substring(0, 10);
+            code.createdAt = shortCreated;
+          });
+        } catch (err) {
+          console.log(err);
+        }
         setRows(codesGenerated);
       }
     }

@@ -32,7 +32,7 @@ function EditClient(props) {
         `https://api.spark4community.com/clients/${props.clientToEdit}`
       );
 
-      console.log("client data in edit client modal: ", response)
+      console.log("client data in edit client modal: ", response);
       /*
       setSpecificClientData({
         ...setSpecificClientData,
@@ -43,18 +43,17 @@ function EditClient(props) {
       setForm({
         ...form,
         client: response.data.client.name,
-        logoUrl: response.data.client.logo_url
-      }
-      )
-    }
-    catch(err){
-      console.error("We got an error trying to get client by id", err)
+        logoUrl: response.data.client.logo_url,
+      });
+    } catch (err) {
+      console.error("We got an error trying to get client by id", err);
     }
   };
 
   useEffect(() => {
     getClientData();
     getClientDataById();
+    console.log(props.clientToEdit);
   }, [props.clientToEdit]);
 
   //it's called when users inputs data into the form
@@ -64,7 +63,7 @@ function EditClient(props) {
       ...form,
       client: value,
     });
-    console.log("client value: ",  form.client)
+    console.log("client value: ", form.client);
   };
 
   //it's called when users inputs data into the form
@@ -74,7 +73,7 @@ function EditClient(props) {
       ...form,
       logoUrl: value,
     });
-    console.log("logo url: ", form.logoUrl)
+    console.log("logo url: ", form.logoUrl);
   };
 
   //gets called when the user inputs the wrong username and password
@@ -118,18 +117,19 @@ function EditClient(props) {
   const updateClientData = async () => {
     const clientData = {
       name: form.client,
-      logo_url: form.logoUrl
-    }
-    try{
-      console.log("new client data: ", clientData)
-      const response = await axios.put(`https://api.spark4community.com/clients/${props.clientToEdit}`, clientData);
-      console.log("response data: ", response )
+      logo_url: form.logoUrl,
+    };
+    try {
+      console.log("new client data: ", clientData);
+      const response = await axios.put(
+        `https://api.spark4community.com/clients/${props.clientToEdit}`,
+        clientData
+      );
+      console.log("response data: ", response);
       notify("client has been updated!");
       props.handleCloseModal();
       props.updateRows();
-
-    }
-    catch(err){
+    } catch (err) {
       console.error("got an error trying to update the client data: ", err);
       notify("You can't change it to a client that already exists!");
     }
@@ -141,7 +141,10 @@ function EditClient(props) {
     //updates the client Data
     updateClientData();
   };
-
+  const handleDeletion = () => {
+    props.handleCloseModal();
+    props.handleDelete("client", props.clientToEdit);
+  };
   return (
     <div className={style.editClient}>
       <Modal
@@ -178,6 +181,13 @@ function EditClient(props) {
             <div className={style.buttonContainer}>
               <button className={style.button} type="submit">
                 Edit Client
+              </button>
+              <button
+                onClick={() => handleDeletion()}
+                className={style.button}
+                type="button"
+              >
+                Delete Client
               </button>
             </div>
           </form>

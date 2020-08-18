@@ -24,7 +24,10 @@ function ManageCodesPage() {
   let [showEditClientModal, setShowEditClientModal] = useState(false);
   let [showFilterButtonModal, setShowFilterButtonModal] = useState(false);
   let [showSortByButtonModal, setShowSortByButtonModal] = useState(false);
-
+  const [
+    showDeleteConfirmationModal,
+    setShowDeleteConfirmationModal,
+  ] = useState(false);
   let [rowToEdit, setRowToEdit] = useState();
   let [clientToEdit, setClientToEdit] = useState();
   let [codes, setCodes] = useState("");
@@ -32,6 +35,10 @@ function ManageCodesPage() {
   let [showArrows, setShowArrows] = useState({ front: false });
   let [page, setPage] = useState(0);
   let [currentChanges, setCurrentChanges] = useState();
+  const [rowToDelete, setRowToDelete] = useState();
+  const [clientToDelete, setClientToDelete] = useState();
+  const [type, setType] = useState();
+
   const handleGenerateCodeShowModal = () => {
     setShowGenerateCodeModal(true);
     console.log("bool: ", showGenerateCodeModal);
@@ -46,7 +53,9 @@ function ManageCodesPage() {
   const handleEditClientModal = () => {
     setShowEditClientModal(true);
   };
-
+  const handleDeleteConfirmation = () => {
+    setShowDeleteConfirmationModal(true);
+  };
   const handleFilterButtonModaal = () => {
     setShowFilterButtonModal(true);
   };
@@ -65,6 +74,18 @@ function ManageCodesPage() {
   const resetPage = () => {
     setPage(0);
   };
+
+  const handleDelete = (type, row) => {
+    setType(type);
+    if (type === "code") {
+      setRowToDelete(row);
+    }
+    if (type === "client") {
+      setClientToDelete(row);
+    }
+    handleDeleteConfirmation();
+  };
+
   async function updateRows(changes) {
     let codesFetch;
     if (changes) {
@@ -169,6 +190,7 @@ function ManageCodesPage() {
           }}
           clientToEdit={clientToEdit}
           updateRows={updateRows}
+          handleDelete={handleDelete}
         />
         <FilterButtonModal
           showModal={showFilterButtonModal}
@@ -215,6 +237,13 @@ function ManageCodesPage() {
         gridHeight={gridHeight}
         handleEditClientModal={handleEditClientModal}
         updateClientToEdit={updateClientToEdit}
+        showDeleteConfirmationModal={showDeleteConfirmationModal}
+        handleDeleteConfirmation={handleDeleteConfirmation}
+        handleClose={() => setShowDeleteConfirmationModal(false)}
+        handleDelete={handleDelete}
+        type={type}
+        rowToDelete={rowToDelete}
+        clientToDelete={clientToDelete}
       />
       <div className={style.pageButtons}>
         {page > 0 && (
