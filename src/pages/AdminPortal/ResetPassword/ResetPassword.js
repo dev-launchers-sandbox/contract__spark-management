@@ -18,16 +18,14 @@ import {
 toast.configure();
 
 function ResetPassword() {
-
   const [token, setToken] = useState();
 
   useEffect(() => {
-   const queryString = window.location.search;
-   const urlParams = new URLSearchParams(queryString);
-   let urlToString = urlParams.toString();
-   setToken(urlToString.substr(6));
-   alert(urlToString.substr(6))
- }, []);
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let urlToString = urlParams.toString();
+    setToken(urlToString.substr(6));
+  }, []);
 
   const [form, setForm] = useState({
     newPassword: "",

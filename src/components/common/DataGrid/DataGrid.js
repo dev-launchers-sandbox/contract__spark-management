@@ -154,7 +154,6 @@ function DataTable(props) {
 
   const gridHeight = () => {
     let numberOfCodes = props.codes.lenght;
-    alert(numberOfCodes * 35);
     return numberOfCodes * 35;
   };
   return (
