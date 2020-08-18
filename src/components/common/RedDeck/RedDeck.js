@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "./RedDeck.module.css";
 import ReactCardFlip from "react-card-flip";
 
-import InstructionButton from "../InstructionButton/InstructionButton";
+import LinkHolderCard from "../LinkHolderCard/LinkHolderCard";
 import CopyTextIcon from "./../Icons/CopyTextIcon/CopyTextIcon";
 import SelectCardIcon from "./../Icons/SelectCardIcon/SelectCardIcon";
 import useDeck from "./../useDeck/useDeck";
@@ -58,7 +58,6 @@ export default function RedDeck(props) {
           <img className={style.whiteLogo} src={WhiteLogo} alt="logo" />
         </div>
       </ReactCardFlip>
-
     </div>
   );
 }
