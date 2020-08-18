@@ -32,9 +32,6 @@ function DataTable(props) {
     setShowDeleteConfirmationModal,
   ] = useState(false);
   const [codes, setCodes] = useState("");
-  const [rowToDelete, setRowToDelete] = useState();
-  const [clientToDelete, setClientToDelete] = useState();
-  const [type, setType] = useState();
 
   const ClientActions = (value) => {
     return (
@@ -68,7 +65,7 @@ function DataTable(props) {
       <div className={style.actionsContainer}>
         <span
           className={style.deleteIcon}
-          onClick={() => handleDelete("code", row)}
+          onClick={() => props.handleDelete("code", row)}
           role="img"
           aria-label="delete"
         >
@@ -95,17 +92,6 @@ function DataTable(props) {
     { key: "user_creator_name", name: "Created by" },
     { key: "code_actions", name: "", formatter: Actions },
   ];
-
-  const handleDelete = (type, row) => {
-    setType(type);
-    if (type === "code") {
-      setRowToDelete(row);
-    }
-    if (type === "client") {
-      setClientToDelete(row);
-    }
-    setShowDeleteConfirmationModal(true);
-  };
   const handleCopy = () => {
     notify("Code Copied To Clipboard!");
   };
@@ -127,15 +113,15 @@ function DataTable(props) {
     props.handleEditClientModal();
   };
   const redirectDelete = () => {
-    if (type === "code") deleteCode();
-    if (type === "client") deleteClient();
+    if (props.type === "code") deleteCode();
+    if (props.type === "client") deleteClient();
   };
   const deleteCode = async () => {
-    let row = rowToDelete;
+    let row = props.rowToDelete;
     try {
       await axios.delete(`https://api.spark4community.com/codes/${row._id}`);
       props.updateRows();
-      handleCloseModal();
+      props.handleClose();
     } catch (err) {
       alert("There was an error while deleting the code");
       props.updateRows();
@@ -148,7 +134,7 @@ function DataTable(props) {
     );
     let clients = fetchClients.data;
     let clientFound = clients.find(
-      (client) => client.name === clientToDelete.client_name
+      (client) => client._id === props.clientToDelete
     );
     try {
       await axios.delete(
@@ -158,20 +144,19 @@ function DataTable(props) {
     } catch {
       alert("There was an error while deleting the client");
     }
+    props.handleClose();
+    notify("The client was deleted");
   };
 
   useEffect(() => {
     props.updateRows();
   }, []);
-  const handleCloseModal = () => {
-    setShowDeleteConfirmationModal(false);
-  };
+
   const gridHeight = () => {
     let numberOfCodes = props.codes.lenght;
     alert(numberOfCodes * 35);
     return numberOfCodes * 35;
   };
-  useEffect(() => {}, [clientToDelete]);
   return (
     <div>
       <div className={style.DataGrid}>
@@ -186,16 +171,16 @@ function DataTable(props) {
           overlayClick={true}
           height={gridHeight}
           color="#f3e8cb"
-          showModal={showDeleteConfirmationModal}
-          handleCloseModal={handleCloseModal}
+          showModal={props.showDeleteConfirmationModal}
+          handleCloseModal={props.handleClose}
         >
           <p className={style.modalP}>
             {" "}
-            Are you sure you want to delete this {type}?
+            Are you sure you want to delete this {props.type}?
           </p>
           <div className={style.buttonContainer}>
             <button onClick={redirectDelete}> Yes </button>
-            <button onClick={handleCloseModal}> No </button>
+            <button onClick={props.handleClose}> No </button>
           </div>
         </Modal>
       </div>
