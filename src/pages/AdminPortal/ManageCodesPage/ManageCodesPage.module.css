@@ -58,13 +58,11 @@
 }
 .changePageButtons button:hover {
   transform: scale(1.1);
-  font-weight: bold;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer; /*repeated code*/
 }
 .manageCodesPage button:hover {
   transform: scale(1.1);
-  font-weight: bold;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
 }
@@ -93,7 +91,6 @@
 .resetFiltersAndSorts button:hover {
   cursor: pointer;
   transform: scale(1.1);
-  font-weight: bold;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
 }

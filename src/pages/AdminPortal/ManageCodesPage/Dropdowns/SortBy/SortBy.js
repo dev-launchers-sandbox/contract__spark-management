@@ -41,7 +41,9 @@ export default function SortBy(props) {
   return (
     <div className={style.sortBy}>
       <div className={style.sortByColumnContainer}>
-        <p> Sort By: </p>
+        <div className={style.sortByTextContainer}>
+          <p> Sort By: </p>
+        </div>
         <div className={style.sortByColumnDropdown}>
           <select name="column" value={sortBy.column} onChange={handleChange}>
             <option value="client_name"> Client </option>
@@ -54,7 +56,9 @@ export default function SortBy(props) {
         </div>
       </div>
       <div className={style.sortByTypeContainer}>
-        <p> Type: </p>
+        <div className={style.sortByTextContainer}>
+          <p> Type: </p>
+        </div>
         <div className={style.sortByTypeDropdown}>
           <select name="type" value={sortBy.type} onChange={handleChange}>
             <option value="+"> +Ascending </option>
