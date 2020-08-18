@@ -1,6 +1,6 @@
 .Header {
   display: flex;
-  background-color: #c4c4c4;
+  background-color: #cab79b;
   font-family: "Nunito Sans", serif;
   align-items: center;
   justify-content: space-around;
@@ -12,11 +12,4 @@
 .Header h1 {
   font-family: "Sue Ellen Francisco";
   font-size: 1em;
-}
-.Header button {
-  background-color: #c4c4c4;
-  border: solid 2px;
-  font-family: "Sue Ellen Francisco";
-  font-size: 1em;
-  font-weight: bold;
 }
