@@ -30,10 +30,7 @@
   display: flex;
   justify-content: center;
 }
-.modalP {
-  display: flex;
-  justify-content: center;
-}
+
 .editClientFormatter {
   display: flex;
 }
@@ -49,7 +46,6 @@
   justify-content: center;
   text-decoration: underline;
   color: #91413c;
-
 }
 .clientActionsContainer:hover {
   cursor: pointer;
@@ -59,4 +55,14 @@
 }
 .copyToClipBoard:hover {
   cursor: pointer;
+}
+.modalP {
+  display: flex;
+  justify-content: center;
+}
+.paragraphContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }

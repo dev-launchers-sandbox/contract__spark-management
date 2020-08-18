@@ -173,13 +173,29 @@ function DataTable(props) {
           showModal={props.showDeleteConfirmationModal}
           handleCloseModal={props.handleClose}
         >
-          <p className={style.modalP}>
-            {" "}
-            Are you sure you want to delete this {props.type}?
-          </p>
-          <div className={style.buttonContainer}>
-            <button onClick={redirectDelete}> Yes </button>
-            <button onClick={props.handleClose}> No </button>
+          <div className={style.modalContainer}>
+            {props.type === "code" && (
+              <p className={style.modalP}>
+                {" "}
+                Are you sure you want to delete this {props.type}?
+              </p>
+            )}
+            {props.type === "client" && (
+              <div className={style.paragraphContainer}>
+                <p className={style.modalP}>
+                  {" "}
+                  Are you sure you want to delete this {props.type}?
+                </p>
+                <p style={{ color: "red" }}>
+                  {" "}
+                  This will delete all codes assigned to this client!{" "}
+                </p>
+              </div>
+            )}
+            <div className={style.buttonContainer}>
+              <button onClick={redirectDelete}> Yes </button>
+              <button onClick={props.handleClose}> No </button>
+            </div>
           </div>
         </Modal>
       </div>
