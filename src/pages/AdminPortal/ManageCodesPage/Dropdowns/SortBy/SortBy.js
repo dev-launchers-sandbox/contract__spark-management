@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
 
 export default function SortBy(props) {
-  const [sortBy, setSortBy] = useState({ column: "_id", type: "+" });
+  const [sortBy, setSortBy] = useState({ column: "client_name", type: "+" });
   const handleChange = (event) => {
     const { name, value } = event.target;
     setSortBy({
@@ -44,8 +44,8 @@ export default function SortBy(props) {
         <p> Sort By: </p>
         <div className={style.sortByColumnDropdown}>
           <select name="column" value={sortBy.column} onChange={handleChange}>
-            <option value="_id"> Code </option>
             <option value="client_name"> Client </option>
+            <option value="_id"> Code </option>
             <option value="deck_name"> Deck </option>
             <option value="user_creator_name"> Created By </option>
             <option value="createdAt"> Created At </option>
