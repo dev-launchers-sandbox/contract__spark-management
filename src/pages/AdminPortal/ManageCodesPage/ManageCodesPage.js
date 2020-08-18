@@ -10,7 +10,15 @@ import EditModal from "../../../components/common/EditModal/EditModal.js";
 import EditClientModal from "../../../components/common/EditClient/EditClient.js";
 import FilterButtonModal from "../../../components/common/FilterButtonModal/FilterButtonModal.js";
 import SortByButtonModal from "../../../components/common/SortByButtonModal/SortByButtonModal.js";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useParams,
+  Redirect,
+  Link,
+  useRouterHistory,
+} from "react-router-dom";
 import SortByDropdowns from "./Dropdowns/SortBy/SortBy";
 import FilterByDropdowns from "./Dropdowns/FilterBy/FilterBy";
 import axios from "axios";
@@ -225,8 +233,9 @@ function ManageCodesPage() {
           resetPage={resetPage}
         />
         <div className={style.buttonContainer}>
-          <button onClick={handleGenerateCodeShowModal}>+ Code</button>
-          <button onClick={handleGenerateClientShowModal}>+ Client</button>
+          <button onClick={handleGenerateCodeShowModal}>+ Code 🔑</button>
+          <button onClick={handleGenerateClientShowModal}>+ Client 💼</button>
+          <Link to="/CreateNewUser"><button>+ User 👤</button></Link>
         </div>
       </div>
       <DataGridComponent
@@ -258,11 +267,11 @@ function ManageCodesPage() {
         )}
       </div>
       <div className={style.buttonContainer}>
-        <button onClick={handleFilterButtonModaal}>Filter</button>
-        <button onClick={handleSortByButtonModaal}>Sort</button>
+        <button onClick={handleFilterButtonModaal}>🎛️ Filter</button>
+        <button onClick={handleSortByButtonModaal}>📚 Sort</button>
       </div>
       <div className={style.resetFiltersAndSorts}>
-        <button onClick={resetFiltersAndSorts}>Reset View</button>
+        <button onClick={resetFiltersAndSorts}>⬜ Reset View</button>
       </div>
     </div>
   );

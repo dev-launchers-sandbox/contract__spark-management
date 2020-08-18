@@ -44,9 +44,7 @@ export default function FilterBy(props) {
   };
   return (
     <div className={style.filterBy}>
-      <div className={style.filterByContainer}>
-        <p> Filter By: </p>
-      </div>
+      <label className={style.filterByLabel}> Filter By: </label>
       <div className={style.filterByColumnDropdown}>
         <select name="column" value={filterBy.column} onChange={handleChange}>
           <option value="client_name"> Client </option>
