@@ -29,6 +29,7 @@ export default function CodesGenerated(props) {
           .then((newCodes) => (codesGenerated = newCodes.data));
         try {
           codesGenerated.forEach((code) => {
+            console.log(code.expiration_date);
             let shortExp = code.expiration_date.substring(0, 10);
             code.expiration_date = shortExp;
           });
