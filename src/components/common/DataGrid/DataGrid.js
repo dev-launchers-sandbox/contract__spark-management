@@ -44,8 +44,17 @@ function DataTable(props) {
     );
   };
   const CodeAction = (value) => {
+    function expiredColor() {
+      let now = Date.now();
+      let exp = new Date(value.row.expiration_date).getTime();
+      if (now > exp) {
+        return "red";
+      } else {
+        return "black";
+      }
+    }
     return (
-      <div>
+      <div style={{ color: expiredColor() }}>
         {value.row._id}
         <CopyToClipboard text={value.row._id}>
           <span
@@ -79,6 +88,16 @@ function DataTable(props) {
         >
           ️📝
         </span>
+        <CopyToClipboard text={copyRow(row)}>
+          <span
+            onClick={() => notify("Text Copied To Clipboard!")}
+            className={style.editIcon}
+            role="img"
+            aria-label="edit"
+          >
+            ️📊
+          </span>
+        </CopyToClipboard>
       </div>
     );
   };
@@ -98,6 +117,14 @@ function DataTable(props) {
   const handleEdit = (row) => {
     props.handleEditShowModal();
     props.updateCodeToEdit(row);
+  };
+  const copyRow = (row) => {
+    let code = `${row._id}, `;
+    let client = `${row.client_name}, `;
+    let subclient = (row.sub_client_name || "None") + ", ";
+    let expiration_date = `${row.expiration_date}`;
+    let rowToCopy = code + client + subclient + expiration_date;
+    return rowToCopy;
   };
   const handleEditClient = async (row) => {
     let clientFetch = await axios.get(
@@ -156,6 +183,13 @@ function DataTable(props) {
     let numberOfCodes = props.codes.lenght;
     return numberOfCodes * 35;
   };
+  const RowRenderer = ({ renderBaseRow, ...props }) => {
+    console.log(renderBaseRow);
+    let color = "green";
+    return (
+      <div style={{ backgroundColor: color }}>{renderBaseRow(...props)}</div>
+    );
+  };
   return (
     <div>
       <div className={style.DataGrid}>
@@ -163,6 +197,7 @@ function DataTable(props) {
           height={props.gridHeight}
           columns={columns}
           rows={props.codes}
+          rowRendered={RowRenderer}
         />
       </div>
       <div className={style.deleteCodeConfirmation}>

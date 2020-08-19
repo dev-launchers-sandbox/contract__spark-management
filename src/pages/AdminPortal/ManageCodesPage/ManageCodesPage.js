@@ -110,7 +110,6 @@ function ManageCodesPage() {
             page * NUM_ROWS_PER_PAGE
           }&limit=${NUM_ROWS_PER_PAGE}${currentChanges}`
         );
-        console.log("codes", codesFetch);
       } else {
         codesFetch = await axios.get(
           `https://api.spark4community.com/codes?skip=${
@@ -235,7 +234,9 @@ function ManageCodesPage() {
         <div className={style.buttonContainer}>
           <button onClick={handleGenerateCodeShowModal}>+ Code 🔑</button>
           <button onClick={handleGenerateClientShowModal}>+ Client 💼</button>
-          <Link to="/CreateNewUser"><button>+ User 👤</button></Link>
+          <Link to="/CreateNewUser">
+            <button>+ User 👤</button>
+          </Link>
         </div>
       </div>
       <DataGridComponent
