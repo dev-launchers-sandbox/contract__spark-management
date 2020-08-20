@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import style from "./GenerateClient.module.css";
 import Modal from "../Modal/Modal.js";
+import ClientCreatedModal from "../ClientCreatedModal/ClientCreatedModal.js"
 import axios from "axios";
 import Select from "react-select";
 import { toast } from "react-toastify";
@@ -12,6 +13,8 @@ function GenerateClient(props) {
     client: "",
     logoUrl: "",
   });
+
+  let [showClientCreatedModal, setShowClientCreatedModal] = useState(false);
   //it's called when users inputs data into the form
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -66,6 +69,7 @@ function GenerateClient(props) {
         );
         notify("Data has been sent!");
         props.handleCloseModal();
+        setShowClientCreatedModal(true);
       } catch (err) {
         console.error(err);
       }
@@ -83,6 +87,7 @@ function GenerateClient(props) {
   };
 
   return (
+    <div>
     <Modal
       overlayClick={true}
       height="58vh"
@@ -122,6 +127,14 @@ function GenerateClient(props) {
         </form>
       </div>
     </Modal>
+    <ClientCreatedModal
+      showModal={showClientCreatedModal}
+      handleCloseModal={() => {
+        setShowClientCreatedModal(false);
+      }}
+    />
+    </div>
+
   );
 }
 

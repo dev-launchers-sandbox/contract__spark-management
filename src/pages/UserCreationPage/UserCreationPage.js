@@ -96,7 +96,9 @@ function UserCreationPage() {
       <div className={style.adminLoginPage}>
         <div className={style.loginContainer}>
           <div className={style.loginPopup}>
+          <div className={style.imageHolder}>
             <img className={style.logo} src={logo} alt="logo" />
+          </div>
             <div className={style.formContainer}>
               <form>
                 <label
@@ -169,17 +171,16 @@ function UserCreationPage() {
                 <br />
                 <div className={style.buttonContainer}>
                   <button className={style.button} onClick={handleSubmit}>
-                    Log in
+                    Create User
                   </button>
                 </div>
               </form>
-              <div className={style.forgotPasswordText}>
-                <Link to="/ManageCodes" className={style.forgotPasswordLink}>Go back to ManageCodes page</Link>
-              </div>
             </div>
           </div>
         </div>
-
+        <div className={style.manaCodesButtonContainer} style={{marginTop:"2%"}}>
+          <Link to="/ManageCodes"><button className={style.manageCodesButton}>Go back</button></Link>
+        </div>
         <RandomQuote />
       </div>
       {/*if true redirect the user to the main page */}

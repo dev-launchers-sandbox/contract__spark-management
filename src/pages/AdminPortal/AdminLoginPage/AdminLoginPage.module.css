@@ -3,20 +3,39 @@
   font-family: "Sue Ellen Francisco";
 }
 
+.imageHolder{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .logo {
+  width: 50%;
   height: 7vh;
 }
 
 .loginContainer {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 
+.formContainer{
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.emailContainer{
+  width: 100%;
+}
+
 .loginPopup {
-  width: 50vh;
-  height: 60vh;
+  width: 25vw;
+  height: 63vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -27,11 +46,21 @@
   box-shadow: 3px 5.7141px 5.7141px rgba(0, 0, 0, 0.25);
 }
 
+@media (orientation: portrait) {
+  .loginPopup {
+    width: 75vw;
+  }
+}
+
 .buttonContainer {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 5%;
+}
+
+.emailContainer{
+  width: 100%;
 }
 
 .button {

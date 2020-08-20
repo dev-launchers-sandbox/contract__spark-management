@@ -98,24 +98,28 @@ function AdminLoginPage() {
       <div className={style.adminLoginPage}>
         <div className={style.loginContainer}>
           <div className={style.loginPopup}>
+          <div className={style.imageHolder}>
             <img className={style.logo} src={logo} alt="logo" />
+          </div>
             <div className={style.formContainer}>
               <form>
-                <label
-                  style={{
-                    fontFamily: "Sue Ellen Francisco",
-                    fontWeight: "normal",
-                  }}
-                >
-                  Email:
-                </label>
-                <br />
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                />
+                <div className={style.emailContainer}>
+                  <label
+                    style={{
+                      fontFamily: "Sue Ellen Francisco",
+                      fontWeight: "normal",
+                    }}
+                  >
+                    Email:
+                  </label>
+                  <br />
+                  <input
+                    type="email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                  />
+                </div>
                 <br />
                 <label
                   style={{
