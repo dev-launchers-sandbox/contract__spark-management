@@ -147,12 +147,12 @@ function EditModal(props) {
         codeBatch
       );
 
-      notify("Code Data has been updated!");
+      notify("The code data has been updated!");
       props.handleCloseModal();
       props.updateRows();
     } catch (err) {
       console.error(err);
-      notify("something went wrong with sending the data");
+      notify("Something went wrong with sending the data");
     }
   };
   const handleSubmit = (events) => {
