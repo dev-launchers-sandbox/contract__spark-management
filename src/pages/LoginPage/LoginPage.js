@@ -179,8 +179,8 @@ function LoginPage(props) {
                   name="code"
                   value={form.code}
                   placeholder="code"
-                  className={style.codeInput}
-                
+                  style={{width: "19.9em"}}
+
                   onChange={handleChange}
                 />
               </div>
