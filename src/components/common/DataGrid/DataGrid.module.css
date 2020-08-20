@@ -7,7 +7,7 @@
 }
 
 .DataGrid > div:first-of-type {
-  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .buttonContainer span:hover {

@@ -86,7 +86,7 @@ function DataTable(props) {
           role="img"
           aria-label="edit"
         >
-          ️📝
+          ️✏️
         </span>
         <CopyToClipboard text={copyRow(row)}>
           <span
@@ -95,7 +95,7 @@ function DataTable(props) {
             role="img"
             aria-label="edit"
           >
-            ️📊
+            📓
           </span>
         </CopyToClipboard>
       </div>
