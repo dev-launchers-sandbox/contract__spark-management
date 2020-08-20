@@ -15,6 +15,23 @@ import {
   useRouterHistory,
 } from "react-router-dom";
 
+const notify = (text) => {
+  toast(text, {
+    position: toast.POSITION.BOTTOM_RIGHT,
+    autoClose: 2500,
+    className: css({
+      background: "white",
+    }),
+    bodyClassName: css({
+      fontSize: "20px",
+      color: "black",
+    }),
+    progressClassName: css({
+      background: "repeating-radial-gradient( transparent, transparent )",
+    }),
+  });
+};
+
 toast.configure();
 
 function ResetPassword() {
@@ -39,7 +56,7 @@ function ResetPassword() {
       [name]: value,
     });
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (form.newPassword !== form.confirmPassword) {
       return notify("Passwords do not match");
@@ -53,34 +70,23 @@ function ResetPassword() {
       verifiedPassword: form.confirmPassword,
     };
     try {
-      axios.post("https://api.spark4community.com/reset-password", newInfo);
+      await axios.post(
+        "https://api.spark4community.com/reset-password",
+        newInfo
+      );
+      notify("The password reset was successfull!");
     } catch (error) {
       alert("There was an error! Try again or come back in a few minutes");
     }
   };
-  const notify = (text) => {
-    toast(text, {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 2500,
-      className: css({
-        background: "white",
-      }),
-      bodyClassName: css({
-        fontSize: "20px",
-        color: "black",
-      }),
-      progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )",
-      }),
-    });
-  };
+
   return (
     <div className={style.resetPassword}>
       <div className={style.loginContainer}>
         <div className={style.loginPopup}>
-        <div className={style.imageHolder}>
-          <img className={style.logo} src={logo} alt="logo" />
-        </div>
+          <div className={style.imageHolder}>
+            <img className={style.logo} src={logo} alt="logo" />
+          </div>
           <div className={style.formContainer}>
             <form>
               <label

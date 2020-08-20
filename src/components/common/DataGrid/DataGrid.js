@@ -90,7 +90,7 @@ function DataTable(props) {
         </span>
         <CopyToClipboard text={copyRow(row)}>
           <span
-            onClick={() => notify("Text Copied To Clipboard!")}
+            onClick={() => notify("Row copied to clipboard!")}
             className={style.editIcon}
             role="img"
             aria-label="edit"
@@ -112,7 +112,7 @@ function DataTable(props) {
     { key: "code_actions", name: "", formatter: Actions },
   ];
   const handleCopy = () => {
-    notify("Code Copied To Clipboard!");
+    notify("Code copied to clipboard!");
   };
   const handleEdit = (row) => {
     props.handleEditShowModal();

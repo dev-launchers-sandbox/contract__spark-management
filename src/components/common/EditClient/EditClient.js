@@ -126,7 +126,7 @@ function EditClient(props) {
         clientData
       );
       console.log("response data: ", response);
-      notify("client has been updated!");
+      notify("The client has been updated!");
       props.handleCloseModal();
       props.updateRows();
     } catch (err) {
