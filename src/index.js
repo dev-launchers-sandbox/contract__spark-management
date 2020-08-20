@@ -52,7 +52,7 @@ let routes = [
   },
   {
     path: "/CreateNewUser",
-    component: UserCreationRoute
+    component: UserCreationRoute,
   },
   {
     path: "/:code/CommunityDeck",
@@ -77,9 +77,10 @@ let routes = [
 ];
 const getBasename = (path) => {
   // TODO: Not a perfect solution, doesn't account for routes that begin with dynamic parameters
-  path = path.substr(0, path.lastIndexOf("/"));
   routes.map((entry) => {
-    path = path.substr(0, path.lastIndexOf(entry.path));
+    if (entry.path === "/") return;
+    let index = path.lastIndexOf(entry.path);
+    if (index != -1) path = path.substr(0, path.lastIndexOf(entry.path));
   });
   return path;
 };
