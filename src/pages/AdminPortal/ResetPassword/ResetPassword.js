@@ -78,7 +78,9 @@ function ResetPassword() {
     <div className={style.resetPassword}>
       <div className={style.loginContainer}>
         <div className={style.loginPopup}>
+        <div className={style.imageHolder}>
           <img className={style.logo} src={logo} alt="logo" />
+        </div>
           <div className={style.formContainer}>
             <form>
               <label

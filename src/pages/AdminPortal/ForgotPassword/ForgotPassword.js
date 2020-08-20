@@ -63,7 +63,7 @@ function ForgotPassword(){
       <div className={style.forgotPassword}>
         <div className={style.loginContainer}>
           <div className={style.loginPopup}>
-            <div className={style.imageContainer} >
+            <div className={style.imageHolder} >
               <img className={style.logo} src={logo} alt="logo" />
             </div>
             <div className={style.formContainer}>

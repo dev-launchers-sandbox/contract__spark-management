@@ -212,7 +212,7 @@ function LoginPage(props) {
                   rel="noopener noreferrer"
                   className={style.link}
                 >
-                  Learn more about the S.P.A.R.K. App™ here
+                  Learn more about the S.P.A.R.K. App® here
                 </a>{" "}
                 and/or{" "}
                 <a

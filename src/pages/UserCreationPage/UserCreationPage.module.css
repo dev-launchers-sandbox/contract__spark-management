@@ -3,8 +3,17 @@
   font-family: "Sue Ellen Francisco";
 }
 
+.imageHolder{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .logo {
-  height: 7vh;
+  width: 50%;
+  height: 9vh;
+  display: flex;
+  align-items: flex-start;
 }
 
 .loginContainer {
@@ -14,9 +23,11 @@
   align-items: center;
 }
 
+
+
 .loginPopup {
-  width: 60vh;
-  height: 85vh;
+  width: 30vw;
+  height: 95vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -26,6 +37,20 @@
   border-radius: 0.5em;
   box-shadow: 3px 5.7141px 5.7141px rgba(0, 0, 0, 0.25);
 }
+
+@media (orientation: portrait) {
+  .loginPopup {
+    width: 65vw;
+  }
+}
+
+.formContainer{
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 
 .buttonContainer {
   width: 100%;
@@ -47,6 +72,34 @@
   cursor: pointer;
   border-radius: 0.3em;
 }
+
+.manaCodesButtonContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.manageCodesButton {
+  background-color: #912123;
+  color: #f3e8cb;
+  width: 10.5em;
+  height: 3em;
+  border: none;
+  padding: 1em 3.2em;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.67em;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 0.3em;
+}
+
+.manageCodesButton:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+}
+
 
 .passwordContainer {
   width: 100%;
