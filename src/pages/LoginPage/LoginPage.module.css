@@ -60,7 +60,7 @@
 
 input[type="text"] {
   height: 4em;
-  width: 20em;
+  width: 5em;
   display: inline-block;
   box-sizing: border-box;
   text-align: center;
@@ -79,6 +79,10 @@ input[type="text"] {
 
 .link:hover {
   text-decoration: underline;
+}
+
+.codeInput{
+  width: 17vw;
 }
 
 .blurbText {
@@ -109,4 +113,6 @@ input[type="text"] {
   .sparkLogo {
     height: 10vh;
   }
+
+
 }
