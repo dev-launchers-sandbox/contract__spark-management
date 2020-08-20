@@ -55,19 +55,19 @@ let routes = [
     component: UserCreationRoute,
   },
   {
-    path: "/:code/CommunityDeck",
+    path: "/CommunityDeck/:code",
     component: CommunityDeckRoute,
   },
   {
-    path: "/:code/ConversationalDeck",
+    path: "/ConversationalDeck/:code",
     component: ConversationalDeckRoute,
   },
   {
-    path: "/:code/SpanishDeck",
+    path: "/SpanishDeck/:code",
     component: SpanishDeckRoute,
   },
   {
-    path: "/:code/YouthDeck",
+    path: "/YouthDeck/:code",
     component: YouthDeckRoute,
   },
   {
