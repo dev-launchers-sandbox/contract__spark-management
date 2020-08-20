@@ -4,8 +4,10 @@ import { BrowserRouter as Router, Redirect, useParams } from "react-router-dom";
 import useDeck from "./../useDeck/useDeck";
 import YellowCard from "./../YellowCard/YellowCard";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
+import HowToPlayButton from "./HowToPlayButton/HowToPlayButton";
+import NeedHelpButton from "./NeedHelpButton/NeedHelpButton";
+
 import HelpButton from "../HelpButton/HelpButton.js";
-import LinkHolderCard from "../LinkHolderCard/LinkHolderCard";
 const NUM_CARDS_IN_HAND = 8;
 let initialFlipStates = [];
 for (let i = 0; i < NUM_CARDS_IN_HAND; i++) initialFlipStates.push(false);
@@ -99,13 +101,14 @@ export default function Hand(props) {
             />
           );
         })}
-        <LinkHolderCard />
       </div>
       <div className={style.buttonHolder}>
+        <HowToPlayButton />
         <DiscardHandButton
           populateCards={populateCards}
           discardCards={discardCards}
         />
+        <NeedHelpButton />
       </div>
       {/* Checks if the code has been verified*/}
       {sessionStorage.getItem(code) === null && <Redirect to="/" />}
