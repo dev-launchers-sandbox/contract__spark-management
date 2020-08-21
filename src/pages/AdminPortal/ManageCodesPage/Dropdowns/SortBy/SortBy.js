@@ -6,6 +6,8 @@ import { css } from "glamor";
 
 export default function SortBy(props) {
   const [sortBy, setSortBy] = useState({ column: "client_name", type: "+" });
+
+  //Allows us to have controlled forms. Updates the state of the form as the user types
   const handleChange = (event) => {
     const { name, value } = event.target;
     setSortBy({
@@ -14,6 +16,7 @@ export default function SortBy(props) {
     });
   };
 
+  //Sends a toast nofication saying whatever is passed as a parameter
   const notify = (text) => {
     toast(text, {
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -31,6 +34,7 @@ export default function SortBy(props) {
     });
   };
 
+  //Gets called whenever the user applies the sort
   const applySort = () => {
     let sort = `&sort=${sortBy.type}${sortBy.column}`;
     props.updateRows(sort);

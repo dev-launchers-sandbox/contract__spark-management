@@ -4,6 +4,7 @@ import style from "./FilterBy.module.css";
 import { toast } from "react-toastify";
 import { css } from "glamor";
 
+//Sends a toast nofication saying whatever is passed as a parameter
 const notify = (text) => {
   toast(text, {
     position: toast.POSITION.BOTTOM_RIGHT,
@@ -23,8 +24,12 @@ const notify = (text) => {
 
 toast.configure();
 export default function FilterBy(props) {
-  const [filterBy, setFilterBy] = useState({ column: "client_name", input: "" });
+  const [filterBy, setFilterBy] = useState({
+    column: "client_name",
+    input: "",
+  });
 
+  //Allows us to have controlled forms. Updates the state of the form as the user types
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFilterBy({
@@ -33,8 +38,13 @@ export default function FilterBy(props) {
     });
   };
 
-  const handleSubmit = () => {
-    if (!filterBy.input) return notify("You must type something in");
+  //Gets called whenever the user applies the filter
+  const applyFilter = () => {
+    //removes all spaces, tabs, line breaks
+    let noSpaceString = filterBy.input.replace(/\s/g, "");
+    //We do not want to allow blank filters
+    if (!noSpaceString.length) return notify("You must type something in");
+    //The server needs this for filter to work!
     let input = filterBy.input.split(" ").join("%20");
     let filter = `&${filterBy.column}=${input}`;
     props.updateRows(filter);
@@ -42,6 +52,7 @@ export default function FilterBy(props) {
     props.resetPage();
     props.handleCloseModal();
   };
+
   return (
     <div className={style.filterBy}>
       <label className={style.filterByLabel}> Filter By: </label>
@@ -66,7 +77,7 @@ export default function FilterBy(props) {
         />
       </div>
       <div className={style.applyFilter}>
-        <button className={style.button} onClick={handleSubmit}>
+        <button className={style.button} onClick={applyFilter}>
           {" "}
           Apply Filter{" "}
         </button>

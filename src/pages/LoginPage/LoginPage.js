@@ -27,7 +27,7 @@ function LoginPage(props) {
   const [redirect, setRedirect] = useState(false);
   const [deckUsing, setDeckUsing] = useState("");
 
-  //it's called when users inputs data into the form
+  //Allows us to have controlled forms. Updates the state of the form as the user types
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
@@ -36,19 +36,17 @@ function LoginPage(props) {
     });
   };
 
-  //gets called when enter button is clicked
+  //Starts the process of code verification
   const handleClick = (event) => {
-    //prevens page from reloading when pressing the button
+    //Prevents the page from reloading after the form submission
     event.preventDefault();
-    //sets is loading to true
-    setIsLoading(true);
-    //verifies the code the user submits and redirects them depending on the status code
+    setIsLoading(true); //Lets the user know their code is being processed
     verifyCode();
   };
 
-  //gets called when the user submits the wrong code
-  const notify = () => {
-    toast("You entered the wrong code", {
+  //Sends a toast nofication saying whatever is passed as a parameter
+  const notify = (text) => {
+    toast(text, {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 2500,
       className: css({
@@ -63,58 +61,27 @@ function LoginPage(props) {
       }),
     });
   };
-  const verifyIfSelection = async () => {
-    try {
-      const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${form.code}/`;
-      //sets isLoading to false
-      const data = await axios.get(
-        `https://api.spark4community.com/codes/${form.code}/validate`
-      );
-      console.log("spark data: ", data);
-      sessionStorage.setItem(form.code, true);
-      setDeckUsing("");
-      setIsLoading(false);
-      if (data.data.valid) {
-        return setRedirect("specialCase");
-      }
-    } catch (err) {
-      //notifies the user that they have submitted the wrong code
-      console.log(err);
-      notify();
-      setIsLoading(false);
-      setForm({
-        ...form,
-        code: "",
-      });
-    }
-  };
-  //verifies the code the user submits and redirects them depending on the status code
-  const verifyCode = async () => {
-    let deckLetter = form.code.charAt(0);
-    let codeWithoutDeckLetter = form.code.substring(1);
-    try {
-      //stores the url and the code the user inputs without the letter of the deck on top
-      const link = `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${codeWithoutDeckLetter}/`;
-      //gets the response data from the url using a GET request
-      const data = await axios.get(
-        `https://api.spark4community.com/codes/${form.code}/validate`
-      );
-      console.log("status code: ", data.status);
 
+  //Verifies that the code inputted exists, and redirects the user to the correct game.
+  const verifyCode = async () => {
+    try {
+      //Sends a request to the server to verify the code.
+      const data = await axios.get(
+        `https://api.spark4community.com/codes/${form.code}/validate`
+      );
+      // Gets all the code data to be able to send the user to the correct game.
       const codeData = await axios.get(
         `https://api.spark4community.com/codes/${form.code}`
       );
-      console.log("code data in login page: ", codeData);
-      //marks the code as verified and saves it in sessionStorage
-      sessionStorage.setItem(form.code, true);
-      //props.correctDeck(deckLetter);
-      //sets isLoading to false
 
+      //!IMPORTANT Only verified codes will get to this point
+
+      sessionStorage.setItem(form.code, true); //Marks the code as verified
+      //Sets the deck using to later redirect to it
       if (codeData.data.code.deck_name === "community") {
         setDeckUsing("CommunityDeck");
       } else if (codeData.data.code.deck_name === "spanish") {
         setDeckUsing("SpanishDeck");
-        console.log("spanish");
       } else if (codeData.data.code.deck_name === "conversational") {
         setDeckUsing("ConversationalDeck");
       } else if (codeData.data.code.deck_name === "youth") {
@@ -125,21 +92,23 @@ function LoginPage(props) {
           code: "",
         });
         setIsLoading(false);
-        notify();
+        notify("This code does not exist!");
         return;
       }
       setIsLoading(false);
-      /*checks if the status from the GET request was a succes
-        If it was a succes then it will set statusCode to 200
-      */
+
+      //Verifies that the code is not expired and allows for the redirect to happen
       if (data.data.valid) {
         setRedirect(true);
       }
-
-      //props.correctDeck(deckLetter);
     } catch (error) {
-      verifyIfSelection();
-      console.log("error here");
+      // All invalid codes will reach this endpoint
+      setForm({
+        ...form,
+        code: "",
+      });
+      setIsLoading(false);
+      notify("This code does not exist!");
     }
   };
 
@@ -227,9 +196,8 @@ function LoginPage(props) {
               </p>
             </div>
           </div>
-          {/*If the status code is 200 redirect the user to the game with the code they submitted */}
+          {/*If it is true then it will redirect the user to the game with the code they submitted */}
           {redirect ? <Redirect to={`/${deckUsing}/${form.code}`} /> : ""}
-          {redirect === "specialCase" ? <Redirect to={`/${form.code}`} /> : ""}
         </div>
       </PageBody>
     </LoadingOverlay>
