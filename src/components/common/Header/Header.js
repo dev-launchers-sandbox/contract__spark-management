@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./Header.module.css";
-import SparkLogo from "../../../images/spark_app_logo_transparent.png";
+import sparkLogo from "../../../images/spark_app_logo_transparent.png";
 import axios from "axios";
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 
@@ -29,7 +29,7 @@ function Header() {
       {/*} Needed to allow us to programmatically redirect{*/}
       {doRedirect ? <Redirect to="/AdminLoginPage" /> : ""}
       {/*}Actual visual body: {*/}
-      <img className={style.sparkLogo} src={SparkLogo} alt="sparkLogo" />
+      <img className={style.sparkLogo} src={sparkLogo} alt="sparkLogo" />
       <h1>{username.toUpperCase()}</h1>
       <a style={{textDecoration: "none", fontWeight: "bold"}}onClick={logout}>🚪 Log Out</a>
     </div>
