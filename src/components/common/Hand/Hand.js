@@ -5,6 +5,8 @@ import useDeck from "./../useDeck/useDeck";
 import YellowCard from "./../YellowCard/YellowCard";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
 import HelpButton from "../HelpButton/HelpButton.js";
+import HowToPlayButton from "./HowToPlayButton/HowToPlayButton";
+import NeedHelpButton from "./NeedHelpButton/NeedHelpButton";
 import queryString from "query-string";
 const NUM_CARDS_IN_HAND = 8;
 let initialFlipStates = [];
@@ -113,10 +115,12 @@ export default function Hand(props) {
         })}
       </div>
       <div className={style.buttonHolder}>
+        <HowToPlayButton />
         <DiscardHandButton
           populateCards={populateCards}
           discardCards={discardCards}
         />
+        <NeedHelpButton />
       </div>
       {/* Checks if the code has been verified*/}
       {redirect && <Redirect to="/" />}
