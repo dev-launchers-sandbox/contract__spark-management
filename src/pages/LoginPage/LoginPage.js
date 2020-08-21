@@ -17,6 +17,7 @@ import PageBody from "../../components/common/PageBody/PageBody.js";
 import Logo from "../../components/common/Logo/Logo.js";
 import SelectDeck from "../../components/common/SelectDeck/SelectDeck.js";
 import LoadingOverlay from "react-loading-overlay";
+import notify from "../../components/common/notify/notify.js"
 import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../images/spark_app_logo_transparent.png";
 import HelpButton from "../../components/common/HelpButton/HelpButton.js";
@@ -42,24 +43,6 @@ function LoginPage(props) {
     event.preventDefault();
     setIsLoading(true); //Lets the user know their code is being processed
     verifyCode();
-  };
-
-  //Sends a toast nofication saying whatever is passed as a parameter
-  const notify = (text) => {
-    toast(text, {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 2500,
-      className: css({
-        background: "white",
-      }),
-      bodyClassName: css({
-        fontSize: "20px",
-        color: "black",
-      }),
-      progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )",
-      }),
-    });
   };
 
   //Verifies that the code inputted exists, and redirects the user to the correct game.

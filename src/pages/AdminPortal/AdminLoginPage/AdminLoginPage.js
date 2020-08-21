@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import style from "./AdminLoginPage.module.css";
 import PageBody from "../../../components/common/PageBody/PageBody.js";
 import logo from "../../../images/spark_app_logo_transparent.png";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { css } from "glamor";
 import axios from "axios";
+import notify from "../../../components/common/notify/notify.js"
 import MockAdapter from "axios-mock-adapter";
 import {
   BrowserRouter as Router,
@@ -38,23 +36,6 @@ function AdminLoginPage() {
     checkIfUserLoggedIn(); //Call the async function
   }, []);
 
-  //Sends a toast nofication saying whatever is passed as a parameter
-  const notify = () => {
-    toast(text, {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 2500,
-      className: css({
-        background: "white",
-      }),
-      bodyClassName: css({
-        fontSize: "20px",
-        color: "black",
-      }),
-      progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )",
-      }),
-    });
-  };
   //Allows us to have controlled forms. Updates the state of the form as the user types
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -87,6 +68,7 @@ function AdminLoginPage() {
       // If the info provided is correct, allow the redirect to /ManageCodes
       if (response.status === 200) {
         setRedirect(true);
+        notify("Logged in")
       }
     } catch (err) {
       //Notifies the user that the info provided is incorrect

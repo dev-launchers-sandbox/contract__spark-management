@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import style from "./UserCreationPage.module.css";
-import PageBody from "../../components/common/PageBody/PageBody.js";
-import logo from "../../images/spark_app_logo_transparent.png";
+import PageBody from "../../../components/common/PageBody/PageBody.js";
+import logo from "../../../images/spark_app_logo_transparent.png";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import notify from "../../../components/common/notify/notify.js"
 import { css } from "glamor";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
@@ -15,7 +16,7 @@ import {
   useParams,
   Redirect,
 } from "react-router-dom";
-import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
+import RandomQuote from "../../../components/common/RandomQuote/RandomQuote.js";
 
 function UserCreationPage() {
   let [form, setForm] = useState({
@@ -34,23 +35,6 @@ function UserCreationPage() {
     });
   };
 
-  //Sends a toast nofication saying whatever is passed as a parameter
-  const notify = (text) => {
-    toast(text, {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 2500,
-      className: css({
-        background: "white",
-      }),
-      bodyClassName: css({
-        fontSize: "20px",
-        color: "black",
-      }),
-      progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )",
-      }),
-    });
-  };
   //Sends a post request to the server, which will create a new user with the data provided.
   const userCreationRequest = async () => {
     const userData = {

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import style from "./GenerateClient.module.css";
 import Modal from "../Modal/Modal.js";
-import ClientCreatedModal from "../ClientCreatedModal/ClientCreatedModal.js";
+import ClientCreatedModal from "../ClientCreatedModal/ClientCreatedModal.js"
+import notify from "../notify/notify.js"
 import axios from "axios";
 import Select from "react-select";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { css } from "glamor";
 
 function GenerateClient(props) {
   let [form, setForm] = useState({
@@ -15,7 +13,8 @@ function GenerateClient(props) {
   });
 
   let [showClientCreatedModal, setShowClientCreatedModal] = useState(false);
-  //it's called when users inputs data into the form
+
+  //Allows us to have controlled forms. Updates the state of the form as the user types
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
@@ -24,25 +23,7 @@ function GenerateClient(props) {
     });
   };
 
-  //gets called when the user inputs the wrong username and password
-  const notify = (text) => {
-    toast(text, {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 2500,
-      className: css({
-        background: "white",
-      }),
-      bodyClassName: css({
-        fontSize: "20px",
-        color: "black",
-      }),
-      progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )",
-      }),
-    });
-  };
-
-  //clears state after the modal closes
+  //clears the forms whenever the user clicks on the modal
   const clearState = () => {
     setForm({
       ...form,
@@ -51,24 +32,28 @@ function GenerateClient(props) {
     });
   };
 
+  //when the user opens the modal the forms will be cleared
   useEffect(() => {
     clearState();
   }, [props.showModal]);
 
   //sends the clienData to the path /clients via post request
   const sendClientData = async () => {
-    if (form.client.length !== 0) {
+    if (form.client.length !== 0) { //prevents the user from accidentally submitting no client
       const clientData = {
         name: form.client,
         logo_url: form.logoUrl,
       };
       try {
+        //sends a request to the server to later display the clients to the user
         const response = await axios.post(
           "https://api.spark4community.com/clients",
           clientData
         );
         notify("Data has been sent!");
+        //updates the row with the new code_batch
         props.handleCloseModal();
+        //displays a modal that tells the user their data has been sent
         setShowClientCreatedModal(true);
       } catch (err) {
         console.error(err);

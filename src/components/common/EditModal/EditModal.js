@@ -3,9 +3,7 @@ import style from "./EditModal.module.css";
 import Modal from "../Modal/Modal.js";
 import axios from "axios";
 import Select from "react-select";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { css } from "glamor";
+import notify from "../notify/notify.js"
 
 function EditModal(props) {
   let [client, setClient] = useState([]);
@@ -41,24 +39,6 @@ function EditModal(props) {
   const getDeckData = async () => {
     const deckData = await axios.get("https://api.spark4community.com/decks");
     setDeck(deckData.data);
-  };
-
-  //gets called when the user inputs the wrong username and password
-  const notify = (text) => {
-    toast(text, {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 2500,
-      className: css({
-        background: "white",
-      }),
-      bodyClassName: css({
-        fontSize: "20px",
-        color: "black",
-      }),
-      progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )",
-      }),
-    });
   };
 
   const getCodeData = async () => {
