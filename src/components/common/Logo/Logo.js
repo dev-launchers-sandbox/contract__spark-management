@@ -6,11 +6,20 @@ import redLogo from "../../../images/spark_app_logo_transparent.png";
 import { Link, useParams } from "react-router-dom";
 import BrandedLogo from "../../../images/mcneil-logo.png";
 import axios from "axios";
+import queryString from "query-string";
 export default function Logo(props) {
   const [doesImageExist, setDoesImageExist] = useState(true);
-
   const [logoUrl, setLogoUrl] = useState(null);
-  let { code } = useParams();
+  const [code, setCode] = useState("None");
+
+  useEffect(() => {
+    let query = window.location.search;
+    try {
+      const queryParsed = queryString.parse(query);
+      setCode(queryParsed.code);
+    } catch (error) {}
+  }, []);
+
   useEffect(() => {
     const getClientLogoUrl = async () => {
       try {
@@ -42,7 +51,13 @@ export default function Logo(props) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src={process.env.PUBLIC_URL + "/images/spark_app_logo_transparent.png"} className={style.sparkLogo} alt="Logo" />
+          <img
+            src={
+              process.env.PUBLIC_URL + "/images/spark_app_logo_transparent.png"
+            }
+            className={style.sparkLogo}
+            alt="Logo"
+          />
         </a>
 
         {doesImageExist ? (

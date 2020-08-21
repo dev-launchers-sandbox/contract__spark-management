@@ -146,7 +146,7 @@ function LoginPage(props) {
                   type="text"
                   name="code"
                   value={form.code}
-                  style={{width: "19.5em"}}
+                  style={{ width: "19.5em" }}
                   placeholder="code"
                   onChange={handleChange}
                 />
@@ -198,7 +198,7 @@ function LoginPage(props) {
             </div>
           </div>
           {/*If it is true then it will redirect the user to the game with the code they submitted */}
-          {redirect ? <Redirect to={`/${deckUsing}/${form.code}`} /> : ""}
+          {redirect ? <Redirect to={`/${deckUsing}?code=${form.code}`} /> : ""}
         </div>
       </PageBody>
     </LoadingOverlay>
