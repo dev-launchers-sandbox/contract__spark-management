@@ -39,7 +39,7 @@ function LoginPage(props) {
 
   //Starts the process of code verification
   const handleClick = (event) => {
-    //Prevents the page from reloading after the form submission
+    //Prevents the page from refreshing after the form submission
     event.preventDefault();
     setIsLoading(true); //Lets the user know their code is being processed
     verifyCode();

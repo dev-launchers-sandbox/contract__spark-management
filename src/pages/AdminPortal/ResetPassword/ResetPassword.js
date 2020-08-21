@@ -45,7 +45,7 @@ function ResetPassword() {
 
   //Gets called whenever the form gets submitted
   const handleSubmit = async (event) => {
-    //Prevents the page from reloading after the form submission
+    //Prevents the page from refreshing after the form submission
     event.preventDefault();
     if (form.newPassword !== form.confirmPassword) {
       //This makes sure they didn’t mistype their password
@@ -60,7 +60,6 @@ function ResetPassword() {
       password: form.newPassword,
       verifiedPassword: form.confirmPassword,
     };
-    console.log(newInfo.password);
     try {
       //Makes the post req. to the server sending the new user data.
       await axios.post(

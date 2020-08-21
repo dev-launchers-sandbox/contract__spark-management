@@ -48,41 +48,53 @@ function ManageCodesPage() {
   const [type, setType] = useState();
 
   const handleGenerateCodeShowModal = () => {
+    //Shows the Generate Code Modal.
     setShowGenerateCodeModal(true);
-    console.log("bool: ", showGenerateCodeModal);
   };
   const handleGenerateClientShowModal = () => {
+    //Shows the Generate Client Modal.
     setShowGenerateClientModal(true);
   };
   const handleEditShowModal = () => {
+    //Shows the Edit Code Modal.
     setShowEditModal(true);
   };
 
   const handleEditClientModal = () => {
+    //Shows the Edit Client Modal.
     setShowEditClientModal(true);
   };
   const handleDeleteConfirmation = () => {
+    //Shows the Delete Confirmation Modal.
     setShowDeleteConfirmationModal(true);
   };
   const handleFilterButtonModaal = () => {
+    //Shows the Filter Modal.
     setShowFilterButtonModal(true);
   };
 
   const handleSortByButtonModaal = () => {
+    //Shows the Sort Modal.
     setShowSortByButtonModal(true);
   };
 
+  //Called whenever the Edit Code Modal shows. rowToEdit is passed as props to the modal.
   const updateCodeToEdit = (value) => {
     setRowToEdit(value);
   };
 
+  // Called whenever the Edit Client Modal shows. clientToEdit is passed as props to the modal
   const updateClientToEdit = (id) => {
     setClientToEdit(id);
   };
+
+  // Called whenever the view is reset (sort, filter, reset view), to prevent blank pages
   const resetPage = () => {
     setPage(0);
   };
 
+  // Sets rowToDelete or clientToDelete, depending on the delete type, to the row passed in the parameters
+  // This way, we can pass rowToDelete, and clientToDelete to the Delete Modal
   const handleDelete = (type, row) => {
     setType(type);
     if (type === "code") {
@@ -91,19 +103,25 @@ function ManageCodesPage() {
     if (type === "client") {
       setClientToDelete(row);
     }
-    handleDeleteConfirmation();
+    handleDeleteConfirmation(); //Shows the delete confirmation modal
   };
 
+  /* Called whenever the rows must be updated. This updates what the grid shows, by making a get request
+   to the server with the special parameters as needed.
+*/
   async function updateRows(changes) {
     let codesFetch;
+    //If changes are passed, send a request with them as parameters; ignoring the previous sorts&filters.
     if (changes) {
       codesFetch = await axios.get(
         `https://api.spark4community.com/codes?skip=${
           page * NUM_ROWS_PER_PAGE
         }&limit=${NUM_ROWS_PER_PAGE}${changes}`
       );
+      //Update currentChanges, so page refreshing does not undo the filter/sorters
       setCurrentChanges(changes);
     } else {
+      // If there are currentChanges, send a request with them as parameters
       if (currentChanges && currentChanges !== "") {
         codesFetch = await axios.get(
           `https://api.spark4community.com/codes?skip=${
@@ -111,6 +129,7 @@ function ManageCodesPage() {
           }&limit=${NUM_ROWS_PER_PAGE}${currentChanges}`
         );
       } else {
+        //if there aren’t any currentChanges, or changes passed, send the get req. with no parameters.
         codesFetch = await axios.get(
           `https://api.spark4community.com/codes?skip=${
             page * NUM_ROWS_PER_PAGE
@@ -120,6 +139,7 @@ function ManageCodesPage() {
     }
     let codeArray = codesFetch.data;
     try {
+      // Removes miliseconds for the dates
       codeArray.forEach((code) => {
         let shortExp = code.expiration_date.substring(0, 10);
         code.expiration_date = shortExp;
@@ -131,32 +151,35 @@ function ManageCodesPage() {
     } catch (err) {
       console.log(err);
     }
-    setCodes(codeArray);
+    setCodes(codeArray); //Update codes, which updates the rows.
   }
+
+  //Called whenever the user clicks nextPage
   const addPage = () => {
     setPage(page + 1);
   };
 
-  /*
-  ok lets think of I do
-  updateRows(parame) {
-    axios.get(parame + state for past)
-}
-
-  */
-  const resetFiltersAndSorts = () => {
-    setCurrentChanges();
-  };
+  //Called whenever the user clicks previous page
   const substractPage = () => {
     setPage(page - 1);
   };
+
+  //Called whenever the user wants to get rid of all filters and sorts.
+  const resetFiltersAndSorts = () => {
+    setCurrentChanges();
+  };
+
+  // Whenever the current sorts and filters change, update the rows.
   useEffect(() => {
     updateRows();
   }, [currentChanges]);
+
+  //Whenever the page changes, update the rows to show the new page.
   useEffect(() => {
     updateRows();
   }, [page]);
 
+  //Whenever the codes change, update the length of the grid to make it adaptive to the number of rows.
   useEffect(() => {
     let numberOfRows = codes.length + 1;
     if (codes.length < 10) numberOfRows = 10;

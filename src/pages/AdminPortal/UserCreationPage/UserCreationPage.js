@@ -67,7 +67,7 @@ function UserCreationPage() {
 
   //Gets called whenever the form gets submitted
   const handleSubmit = (event) => {
-    //Prevents the page from reloading after the form submission
+    //Prevents the page from refreshing after the form submission
     event.preventDefault();
     userCreationRequest();
   };

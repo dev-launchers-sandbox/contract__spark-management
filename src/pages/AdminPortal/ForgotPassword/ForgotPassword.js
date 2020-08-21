@@ -8,7 +8,7 @@ import notify from "../../../components/common/notify/notify.js"
 function ForgotPassword() {
   let [form, setForm] = useState({ email: "" });
 
-  //updates state when form is updated
+  //Allows us to have controlled forms. Updates the state of the form as the user types
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
@@ -23,18 +23,16 @@ function ForgotPassword() {
         "https://api.spark4community.com/forgot-password",
         { email: form.email }
       );
-      console.log("forgot password: ", response);
       notify("An email has been sent!");
     } catch (err) {
-      console.error(err);
       notify("Email address is invalid");
     }
   };
 
+  //Gets called whenever the form gets submitted
   const handleSubmit = (events) => {
-    //prevents page from refreshing
+    //Prevents the page from refreshing after the form submission
     events.preventDefault();
-    //sends forgotpassword
     sendForgotPassword();
   };
 
