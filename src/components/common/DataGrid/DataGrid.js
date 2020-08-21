@@ -4,26 +4,10 @@ import "react-data-grid/dist/react-data-grid.css";
 import style from "./DataGrid.module.css";
 import axios from "axios";
 import Modal from "../Modal/Modal";
+import notify from "../notify/notify.js"
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 import { css } from "glamor";
-
-const notify = (text) => {
-  toast(text, {
-    position: toast.POSITION.BOTTOM_RIGHT,
-    autoClose: 2500,
-    className: css({
-      background: "white",
-    }),
-    bodyClassName: css({
-      fontSize: "20px",
-      color: "black",
-    }),
-    progressClassName: css({
-      background: "repeating-radial-gradient( transparent, transparent )",
-    }),
-  });
-};
 
 toast.configure();
 function DataTable(props) {

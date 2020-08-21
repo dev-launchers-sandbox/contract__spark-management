@@ -5,9 +5,7 @@ import sparkLogo from "../../../images/spark_app_logo_transparent.png";
 import axios from "axios";
 import Select from "react-select";
 import Modal from "../Modal/Modal.js";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { css } from "glamor";
+import notify from "../notify/notify.js"
 import CodesGenerated from "../CodesGenerated/CodesGenerated";
 function GenerateCode(props) {
   let [client, setClient] = useState([]);
@@ -24,7 +22,7 @@ function GenerateCode(props) {
 
   let [formClient, setFormClient] = useState("");
 
-  //clears state after the modal closes
+  //clears the forms whenever the user clicks on the modal
   const clearState = () => {
     setForm({
       ...form,
@@ -38,7 +36,9 @@ function GenerateCode(props) {
 
     setFormClient("");
   };
-  //gets the client data when the componenet mounts
+
+
+  //sends a request to the server so we can display all the clients to the user
   useEffect(() => {
     const getClientData = async () => {
       const clientData = await axios.get(
@@ -51,7 +51,7 @@ function GenerateCode(props) {
     clearState();
   }, [props.showModal]);
 
-  //it's called when users inputs data into the form
+  //Allows us to have controlled forms. Updates the state of the form as the user types
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
@@ -60,34 +60,13 @@ function GenerateCode(props) {
     });
   };
 
-  //notifies the user
-  const notify = (text) => {
-    toast(text, {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 2500,
-      className: css({
-        background: "white",
-      }),
-      bodyClassName: css({
-        fontSize: "20px",
-        color: "black",
-      }),
-      progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )",
-      }),
-    });
-  };
-
-  //gets called when the Select component changes
+  //updates the state of the select component as the user clicks on the options
   const handleSelectChange = (formClient) => {
     setFormClient(formClient);
     console.log("option selected: ", formClient);
   };
 
-  /*
-      checks if the client form, expiration date form, and checks if all deck forms are empty
-      if so return false
-    */
+  //prevents users from sending empty values in code_batches
   const formValidation = () => {
     console.log("formClient length: ", formClient.length);
     if (
@@ -128,9 +107,13 @@ function GenerateCode(props) {
           codeBatch
         );
         notify("Data has been sent!");
+        //stores the newly created codes in state to be displayed
         setGeneratedCodes(data.data.code_batch._id);
+        //updates the row with the new code_batch
         props.updateRows();
+        //closes the modal once they submt
         props.handleCloseModal();
+        //displays the newly generated codes to the user
         setShowGeneratedCodesModal(true);
       } catch (err) {
         console.error(err);
@@ -140,18 +123,14 @@ function GenerateCode(props) {
     }
   };
 
-  //gets called when user click the Generate Code(s) button
+  //sends the data to the server to be later displayed in the data grid for the user
   const handleSubmit = (events) => {
     //prevents page from refreshing
     events.preventDefault();
     sendCodeData();
   };
 
-  /*
-   loops through the client data from the useEffect
-   and creates an array of options from the client data
-   to be used in the select component
-  */
+  //adds the new clients the user creates into the select component
   const selectOptions = () => {
     let newOptions = [];
     for (let i = 0; i < client.length; i++) {

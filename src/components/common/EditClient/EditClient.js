@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./EditClient.module.css";
 import Modal from "../Modal/Modal.js";
 import axios from "axios";
+import notify from "../notify/notify.js"
 import Select from "react-select";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -75,25 +76,7 @@ function EditClient(props) {
     });
     console.log("logo url: ", form.logoUrl);
   };
-
-  //gets called when the user inputs the wrong username and password
-  const notify = (text) => {
-    toast(text, {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 2500,
-      className: css({
-        background: "white",
-      }),
-      bodyClassName: css({
-        fontSize: "20px",
-        color: "black",
-      }),
-      progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )",
-      }),
-    });
-  };
-
+  
   const selectOptions = (data) => {
     let newOptions = [];
     for (let i = 0; i < data.length; i++) {

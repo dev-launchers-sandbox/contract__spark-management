@@ -3,9 +3,7 @@ import style from "./ForgotPassword.module.css";
 import logo from "../../../images/spark_app_logo_transparent.png";
 import axios from "axios";
 import PageBody from "../../../components/common/PageBody/PageBody.js";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { css } from "glamor";
+import notify from "../../../components/common/notify/notify.js"
 
 function ForgotPassword() {
   let [form, setForm] = useState({ email: "" });
@@ -16,24 +14,6 @@ function ForgotPassword() {
     setForm({
       ...form,
       [name]: value,
-    });
-  };
-
-  //notifies the user
-  const notify = (text) => {
-    toast(text, {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 2500,
-      className: css({
-        background: "white",
-      }),
-      bodyClassName: css({
-        fontSize: "20px",
-        color: "black",
-      }),
-      progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )",
-      }),
     });
   };
 

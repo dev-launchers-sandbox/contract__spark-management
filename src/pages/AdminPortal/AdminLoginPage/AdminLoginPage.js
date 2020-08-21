@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import style from "./AdminLoginPage.module.css";
 import PageBody from "../../../components/common/PageBody/PageBody.js";
 import logo from "../../../images/spark_app_logo_transparent.png";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { css } from "glamor";
 import axios from "axios";
+import notify from "../../../components/common/notify/notify.js"
 import MockAdapter from "axios-mock-adapter";
 import {
   BrowserRouter as Router,
@@ -67,30 +65,13 @@ function AdminLoginPage() {
 
       if (response.status === 200) {
         setRedirect(true);
+        notify("Logged in")
       }
       console.log("user response: ", response);
     } catch (err) {
       console.error("error posting user data: ", err);
-      notify();
+      notify("Account doesn't exist");
     }
-  };
-
-  //gets called when the user inputs the wrong username and password
-  const notify = () => {
-    toast("Account doesn't exist", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 2500,
-      className: css({
-        background: "white",
-      }),
-      bodyClassName: css({
-        fontSize: "20px",
-        color: "black",
-      }),
-      progressClassName: css({
-        background: "repeating-radial-gradient( transparent, transparent )",
-      }),
-    });
   };
 
   return (

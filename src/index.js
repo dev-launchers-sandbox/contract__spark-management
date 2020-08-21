@@ -21,7 +21,7 @@ import YouthDeckRoute from "./routes/YouthDeck.js";
 import LoginPageRoute from "./pages/LoginPage/LoginPage";
 import AdminLoginPage from "./pages/AdminPortal/AdminLoginPage/AdminLoginPage";
 import ForgotPasswordRoute from "./pages/AdminPortal/ForgotPassword/ForgotPassword.js";
-import UserCreationRoute from "./pages/UserCreationPage/UserCreationPage.js";
+import UserCreationRoute from "./pages/AdminPortal/UserCreationPage/UserCreationPage.js";
 
 //import mockData from "../src/mockData/MockData.js";
 
