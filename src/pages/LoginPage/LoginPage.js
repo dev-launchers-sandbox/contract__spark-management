@@ -177,6 +177,7 @@ function LoginPage(props) {
                   type="text"
                   name="code"
                   value={form.code}
+                    
                   placeholder="code"
                   onChange={handleChange}
                 />

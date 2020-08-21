@@ -16,7 +16,9 @@ export default function YouthDeck(props) {
   return (
     <PageBody>
       <div className="upperRow">
-        <Logo marginTop="4%" />
+        <div className="logoHolder">
+          <Logo marginTop="4%" />
+        </div>
         <RedDeck deck={YouthDeckRed} />
       </div>
       <Hand deck={YouthDeckYellow} />

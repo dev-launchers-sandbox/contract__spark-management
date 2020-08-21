@@ -39,8 +39,17 @@
 .formContainer {
   width: 100%;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
 }
+
+@media (orientation: portrait) {
+  .formContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 
 .form {
   width: 100%;

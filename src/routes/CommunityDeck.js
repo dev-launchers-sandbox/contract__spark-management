@@ -15,7 +15,9 @@ export default function CommunityDeck(props) {
   return (
     <PageBody>
       <div className="upperRow">
-        <Logo marginTop="4%" />
+        <div className="logoHolder">
+          <Logo marginTop="4%" />
+        </div>
         <RedDeck deck={CommunityDeckRed} />
         {/*
         <div className={"buttonContainer"}>

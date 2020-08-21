@@ -16,7 +16,9 @@ export default function SpanishDeck(props) {
   return (
     <PageBody>
       <div className="upperRow">
-        <Logo marginTop="4%" />
+        <div className="logoHolder">
+          <Logo marginTop="4%" />
+        </div>
         <RedDeck deck={SpanishDeckRed} />
       </div>
       <Hand deck={SpanishDeckYellow} />
