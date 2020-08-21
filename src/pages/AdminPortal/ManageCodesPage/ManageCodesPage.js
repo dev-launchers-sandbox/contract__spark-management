@@ -6,7 +6,7 @@ import Header from "../../../components/common/Header/Header";
 import DataGridComponent from "../../../components/common/DataGrid/DataGrid";
 import GenerateCode from "../../../components/common/GenerateCode/GenerateCode.js";
 import GenerateClient from "../../../components/common/GenerateClient/GenerateClient.js";
-import EditModal from "../../../components/common/EditModal/EditModal.js";
+import EditCodeModal from "../../../components/common/EditCodeModal/EditCodeModal.js";
 import EditClientModal from "../../../components/common/EditClient/EditClient.js";
 import FilterButtonModal from "../../../components/common/FilterButtonModal/FilterButtonModal.js";
 import SortByButtonModal from "../../../components/common/SortByButtonModal/SortByButtonModal.js";
@@ -28,7 +28,7 @@ const NUM_ROWS_PER_PAGE = 50;
 function ManageCodesPage() {
   let [showGenerateCodeModal, setShowGenerateCodeModal] = useState(false);
   let [showGenerateClientModal, setShowGenerateClientModal] = useState(false);
-  let [showEditModal, setShowEditModal] = useState(false);
+  let [showEditCodeModal, setShowEditCodeModal] = useState(false);
   let [showEditClientModal, setShowEditClientModal] = useState(false);
   let [showFilterButtonModal, setShowFilterButtonModal] = useState(false);
   let [showSortByButtonModal, setShowSortByButtonModal] = useState(false);
@@ -55,9 +55,9 @@ function ManageCodesPage() {
     //Shows the Generate Client Modal.
     setShowGenerateClientModal(true);
   };
-  const handleEditShowModal = () => {
+  const handleEditCodeShowModal = () => {
     //Shows the Edit Code Modal.
-    setShowEditModal(true);
+    setShowEditCodeModal(true);
   };
 
   const handleEditClientModal = () => {
@@ -205,10 +205,10 @@ function ManageCodesPage() {
           }}
           updateRows={updateRows}
         />
-        <EditModal
-          showModal={showEditModal}
+        <EditCodeModal
+          showModal={showEditCodeModal}
           handleCloseModal={() => {
-            setShowEditModal(false);
+            setShowEditCodeModal(false);
           }}
           rowToEdit={rowToEdit}
           updateRows={updateRows}
@@ -264,7 +264,7 @@ function ManageCodesPage() {
       </div>
       <DataGridComponent
         updateRows={updateRows}
-        handleEditShowModal={handleEditShowModal}
+        handleEditCodeShowModal={handleEditCodeShowModal}
         updateCodeToEdit={updateCodeToEdit}
         codes={codes}
         gridHeight={gridHeight}
