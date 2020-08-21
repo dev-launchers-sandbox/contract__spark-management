@@ -39,7 +39,7 @@ export default function YellowCard(props) {
         style={{ transformStyle: "initial" }}
         className={style.YellowCard}
       >
-        <img className={style.logo} src={redLogo} alt="logo" />
+        <img className={style.logo} src={process.env.PUBLIC_URL + "/images/red-spark-logo.png"} alt="logo" />
       </div>
     </ReactCardFlip>
   );

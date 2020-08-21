@@ -7,11 +7,11 @@ import style from "./ClientCreatedModal.module.css"
 
 function ClientCreatedModal(props){
 
-  //close the modal after 5 seconds
+  //close the modal after 3 seconds
   useEffect(() => {
     setTimeout(() => {
       props.handleCloseModal()
-    }, 5000);
+    }, 3000);
   }, [props.showModal])
 
   return (

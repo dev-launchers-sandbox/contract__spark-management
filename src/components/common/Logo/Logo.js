@@ -42,7 +42,7 @@ export default function Logo(props) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src={redLogo} className={style.sparkLogo} alt="Logo" />
+          <img src={process.env.PUBLIC_URL + "/images/spark_app_logo_transparent.png"} className={style.sparkLogo} alt="Logo" />
         </a>
 
         {doesImageExist ? (

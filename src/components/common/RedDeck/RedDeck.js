@@ -54,7 +54,7 @@ export default function RedDeck(props) {
           className={style.RedDeck}
           onClick={onClick}
         >
-          <img className={style.whiteLogo} src={whiteLogo} alt="logo" />
+          <img className={style.whiteLogo} src={process.env.PUBLIC_URL + "/images/white-spark-logo.png"} alt="logo" />
         </div>
       </ReactCardFlip>
     </div>
