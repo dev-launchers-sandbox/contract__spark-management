@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import style from "./Logo.module.css";
 
-import RedLogo from "../../../images/spark_app_logo_transparent.png";
+import redLogo from "../../../images/spark_app_logo_transparent.png";
 //import BrandedLogo from "../../../images/branded-logo.png";
 import { Link, useParams } from "react-router-dom";
 import BrandedLogo from "../../../images/mcneil-logo.png";
@@ -42,7 +42,7 @@ export default function Logo(props) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src={RedLogo} className={style.sparkLogo} alt="Logo" />
+          <img src={redLogo} className={style.sparkLogo} alt="Logo" />
         </a>
 
         {doesImageExist ? (
