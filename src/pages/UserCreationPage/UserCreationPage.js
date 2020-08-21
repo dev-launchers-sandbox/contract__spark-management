@@ -18,10 +18,14 @@ import {
 import RandomQuote from "../../components/common/RandomQuote/RandomQuote.js";
 
 function UserCreationPage() {
-  let [form, setForm] = useState({ email: "", password: "", fullName: "", confirmPassword: "" });
+  let [form, setForm] = useState({
+    email: "",
+    password: "",
+    fullName: "",
+    confirmPassword: "",
+  });
 
-  const [redirect, setRedirect] = useState(false);
-
+  //Allows us to have controlled forms. Updates the state of the form as the user types
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
@@ -30,7 +34,7 @@ function UserCreationPage() {
     });
   };
 
-  //gets called when the user inputs the wrong username and password
+  //Sends a toast nofication saying whatever is passed as a parameter
   const notify = (text) => {
     toast(text, {
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -47,58 +51,51 @@ function UserCreationPage() {
       }),
     });
   };
-
+  //Sends a post request to the server, which will create a new user with the data provided.
   const userCreationRequest = async () => {
     const userData = {
       email: form.email,
       password: form.password,
       full_name: form.fullName,
-      user_type: "super"
+      user_type: "super",
     };
-    if(form.password !== form.confirmPassword){
-      return notify("Passwords need to match")
+    if (form.password !== form.confirmPassword) {
+      //This makes sure they didn’t mistype their password
+      return notify("Passwords need to match");
     }
 
-    if(form.password === "" || form.confirmPassword === ""){
-      return notify("Password can't be empty")
+    if (form.password === "" || form.confirmPassword === "") {
+      //They must submit a password for the new user.
+      return notify("Password can't be empty");
     }
-
     try {
       const response = await axios.post(
         "https://api.spark4community.com/signup",
         userData,
         { withCredentials: true }
       );
-      notify("User has been created!")
-
-      console.log("user response: ", response);
+      notify("User has been created!");
     } catch (err) {
-      console.error("error posting user data: ", err);
-      notify("Account already exists");
+      console.error("There was an error while creating the new user: ", err);
+      notify("This account already exists!");
     }
   };
 
-
-  //when the log in button is pressed this is called
+  //Gets called whenever the form gets submitted
   const handleSubmit = (event) => {
-    //prevents the page from refreshing when submitting
+    //Prevents the page from reloading after the form submission
     event.preventDefault();
-
     userCreationRequest();
-    console.log("func is being called");
   };
-
-
-
 
   return (
     <PageBody>
       <div className={style.adminLoginPage}>
         <div className={style.loginContainer}>
           <div className={style.loginPopup}>
-          <div className={style.imageHolder}>
-            <img className={style.logo} src={logo} alt="logo" />
-          </div>
+            <div className={style.imageHolder}>
+              <img className={style.logo} src={logo} alt="logo" />
+            </div>
             <div className={style.formContainer}>
               <form>
                 <label
@@ -130,7 +127,7 @@ function UserCreationPage() {
                   type="text"
                   name="fullName"
                   value={form.fullName}
-                  style={{width: "100%"}}
+                  style={{ width: "100%" }}
                   onChange={handleChange}
                 />
                 <br />
@@ -178,13 +175,17 @@ function UserCreationPage() {
             </div>
           </div>
         </div>
-        <div className={style.manaCodesButtonContainer} style={{marginTop:"2%"}}>
-          <Link to="/ManageCodes"><button className={style.manageCodesButton}>Go back</button></Link>
+        <div
+          className={style.manaCodesButtonContainer}
+          style={{ marginTop: "2%" }}
+        >
+          <Link to="/ManageCodes">
+            <button className={style.manageCodesButton}>Go back</button>
+          </Link>
         </div>
         <RandomQuote />
       </div>
-      {/*if true redirect the user to the main page */}
-      {redirect && <Redirect to="/ManageCodes" />}
+      {/*if true redirect the user to the manage codes page */}
     </PageBody>
   );
 }

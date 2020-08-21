@@ -15,6 +15,7 @@ import {
   useRouterHistory,
 } from "react-router-dom";
 
+//Sends a toast nofication saying whatever is passed as a parameter
 const notify = (text) => {
   toast(text, {
     position: toast.POSITION.BOTTOM_RIGHT,
@@ -38,6 +39,7 @@ function ResetPassword() {
   const [token, setToken] = useState();
 
   useEffect(() => {
+    //Sets the user token to the token provided in the URL, to allow us to reset its password
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     let urlToString = urlParams.toString();
@@ -49,6 +51,7 @@ function ResetPassword() {
     confirmPassword: "",
   });
 
+  //Allows us to have controlled forms. Updates the state of the form as the user types
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
@@ -56,12 +59,17 @@ function ResetPassword() {
       [name]: value,
     });
   };
+
+  //Gets called whenever the form gets submitted
   const handleSubmit = async (event) => {
+    //Prevents the page from reloading after the form submission
     event.preventDefault();
     if (form.newPassword !== form.confirmPassword) {
+      //This makes sure they didn’t mistype their password
       return notify("Passwords do not match");
     }
-    if (form.newPassword == "" || form.confirmPassword === "") {
+    if (!form.newPassword.replace(/\s/g, "").length) {
+      //They must submit a password for the new user.
       return notify("You must introduce a password");
     }
     let newInfo = {
@@ -69,13 +77,16 @@ function ResetPassword() {
       password: form.newPassword,
       verifiedPassword: form.confirmPassword,
     };
+    console.log(newInfo.password);
     try {
+      //Makes the post req. to the server sending the new user data.
       await axios.post(
         "https://api.spark4community.com/reset-password",
         newInfo
       );
       notify("The password reset was successfull!");
     } catch (error) {
+      //If it did not find a user with token this code will run.
       alert("There was an error! Try again or come back in a few minutes");
     }
   };
