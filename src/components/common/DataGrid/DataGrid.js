@@ -99,7 +99,7 @@ function DataTable(props) {
     notify("Code copied to clipboard!");
   };
   const handleEdit = (row) => {
-    props.handleEditShowModal();
+    props.handleEditCodeShowModal();
     props.updateCodeToEdit(row);
   };
   const copyRow = (row) => {
