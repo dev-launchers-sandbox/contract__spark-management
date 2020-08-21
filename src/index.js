@@ -32,7 +32,7 @@ import SelectDeck from "./components/common/SelectDeck/SelectDeck";
 // Change axios defaults, to fix cookies being sent (may need a better solution)
 axios.defaults.withCredentials = true;
 
-// Allows us to serve up the app from any arbitrary directory on a server
+// An Array of all the routes, so we can use it in getBasename()
 let routes = [
   {
     path: "/",
@@ -90,10 +90,7 @@ function App() {
   let [statusCode, setStatusCode] = useState(null);
   let [formCode, setFormCode] = useState("");
 
-  //creates the mock requests
-  //mockData();
-
-  //
+  //Map of all the paths with its correspoding component. Prevents code repetition
   let routeComponents = routes.map(({ path, component }, key) => (
     <Route exact path={path} component={component} key={key} />
   ));
