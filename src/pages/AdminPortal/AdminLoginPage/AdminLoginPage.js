@@ -25,59 +25,22 @@ function AdminLoginPage() {
 
   const [userAccounts, setUserAccounts] = useState([]);
 
-  //updates state when form is updated
+  //Whenever the AdminLoginPage, try getting the current user, to be able to redirect to ManageCodes if needed.
   useEffect(() => {
     async function checkIfUserLoggedIn() {
       try {
         await axios.get("https://api.spark4community.com/users/current");
         setRedirect(true);
-      } catch (error) {}
-    }
-    checkIfUserLoggedIn();
-  }, []);
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
-
-  //when the log in button is pressed this is called
-  const handleSubmit = (event) => {
-    //prevents the page from refreshing when submitting
-    event.preventDefault();
-
-    checkIfUserExists();
-    console.log("func is being called");
-  };
-
-  const checkIfUserExists = async () => {
-    const userData = {
-      email: form.email,
-      password: form.password,
-    };
-
-    try {
-      const response = await axios.post(
-        "https://api.spark4community.com/login",
-        userData,
-        { withCredentials: true }
-      );
-
-      if (response.status === 200) {
-        setRedirect(true);
+      } catch (error) {
+        // If they are not logged in, it will reach the catch block
       }
-      console.log("user response: ", response);
-    } catch (err) {
-      console.error("error posting user data: ", err);
-      notify();
     }
-  };
+    checkIfUserLoggedIn(); //Call the async function
+  }, []);
 
-  //gets called when the user inputs the wrong username and password
+  //Sends a toast nofication saying whatever is passed as a parameter
   const notify = () => {
-    toast("Account doesn't exist", {
+    toast(text, {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 2500,
       className: css({
@@ -92,15 +55,55 @@ function AdminLoginPage() {
       }),
     });
   };
+  //Allows us to have controlled forms. Updates the state of the form as the user types
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
+  //Gets called whenever the form gets submitted
+  const handleSubmit = (event) => {
+    //Prevents the page from refreshing after the form submission
+    event.preventDefault();
+    checkIfUserExists();
+  };
+
+  //Checks if the info provided matches to a user. If it does, we give the user access to it.
+  const checkIfUserExists = async () => {
+    const userData = {
+      email: form.email,
+      password: form.password,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://api.spark4community.com/login",
+        userData,
+        { withCredentials: true }
+      );
+      // If the info provided is correct, allow the redirect to /ManageCodes
+      if (response.status === 200) {
+        setRedirect(true);
+      }
+    } catch (err) {
+      //Notifies the user that the info provided is incorrect
+      notify("This account doesn't exist");
+    }
+  };
+
+  //gets called when the user inputs the wrong username and password
 
   return (
     <PageBody>
       <div className={style.adminLoginPage}>
         <div className={style.loginContainer}>
           <div className={style.loginPopup}>
-          <div className={style.imageHolder}>
-            <img className={style.logo} src={logo} alt="logo" />
-          </div>
+            <div className={style.imageHolder}>
+              <img className={style.logo} src={logo} alt="logo" />
+            </div>
             <div className={style.formContainer}>
               <form>
                 <div className={style.emailContainer}>
@@ -161,7 +164,7 @@ function AdminLoginPage() {
         </div>
         <RandomQuote />
       </div>
-      {/*if true redirect the user to the main page */}
+      {/*If true, meaning the user is logged in, redirect to ManageCodes*/}
       {redirect && <Redirect to="/ManageCodes" />}
     </PageBody>
   );

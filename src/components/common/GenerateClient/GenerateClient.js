@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import style from "./GenerateClient.module.css";
 import Modal from "../Modal/Modal.js";
-import ClientCreatedModal from "../ClientCreatedModal/ClientCreatedModal.js"
+import ClientCreatedModal from "../ClientCreatedModal/ClientCreatedModal.js";
 import axios from "axios";
 import Select from "react-select";
 import { toast } from "react-toastify";
@@ -80,7 +80,7 @@ function GenerateClient(props) {
 
   //gets called when the user clicks the Generate Client button
   const handleSubmit = (events) => {
-    //prevents the page from reloading on submit
+    //prevents the page from refreshing on submit
     events.preventDefault();
 
     sendClientData();
@@ -88,53 +88,52 @@ function GenerateClient(props) {
 
   return (
     <div>
-    <Modal
-      overlayClick={true}
-      height="58vh"
-      color="#f3e8cb"
-      showModal={props.showModal}
-      handleCloseModal={props.handleCloseModal}
-    >
-      <div className={style.generateDistrict}>
-        <div className={style.textContainer}>
-          <b className={style.clientText}>Create New Client</b>
+      <Modal
+        overlayClick={true}
+        height="58vh"
+        color="#f3e8cb"
+        showModal={props.showModal}
+        handleCloseModal={props.handleCloseModal}
+      >
+        <div className={style.generateDistrict}>
+          <div className={style.textContainer}>
+            <b className={style.clientText}>Create New Client</b>
+          </div>
+          <form className={style.formContainer}>
+            <div className={style.clientContainer}>
+              <label className={style.label}>Client Name</label>
+              <input
+                type="text"
+                name="client"
+                onChange={handleChange}
+                value={form.client}
+                required
+              />
+            </div>
+            <div className={style.logoUrlContainer}>
+              <label className={style.label}>Logo URL</label>
+              <input
+                type="text"
+                name="logoUrl"
+                onChange={handleChange}
+                value={form.logoUrl}
+              />
+            </div>
+            <div className={style.buttonContainer}>
+              <button className={style.button} onClick={handleSubmit}>
+                Create Client
+              </button>
+            </div>
+          </form>
         </div>
-        <form className={style.formContainer}>
-          <div className={style.clientContainer}>
-            <label className={style.label}>Client Name</label>
-            <input
-              type="text"
-              name="client"
-              onChange={handleChange}
-              value={form.client}
-              required
-            />
-          </div>
-          <div className={style.logoUrlContainer}>
-            <label className={style.label}>Logo URL</label>
-            <input
-              type="text"
-              name="logoUrl"
-              onChange={handleChange}
-              value={form.logoUrl}
-            />
-          </div>
-          <div className={style.buttonContainer}>
-            <button className={style.button} onClick={handleSubmit}>
-              Create Client
-            </button>
-          </div>
-        </form>
-      </div>
-    </Modal>
-    <ClientCreatedModal
-      showModal={showClientCreatedModal}
-      handleCloseModal={() => {
-        setShowClientCreatedModal(false);
-      }}
-    />
+      </Modal>
+      <ClientCreatedModal
+        showModal={showClientCreatedModal}
+        handleCloseModal={() => {
+          setShowClientCreatedModal(false);
+        }}
+      />
     </div>
-
   );
 }
 
