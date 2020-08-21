@@ -76,11 +76,13 @@ let routes = [
   },
 ];
 const getBasename = (path) => {
+  return "/Play/"; // TODO: overwriting for now... this sucks
   // TODO: Not a perfect solution, doesn't account for routes that begin with dynamic parameters
   routes.map((entry) => {
     if (entry.path === "/") return;
-    let index = path.lastIndexOf(entry.path);
-    if (index != -1) path = path.substr(0, path.lastIndexOf(entry.path));
+    let fixedPath = entry.path.split("/:")[0];
+    let index = path.indexOf(fixedPath);
+    if (index != -1) path = path.substr(0, index);
   });
   return path;
 };
