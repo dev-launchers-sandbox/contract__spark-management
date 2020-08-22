@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactModal from "react-modal";
 
 function Modal(props) {
+  //Custom styles for the modal
   const customStyle = {
     content: {
       top: "50%",
@@ -12,8 +13,8 @@ function Modal(props) {
       transform: "translate(-50%, -50%)",
       backgroundColor: props.color,
       borderRadius: "10px",
-      fontFamily: "nunito sans"
-    }
+      fontFamily: "nunito sans",
+    },
   };
   return (
     <div>

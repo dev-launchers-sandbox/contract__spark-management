@@ -11,6 +11,7 @@ import style from "./Modal.module.css";
 
 toast.configure();
 function EULAModal() {
+  //Checks to see if localStorage is available, to avoid a later error.
   const isLocalStorageAvailable = () => {
     var test = "test";
     try {
@@ -23,36 +24,27 @@ function EULAModal() {
   };
   let accepted;
   if (isLocalStorageAvailable()) {
-    console.log(isLocalStorageAvailable());
     /*
-    checks to see if the user has already accepted the terms.
-    If not, display the eula modal
+    Checks to see if the user has already accepted the terms.
+    If not, display the EULA Modal
   */
     accepted = localStorage.getItem("accepted")
       ? JSON.parse(localStorage.getItem("accepted"))
       : true;
   } else {
     accepted = true;
-    console.log(isLocalStorageAvailable());
   }
   const [showModal, setShowModal] = useState(accepted);
   const [answer, setIsChecked] = useState({
     isChecked: false,
   });
 
-  /*
-    this checks if local storage is available (avoids crash in private mode)
-    If it is, it will return true, if not, false.
-  */
-
   //when the toggle button is clicked, the modal is shown
   const handleOpenModal = () => {
-    //window.location.reload();
-
     setShowModal(true);
-    //get the accepted value from localStorage
+    //Get the accepted value from localStorage
     let newAnswer = JSON.parse(localStorage.getItem("accepted"));
-    //set the accepted value to true
+    //Set the accepted value to true
     newAnswer = true;
     //set the new answer into localStorage
     localStorage.setItem("accepted", JSON.stringify(newAnswer));
@@ -69,7 +61,7 @@ function EULAModal() {
     localStorage.setItem("accepted", JSON.stringify(newAnswer));
   };
 
-  //notifies the user when the decline button is pressed
+  //Notifies the user when the decline button is pressed
   const notify = (event) => {
     event.preventDefault();
     toast("You must accept to continue", {
@@ -88,7 +80,7 @@ function EULAModal() {
     });
   };
 
-  //updates state accordingly when users input things
+  //Allows us to have controlled forms. Updates the state of the form as the user types
   const handleChange = (event) => {
     const { name, checked } = event.target;
 
@@ -97,7 +89,7 @@ function EULAModal() {
       [name]: checked,
     });
   };
-  //custom styles for the modal
+  //Custom styles for the modal
   const customStyle = {
     content: {
       top: "50%",
