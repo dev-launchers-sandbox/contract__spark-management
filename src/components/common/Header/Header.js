@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 
 function Header() {
   const [username, setUsername] = useState("");
+
+  //Whenever the page loads, we want to get the current user to show it in the header
   useEffect(() => {
     const fetchUser = async () => {
       let userUsername = await axios.get(
@@ -18,6 +20,8 @@ function Header() {
 
   // Logout logic
   const [doRedirect, setDoRedirect] = React.useState(false);
+
+  //Logs the user out of their account
   const logout = () => {
     axios.post("https://api.spark4community.com/logout").then((res) => {
       setDoRedirect(true); // redirect back to login page when we get a response from the server
@@ -31,7 +35,12 @@ function Header() {
       {/*}Actual visual body: {*/}
       <img className={style.sparkLogo} src={sparkLogo} alt="sparkLogo" />
       <h1>{username.toUpperCase()}</h1>
-      <a style={{textDecoration: "none", fontWeight: "bold"}}onClick={logout}>🚪 Log Out</a>
+      <a
+        style={{ textDecoration: "none", fontWeight: "bold" }}
+        onClick={logout}
+      >
+        🚪 Log Out
+      </a>
     </div>
   );
 }

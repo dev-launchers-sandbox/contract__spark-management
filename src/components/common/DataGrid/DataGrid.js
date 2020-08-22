@@ -4,7 +4,7 @@ import "react-data-grid/dist/react-data-grid.css";
 import style from "./DataGrid.module.css";
 import axios from "axios";
 import Modal from "../Modal/Modal";
-import notify from "../notify/notify.js"
+import notify from "../notify/notify.js";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 import { css } from "glamor";
@@ -17,6 +17,7 @@ function DataTable(props) {
   ] = useState(false);
   const [codes, setCodes] = useState("");
 
+  //A formatter for the clients.
   const ClientActions = (value) => {
     return (
       <div
@@ -27,6 +28,7 @@ function DataTable(props) {
       </div>
     );
   };
+  //A formatter for the codes.
   const CodeAction = (value) => {
     function expiredColor() {
       let now = Date.now();
@@ -53,6 +55,7 @@ function DataTable(props) {
       </div>
     );
   };
+  //A formatter for the available actions
   const Actions = ({ value, row }) => {
     return (
       <div className={style.actionsContainer}>
@@ -85,6 +88,7 @@ function DataTable(props) {
       </div>
     );
   };
+  // Array of all the columns that will show in the grid
   const columns = [
     { key: "_id", name: "Code", formatter: CodeAction },
     { key: "client_name", name: "Client", formatter: ClientActions },
@@ -95,13 +99,18 @@ function DataTable(props) {
     { key: "user_creator_name", name: "Created by" },
     { key: "code_actions", name: "", formatter: Actions },
   ];
+  //Lets the user know the "copy to clipboard" was successfull
   const handleCopy = () => {
     notify("Code copied to clipboard!");
   };
+
+  //Called whenever the user wants to edit a code.
   const handleEdit = (row) => {
     props.handleEditShowModal();
     props.updateCodeToEdit(row);
   };
+
+  //Copies the entire row in CSV format.
   const copyRow = (row) => {
     let code = `${row._id}, `;
     let client = `${row.client_name}, `;
@@ -110,23 +119,30 @@ function DataTable(props) {
     let rowToCopy = code + client + subclient + expiration_date;
     return rowToCopy;
   };
+
+  //Called whenever the user wants to edit a client.
   const handleEditClient = async (row) => {
     let clientFetch = await axios.get(
       `https://api.spark4community.com/clients`
     );
     let clients = clientFetch.data;
+    // Finds the client matching the name of the row, to later get the id
     let clientToEdit = clients.find(
       (client) => client.name === row.client_name
     );
+    //If the client has been deleted, meaning it does not exist, we prevent the error.
     if (!clientToEdit) return notify("This client does not exist anymore");
-    console.log(clientToEdit._id);
     props.updateClientToEdit(clientToEdit._id);
     props.handleEditClientModal();
   };
+
+  //Prevents code repetition, by having the same modal for deleting the client and code(s).
   const redirectDelete = () => {
     if (props.type === "code") deleteCode();
     if (props.type === "client") deleteClient();
   };
+
+  //Called whenever a user wants to delete a code. It removed the code from the database.
   const deleteCode = async () => {
     let row = props.rowToDelete;
     try {
@@ -139,11 +155,13 @@ function DataTable(props) {
     }
   };
 
+  //Called whenever a user wants to delete a client. It removed the client from the database.
   const deleteClient = async () => {
     let fetchClients = await axios.get(
       `https://api.spark4community.com/clients`
     );
     let clients = fetchClients.data;
+    // Finds the client matching the name of the row, to later get the id
     let clientFound = clients.find(
       (client) => client._id === props.clientToDelete
     );
@@ -163,17 +181,6 @@ function DataTable(props) {
     props.updateRows();
   }, []);
 
-  const gridHeight = () => {
-    let numberOfCodes = props.codes.lenght;
-    return numberOfCodes * 35;
-  };
-  const RowRenderer = ({ renderBaseRow, ...props }) => {
-    console.log(renderBaseRow);
-    let color = "green";
-    return (
-      <div style={{ backgroundColor: color }}>{renderBaseRow(...props)}</div>
-    );
-  };
   return (
     <div>
       <div className={style.DataGrid}>
@@ -181,13 +188,11 @@ function DataTable(props) {
           height={props.gridHeight}
           columns={columns}
           rows={props.codes}
-          rowRendered={RowRenderer}
         />
       </div>
       <div className={style.deleteCodeConfirmation}>
         <Modal
           overlayClick={true}
-          height={gridHeight}
           color="#f3e8cb"
           showModal={props.showDeleteConfirmationModal}
           handleCloseModal={props.handleClose}

@@ -5,7 +5,7 @@ import sparkLogo from "../../../images/spark_app_logo_transparent.png";
 import axios from "axios";
 import Select from "react-select";
 import Modal from "../Modal/Modal.js";
-import notify from "../notify/notify.js"
+import notify from "../notify/notify.js";
 import CodesGenerated from "../CodesGenerated/CodesGenerated";
 function GenerateCode(props) {
   let [client, setClient] = useState([]);
@@ -22,7 +22,7 @@ function GenerateCode(props) {
 
   let [formClient, setFormClient] = useState("");
 
-  //clears the forms whenever the user clicks on the modal
+  //Clears the forms whenever the user clicks on the modal
   const clearState = () => {
     setForm({
       ...form,
@@ -37,8 +37,7 @@ function GenerateCode(props) {
     setFormClient("");
   };
 
-
-  //sends a request to the server so we can display all the clients to the user
+  //Sends a request to the server so we can display all the clients to the user
   useEffect(() => {
     const getClientData = async () => {
       const clientData = await axios.get(
@@ -60,15 +59,13 @@ function GenerateCode(props) {
     });
   };
 
-  //updates the state of the select component as the user clicks on the options
+  //Updates the state of the select component as the user clicks on the options
   const handleSelectChange = (formClient) => {
     setFormClient(formClient);
-    console.log("option selected: ", formClient);
   };
 
-  //prevents users from sending empty values in code_batches
+  //Prevents users from sending empty values in code_batches
   const formValidation = () => {
-    console.log("formClient length: ", formClient.length);
     if (
       ((formClient.length !== 0 || formClient.length !== 0) &&
         form.expirationDate.length !== 0 &&
@@ -83,7 +80,7 @@ function GenerateCode(props) {
     }
   };
 
-  //sends the codeBatch data to the path /code_batch via post request
+  //Sends the codeBatch data to the path /code_batch via post request
   const sendCodeData = async () => {
     if (
       formValidation() === true &&
@@ -101,19 +98,19 @@ function GenerateCode(props) {
         },
       };
       try {
-        //sends the data to /code_batch
+        //Sends the data to /code_batch
         const data = await axios.post(
           "https://api.spark4community.com/code_batches",
           codeBatch
         );
         notify("Data has been sent!");
-        //stores the newly created codes in state to be displayed
+        //Stores the newly created codes in state to be displayed
         setGeneratedCodes(data.data.code_batch._id);
-        //updates the row with the new code_batch
+        //Updates the row with the new code_batch
         props.updateRows();
-        //closes the modal once they submt
+        //Closes the modal once they submt
         props.handleCloseModal();
-        //displays the newly generated codes to the user
+        //Displays the newly generated codes to the user
         setShowGeneratedCodesModal(true);
       } catch (err) {
         console.error(err);
@@ -123,14 +120,14 @@ function GenerateCode(props) {
     }
   };
 
-  //sends the data to the server to be later displayed in the data grid for the user
+  //Sends the data to the server to be later displayed in the data grid for the user
   const handleSubmit = (events) => {
-    //prevents page from refreshing
+    //Prevents the page from refreshing after the form submission
     events.preventDefault();
     sendCodeData();
   };
 
-  //adds the new clients the user creates into the select component
+  //Adds the new clients the user creates into the select component
   const selectOptions = () => {
     let newOptions = [];
     for (let i = 0; i < client.length; i++) {

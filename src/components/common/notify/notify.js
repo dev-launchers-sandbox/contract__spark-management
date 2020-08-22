@@ -2,8 +2,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
 
-
-//gets called when the user inputs the wrong username and password
+// Sends a toast notification with what is passed in the parameter
 const notify = (text) => {
   toast(text, {
     position: toast.POSITION.BOTTOM_RIGHT,

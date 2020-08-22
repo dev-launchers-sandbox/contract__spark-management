@@ -3,7 +3,7 @@ import style from "./AdminLoginPage.module.css";
 import PageBody from "../../../components/common/PageBody/PageBody.js";
 import logo from "../../../images/spark_app_logo_transparent.png";
 import axios from "axios";
-import notify from "../../../components/common/notify/notify.js"
+import notify from "../../../components/common/notify/notify.js";
 import MockAdapter from "axios-mock-adapter";
 import {
   BrowserRouter as Router,
@@ -68,15 +68,13 @@ function AdminLoginPage() {
       // If the info provided is correct, allow the redirect to /ManageCodes
       if (response.status === 200) {
         setRedirect(true);
-        notify("Logged in")
+        notify("Logged in");
       }
     } catch (err) {
       //Notifies the user that the info provided is incorrect
       notify("This account doesn't exist");
     }
   };
-
-  //gets called when the user inputs the wrong username and password
 
   return (
     <PageBody>

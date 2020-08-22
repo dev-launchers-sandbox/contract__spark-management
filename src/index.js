@@ -23,8 +23,6 @@ import AdminLoginPage from "./pages/AdminPortal/AdminLoginPage/AdminLoginPage";
 import ForgotPasswordRoute from "./pages/AdminPortal/ForgotPassword/ForgotPassword.js";
 import UserCreationRoute from "./pages/AdminPortal/UserCreationPage/UserCreationPage.js";
 
-//import mockData from "../src/mockData/MockData.js";
-
 import ManageCodesPage from "./pages/AdminPortal/ManageCodesPage/ManageCodesPage";
 import Footer from "../src/components/common/Footer/Footer.js";
 import SelectDeck from "./components/common/SelectDeck/SelectDeck";

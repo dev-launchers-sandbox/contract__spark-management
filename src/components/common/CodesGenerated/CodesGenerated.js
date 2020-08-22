@@ -6,6 +6,7 @@ import style from "./CodesGenerated.module.css";
 import axios from "axios";
 export default function CodesGenerated(props) {
   const [rows, setRows] = useState("");
+  // Array of all the columns that will show in the grid
   const columns = [
     { key: "_id", name: "Code" },
     { key: "client_name", name: "Client" },
@@ -14,10 +15,14 @@ export default function CodesGenerated(props) {
     { key: "createdAt", name: "Created At" },
     { key: "expiration_date", name: "Exp. Date" },
   ];
+
+  //Close this modal and open the create codes one.
   const generateMoreCodes = () => {
     props.openGenerateCode();
     props.handleCloseModal();
   };
+  //Whenever the props.codesGenerated change, update what will show in the table
+  // This allows us to use the same grid at all times
   useEffect(() => {
     async function getNewCodes() {
       if (props.generatedCodes) {
@@ -28,8 +33,8 @@ export default function CodesGenerated(props) {
           )
           .then((newCodes) => (codesGenerated = newCodes.data));
         try {
+          // Removes miliseconds for the dates
           codesGenerated.forEach((code) => {
-            console.log(code.expiration_date);
             let shortExp = code.expiration_date.substring(0, 10);
             code.expiration_date = shortExp;
           });
@@ -37,9 +42,7 @@ export default function CodesGenerated(props) {
             let shortCreated = code.createdAt.substring(0, 10);
             code.createdAt = shortCreated;
           });
-        } catch (err) {
-          console.log(err);
-        }
+        } catch (err) {}
         setRows(codesGenerated);
       }
     }

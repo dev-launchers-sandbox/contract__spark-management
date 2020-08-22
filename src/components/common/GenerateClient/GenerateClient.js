@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import style from "./GenerateClient.module.css";
 import Modal from "../Modal/Modal.js";
-import ClientCreatedModal from "../ClientCreatedModal/ClientCreatedModal.js"
-import notify from "../notify/notify.js"
+import ClientCreatedModal from "../ClientCreatedModal/ClientCreatedModal.js";
+import notify from "../notify/notify.js";
 import axios from "axios";
 import Select from "react-select";
 
@@ -23,7 +23,7 @@ function GenerateClient(props) {
     });
   };
 
-  //clears the forms whenever the user clicks on the modal
+  //Clears the forms whenever the user clicks on the modal
   const clearState = () => {
     setForm({
       ...form,
@@ -32,28 +32,29 @@ function GenerateClient(props) {
     });
   };
 
-  //when the user opens the modal the forms will be cleared
+  //When the user opens the modal the forms will be cleared
   useEffect(() => {
     clearState();
   }, [props.showModal]);
 
   //sends the clienData to the path /clients via post request
   const sendClientData = async () => {
-    if (form.client.length !== 0) { //prevents the user from accidentally submitting no client
+    if (form.client.length !== 0) {
+      //Prevents the user from accidentally submitting no client
       const clientData = {
         name: form.client,
         logo_url: form.logoUrl,
       };
       try {
-        //sends a request to the server to later display the clients to the user
+        //Sends a request to the server to later display the clients to the user
         const response = await axios.post(
           "https://api.spark4community.com/clients",
           clientData
         );
         notify("Data has been sent!");
-        //updates the row with the new code_batch
+        //Updates the row with the new code_batch
         props.handleCloseModal();
-        //displays a modal that tells the user their data has been sent
+        //Displays a modal that tells the user their data has been sent
         setShowClientCreatedModal(true);
       } catch (err) {
         console.error(err);
@@ -63,11 +64,10 @@ function GenerateClient(props) {
     }
   };
 
-  //gets called when the user clicks the Generate Client button
+  //Gets called whenever the form gets submitted
   const handleSubmit = (events) => {
-    //prevents the page from refreshing on submit
+    //Prevents the page from refreshing after the form submission
     events.preventDefault();
-
     sendClientData();
   };
 
