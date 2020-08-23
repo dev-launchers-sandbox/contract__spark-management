@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import style from "./EditCodeModal.module.css";
-import Modal from "../Modal/Modal.js";
+import Modal from "../../../../../components/common/Modal/Modal.js";
 import axios from "axios";
 import Select from "react-select";
-import notify from "../notify/notify.js"
+import notify from "../../../../../components/common/notify/notify.js";
 
 function EditCodeModal(props) {
   let [client, setClient] = useState([]);

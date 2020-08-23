@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ReactModal from "react-modal";
 import style from "./GenerateCode.module.css";
-import sparkLogo from "../../../images/spark_app_logo_transparent.png";
+import sparkLogo from "../../../../../images/spark_app_logo_transparent.png";
 import axios from "axios";
 import Select from "react-select";
-import Modal from "../Modal/Modal.js";
-import notify from "../notify/notify.js";
-import CodesGenerated from "../CodesGenerated/CodesGenerated";
+import Modal from "../../../../../components/common/Modal/Modal.js";
+import notify from "../../../../../components/common/notify/notify.js";
+import CodesGenerated from "./CodesGenerated/CodesGenerated.js";
 function GenerateCode(props) {
   let [client, setClient] = useState([]);
   let [showGeneratedCodesModal, setShowGeneratedCodesModal] = useState(false);
