@@ -12,7 +12,7 @@ import {
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
-import EULAModal from "../../../components/common/EULAModal/EULAModal.js";
+import EULAModal from "./EULAModal/EULAModal.js";
 import PageBody from "../../../components/common/PageBody/PageBody.js";
 import Logo from "../../../components/common/Logo/Logo.js";
 import SelectDeck from "../../../components/common/SelectDeck/SelectDeck.js";
