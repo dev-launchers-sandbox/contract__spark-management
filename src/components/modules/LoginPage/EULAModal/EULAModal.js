@@ -4,7 +4,6 @@ import termsOfAgreement from "./termsOfAgreement.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
-import header from "../../../../";
 import TextBox from "../EULAModal/TextBox/TextBox.js";
 
 import style from "./Modal.module.css";

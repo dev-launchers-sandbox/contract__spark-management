@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Modal from "../Modal/Modal.js";
+import Modal from "../../../../../components/common/Modal/Modal.js";
 import ReactDataGrid from "react-data-grid";
-import SortByDropdowns from "../../../components/modules/ManageCodesPage/Dropdowns/SortBy/SortBy.js";
-import FilterByDropdowns from "../../../components/modules/ManageCodesPage/Dropdowns/FilterBy/FilterBy.js";
+import SortByDropdowns from "../../../../../components/modules/ManageCodesPage/Dropdowns/SortBy/SortBy.js";
+import FilterByDropdowns from "../../../../../components/modules/ManageCodesPage/Dropdowns/FilterBy/FilterBy.js";
 import "react-data-grid/dist/react-data-grid.css";
 import style from "./FilterButton.module.css";
 import axios from "axios";

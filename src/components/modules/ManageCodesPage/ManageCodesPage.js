@@ -8,8 +8,8 @@ import GenerateCode from "../ManageCodesPage/Modals/GenerateCode/GenerateCode.js
 import GenerateClient from "../ManageCodesPage/Modals/GenerateClient/GenerateClient.js";
 import EditCodeModal from "../ManageCodesPage/Modals/EditCodeModal/EditCodeModal.js";
 import EditClientModal from "../ManageCodesPage/Modals/EditClient/EditClient.js";
-import FilterButtonModal from "../../../components/common/FilterButtonModal/FilterButtonModal.js";
-import SortByButtonModal from "../../../components/common/SortByButtonModal/SortByButtonModal.js";
+import FilterButtonModal from "../ManageCodesPage/Modals/FilterButtonModal/FilterButtonModal.js";
+import SortByButtonModal from "../ManageCodesPage/Modals/SortByButtonModal/SortByButtonModal.js";
 import {
   BrowserRouter as Router,
   Switch,

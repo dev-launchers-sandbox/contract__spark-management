@@ -5,7 +5,6 @@ import style from "./SelectDeck.module.css";
 import axios from "axios";
 import Logo from "../Logo/Logo.js";
 import PageBody from "../PageBody/PageBody.js";
-import EULAModal from "../EULAModal/EULAModal.js";
 import HelpButton from "../HelpButton/HelpButton.js";
 
 import TransparentLogo from "./../../../images/spark_app_logo_transparent.png";
