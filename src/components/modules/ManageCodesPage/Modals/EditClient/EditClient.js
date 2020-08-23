@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import style from "./EditClient.module.css";
-import Modal from "../Modal/Modal.js";
+import Modal from "../../../../../components/common/Modal/Modal.js";
 import axios from "axios";
-import notify from "../notify/notify.js"
+import notify from "../../../../../components/common/notify/notify.js";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

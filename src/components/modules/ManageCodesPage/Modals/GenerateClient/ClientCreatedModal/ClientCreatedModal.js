@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Modal from "../Modal/Modal.js";
+import Modal from "../../../../../../components/common/Modal/Modal.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";

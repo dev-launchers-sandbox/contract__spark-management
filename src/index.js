@@ -13,17 +13,17 @@ import ReactModal from "react-modal";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 
-import ResetPassword from "./pages/AdminPortal/ResetPassword/ResetPassword";
+import ResetPasswordRoute from "./routes/ResetPasswordRoute.js";
 import CommunityDeckRoute from "./routes/CommunityDeck.js";
 import ConversationalDeckRoute from "./routes/ConversationalDeck.js";
 import SpanishDeckRoute from "./routes/SpanishDeck.js";
 import YouthDeckRoute from "./routes/YouthDeck.js";
-import LoginPageRoute from "./pages/LoginPage/LoginPage";
-import AdminLoginPage from "./pages/AdminPortal/AdminLoginPage/AdminLoginPage";
-import ForgotPasswordRoute from "./pages/AdminPortal/ForgotPassword/ForgotPassword.js";
-import UserCreationRoute from "./pages/AdminPortal/UserCreationPage/UserCreationPage.js";
+import LoginPageRoute from "./routes/LoginPageRoute.js";
+import AdminLoginRoute from "./routes/AdminLoginRoute.js";
+import ForgotPasswordRoute from "./routes/ForgotPasswordRoute.js";
+import UserCreationRoute from "./routes/UserCreationRoute.js";
 
-import ManageCodesPage from "./pages/AdminPortal/ManageCodesPage/ManageCodesPage";
+import ManageCodesRoute from "./routes/ManageCodesRoute.js";
 import Footer from "../src/components/common/Footer/Footer.js";
 import SelectDeck from "./components/common/SelectDeck/SelectDeck";
 
@@ -38,15 +38,15 @@ let routes = [
   },
   {
     path: "/AdminLoginPage",
-    component: AdminLoginPage,
+    component: AdminLoginRoute,
   },
   {
     path: "/ManageCodes",
-    component: ManageCodesPage,
+    component: ManageCodesRoute,
   },
   {
     path: "/ResetPassword",
-    component: ResetPassword,
+    component: ResetPasswordRoute,
   },
   {
     path: "/CreateNewUser",
@@ -100,7 +100,6 @@ function App() {
       <div className="App">
         <Switch> {routeComponents} </Switch>
       </div>
-      <Footer />
       {statusCode === 200 && <Redirect to="/" />}
     </Router>
   );

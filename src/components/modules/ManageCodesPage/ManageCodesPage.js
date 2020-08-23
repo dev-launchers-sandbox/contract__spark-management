@@ -4,10 +4,10 @@ import style from "./ManageCodesPage.module.css";
 import MockAdapter from "axios-mock-adapter";
 import Header from "../../../components/common/Header/Header";
 import DataGridComponent from "../../../components/common/DataGrid/DataGrid";
-import GenerateCode from "../../../components/common/GenerateCode/GenerateCode.js";
-import GenerateClient from "../../../components/common/GenerateClient/GenerateClient.js";
-import EditCodeModal from "../../../components/common/EditCodeModal/EditCodeModal.js";
-import EditClientModal from "../../../components/common/EditClient/EditClient.js";
+import GenerateCode from "../ManageCodesPage/Modals/GenerateCode/GenerateCode.js";
+import GenerateClient from "../ManageCodesPage/Modals/GenerateClient/GenerateClient.js";
+import EditCodeModal from "../ManageCodesPage/Modals/EditCodeModal/EditCodeModal.js";
+import EditClientModal from "../ManageCodesPage/Modals/EditClient/EditClient.js";
 import FilterButtonModal from "../../../components/common/FilterButtonModal/FilterButtonModal.js";
 import SortByButtonModal from "../../../components/common/SortByButtonModal/SortByButtonModal.js";
 import {
@@ -189,7 +189,6 @@ function ManageCodesPage() {
   return (
     <div>
       <div className={style.manageCodesPage}>
-        <Header />
         <GenerateCode
           showModal={showGenerateCodeModal}
           handleCloseModal={() => {

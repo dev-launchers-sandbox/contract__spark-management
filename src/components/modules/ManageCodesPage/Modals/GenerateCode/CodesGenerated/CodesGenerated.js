@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Modal from "../Modal/Modal.js";
+import Modal from "../../../../../../components/common/Modal/Modal.js";
 import ReactDataGrid from "react-data-grid";
 import "react-data-grid/dist/react-data-grid.css";
 import style from "./CodesGenerated.module.css";
