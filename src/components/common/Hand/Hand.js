@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Redirect, useParams } from "react-router-dom";
 import useDeck from "./../useDeck/useDeck";
 import YellowCard from "./../YellowCard/YellowCard";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
-import HelpButton from "../HelpButton/HelpButton.js";
 import HowToPlayButton from "./HowToPlayButton/HowToPlayButton";
 import NeedHelpButton from "./NeedHelpButton/NeedHelpButton";
 import queryString from "query-string";

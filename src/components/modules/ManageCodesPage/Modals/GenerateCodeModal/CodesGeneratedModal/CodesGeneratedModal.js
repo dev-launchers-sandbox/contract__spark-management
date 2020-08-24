@@ -4,6 +4,7 @@ import ReactDataGrid from "react-data-grid";
 import "react-data-grid/dist/react-data-grid.css";
 import style from "./CodesGeneratedModal.module.css";
 import axios from "axios";
+import Button from "../../../../../../components/common/Button/Button";
 
 export default function CodesGeneratedModal(props) {
   const [rows, setRows] = useState("");
@@ -61,10 +62,20 @@ export default function CodesGeneratedModal(props) {
         <p className={style.modalP}> These are your codes! </p>
         <ReactDataGrid columns={columns} rows={rows} />
         <div className={style.buttonContainer}>
-          <button onClick={generateMoreCodes}> Create More! </button>
-          <button onClick={props.handleCloseModal}> I’m done! </button>
+          <Button style={{ color: "black" }} onClick={generateMoreCodes}>
+            {" "}
+            Create More!{" "}
+          </Button>
+          <Button style={{ color: "black" }} onClick={props.handleCloseModal}>
+            {" "}
+            I’m done!{" "}
+          </Button>
         </div>
       </Modal>
     </div>
   );
 }
+/*
+<button onClick={generateMoreCodes}> Create More! </button>
+<button onClick={props.handleCloseModal}> I’m done! </button>
+*/

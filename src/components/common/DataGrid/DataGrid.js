@@ -8,7 +8,7 @@ import notify from "../notify/notify.js";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 import { css } from "glamor";
-
+import Button from "../Button/Button";
 toast.configure();
 function DataTable(props) {
   const [
@@ -217,8 +217,14 @@ function DataTable(props) {
               </div>
             )}
             <div className={style.buttonContainer}>
-              <button onClick={redirectDelete}> Yes </button>
-              <button onClick={props.handleClose}> No </button>
+              <Button style={{ color: "black" }} onClick={redirectDelete}>
+                {" "}
+                Yes{" "}
+              </Button>
+              <Button style={{ color: "black" }} onClick={props.handleClose}>
+                {" "}
+                No{" "}
+              </Button>
             </div>
           </div>
         </Modal>
@@ -228,3 +234,8 @@ function DataTable(props) {
 }
 
 export default DataTable;
+
+/*
+<button onClick={redirectDelete}> Yes </button>
+<button onClick={props.handleClose}> No </button>
+*/

@@ -7,6 +7,7 @@ import Select from "react-select";
 import Modal from "../../../../../components/common/Modal/Modal.js";
 import notify from "../../../../../components/common/notify/notify.js";
 import CodesGeneratedModal from "./CodesGeneratedModal/CodesGeneratedModal.js";
+import Button from "../../../../../components/common/Button/Button";
 
 function GenerateCodeModal(props) {
   let [client, setClient] = useState([]);

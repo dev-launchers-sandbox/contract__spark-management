@@ -17,10 +17,9 @@ import PageBody from "../../../components/common/PageBody/PageBody.js";
 import Logo from "../../../components/common/Logo/Logo.js";
 import SelectDeck from "../../../components/common/SelectDeck/SelectDeck.js";
 import LoadingOverlay from "react-loading-overlay";
-import notify from "../../../components/common/notify/notify.js"
+import notify from "../../../components/common/notify/notify.js";
 import RandomQuote from "../../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../../images/spark_app_logo_transparent.png";
-import HelpButton from "../../../components/common/HelpButton/HelpButton.js";
 
 function LoginPage(props) {
   let [form, setForm] = useState({ code: "" });

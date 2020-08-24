@@ -5,7 +5,7 @@ import ClientCreatedModal from "./ClientCreatedModal/ClientCreatedModal.js";
 import notify from "../../../../../components/common/notify/notify.js";
 import axios from "axios";
 import Select from "react-select";
-
+import Button from "../../../../../components/common/Button/Button";
 function GenerateClient(props) {
   let [form, setForm] = useState({
     client: "",
@@ -105,9 +105,13 @@ function GenerateClient(props) {
               />
             </div>
             <div className={style.buttonContainer}>
-              <button className={style.button} onClick={handleSubmit}>
-                Create Client
-              </button>
+              <Button
+                style={{ fontWeight: "bold", color: "black" }}
+                onClick={handleSubmit}
+              >
+                {" "}
+                Create Client{" "}
+              </Button>
             </div>
           </form>
         </div>
@@ -123,3 +127,8 @@ function GenerateClient(props) {
 }
 
 export default GenerateClient;
+/*
+<button className={style.button} onClick={handleSubmit}>
+  Create Client
+</button>
+*/
