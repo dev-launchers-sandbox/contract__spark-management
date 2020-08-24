@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import style from "./EditClient.module.css";
+import style from "./EditClientModal.module.css";
 import Modal from "../../../../../components/common/Modal/Modal.js";
 import axios from "axios";
 import notify from "../../../../../components/common/notify/notify.js";
@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
 
-function EditClient(props) {
+function EditClientModal(props) {
   let [form, setForm] = useState({
     client: "",
     logoUrl: "",
@@ -31,7 +31,6 @@ function EditClient(props) {
   //prepopulates the forms with the specific client data
   const getClientDataById = async () => {
     try {
-
       //makes request to server to get specific client data
       const response = await axios.get(
         `https://api.spark4community.com/clients/${props.clientToEdit}`
@@ -95,7 +94,6 @@ function EditClient(props) {
       notify("You can't change it to a client that already exists!");
     }
   };
-
 
   const handleSubmit = (events) => {
     //prevents the page from reloading
@@ -163,4 +161,4 @@ function EditClient(props) {
   );
 }
 
-export default EditClient;
+export default EditClientModal;

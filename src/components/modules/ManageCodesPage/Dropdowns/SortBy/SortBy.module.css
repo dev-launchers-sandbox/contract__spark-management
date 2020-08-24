@@ -1,15 +1,12 @@
 .sortBy {
   font-family: "Nunito Sans", serif;
-
 }
 
-.label{
+.label {
   display: flex;
   justify-content: center;
   font-family: "Nunito Sans";
 }
-
-
 
 .sortBy select {
   background: white;
@@ -26,27 +23,12 @@
   cursor: pointer;
 }
 
-.sortByTextContainer{
+.sortByTextContainer {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.button {
-  background: #91413c;
-  border-radius: 2px;
-  font-size: 1.2vw;
-  border: 2px;
-  margin: 1em;
-  margin-top: 1.5em;
-  width: 10em;
-  height: 2em;
-}
-
-.button:hover {
-  transform: scale(1.1);
-  cursor: pointer;
-}
 .sortBy select:after {
   background: #823c38;
 }

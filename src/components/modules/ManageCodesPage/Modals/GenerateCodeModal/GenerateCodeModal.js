@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ReactModal from "react-modal";
-import style from "./GenerateCode.module.css";
+import style from "./GenerateCodeModal.module.css";
 import sparkLogo from "../../../../../images/spark_app_logo_transparent.png";
 import axios from "axios";
 import Select from "react-select";
 import Modal from "../../../../../components/common/Modal/Modal.js";
 import notify from "../../../../../components/common/notify/notify.js";
-import CodesGenerated from "./CodesGenerated/CodesGenerated.js";
-function GenerateCode(props) {
+import CodesGeneratedModal from "./CodesGeneratedModal/CodesGeneratedModal.js";
+
+function GenerateCodeModal(props) {
   let [client, setClient] = useState([]);
   let [showGeneratedCodesModal, setShowGeneratedCodesModal] = useState(false);
   let [generatedCodes, setGeneratedCodes] = useState();
@@ -242,7 +243,7 @@ function GenerateCode(props) {
           </div>
         </div>
       </Modal>
-      <CodesGenerated
+      <CodesGeneratedModal
         showModal={showGeneratedCodesModal}
         handleCloseModal={() => {
           setShowGeneratedCodesModal(false);
@@ -254,4 +255,4 @@ function GenerateCode(props) {
   );
 }
 
-export default GenerateCode;
+export default GenerateCodeModal;
