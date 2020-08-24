@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import Modal from "../../../../../../components/common/Modal/Modal.js";
 import ReactDataGrid from "react-data-grid";
 import "react-data-grid/dist/react-data-grid.css";
-import style from "./CodesGenerated.module.css";
+import style from "./CodesGeneratedModal.module.css";
 import axios from "axios";
-export default function CodesGenerated(props) {
+
+export default function CodesGeneratedModal(props) {
   const [rows, setRows] = useState("");
   // Array of all the columns that will show in the grid
   const columns = [

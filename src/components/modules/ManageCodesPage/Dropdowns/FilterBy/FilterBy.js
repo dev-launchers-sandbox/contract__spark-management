@@ -4,6 +4,8 @@ import style from "./FilterBy.module.css";
 import { toast } from "react-toastify";
 import { css } from "glamor";
 
+import Button from "./../../../..//common/Button/Button.js";
+
 //Sends a toast nofication saying whatever is passed as a parameter
 const notify = (text) => {
   toast(text, {
@@ -59,6 +61,7 @@ export default function FilterBy(props) {
       <div className={style.filterByColumnDropdown}>
         <select name="column" value={filterBy.column} onChange={handleChange}>
           <option value="client_name"> Client </option>
+          <option value="sub_client_name"> Sub Client </option>
           <option value="_id"> Code </option>
           <option value="deck_name"> Deck </option>
           <option value="user_creator_name"> Created By </option>
@@ -77,10 +80,10 @@ export default function FilterBy(props) {
         />
       </div>
       <div className={style.applyFilter}>
-        <button className={style.button} onClick={applyFilter}>
+        <Button style={{ color: "BLACK" }} onClick={applyFilter}>
           {" "}
           Apply Filter{" "}
-        </button>
+        </Button>
       </div>
     </div>
   );

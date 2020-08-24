@@ -4,12 +4,13 @@ import style from "./ManageCodesPage.module.css";
 import MockAdapter from "axios-mock-adapter";
 import Header from "../../../components/common/Header/Header";
 import DataGridComponent from "../../../components/common/DataGrid/DataGrid";
-import GenerateCode from "../ManageCodesPage/Modals/GenerateCode/GenerateCode.js";
+import GenerateCodeModal from "../ManageCodesPage/Modals/GenerateCodeModal/GenerateCodeModal.js";
 import GenerateClient from "../ManageCodesPage/Modals/GenerateClient/GenerateClient.js";
 import EditCodeModal from "../ManageCodesPage/Modals/EditCodeModal/EditCodeModal.js";
-import EditClientModal from "../ManageCodesPage/Modals/EditClient/EditClient.js";
+import EditClientModal from "../ManageCodesPage/Modals/EditClientModal/EditClientModal.js";
 import FilterButtonModal from "../ManageCodesPage/Modals/FilterButtonModal/FilterButtonModal.js";
 import SortByButtonModal from "../ManageCodesPage/Modals/SortByButtonModal/SortByButtonModal.js";
+import Button from "../../../components/common/Button/Button.js";
 import {
   BrowserRouter as Router,
   Switch,
@@ -68,12 +69,12 @@ function ManageCodesPage() {
     //Shows the Delete Confirmation Modal.
     setShowDeleteConfirmationModal(true);
   };
-  const handleFilterButtonModaal = () => {
+  const handleFilterButtonModal = () => {
     //Shows the Filter Modal.
     setShowFilterButtonModal(true);
   };
 
-  const handleSortByButtonModaal = () => {
+  const handleSortByButtonModal = () => {
     //Shows the Sort Modal.
     setShowSortByButtonModal(true);
   };
@@ -189,7 +190,7 @@ function ManageCodesPage() {
   return (
     <div>
       <div className={style.manageCodesPage}>
-        <GenerateCode
+        <GenerateCodeModal
           showModal={showGenerateCodeModal}
           handleCloseModal={() => {
             setShowGenerateCodeModal(false);
@@ -254,10 +255,10 @@ function ManageCodesPage() {
           resetPage={resetPage}
         />
         <div className={style.buttonContainer}>
-          <button onClick={handleGenerateCodeShowModal}>+ Code 🔑</button>
-          <button onClick={handleGenerateClientShowModal}>+ Client 💼</button>
+          <Button onClick={handleGenerateCodeShowModal}>+ Code 🔑</Button>
+          <Button onClick={handleGenerateClientShowModal}>+ Client 💼</Button>
           <Link to="/CreateNewUser">
-            <button>+ User 👤</button>
+            <Button doNothing={true}>+ User 👤 </Button>
           </Link>
         </div>
       </div>
@@ -278,26 +279,24 @@ function ManageCodesPage() {
         clientToDelete={clientToDelete}
       />
       <div className={style.pageButtons}>
-        {page > 0 && (
-          <button className={style.lastPageButton} onClick={substractPage}>
-            {" Previous Page"}
-          </button>
-        )}
+        {page > 0 && <Button onClick={substractPage}> Previous Page </Button>}
         {codes.length === NUM_ROWS_PER_PAGE && (
-          <button className={style.nextPageButton} onClick={addPage}>
-            {" Next Page"}
-          </button>
+          <Button onClick={addPage}> Next Page </Button>
         )}
       </div>
       <div className={style.buttonContainer}>
-        <button onClick={handleFilterButtonModaal}>🎛️ Filter</button>
-        <button onClick={handleSortByButtonModaal}>📚 Sort</button>
+        <Button onClick={handleFilterButtonModal}> 🎛️ Filter </Button>
+        <Button onClick={handleSortByButtonModal}>📚 Sort</Button>
       </div>
       <div className={style.resetFiltersAndSorts}>
-        <button onClick={resetFiltersAndSorts}>⬜ Reset View</button>
+        <Button onClick={resetFiltersAndSorts}>⬜ Reset View</Button>
       </div>
     </div>
   );
 }
 
 export default ManageCodesPage;
+
+/*  <button className={style.nextPageButton} onClick={addPage}>
+    {" Next Page"}
+  </button>*/

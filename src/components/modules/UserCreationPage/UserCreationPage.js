@@ -4,7 +4,8 @@ import PageBody from "../../../components/common/PageBody/PageBody.js";
 import logo from "../../../images/spark_app_logo_transparent.png";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import notify from "../../../components/common/notify/notify.js"
+import notify from "../../../components/common/notify/notify.js";
+import Button from "../../../components/common/Button/Button.js";
 import { css } from "glamor";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
@@ -164,7 +165,18 @@ function UserCreationPage() {
           style={{ marginTop: "2%" }}
         >
           <Link to="/ManageCodes">
-            <button className={style.manageCodesButton}>Go back</button>
+            <Button
+              style={{
+                backgroundColor: "#912123",
+                padding: "1em 3.2em",
+                width: "10.5em",
+                height: "3em",
+              }}
+              doNothing={true}
+            >
+              {" "}
+              Go Back{" "}
+            </Button>
           </Link>
         </div>
         <RandomQuote />

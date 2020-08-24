@@ -4,7 +4,7 @@ import ReactDataGrid from "react-data-grid";
 import SortByDropdowns from "../../../../../components/modules/ManageCodesPage/Dropdowns/SortBy/SortBy.js";
 import FilterByDropdowns from "../../../../../components/modules/ManageCodesPage/Dropdowns/FilterBy/FilterBy.js";
 import "react-data-grid/dist/react-data-grid.css";
-import style from "./FilterButton.module.css";
+import style from "./FilterButtonModal.module.css";
 import axios from "axios";
 
 function FilterButtonModal(props) {
