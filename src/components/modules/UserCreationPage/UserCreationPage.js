@@ -4,7 +4,7 @@ import PageBody from "../../../components/common/PageBody/PageBody.js";
 import logo from "../../../images/spark_app_logo_transparent.png";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import notify from "../../../components/common/notify/notify.js";
+import notify from "../../../utils/notify.js";
 import Button from "../../../components/common/Button/Button.js";
 import { css } from "glamor";
 import axios from "axios";

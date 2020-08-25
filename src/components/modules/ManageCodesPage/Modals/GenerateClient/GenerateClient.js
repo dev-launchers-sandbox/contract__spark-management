@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./GenerateClient.module.css";
 import Modal from "../../../../../components/common/Modal/Modal.js";
 import ClientCreatedModal from "./ClientCreatedModal/ClientCreatedModal.js";
-import notify from "../../../../../components/common/notify/notify.js";
+import notify from "../../../../../utils/notify.js";
 import axios from "axios";
 import Select from "react-select";
 import Button from "../../../../../components/common/Button/Button";

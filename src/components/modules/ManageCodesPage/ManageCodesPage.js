@@ -3,7 +3,7 @@ import style from "./ManageCodesPage.module.css";
 
 import MockAdapter from "axios-mock-adapter";
 import Header from "../../../components/common/Header/Header";
-import DataGridComponent from "../../../components/common/DataGrid/DataGrid";
+import DataGrid from "./DataGrid/DataGrid.js";
 import GenerateCodeModal from "../ManageCodesPage/Modals/GenerateCodeModal/GenerateCodeModal.js";
 import GenerateClient from "../ManageCodesPage/Modals/GenerateClient/GenerateClient.js";
 import EditCodeModal from "../ManageCodesPage/Modals/EditCodeModal/EditCodeModal.js";
@@ -262,7 +262,7 @@ function ManageCodesPage() {
           </Link>
         </div>
       </div>
-      <DataGridComponent
+      <DataGrid
         updateRows={updateRows}
         handleEditCodeShowModal={handleEditCodeShowModal}
         updateCodeToEdit={updateCodeToEdit}

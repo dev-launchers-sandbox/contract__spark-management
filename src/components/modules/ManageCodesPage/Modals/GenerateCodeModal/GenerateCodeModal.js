@@ -5,7 +5,7 @@ import sparkLogo from "../../../../../images/spark_app_logo_transparent.png";
 import axios from "axios";
 import Select from "react-select";
 import Modal from "../../../../../components/common/Modal/Modal.js";
-import notify from "../../../../../components/common/notify/notify.js";
+import notify from "../../../../../utils/notify.js";
 import CodesGeneratedModal from "./CodesGeneratedModal/CodesGeneratedModal.js";
 import Button from "../../../../../components/common/Button/Button";
 
