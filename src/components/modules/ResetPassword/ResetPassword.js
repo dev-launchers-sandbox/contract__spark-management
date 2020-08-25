@@ -3,7 +3,7 @@ import style from "./ResetPassword.module.css";
 import logo from "../../../images/spark_app_logo_transparent.png";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import notify from "../../../components/common/notify/notify.js"
+import notify from "../../../utils/notify.js";
 import { css } from "glamor";
 import axios from "axios";
 import {

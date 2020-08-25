@@ -3,7 +3,7 @@ import style from "./ForgotPassword.module.css";
 import logo from "../../../images/spark_app_logo_transparent.png";
 import axios from "axios";
 import PageBody from "../../../components/common/PageBody/PageBody.js";
-import notify from "../../../components/common/notify/notify.js"
+import notify from "../../../utils/notify.js";
 
 function ForgotPassword() {
   let [form, setForm] = useState({ email: "" });

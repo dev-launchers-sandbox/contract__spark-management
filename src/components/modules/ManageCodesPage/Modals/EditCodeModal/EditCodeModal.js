@@ -3,7 +3,7 @@ import style from "./EditCodeModal.module.css";
 import Modal from "../../../../../components/common/Modal/Modal.js";
 import axios from "axios";
 import Select from "react-select";
-import notify from "../../../../../components/common/notify/notify.js";
+import notify from "../../../../../utils/notify.js";
 import Button from "../../../../../components/common/Button/Button.js";
 function EditCodeModal(props) {
   let [client, setClient] = useState([]);

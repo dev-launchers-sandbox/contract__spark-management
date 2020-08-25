@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./EditClientModal.module.css";
 import Modal from "../../../../../components/common/Modal/Modal.js";
 import axios from "axios";
-import notify from "../../../../../components/common/notify/notify.js";
+import notify from "../../../../../utils/notify.js";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

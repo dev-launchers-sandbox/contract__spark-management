@@ -3,7 +3,7 @@ import style from "./AdminLoginPage.module.css";
 import PageBody from "../../../components/common/PageBody/PageBody.js";
 import logo from "../../../images/spark_app_logo_transparent.png";
 import axios from "axios";
-import notify from "../../../components/common/notify/notify.js";
+import notify from "../../../utils/notify.js";
 import MockAdapter from "axios-mock-adapter";
 import {
   BrowserRouter as Router,

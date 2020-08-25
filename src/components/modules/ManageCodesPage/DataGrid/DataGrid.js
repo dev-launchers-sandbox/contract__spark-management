@@ -3,12 +3,12 @@ import ReactDataGrid from "react-data-grid";
 import "react-data-grid/dist/react-data-grid.css";
 import style from "./DataGrid.module.css";
 import axios from "axios";
-import Modal from "../Modal/Modal";
-import notify from "../notify/notify.js";
+import Modal from "../../../../components/common/Modal/Modal";
+import notify from "../../../../utils/notify.js";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 import { css } from "glamor";
-import Button from "../Button/Button";
+import Button from "../../../../components/common/Button/Button";
 toast.configure();
 function DataTable(props) {
   const [
