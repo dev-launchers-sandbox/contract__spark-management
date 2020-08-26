@@ -5,7 +5,7 @@ function TextBox() {
   return (
     <div className={style.textBox}>
       <p>
-        Please read this S.P.A.R.K. App™ digital game (“App”) End User License
+        Please read this S.P.A.R.K. App<span>&#174;</span> digital game (“App”) End User License
         Agreement (“Agreement”) carefully before using the App. This Agreement
         forms a binding legal agreement and sets forth the terms and conditions
         of your use of the App. For the purposes of this Agreement, “you” means
