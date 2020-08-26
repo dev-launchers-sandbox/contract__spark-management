@@ -115,8 +115,9 @@ function DataTable(props) {
     let code = `${row._id}, `;
     let client = `${row.client_name}, `;
     let subclient = (row.sub_client_name || "None") + ", ";
-    let expiration_date = `${row.expiration_date}`;
-    let rowToCopy = code + client + subclient + expiration_date;
+    let expiration_date = `${row.expiration_date}, `;
+    let deck = `${row.deck_name}`;
+    let rowToCopy = code + client + subclient + expiration_date + deck;
     return rowToCopy;
   };
 
