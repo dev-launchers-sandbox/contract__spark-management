@@ -1,0 +1,13 @@
+[
+  { "question": "I am..." },
+  { "question": "I am not..." },
+  { "question": "I like..." },
+  { "question": "I don't like..." },
+  { "question": "I love..." },
+  { "question": "I don't love..." },
+  { "question": "My family is..." },
+  { "question": "My family is not..." },
+  { "question": "My friends are..." },
+  { "question": "My friends are not..." },
+  { "question": "My toys are..." }
+]

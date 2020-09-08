@@ -20,7 +20,7 @@ import LoadingOverlay from "react-loading-overlay";
 import notify from "../../../utils/notify.js";
 import RandomQuote from "../../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../../images/spark_app_logo_transparent.png";
-
+import sendToGA from "../../../utils/sendToGA";
 function LoginPage(props) {
   let [form, setForm] = useState({ code: "" });
   const [isLoading, setIsLoading] = useState(false);
@@ -60,28 +60,16 @@ function LoginPage(props) {
 
       sessionStorage.setItem(form.code, true); //Marks the code as verified
       //Sets the deck using to later redirect to it
-      if (codeData.data.code.deck_name === "community") {
-        setDeckUsing("CommunityDeck");
-      } else if (codeData.data.code.deck_name === "spanish") {
-        setDeckUsing("SpanishDeck");
-      } else if (codeData.data.code.deck_name === "conversational") {
-        setDeckUsing("ConversationalDeck");
-      } else if (codeData.data.code.deck_name === "youth") {
-        setDeckUsing("YouthDeck");
-      } else {
-        setForm({
-          ...form,
-          code: "",
-        });
-        setIsLoading(false);
-        notify("This code does not exist!");
-        return;
-      }
+      let uppercaseDeckName =
+        codeData.data.code.deck_name.charAt(0).toUpperCase() +
+        codeData.data.code.deck_name.slice(1);
+      setDeckUsing(uppercaseDeckName.concat("Deck"));
       setIsLoading(false);
 
       //Verifies that the code is not expired and allows for the redirect to happen
       if (data.data.valid) {
         setRedirect(true);
+        sendToGA("Game Actions", `Code Entered`);
       }
     } catch (error) {
       // All invalid codes will reach this endpoint

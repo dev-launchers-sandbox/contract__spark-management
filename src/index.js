@@ -16,6 +16,7 @@ import MockAdapter from "axios-mock-adapter";
 import ResetPasswordRoute from "./routes/ResetPasswordRoute.js";
 import CommunityDeckRoute from "./routes/CommunityDeck.js";
 import ConversationalDeckRoute from "./routes/ConversationalDeck.js";
+import ElementaryDeckRoute from "./routes/ElementaryDeck.js";
 import SpanishDeckRoute from "./routes/SpanishDeck.js";
 import YouthDeckRoute from "./routes/YouthDeck.js";
 import LoginPageRoute from "./routes/LoginPageRoute.js";
@@ -27,6 +28,7 @@ import ManageCodesRoute from "./routes/ManageCodesRoute.js";
 import Footer from "../src/components/common/Footer/Footer.js";
 import SelectDeck from "./components/common/SelectDeck/SelectDeck";
 
+import ReactGA from "react-ga";
 // Change axios defaults, to fix cookies being sent (may need a better solution)
 axios.defaults.withCredentials = true;
 
@@ -61,6 +63,10 @@ let routes = [
     component: ConversationalDeckRoute,
   },
   {
+    path: "/ElementaryDeck",
+    component: ElementaryDeckRoute,
+  },
+  {
     path: "/SpanishDeck",
     component: SpanishDeckRoute,
   },
@@ -87,6 +93,17 @@ const getBasename = (path) => {
 
 function App() {
   ReactModal.setAppElement("#root");
+  const init = () => {
+    ReactGA.initialize("UA-176718447-1"); // put your tracking id here
+  };
+  const PageView = () => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  };
+  useEffect(() => {
+    init();
+    PageView();
+  }, []);
+
   let [statusCode, setStatusCode] = useState(null);
   let [formCode, setFormCode] = useState("");
 
