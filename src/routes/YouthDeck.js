@@ -8,11 +8,14 @@ import { Link, useParams } from "react-router-dom";
 
 import YouthDeckYellow from "../data/YouthDeck/YouthDeckYellow.json";
 import YouthDeckRed from "../data/YouthDeck/YouthDeckRed.json";
+import usePageView from "../utils/usePageView"
+
 import axios from "axios";
 
 //This makes the code cleaner by returning the teen deck route that will get called on index.js
 
 export default function YouthDeck(props) {
+  usePageView();
   return (
     <PageBody>
       <div className="upperRow">
