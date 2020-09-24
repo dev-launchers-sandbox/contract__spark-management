@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 
 function usePageViews() {
+  console.log("yo is this working bruh?")
   //gets the current url
   let location = useLocation()
 

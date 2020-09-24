@@ -7,7 +7,8 @@ import ReactGA from "react-ga"
  * @param {string} action
  * @param {string} label
  */
- const reactgaevent = (category, action, label) => {
+ const sendEvent = (category, action, label) => {
+   console.log("event has been fired")
   ReactGA.event({
     category: category,
     action: action,
@@ -15,4 +16,4 @@ import ReactGA from "react-ga"
   });
 };
 
-export default reactgaevent;
+export default sendEvent;
