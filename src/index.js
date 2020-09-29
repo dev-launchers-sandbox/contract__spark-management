@@ -90,7 +90,7 @@ function App() {
   ReactModal.setAppElement("#root");
     const init = () => {
       console.log("google analytics is being initialized")
-      ReactGA.initialize("UA-89240419-1"); // put your tracking id here
+      ReactGA.initialize("UA-89240419-1"); // put spark's tracking id here
       //sends current page to google analytics
       ReactGA.pageview(window.location.pathname + window.location.search);
     };
