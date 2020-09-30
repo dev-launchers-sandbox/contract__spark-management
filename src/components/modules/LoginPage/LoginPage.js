@@ -146,7 +146,7 @@ function LoginPage(props) {
                 <p>
                   Do you need help?{" "}
                   <a
-                    href="https://spark4community.com/contact/"
+                    href="https://spark4community.com/apphelp/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={style.classLink}
