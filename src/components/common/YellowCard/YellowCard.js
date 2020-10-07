@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "./YellowCard.module.css";
 import ReactCardFlip from "react-card-flip";
 
-import RedLogo from "./../../../images/red-spark-logo.png";
+import redLogo from "./../../../images/red-spark-logo.png";
 import CopyTextIcon from "./../Icons/CopyTextIcon/CopyTextIcon";
 import SelectCardIcon from "./../Icons/SelectCardIcon/SelectCardIcon";
 
@@ -39,7 +39,7 @@ export default function YellowCard(props) {
         style={{ transformStyle: "initial" }}
         className={style.YellowCard}
       >
-        <img className={style.logo} src={RedLogo} alt="logo" />
+        <img className={style.logo} src={process.env.PUBLIC_URL + "/images/red-spark-logo.png"} alt="logo" />
       </div>
     </ReactCardFlip>
   );

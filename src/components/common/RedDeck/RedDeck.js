@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import style from "./RedDeck.module.css";
 import ReactCardFlip from "react-card-flip";
 
-import InstructionButton from "../InstructionButton/InstructionButton";
 import CopyTextIcon from "./../Icons/CopyTextIcon/CopyTextIcon";
 import SelectCardIcon from "./../Icons/SelectCardIcon/SelectCardIcon";
 import useDeck from "./../useDeck/useDeck";
-import WhiteLogo from "./../../../images/white-spark-logo.png";
+import whiteLogo from "./../../../images/white-spark-logo.png";
+import sendEvent from "../../../utils/sendEvent.js"
+
 
 export default function RedDeck(props) {
   const { drawCard } = useDeck(props.deck); // uses the useDeck
@@ -45,7 +46,10 @@ export default function RedDeck(props) {
           <div>
             <h1> {card} </h1>
             <CopyTextIcon text={card} />
-            <SelectCardIcon onClick={onClick} />
+            <SelectCardIcon onClick={() => {
+              onClick()
+              sendEvent("Red Card", "Discard and draw button clicked", "button")
+            }} />
           </div>
         </div>
 
@@ -55,10 +59,9 @@ export default function RedDeck(props) {
           className={style.RedDeck}
           onClick={onClick}
         >
-          <img className={style.whiteLogo} src={WhiteLogo} alt="logo" />
+          <img className={style.whiteLogo} src={process.env.PUBLIC_URL + "/images/white-spark-logo.png"} alt="logo" />
         </div>
       </ReactCardFlip>
-
     </div>
   );
 }

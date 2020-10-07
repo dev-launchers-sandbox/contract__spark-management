@@ -4,18 +4,20 @@ import { BrowserRouter as Router, Redirect, useParams } from "react-router-dom";
 import useDeck from "./../useDeck/useDeck";
 import YellowCard from "./../YellowCard/YellowCard";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
-import HelpButton from "../HelpButton/HelpButton.js";
-
+import HowToPlayButton from "./HowToPlayButton/HowToPlayButton";
+import NeedHelpButton from "./NeedHelpButton/NeedHelpButton";
+import queryString from "query-string";
+import sendEvent from "../../../utils/sendEvent.js"
 const NUM_CARDS_IN_HAND = 8;
 let initialFlipStates = [];
 for (let i = 0; i < NUM_CARDS_IN_HAND; i++) initialFlipStates.push(false);
 
 export default function Hand(props) {
-  let { code } = useParams();
   const { drawCard } = useDeck(props.deck); //Custom hook
   const [cards, setCards] = useState([]); //Cards holds all of the cards that the hand is displaying
   const [flipStates, setFlipStates] = useState(initialFlipStates);
-
+  const [code, setCode] = useState("None");
+  const [redirect, setRedirect] = useState(false);
   // populateHand() : Draws NUM_CARDS_IN_HAND cards into the hand
   const populateCards = () => {
     let newHand = [];
@@ -58,7 +60,6 @@ export default function Hand(props) {
   // discardCardAndDraw() : Discards the supplied card and replaces it with a new one
   const discardCardAndDraw = (card) => {
     // Remove card from the hand
-    console.log(card);
     let cardsCopy = [...cards];
     const index = cardsCopy.indexOf(card);
 
@@ -79,9 +80,21 @@ export default function Hand(props) {
   // When this Hand component mounts:
   //    Draw cards
   useEffect(() => {
-    hideAllCards();
-    populateCards();
+    let query = window.location.search;
+    try {
+      const queryParsed = queryString.parse(query);
+      setCode(queryParsed.code);
+    } catch (error) {
+    } finally {
+      hideAllCards();
+      populateCards();
+    }
   }, []);
+
+  useEffect(() => {
+    if (code === "None") return;
+    if (!sessionStorage.getItem(code)) setRedirect(true);
+  }, [code]);
 
   return (
     <div>
@@ -93,6 +106,8 @@ export default function Hand(props) {
               answer={card.answer}
               onClick={() => {
                 //flipCard(card);
+                console.log("yellow card button has been pressed")
+                sendEvent("Yellow Card", "Discards and draw button clicked", "button")
                 discardCardAndDraw(card);
               }}
               emoji={card.isEmoji}
@@ -102,14 +117,16 @@ export default function Hand(props) {
         })}
       </div>
       <div className={style.buttonHolder}>
+        <HowToPlayButton />
         <DiscardHandButton
           populateCards={populateCards}
           discardCards={discardCards}
         />
-        <HelpButton />
+        <NeedHelpButton />
       </div>
       {/* Checks if the code has been verified*/}
-      {sessionStorage.getItem(code) === null && <Redirect to="/" />}
+      {redirect && <Redirect to="/" />}
     </div>
   );
 }
+//

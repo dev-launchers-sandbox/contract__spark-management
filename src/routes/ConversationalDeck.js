@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import PageBody from "../components/common/PageBody/PageBody";
 import RedDeck from "../components/common/RedDeck/RedDeck";
@@ -8,20 +8,20 @@ import { Link, useParams } from "react-router-dom";
 
 import ConversationalRedDeck from "../data/ConversationalDeck/ConversationalDeckRed";
 import ConversationalYellowDeck from "../data/ConversationalDeck/ConversationalDeckYellow";
-import InstructionButton from "../components/common/InstructionButton/InstructionButton";
+import usePageView from "../utils/usePageView"
+import axios from "axios";
+
 //This makes the code cleaner by returning the conversational deck route that will get called on index.js
 
-export default function ConversationalDeck() {
-  let { code } = useParams();
-  useEffect(() => {
-    console.log("ConversationalDeck Mounted!");
-  }, []);
+export default function ConversationalDeck(props) {
+  usePageView();
   return (
     <PageBody>
       <div className="upperRow">
-        <Logo marginTop="4%" />
+        <div className="logoHolder">
+          <Logo marginTop="4%" />
+        </div>
         <RedDeck deck={ConversationalRedDeck} />
-        <InstructionButton />
       </div>
       <Hand deck={ConversationalYellowDeck} />
     </PageBody>

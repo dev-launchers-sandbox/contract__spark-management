@@ -1,0 +1,35 @@
+.filterBy {
+  font-family: "Nunito Sans", serif;
+}
+
+.filterByContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.filterByLabel {
+  display: flex;
+  justify-content: center;
+  font-family: "Nunito Sans";
+}
+
+.filterByColumnDropdown select {
+  background: white;
+  border-radius: 2px;
+  font-size: 1.2vw;
+  border: 2px;
+  margin: 1em;
+  width: 10em;
+  height: 2em;
+}
+
+.filterByColumnDropdown select:hover {
+  cursor: pointer;
+}
+
+.inputBox {
+  display: flex;
+  justify-content: center;
+}
