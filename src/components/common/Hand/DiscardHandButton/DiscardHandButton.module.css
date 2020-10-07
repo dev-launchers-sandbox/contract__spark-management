@@ -10,6 +10,8 @@
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
+  margin-bottom: 2em;
+  border: none;
 }
 .discardHandButton:hover {
   cursor: pointer;

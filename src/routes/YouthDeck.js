@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import PageBody from "../components/common/PageBody/PageBody";
 import RedDeck from "../components/common/RedDeck/RedDeck";
@@ -8,18 +8,21 @@ import { Link, useParams } from "react-router-dom";
 
 import YouthDeckYellow from "../data/YouthDeck/YouthDeckYellow.json";
 import YouthDeckRed from "../data/YouthDeck/YouthDeckRed.json";
-import InstructionButton from "../components/common/InstructionButton/InstructionButton";
+import usePageView from "../utils/usePageView"
+
+import axios from "axios";
 
 //This makes the code cleaner by returning the teen deck route that will get called on index.js
 
-export default function YouthDeck() {
-  let { code } = useParams();
+export default function YouthDeck(props) {
+  usePageView();
   return (
     <PageBody>
       <div className="upperRow">
-        <Logo marginTop="4%" />
+        <div className="logoHolder">
+          <Logo marginTop="4%" />
+        </div>
         <RedDeck deck={YouthDeckRed} />
-        <InstructionButton />
       </div>
       <Hand deck={YouthDeckYellow} />
     </PageBody>

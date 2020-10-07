@@ -1,0 +1,9 @@
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.modalP {
+  font-family: "Nunito Sans", serif;
+  text-align: center;
+}

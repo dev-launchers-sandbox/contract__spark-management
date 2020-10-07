@@ -1,0 +1,52 @@
+.DataGrid {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border: solid;
+}
+
+.DataGrid > div:first-of-type {
+  overflow-y: hidden;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.editClientFormatter {
+  display: flex;
+}
+.editClientFormatter p {
+  background-color: purple;
+}
+.actionsContainer {
+  display: flex;
+  justify-content: space-around;
+}
+.clientActionsContainer {
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  color: #91413c;
+}
+.clientActionsContainer:hover {
+  cursor: pointer;
+}
+.actionsContainer span:hover {
+  cursor: pointer;
+}
+.copyToClipBoard:hover {
+  cursor: pointer;
+}
+.modalP {
+  display: flex;
+  justify-content: center;
+}
+.paragraphContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}

@@ -7,89 +7,114 @@ import {
   Route,
   useParams,
   Redirect,
-  useRouterHistory
+  useLocation
 } from "react-router-dom";
-//comment
-import SelectDeck from "./components/common/SelectDeck/SelectDeck";
 import ReactModal from "react-modal";
 import axios from "axios";
-
+import MockAdapter from "axios-mock-adapter";
+import ReactGA from "react-ga";
+import ResetPasswordRoute from "./routes/ResetPasswordRoute.js";
 import CommunityDeckRoute from "./routes/CommunityDeck.js";
 import ConversationalDeckRoute from "./routes/ConversationalDeck.js";
 import SpanishDeckRoute from "./routes/SpanishDeck.js";
 import YouthDeckRoute from "./routes/YouthDeck.js";
-import LoginPageRoute from "../src/routes/LoginPage/LoginPage.js";
-import AdminLoginPage from "../src/routes/AdminLoginPage/AdminLoginPage.js";
+import LoginPageRoute from "./routes/LoginPageRoute.js";
+import AdminLoginRoute from "./routes/AdminLoginRoute.js";
+import ForgotPasswordRoute from "./routes/ForgotPasswordRoute.js";
+import UserCreationRoute from "./routes/UserCreationRoute.js";
 
+import ManageCodesRoute from "./routes/ManageCodesRoute.js";
 import Footer from "../src/components/common/Footer/Footer.js";
+import SelectDeck from "./components/common/SelectDeck/SelectDeck";
 
-// Allows us to serve up the app from any arbitrary directory on a server
-const getBasename = path => path.substr(0, path.lastIndexOf("/"));
+// Change axios defaults, to fix cookies being sent (may need a better solution)
+axios.defaults.withCredentials = true;
+
+// An Array of all the routes, so we can use it in getBasename()
+let routes = [
+  {
+    path: "/",
+    component: LoginPageRoute,
+  },
+  {
+    path: "/AdminLoginPage",
+    component: AdminLoginRoute,
+  },
+  {
+    path: "/ManageCodes",
+    component: ManageCodesRoute,
+  },
+  {
+    path: "/ResetPassword",
+    component: ResetPasswordRoute,
+  },
+  {
+    path: "/CreateNewUser",
+    component: UserCreationRoute,
+  },
+  {
+    path: "/CommunityDeck",
+    component: CommunityDeckRoute,
+  },
+  {
+    path: "/ConversationalDeck",
+    component: ConversationalDeckRoute,
+  },
+  {
+    path: "/SpanishDeck",
+    component: SpanishDeckRoute,
+  },
+  {
+    path: "/YouthDeck",
+    component: YouthDeckRoute,
+  },
+  {
+    path: "/ForgotPassword",
+    component: ForgotPasswordRoute,
+  },
+];
+const getBasename = (path) => {
+  return "/Play/"; // TODO: overwriting for now... this sucks
+  // TODO: Not a perfect solution, doesn't account for routes that begin with dynamic parameters
+  routes.map((entry) => {
+    if (entry.path === "/") return;
+    let fixedPath = entry.path.split("/:")[0];
+    let index = path.indexOf(fixedPath);
+    if (index != -1) path = path.substr(0, index);
+  });
+  return path;
+};
 
 function App() {
+
   ReactModal.setAppElement("#root");
-  let [statusCode, setStatusCode] = useState(null);
-  /*
-  useEffect(() => {
-    const asyncFunc = async () => {
-      try {
-        //if(code !== null)
-        const data = await axios.get(
-          `https://cors-anywhere.herokuapp.com/https://spark4community.com/Digital/${code}`
-        );
-        console.log("status code: ", data.status);
-        setStatusCode(data.status);
-      } catch (error) {
-        //redirect user to the input code page
-        setStatusCode(404);
-      }
+    const init = () => {
+      console.log("google analytics is being initialized")
+      ReactGA.initialize("UA-89240419-1"); // put your tracking id here
+      //sends current page to google analytics
+      ReactGA.pageview(window.location.pathname + window.location.search);
     };
-    asyncFunc();
-  }, []);
-  */
-  console.log("subdirectory: ", getBasename(window.location.pathname))
+
+
+    useEffect(() => {
+      init();
+    }, []);
+  let [statusCode, setStatusCode] = useState(null);
+  let [formCode, setFormCode] = useState("");
+
+  //Map of all the paths with its correspoding component. Prevents code repetition
+  let routeComponents = routes.map(({ path, component }, key) => (
+    <Route exact path={path} component={component} key={key} />
+  ));
 
   return (
     <Router basename={getBasename(window.location.pathname)}>
       <div className="App">
-        <Switch>
-          <Route exact path="/">
-            {/*When the app if 1st started, we want the user to be able to select the deck.*/}
-            <LoginPageRoute />
-          </Route>
-          <Route exact path="/AdminLoginPage">
-            <AdminLoginPage />
-          </Route>
-          <Route exact path="/:code">
-            <SelectDeck />
-          </Route>
-          <Route exact path="/:code/CommunityDeck">
-            {/*When the community deck is selected, we want to show all of the things the deck should show*/}
-            <CommunityDeckRoute />
-          </Route>
-
-          <Route exact path="/:code/ConversationalDeck">
-            {/*When the conversational deck is selected, we want to show all of the things the deck should show*/}
-            <ConversationalDeckRoute />
-          </Route>
-
-          <Route exact path="/:code/SpanishDeck">
-            {/*When the spanish deck is selected, we want to show all of the things the deck should show*/}
-
-            <SpanishDeckRoute />
-          </Route>
-
-          <Route exact path="/:code/YouthDeck">
-            {/*When the youth deck is selected, we want to show all of the things the deck should show*/}
-            <YouthDeckRoute />
-          </Route>
-        </Switch>
+        <Switch> {routeComponents} </Switch>
       </div>
-      <Footer />
       {statusCode === 200 && <Redirect to="/" />}
     </Router>
   );
 }
-
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);

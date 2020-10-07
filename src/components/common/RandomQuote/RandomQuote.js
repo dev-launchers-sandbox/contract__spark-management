@@ -5,9 +5,11 @@ import quotes from "../../../data/Quotes/Quotes.json";
 function RandomQuote() {
   const [randomQuote, setRandomQuote] = useState({});
 
+  //Whenever this component mounts, we want to show a random quote!
   useEffect(() => {
     setRandomQuote(quotes[parseInt(quotes.length * Math.random(), 0)]);
   }, []);
+
   return (
     <div className={style.randomQuote}>
       <p>
