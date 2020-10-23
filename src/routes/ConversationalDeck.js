@@ -5,6 +5,8 @@ import RedDeck from "../components/common/RedDeck/RedDeck";
 import Logo from "../components/common/Logo/Logo";
 import Hand from "../components/common/Hand/Hand";
 import ChatBox from "../components/common/ChatBox/ChatBox.js";
+import Toggle from "../components/common/Toggle/Toggle.js";
+
 
 import { Link, useParams } from "react-router-dom";
 
@@ -17,20 +19,29 @@ import axios from "axios";
 
 export default function ConversationalDeck(props) {
   usePageView();
+
+  const [chatOpen, setChatOpen] = useState(false);
+
+  const handleCallBack = (isChatOpen) => {
+    setChatOpen(isChatOpen);
+  }
+
+
   return (
     <PageBody>
       <div className="container">
-        <div className="leftColumn">
+        <div className={chatOpen ? "leftColumn" : "leftColumnNotActive"}>
           <div className="upperRow">
             <div className="logoHolder">
               <Logo marginTop="4%" />
             </div>
             <RedDeck deck={ConversationalRedDeck} />
+            {chatOpen ? "" : <Toggle handleCallBack={handleCallBack} />}
           </div>
           <Hand deck={ConversationalYellowDeck} />
         </div>
-        <div className="rightColumn">
-          <ChatBox />
+        <div className={chatOpen ? "rightColumn" : "rightColumnNotActive"}>
+          {chatOpen && <ChatBox handleCallBack={handleCallBack}/>}
         </div>
       </div>
     </PageBody>
