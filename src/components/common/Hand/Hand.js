@@ -107,8 +107,9 @@ export default function Hand(props) {
                 //flipCard(card);
                 discardCardAndDraw(card);
               }}
-              emoji={card.isEmoji}
+              isEmoji={card.isEmoji}
               key={card.answer} // Stops React unique key error
+              emoji={card.emoji || null}
             />
           );
         })}
