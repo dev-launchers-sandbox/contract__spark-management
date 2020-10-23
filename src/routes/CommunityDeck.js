@@ -4,6 +4,7 @@ import PageBody from "../components/common/PageBody/PageBody";
 import RedDeck from "../components/common/RedDeck/RedDeck";
 import Logo from "../components/common/Logo/Logo";
 import Hand from "../components/common/Hand/Hand";
+import ChatBox from "../components/common/ChatBox/ChatBox.js";
 import { Link, useParams, Redirect } from "react-router-dom";
 
 import CommunityDeckYellow from "../data/CommunityDeck/CommunityDeckYellow.json";
@@ -17,13 +18,20 @@ export default function CommunityDeck(props) {
   usePageView();
   return (
     <PageBody>
-      <div className="upperRow">
-        <div className="logoHolder">
-          <Logo marginTop="4%" />
+    <div className="container">
+      <div className="leftColumn">
+        <div className="upperRow">
+          <div className="logoHolder">
+            <Logo marginTop="4%" />
+          </div>
+          <RedDeck deck={CommunityDeckRed} />
         </div>
-        <RedDeck deck={CommunityDeckRed} />
+        <Hand deck={CommunityDeckYellow} />
       </div>
-      <Hand deck={CommunityDeckYellow} />
+      <div className="rightColumn">
+        <ChatBox />
+      </div>
+    </div>
     </PageBody>
   );
 }

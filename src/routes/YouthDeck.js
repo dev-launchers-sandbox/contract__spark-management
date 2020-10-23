@@ -4,6 +4,8 @@ import PageBody from "../components/common/PageBody/PageBody";
 import RedDeck from "../components/common/RedDeck/RedDeck";
 import Logo from "../components/common/Logo/Logo";
 import Hand from "../components/common/Hand/Hand";
+import ChatBox from "../components/common/ChatBox/ChatBox.js";
+
 import { Link, useParams } from "react-router-dom";
 
 import YouthDeckYellow from "../data/YouthDeck/YouthDeckYellow.json";
@@ -18,13 +20,20 @@ export default function YouthDeck(props) {
   usePageView();
   return (
     <PageBody>
-      <div className="upperRow">
-        <div className="logoHolder">
-          <Logo marginTop="4%" />
+      <div className="container">
+        <div className="leftColumn">
+          <div className="upperRow">
+            <div className="logoHolder">
+              <Logo marginTop="4%" />
+            </div>
+            <RedDeck deck={YouthDeckRed} />
+          </div>
+          <Hand deck={YouthDeckYellow} />
         </div>
-        <RedDeck deck={YouthDeckRed} />
+        <div className="rightColumn">
+          <ChatBox />
+        </div>
       </div>
-      <Hand deck={YouthDeckYellow} />
     </PageBody>
   );
 }
