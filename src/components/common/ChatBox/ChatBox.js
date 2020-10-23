@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import style from "./ChatBox.module.css";
 
-function ChatBox(){
+function ChatBox(props){
 
   useEffect(() => {
     console.log("chatbox");
@@ -11,9 +11,15 @@ function ChatBox(){
     event.preventDefault();
   }
 
+  const handleClose = () => {
+    props.handleCallBack(false);
+  }
+
   return(
-    <div className={style.chatBox}>
-      <div className={style.container}>
+    <div className={style.container}>
+      <div className={style.messageArea}>
+        <span className={style.closeToggle} onClick={handleClose}>✖️</span>
+      </div>
       <div className={style.textBar}>
         <form className={style.formContainer}>
           <textarea className={style.chatText} placeholder="type something!" />
@@ -21,7 +27,6 @@ function ChatBox(){
             <button className={style.button} onClick={handleSubmit}>send</button>
           </div>
         </form>
-      </div>
       </div>
     </div>
   )

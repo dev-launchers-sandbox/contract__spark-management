@@ -43,9 +43,18 @@ h2 {
   width: 75%;
 }
 
+.leftColumnNotActive{
+  width: 100%;
+}
+
 .rightColumn{
   width: 25%;
   height: 100%;
+}
+
+.rightColumnNotActive{
+  width: 0%;
+  height: 0%;
 }
 
 @media (orientation: portrait) {
