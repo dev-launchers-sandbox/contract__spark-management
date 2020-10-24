@@ -1,15 +1,38 @@
-import React, { useState, useEffect } from "react";
-import Message from "./Message/Message.js";
+import React, { useState, useEffect, useRef } from "react";
 import style from "./ChatBox.module.css";
 
-function ChatBox(props) {
+import Message from "./Message/Message.js";
+import ChatHeader from "./ChatHeader/ChatHeader.js";
 
+function ChatBox(props) {
   const [messageContent, setMessageContent] = useState("");
 
   const [messages, setMessages] = useState([]);
 
+  let lastMessage = useRef();
+
+  document.onkeypress = function (event) {
+    event = event || window.event;
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      if (!messageContent.replace(/\s/g, "").length) return;
+      setMessageContent("");
+      sendMessage();
+    }
+  };
+
+  useEffect(() => {
+    //lastMessage.scrollIntoView({ behavior: "smooth" });
+    lastMessage.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start",
+    });
+  }, [messages]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!messageContent.replace(/\s/g, "").length) return;
     setMessageContent("");
     sendMessage();
   };
@@ -26,7 +49,7 @@ function ChatBox(props) {
   const sendMessage = () => {
     const room = getRoomCode();
     const username = sessionStorage.getItem("username") || "No username"; //just in case
-    const message = { content: messageContent, author: username, room: room};
+    const message = { content: messageContent, author: username, room: room };
     setMessages([...messages, message]);
   };
 
@@ -40,19 +63,24 @@ function ChatBox(props) {
   return (
     <div className={style.container}>
       <div className={style.messageArea}>
-        <span className={style.closeToggle} onClick={handleClose}>
-          ✖️
-        </span>
-        <div className={style.message}>
+        <div className={style.chatHeaderContainer}>
+          <ChatHeader room={getRoomCode} handleClose={handleClose} />
+        </div>
+        <div id="messages" className={style.message}>
           {messages.map((message, key) => {
-            return (
-              <Message key={key} message={message}/>
-            )
+            return <Message key={key} message={message} />;
           })}
+          <div
+            style={{ float: "left", clear: "both" }}
+            ref={(el) => {
+              lastMessage = el;
+            }}
+          ></div>
         </div>
       </div>
+
       <div className={style.textBar}>
-        <form className={style.formContainer}>
+        <form onSubmit={handleSubmit} className={style.formContainer}>
           <textarea
             value={messageContent}
             onChange={handleChange}
