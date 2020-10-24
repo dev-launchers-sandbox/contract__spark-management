@@ -29,8 +29,6 @@ import ManageCodesRoute from "./routes/ManageCodesRoute.js";
 import Footer from "../src/components/common/Footer/Footer.js";
 import SelectDeck from "./components/common/SelectDeck/SelectDeck";
 
-import { UsernameContext } from "./useContext/useUsernameContext";
-
 // Change axios defaults, to fix cookies being sent (may need a better solution)
 axios.defaults.withCredentials = true;
 
@@ -95,11 +93,11 @@ const getBasename = (path) => {
 
 function App() {
   ReactModal.setAppElement("#root");
-  
+
   const init = () => {
     ReactGA.initialize("UA-176718447-1"); // put your tracking id here
   };
-  
+
   const PageView = () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   };
@@ -112,21 +110,18 @@ function App() {
   const [formCode, setFormCode] = useState("");
   const [username, setUsername] = useState("");
 
-
   //Map of all the paths with its correspoding component. Prevents code repetition
   let routeComponents = routes.map(({ path, component }, key) => (
     <Route exact path={path} component={component} key={key} />
   ));
 
   return (
-    <UsernameContext.Provider value={{ username, setUsername }}>
-      <Router basename={getBasename(window.location.pathname)}>
-        <div className="App">
-          <Switch> {routeComponents} </Switch>
-        </div>
-        {statusCode === 200 && <Redirect to="/" />}
-      </Router>
-    </UsernameContext.Provider>
+    <Router basename={getBasename(window.location.pathname)}>
+      <div className="App">
+        <Switch> {routeComponents} </Switch>
+      </div>
+      {statusCode === 200 && <Redirect to="/" />}
+    </Router>
   );
 }
 const rootElement = document.getElementById("root");
