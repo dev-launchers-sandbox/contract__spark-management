@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import style from "./LoginPage.module.css";
 import {
@@ -21,9 +21,13 @@ import notify from "../../../utils/notify.js";
 import sendEvent from "../../../utils/sendEvent.js";
 import RandomQuote from "../../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../../images/spark_app_logo_transparent.png";
+import { UsernameContext } from "../../../useContext/useUsernameContext";
 
 function LoginPage(props) {
+
+  const { username, setUsername } = useContext(UsernameContext);
   let [form, setForm] = useState({ code: "", username: "" });
+
   const [isLoading, setIsLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [deckUsing, setDeckUsing] = useState("");
@@ -35,6 +39,7 @@ function LoginPage(props) {
       ...form,
       [name]: value,
     });
+    //setUsername(form.username);
   };
 
   //Starts the process of code verification
@@ -67,23 +72,10 @@ function LoginPage(props) {
 
       sessionStorage.setItem(form.code, true); //Marks the code as verified
       //Sets the deck using to later redirect to it
-      if (codeData.data.code.deck_name === "community") {
-        setDeckUsing("CommunityDeck");
-      } else if (codeData.data.code.deck_name === "spanish") {
-        setDeckUsing("SpanishDeck");
-      } else if (codeData.data.code.deck_name === "conversational") {
-        setDeckUsing("ConversationalDeck");
-      } else if (codeData.data.code.deck_name === "youth") {
-        setDeckUsing("YouthDeck");
-      } else {
-        setForm({
-          ...form,
-          code: "",
-        });
-        setIsLoading(false);
-        notify("This code does not exist!");
-        return;
-      }
+      let uppercaseDeckName =
+        codeData.data.code.deck_name.charAt(0).toUpperCase() +
+        codeData.data.code.deck_name.slice(1);
+      setDeckUsing(uppercaseDeckName.concat("Deck"));
       setIsLoading(false);
 
       //Verifies that the code is not expired and allows for the redirect to happen

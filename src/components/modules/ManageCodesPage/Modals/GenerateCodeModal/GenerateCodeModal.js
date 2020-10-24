@@ -18,6 +18,7 @@ function GenerateCodeModal(props) {
     conversationalDeck: 0,
     spanishDeck: 0,
     youthDeck: 0,
+    elementaryDeck: 0,
     client: "",
     expirationDate: "",
   });
@@ -30,6 +31,7 @@ function GenerateCodeModal(props) {
       ...form,
       communityDeck: 0,
       conversationalDeck: 0,
+      elementaryDeck: 0,
       spanishDeck: 0,
       youthDeck: 0,
       client: "",
@@ -74,6 +76,7 @@ function GenerateCodeModal(props) {
         parseInt(form.communityDeck, 0) !== 0) ||
       parseInt(form.conversationalDeck, 0) !== 0 ||
       parseInt(form.spanishDeck, 0) !== 0 ||
+      parseInt(form.elementaryDeck, 0) !== 0 ||
       parseInt(form.youthDeck, 0) !== 0
     ) {
       return true;
@@ -97,6 +100,7 @@ function GenerateCodeModal(props) {
           conversational: parseInt(form.conversationalDeck, 0),
           youth: parseInt(form.youthDeck, 0),
           spanish: parseInt(form.spanishDeck, 0),
+          elementary: parseInt(form.elementaryDeck, 0),
         },
       };
       try {
@@ -179,6 +183,17 @@ function GenerateCodeModal(props) {
                     name="conversationalDeck"
                     onChange={handleChange}
                     value={form.conversationalDeck}
+                    type="number"
+                    min="0"
+                  />
+                </div>
+                <br />
+                <div className={style.row}>
+                  <label>Elementary Deck</label>
+                  <input
+                    name="elementaryDeck"
+                    onChange={handleChange}
+                    value={form.elementaryDeck}
                     type="number"
                     min="0"
                   />
