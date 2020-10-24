@@ -8,7 +8,9 @@ function Toggle(props){
   }
 
   return(
-    <span className={style.openToggle} onClick={handleOpen}>💬</span>
+    <div>
+      <button className={style.button} onClick={handleOpen}>Open Chat 💬</button>
+    </div>
   )
 }
 
