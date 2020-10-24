@@ -24,7 +24,6 @@ import sparkLogo from "../../../images/spark_app_logo_transparent.png";
 import { UsernameContext } from "../../../useContext/useUsernameContext";
 
 function LoginPage(props) {
-
   const { username, setUsername } = useContext(UsernameContext);
   let [form, setForm] = useState({ code: "", username: "" });
 
@@ -39,7 +38,7 @@ function LoginPage(props) {
       ...form,
       [name]: value,
     });
-    //setUsername(form.username);
+    setUsername(form.username);
   };
 
   //Starts the process of code verification
