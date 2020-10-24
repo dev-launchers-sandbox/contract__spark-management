@@ -12,6 +12,7 @@ import {
 import ReactModal from "react-modal";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
+import ReactGA from "react-ga";
 
 import ResetPasswordRoute from "./routes/ResetPasswordRoute.js";
 import CommunityDeckRoute from "./routes/CommunityDeck.js";
@@ -28,7 +29,8 @@ import ManageCodesRoute from "./routes/ManageCodesRoute.js";
 import Footer from "../src/components/common/Footer/Footer.js";
 import SelectDeck from "./components/common/SelectDeck/SelectDeck";
 
-import ReactGA from "react-ga";
+import { UsernameContext } from "./useContext/useUsernameContext";
+
 // Change axios defaults, to fix cookies being sent (may need a better solution)
 axios.defaults.withCredentials = true;
 
@@ -104,8 +106,9 @@ function App() {
     PageView();
   }, []);
 
-  let [statusCode, setStatusCode] = useState(null);
-  let [formCode, setFormCode] = useState("");
+  const [statusCode, setStatusCode] = useState(null);
+  const [formCode, setFormCode] = useState("");
+  const [username, setUsername] = useState("");
 
   //Map of all the paths with its correspoding component. Prevents code repetition
   let routeComponents = routes.map(({ path, component }, key) => (
@@ -113,12 +116,14 @@ function App() {
   ));
 
   return (
-    <Router basename={getBasename(window.location.pathname)}>
-      <div className="App">
-        <Switch> {routeComponents} </Switch>
-      </div>
-      {statusCode === 200 && <Redirect to="/" />}
-    </Router>
+    <UsernameContext.Provider value={{ username, setUsername }}>
+      <Router basename={getBasename(window.location.pathname)}>
+        <div className="App">
+          <Switch> {routeComponents} </Switch>
+        </div>
+        {statusCode === 200 && <Redirect to="/" />}
+      </Router>
+    </UsernameContext.Provider>
   );
 }
 const rootElement = document.getElementById("root");

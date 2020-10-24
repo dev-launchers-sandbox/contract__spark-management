@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import style from "./LoginPage.module.css";
 import {
@@ -20,8 +20,10 @@ import LoadingOverlay from "react-loading-overlay";
 import notify from "../../../utils/notify.js";
 import RandomQuote from "../../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../../images/spark_app_logo_transparent.png";
+import { UsernameContext } from "../../../useContext/useUsernameContext";
 
 function LoginPage(props) {
+  const { username, setUsername } = useContext(UsernameContext);
   let [form, setForm] = useState({ code: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
@@ -34,6 +36,7 @@ function LoginPage(props) {
       ...form,
       [name]: value,
     });
+    //setUsername(form.username);
   };
 
   //Starts the process of code verification
