@@ -8,7 +8,9 @@
 
 .messageArea{
   height: 90%;
+  overflow: auto;
 }
+
 
 .closeToggle{
   display: flex;
