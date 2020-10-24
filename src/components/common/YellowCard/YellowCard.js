@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./YellowCard.module.css";
 import ReactCardFlip from "react-card-flip";
 
@@ -7,7 +7,39 @@ import CopyTextIcon from "./../Icons/CopyTextIcon/CopyTextIcon";
 import SelectCardIcon from "./../Icons/SelectCardIcon/SelectCardIcon";
 
 export default function YellowCard(props) {
+  function cardRenderer() {
+    if (props.emoji) {
+      return (
+        <div style={{ flexDirection: "column" }}>
+          <h1
+            style={{
+              marginTop: null,
+              fontSize: "1.2rem",
+            }}
+          >
+            {props.answer}
+            <br />
+            <br />
+            <span
+              style={{
+                fontSize: "3rem",
+              }}
+            >
+              {props.emoji}
+            </span>
+          </h1>
+        </div>
+      );
+    } else {
+      return (
+        <h1 style={{ fontSize: props.isEmoji ? "4rem" : "1.2rem" }}>
+          {props.answer}
+        </h1>
+      );
+    }
+  }
   //styling for all of the CardFlip properties
+
   return (
     <ReactCardFlip
       containerStyle={{ margin: "2%" }}
@@ -23,11 +55,7 @@ export default function YellowCard(props) {
         className={style.YellowCard}
       >
         <div style={{ width: "100%", height: "100%" }}>
-          <div>
-            <h1 style={{ fontSize: props.emoji ? "4rem" : "1.2rem" }}>
-              {props.answer}
-            </h1>
-          </div>
+          <div>{cardRenderer()}</div>
           <CopyTextIcon text={props.answer} />
           <SelectCardIcon onClick={props.onClick} />
         </div>
@@ -39,11 +67,12 @@ export default function YellowCard(props) {
         style={{ transformStyle: "initial" }}
         className={style.YellowCard}
       >
-        <img className={style.logo} src={process.env.PUBLIC_URL + "/images/red-spark-logo.png"} alt="logo" />
+        <img
+          className={style.logo}
+          src={process.env.PUBLIC_URL + "/images/red-spark-logo.png"}
+          alt="logo"
+        />
       </div>
     </ReactCardFlip>
   );
 }
-YellowCard.defaultProps = {
-  emoji: false
-};

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import style from "./LoginPage.module.css";
 import {
@@ -21,9 +21,12 @@ import notify from "../../../utils/notify.js";
 import sendEvent from "../../../utils/sendEvent.js";
 import RandomQuote from "../../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../../images/spark_app_logo_transparent.png";
+import { UsernameContext } from "../../../useContext/useUsernameContext";
 
 function LoginPage(props) {
-  let [form, setForm] = useState({ code: "" });
+  const { username, setUsername } = useContext(UsernameContext);
+  let [form, setForm] = useState({ code: "", username: "" });
+
   const [isLoading, setIsLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [deckUsing, setDeckUsing] = useState("");
@@ -35,13 +38,19 @@ function LoginPage(props) {
       ...form,
       [name]: value,
     });
+    setUsername(form.username);
   };
 
   //Starts the process of code verification
-  const handleClick = (event) => {
-    console.log("button clicked")
+  const handleSubmit = (event) => {
     //Prevents the page from refreshing after the form submission
     event.preventDefault();
+
+    //Removes all tabs and white spaces and checks if the username is empty (length of 0)
+    if (!form.username.replace(/\s/g, "").length) {
+      return notify("Please input a valid username");
+    }
+
     setIsLoading(true); //Lets the user know their code is being processed
     verifyCode();
   };
@@ -62,23 +71,10 @@ function LoginPage(props) {
 
       sessionStorage.setItem(form.code, true); //Marks the code as verified
       //Sets the deck using to later redirect to it
-      if (codeData.data.code.deck_name === "community") {
-        setDeckUsing("CommunityDeck");
-      } else if (codeData.data.code.deck_name === "spanish") {
-        setDeckUsing("SpanishDeck");
-      } else if (codeData.data.code.deck_name === "conversational") {
-        setDeckUsing("ConversationalDeck");
-      } else if (codeData.data.code.deck_name === "youth") {
-        setDeckUsing("YouthDeck");
-      } else {
-        setForm({
-          ...form,
-          code: "",
-        });
-        setIsLoading(false);
-        notify("This code does not exist!");
-        return;
-      }
+      let uppercaseDeckName =
+        codeData.data.code.deck_name.charAt(0).toUpperCase() +
+        codeData.data.code.deck_name.slice(1);
+      setDeckUsing(uppercaseDeckName.concat("Deck"));
       setIsLoading(false);
 
       //Verifies that the code is not expired and allows for the redirect to happen
@@ -87,7 +83,6 @@ function LoginPage(props) {
         sendEvent("Student Login", "student login button clicked", "button");
       }
     } catch (error) {
-      console.log("error omg error")
       // All invalid codes will reach this endpoint
       setForm({
         ...form,
@@ -136,9 +131,17 @@ function LoginPage(props) {
                   placeholder="code"
                   onChange={handleChange}
                 />
+                <input
+                  type="text"
+                  name="username"
+                  value={form.username}
+                  style={{ width: "19.5em" }}
+                  placeholder="username"
+                  onChange={handleChange}
+                />
               </div>
               <div className={style.buttonContainer}>
-                <button className={style.button} onClick={handleClick}>
+                <button className={style.button} onClick={handleSubmit}>
                   enter
                 </button>
               </div>
@@ -175,7 +178,9 @@ function LoginPage(props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={style.link}
-                  onClick={() => {sendEvent("Waitlist", "Waitlist link clicked", "link")}}
+                  onClick={() => {
+                    sendEvent("Waitlist", "Waitlist link clicked", "link");
+                  }}
                 >
                   get on our waitlist
                 </a>{" "}

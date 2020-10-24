@@ -1,5 +1,4 @@
-import ReactGA from "react-ga"
-
+import ReactGA from "react-ga";
 
 /**
  * Event - Add custom tracking event.
@@ -7,12 +6,11 @@ import ReactGA from "react-ga"
  * @param {string} action
  * @param {string} label
  */
- const sendEvent = (category, action, label) => {
-   console.log("event has been fired")
+const sendEvent = (category, action, label) => {
   ReactGA.event({
     category: category,
     action: action,
-    label: label
+    label: label,
   });
 };
 
