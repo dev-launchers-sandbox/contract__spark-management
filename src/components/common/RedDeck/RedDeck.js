@@ -6,6 +6,8 @@ import CopyTextIcon from "./../Icons/CopyTextIcon/CopyTextIcon";
 import SelectCardIcon from "./../Icons/SelectCardIcon/SelectCardIcon";
 import useDeck from "./../useDeck/useDeck";
 import whiteLogo from "./../../../images/white-spark-logo.png";
+import sendEvent from "../../../utils/sendEvent.js"
+
 
 export default function RedDeck(props) {
   const { drawCard } = useDeck(props.deck); // uses the useDeck
@@ -44,7 +46,10 @@ export default function RedDeck(props) {
           <div>
             <h1> {card} </h1>
             <CopyTextIcon text={card} />
-            <SelectCardIcon onClick={onClick} />
+            <SelectCardIcon onClick={() => {
+              onClick()
+              sendEvent("Red Card", "Discard and draw button clicked", "button")
+            }} />
           </div>
         </div>
 

@@ -18,13 +18,16 @@ import Logo from "../../../components/common/Logo/Logo.js";
 import SelectDeck from "../../../components/common/SelectDeck/SelectDeck.js";
 import LoadingOverlay from "react-loading-overlay";
 import notify from "../../../utils/notify.js";
+import sendEvent from "../../../utils/sendEvent.js";
 import RandomQuote from "../../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../../images/spark_app_logo_transparent.png";
 import { UsernameContext } from "../../../useContext/useUsernameContext";
 
 function LoginPage(props) {
+
   const { username, setUsername } = useContext(UsernameContext);
-  let [form, setForm] = useState({ code: "" });
+  let [form, setForm] = useState({ code: "", username: "" });
+
   const [isLoading, setIsLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [deckUsing, setDeckUsing] = useState("");
@@ -40,9 +43,15 @@ function LoginPage(props) {
   };
 
   //Starts the process of code verification
-  const handleClick = (event) => {
+  const handleSubmit = (event) => {
     //Prevents the page from refreshing after the form submission
     event.preventDefault();
+
+    //Removes all tabs and white spaces and checks if the username is empty (length of 0)
+    if (!form.username.replace(/\s/g, "").length) {
+      return notify("Please input a valid username");
+    }
+
     setIsLoading(true); //Lets the user know their code is being processed
     verifyCode();
   };
@@ -72,6 +81,7 @@ function LoginPage(props) {
       //Verifies that the code is not expired and allows for the redirect to happen
       if (data.data.valid) {
         setRedirect(true);
+        sendEvent("Student Login", "student login button clicked", "button");
       }
     } catch (error) {
       // All invalid codes will reach this endpoint
@@ -122,9 +132,17 @@ function LoginPage(props) {
                   placeholder="code"
                   onChange={handleChange}
                 />
+                <input
+                  type="text"
+                  name="username"
+                  value={form.username}
+                  style={{ width: "19.5em" }}
+                  placeholder="username"
+                  onChange={handleChange}
+                />
               </div>
               <div className={style.buttonContainer}>
-                <button className={style.button} onClick={handleClick}>
+                <button className={style.button} onClick={handleSubmit}>
                   enter
                 </button>
               </div>
@@ -132,7 +150,7 @@ function LoginPage(props) {
                 <p>
                   Do you need help?{" "}
                   <a
-                    href="https://spark4community.com/contact/"
+                    href="https://spark4community.com/apphelp/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={style.classLink}
@@ -161,6 +179,9 @@ function LoginPage(props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={style.link}
+                  onClick={() => {
+                    sendEvent("Waitlist", "Waitlist link clicked", "link");
+                  }}
                 >
                   get on our waitlist
                 </a>{" "}

@@ -7,7 +7,7 @@ import {
   Route,
   useParams,
   Redirect,
-  useRouterHistory,
+  useLocation,
 } from "react-router-dom";
 import ReactModal from "react-modal";
 import axios from "axios";
@@ -95,9 +95,11 @@ const getBasename = (path) => {
 
 function App() {
   ReactModal.setAppElement("#root");
+  
   const init = () => {
     ReactGA.initialize("UA-176718447-1"); // put your tracking id here
   };
+  
   const PageView = () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   };
@@ -109,6 +111,7 @@ function App() {
   const [statusCode, setStatusCode] = useState(null);
   const [formCode, setFormCode] = useState("");
   const [username, setUsername] = useState("");
+
 
   //Map of all the paths with its correspoding component. Prevents code repetition
   let routeComponents = routes.map(({ path, component }, key) => (

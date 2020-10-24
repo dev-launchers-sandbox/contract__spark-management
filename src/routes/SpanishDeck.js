@@ -8,11 +8,13 @@ import { Link, useParams } from "react-router-dom";
 
 import SpanishDeckYellow from "../data/SpanishDeck/SpanishDeckYellow.json";
 import SpanishDeckRed from "../data/SpanishDeck/SpanishDeckRed.json";
+import usePageView from "../utils/usePageView"
 import axios from "axios";
 
 //This makes the code cleaner by returning the spanish deck route that will get called on index.js
 
 export default function SpanishDeck(props) {
+  usePageView();
   return (
     <PageBody>
       <div className="upperRow">

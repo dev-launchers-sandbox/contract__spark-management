@@ -8,11 +8,13 @@ import { Link, useParams, Redirect } from "react-router-dom";
 
 import CommunityDeckYellow from "../data/CommunityDeck/CommunityDeckYellow.json";
 import CommunityDeckRed from "../data/CommunityDeck/CommunityDeckRed.json";
+import usePageView from "../utils/usePageView"
 import axios from "axios";
 
 //This makes the code cleaner by returning the community deck route that will get called on index.js
 
 export default function CommunityDeck(props) {
+  usePageView();
   return (
     <PageBody>
       <div className="upperRow">

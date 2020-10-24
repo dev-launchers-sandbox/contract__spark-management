@@ -42,7 +42,13 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
+.inputContainer input {
+  margin: 0.2em;
+}
+
 .button {
   background-color: #912123;
   color: #f3e8cb;
@@ -81,7 +87,7 @@ input[type="text"] {
   text-decoration: underline;
 }
 
-.codeInput{
+.codeInput {
   width: 17vw;
 }
 
@@ -113,6 +119,4 @@ input[type="text"] {
   .sparkLogo {
     height: 10vh;
   }
-
-
 }
