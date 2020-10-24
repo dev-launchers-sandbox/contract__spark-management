@@ -1,36 +1,61 @@
-import React, {useState, useEffect} from "react"
+import React, { useState, useEffect } from "react";
 import style from "./ChatBox.module.css";
 
-function ChatBox(props){
-
-  useEffect(() => {
-    console.log("chatbox");
-  }, [])
+function ChatBox(props) {
+  const [messageContent, setMessageContent] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  }
+    setMessageContent("");
+    sendMessage();
+  };
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+    setMessageContent(value);
+  };
 
   const handleClose = () => {
     props.handleCallBack(false);
-  }
+  };
 
-  return(
+  const sendMessage = () => {
+    const room = getRoomCode();
+    const username = sessionStorage.getItem("username") || "No username"; //just in case
+    const message = { content: messageContent, author: username, room: room };
+  };
+
+  const getRoomCode = () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let urlToString = urlParams.toString();
+    return urlToString.substr(5);
+  };
+
+  return (
     <div className={style.container}>
       <div className={style.messageArea}>
-        <span className={style.closeToggle} onClick={handleClose}>✖️</span>
+        <span className={style.closeToggle} onClick={handleClose}>
+          ✖️
+        </span>
       </div>
       <div className={style.textBar}>
         <form className={style.formContainer}>
-          <textarea className={style.chatText} placeholder="type something!" />
+          <textarea
+            value={messageContent}
+            onChange={handleChange}
+            className={style.chatText}
+            placeholder="Type something!"
+          />
           <div className={style.buttonHolder}>
-            <button className={style.button} onClick={handleSubmit}>send</button>
+            <button className={style.button} onClick={handleSubmit}>
+              send
+            </button>
           </div>
         </form>
       </div>
     </div>
-  )
+  );
 }
-
 
 export default ChatBox;

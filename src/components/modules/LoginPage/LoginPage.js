@@ -21,10 +21,8 @@ import notify from "../../../utils/notify.js";
 import sendEvent from "../../../utils/sendEvent.js";
 import RandomQuote from "../../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../../images/spark_app_logo_transparent.png";
-import { UsernameContext } from "../../../useContext/useUsernameContext";
 
 function LoginPage(props) {
-  const { username, setUsername } = useContext(UsernameContext);
   let [form, setForm] = useState({ code: "", username: "" });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +36,6 @@ function LoginPage(props) {
       ...form,
       [name]: value,
     });
-    setUsername(form.username);
   };
 
   //Starts the process of code verification
@@ -50,7 +47,7 @@ function LoginPage(props) {
     if (!form.username.replace(/\s/g, "").length) {
       return notify("Please input a valid username");
     }
-
+    sessionStorage.setItem("username", form.username);
     setIsLoading(true); //Lets the user know their code is being processed
     verifyCode();
   };
