@@ -62,6 +62,7 @@ function ChatBox(props) {
 
   return (
     <div className={style.container}>
+
       <div className={style.messageArea}>
         <div className={style.chatHeaderContainer}>
           <ChatHeader room={getRoomCode} handleClose={handleClose} />

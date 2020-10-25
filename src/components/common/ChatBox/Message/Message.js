@@ -3,9 +3,9 @@ import style from "./Message.module.css";
 
 function Message(props){
   return(
-    <div>
-      <p className={style.message}><b>{props.message.author}</b>: {props.message.content}</p>
-      <div className={style.scroll} />
+    <div className={style.messageHolder}>
+      <p className={style.message}><b>{props.message.author}</b></p>
+      <p className={style.message}>{props.message.content}</p>
     </div>
   )
 }
