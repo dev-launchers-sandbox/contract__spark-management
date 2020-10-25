@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import style from "./ChatBox.module.css";
+import { MessagesContext } from "../../../useContext/MessagesProvider";
 
 import Message from "./Message/Message.js";
 import ChatHeader from "./ChatHeader/ChatHeader.js";
@@ -7,7 +8,7 @@ import ChatHeader from "./ChatHeader/ChatHeader.js";
 function ChatBox(props) {
   const [messageContent, setMessageContent] = useState("");
 
-  const [messages, setMessages] = useState([]);
+  const { messages, setMessages } = useContext(MessagesContext);
 
   let lastMessage = useRef();
 
@@ -62,7 +63,6 @@ function ChatBox(props) {
 
   return (
     <div className={style.container}>
-
       <div className={style.messageArea}>
         <div className={style.chatHeaderContainer}>
           <ChatHeader room={getRoomCode} handleClose={handleClose} />
