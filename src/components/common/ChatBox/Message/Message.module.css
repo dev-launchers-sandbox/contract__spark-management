@@ -1,4 +1,17 @@
-.message {
+
+.messageHolder{
+  margin-top: 1rem;
+}
+
+.author{
   font-size: 0.8rem;
   margin-left: .7rem;
+  padding: 0;
+}
+
+.content{
+  font-size: 0.8rem;
+  margin-left: .7rem;
+  margin-bottom: 5px;
+  padding: 0;
 }
