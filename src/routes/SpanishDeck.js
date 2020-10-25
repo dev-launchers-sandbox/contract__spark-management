@@ -11,7 +11,7 @@ import { Link, useParams } from "react-router-dom";
 
 import SpanishDeckYellow from "../data/SpanishDeck/SpanishDeckYellow.json";
 import SpanishDeckRed from "../data/SpanishDeck/SpanishDeckRed.json";
-import usePageView from "../utils/usePageView"
+import usePageView from "../utils/usePageView";
 import axios from "axios";
 
 //This makes the code cleaner by returning the spanish deck route that will get called on index.js
@@ -23,7 +23,7 @@ export default function SpanishDeck(props) {
 
   const handleCallBack = (isChatOpen) => {
     setChatOpen(isChatOpen);
-  }
+  };
 
   return (
     <PageBody>
@@ -33,13 +33,13 @@ export default function SpanishDeck(props) {
             <div className="logoHolder">
               <Logo marginTop="4%" />
             </div>
-            <RedDeck deck={SpanishDeckRed} />
+            <RedDeck openChat={handleCallBack} deck={SpanishDeckRed} />
             {chatOpen ? "" : <Toggle handleCallBack={handleCallBack} />}
           </div>
-          <Hand deck={SpanishDeckYellow} />
+          <Hand openChat={handleCallBack} deck={SpanishDeckYellow} />
         </div>
         <div className={chatOpen ? "rightColumn" : "rightColumnNotActive"}>
-          {chatOpen && <ChatBox handleCallBack={handleCallBack}/>}
+          {chatOpen && <ChatBox handleCallBack={handleCallBack} />}
         </div>
       </div>
     </PageBody>

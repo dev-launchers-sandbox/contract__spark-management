@@ -7,7 +7,7 @@ import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
 import HowToPlayButton from "./HowToPlayButton/HowToPlayButton";
 import NeedHelpButton from "./NeedHelpButton/NeedHelpButton";
 import queryString from "query-string";
-import sendEvent from "../../../utils/sendEvent.js"
+import sendEvent from "../../../utils/sendEvent.js";
 const NUM_CARDS_IN_HAND = 8;
 let initialFlipStates = [];
 for (let i = 0; i < NUM_CARDS_IN_HAND; i++) initialFlipStates.push(false);
@@ -106,13 +106,18 @@ export default function Hand(props) {
               answer={card.answer}
               onClick={() => {
                 //flipCard(card);
-                console.log("yellow card button has been pressed")
-                sendEvent("Yellow Card", "Discards and draw button clicked", "button")
+                console.log("yellow card button has been pressed");
+                sendEvent(
+                  "Yellow Card",
+                  "Discards and draw button clicked",
+                  "button"
+                );
                 discardCardAndDraw(card);
               }}
               isEmoji={card.isEmoji}
               key={card.answer} // Stops React unique key error
               emoji={card.emoji || null}
+              openChat={props.openChat}
             />
           );
         })}

@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import style from "./ChatBox.module.css";
 import { MessagesContext } from "../../../useContext/MessagesProvider";
+import { MessageContentContext } from "../../../useContext/MessageContentProvider";
 
 import Message from "./Message/Message.js";
 import ChatHeader from "./ChatHeader/ChatHeader.js";
 
 function ChatBox(props) {
-  const [messageContent, setMessageContent] = useState("");
-
+  const { messageContent, setMessageContent } = useContext(
+    MessageContentContext
+  ); //ANNOYING
   const { messages, setMessages } = useContext(MessagesContext);
 
   let lastMessage = useRef();
