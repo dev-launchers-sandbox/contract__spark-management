@@ -4,8 +4,8 @@ import style from "./Message.module.css";
 function Message(props){
   return(
     <div className={style.messageHolder}>
-      <p className={style.message}><b>{props.message.author}</b></p>
-      <p className={style.message}>{props.message.content}</p>
+      <div className={style.author}><b>{props.message.author}:</b></div>
+      <div className={style.content}>{props.message.content}</div>
     </div>
   )
 }
