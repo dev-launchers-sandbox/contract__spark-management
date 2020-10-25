@@ -7,12 +7,11 @@ import Hand from "../components/common/Hand/Hand";
 import ChatBox from "../components/common/ChatBox/ChatBox.js";
 import Toggle from "../components/common/Toggle/Toggle.js";
 
-
 import { Link, useParams } from "react-router-dom";
 
 import ConversationalRedDeck from "../data/ConversationalDeck/ConversationalDeckRed";
 import ConversationalYellowDeck from "../data/ConversationalDeck/ConversationalDeckYellow";
-import usePageView from "../utils/usePageView"
+import usePageView from "../utils/usePageView";
 import axios from "axios";
 
 //This makes the code cleaner by returning the conversational deck route that will get called on index.js
@@ -24,8 +23,7 @@ export default function ConversationalDeck(props) {
 
   const handleCallBack = (isChatOpen) => {
     setChatOpen(isChatOpen);
-  }
-
+  };
 
   return (
     <PageBody>
@@ -35,13 +33,13 @@ export default function ConversationalDeck(props) {
             <div className="logoHolder">
               <Logo marginTop="4%" />
             </div>
-            <RedDeck deck={ConversationalRedDeck} />
+            <RedDeck openChat={handleCallBack} deck={ConversationalRedDeck} />
             {chatOpen ? "" : <Toggle handleCallBack={handleCallBack} />}
           </div>
-          <Hand deck={ConversationalYellowDeck} />
+          <Hand openChat={handleCallBack} deck={ConversationalYellowDeck} />
         </div>
         <div className={chatOpen ? "rightColumn" : "rightColumnNotActive"}>
-          {chatOpen && <ChatBox handleCallBack={handleCallBack}/>}
+          {chatOpen && <ChatBox handleCallBack={handleCallBack} />}
         </div>
       </div>
     </PageBody>

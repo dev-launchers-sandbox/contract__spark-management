@@ -3,7 +3,7 @@ import style from "./YellowCard.module.css";
 import ReactCardFlip from "react-card-flip";
 
 import redLogo from "./../../../images/red-spark-logo.png";
-import CopyTextIcon from "./../Icons/CopyTextIcon/CopyTextIcon";
+import SendToChatIcon from "./../Icons/SendToChatIcon/SendToChatIcon";
 import SelectCardIcon from "./../Icons/SelectCardIcon/SelectCardIcon";
 
 export default function YellowCard(props) {
@@ -56,7 +56,7 @@ export default function YellowCard(props) {
       >
         <div style={{ width: "100%", height: "100%" }}>
           <div>{cardRenderer()}</div>
-          <CopyTextIcon text={props.answer} />
+          <SendToChatIcon openChat={props.openChat} text={props.answer} />
           <SelectCardIcon onClick={props.onClick} />
         </div>
       </div>

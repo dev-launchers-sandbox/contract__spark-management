@@ -28,7 +28,9 @@ import ManageCodesRoute from "./routes/ManageCodesRoute.js";
 
 import Footer from "../src/components/common/Footer/Footer.js";
 import SelectDeck from "./components/common/SelectDeck/SelectDeck";
+
 import { MessagesProvider } from "./useContext/MessagesProvider";
+import { MessageContentProvider } from "./useContext/MessageContentProvider";
 
 // Change axios defaults, to fix cookies being sent (may need a better solution)
 axios.defaults.withCredentials = true;
@@ -117,14 +119,18 @@ function App() {
   ));
 
   return (
-    <MessagesProvider>
-      <Router basename={getBasename(window.location.pathname)}>
-        <div className="App">
-          <Switch> {routeComponents} </Switch>
-        </div>
-        {statusCode === 200 && <Redirect to="/" />}
-      </Router>
-    </MessagesProvider>
+    <MessageContentProvider>
+      <MessagesProvider>
+        <Router basename={getBasename(window.location.pathname)}>
+          <MessageContentProvider>
+            <div className="App">
+              <Switch> {routeComponents} </Switch>
+            </div>
+            {statusCode === 200 && <Redirect to="/" />}]
+          </MessageContentProvider>
+        </Router>
+      </MessagesProvider>
+    </MessageContentProvider>
   );
 }
 const rootElement = document.getElementById("root");

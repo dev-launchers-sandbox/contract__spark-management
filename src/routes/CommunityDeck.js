@@ -11,7 +11,7 @@ import { Link, useParams, Redirect } from "react-router-dom";
 
 import CommunityDeckYellow from "../data/CommunityDeck/CommunityDeckYellow.json";
 import CommunityDeckRed from "../data/CommunityDeck/CommunityDeckRed.json";
-import usePageView from "../utils/usePageView"
+import usePageView from "../utils/usePageView";
 import axios from "axios";
 
 //This makes the code cleaner by returning the community deck route that will get called on index.js
@@ -23,8 +23,7 @@ export default function CommunityDeck(props) {
 
   const handleCallBack = (isChatOpen) => {
     setChatOpen(isChatOpen);
-  }
-
+  };
 
   return (
     <PageBody>
@@ -34,13 +33,13 @@ export default function CommunityDeck(props) {
             <div className="logoHolder">
               <Logo marginTop="4%" />
             </div>
-            <RedDeck deck={CommunityDeckRed} />
+            <RedDeck openChat={handleCallBack} deck={CommunityDeckRed} />
             {chatOpen ? "" : <Toggle handleCallBack={handleCallBack} />}
           </div>
-          <Hand deck={CommunityDeckYellow} />
+          <Hand openChat={handleCallBack} deck={CommunityDeckYellow} />
         </div>
         <div className={chatOpen ? "rightColumn" : "rightColumnNotActive"}>
-          {chatOpen && <ChatBox handleCallBack={handleCallBack}/>}
+          {chatOpen && <ChatBox handleCallBack={handleCallBack} />}
         </div>
       </div>
     </PageBody>

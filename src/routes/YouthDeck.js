@@ -7,12 +7,11 @@ import Hand from "../components/common/Hand/Hand";
 import ChatBox from "../components/common/ChatBox/ChatBox.js";
 import Toggle from "../components/common/Toggle/Toggle.js";
 
-
 import { Link, useParams } from "react-router-dom";
 
 import YouthDeckYellow from "../data/YouthDeck/YouthDeckYellow.json";
 import YouthDeckRed from "../data/YouthDeck/YouthDeckRed.json";
-import usePageView from "../utils/usePageView"
+import usePageView from "../utils/usePageView";
 
 import axios from "axios";
 
@@ -25,8 +24,7 @@ export default function YouthDeck(props) {
 
   const handleCallBack = (isChatOpen) => {
     setChatOpen(isChatOpen);
-  }
-
+  };
 
   return (
     <PageBody>
@@ -36,13 +34,13 @@ export default function YouthDeck(props) {
             <div className="logoHolder">
               <Logo marginTop="4%" />
             </div>
-            <RedDeck deck={YouthDeckRed} />
+            <RedDeck openChat={handleCallBack} deck={YouthDeckRed} />
             {chatOpen ? "" : <Toggle handleCallBack={handleCallBack} />}
           </div>
-          <Hand deck={YouthDeckYellow} />
+          <Hand openChat={handleCallBack} deck={YouthDeckYellow} />
         </div>
         <div className={chatOpen ? "rightColumn" : "rightColumnNotActive"}>
-          {chatOpen && <ChatBox handleCallBack={handleCallBack}/>}
+          {chatOpen && <ChatBox handleCallBack={handleCallBack} />}
         </div>
       </div>
     </PageBody>
