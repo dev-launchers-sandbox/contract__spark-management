@@ -8,12 +8,18 @@ import ChatHeader from "./ChatHeader/ChatHeader.js";
 import socket from "../../../utils/socket.js";
 
 function ChatBox(props) {
-  useEffect(() => {
-    console.log("I AM MOUNTED");
+
+  useEffect(() =>{
+    const room = getRoomCode();
+    console.log("I AM MOUNTED")
     socket.on("connect", () => {
       console.log("CONNECTED OMG THIS IS ACTUALLY WORKING!!!");
     });
-  }, []);
+
+    socket.emit("room", room);
+
+  }, [])
+
 
   const { messageContent, setMessageContent } = useContext(
     MessageContentContext
@@ -39,6 +45,13 @@ function ChatBox(props) {
       block: "nearest",
       inline: "start",
     });
+
+    socket.on('receiveMessage', data => {
+      console.log("I have received the message!");
+      console.log("this is the data", data);
+      addMessage(data);
+    });
+
   }, [messages]);
 
   const handleSubmit = (event) => {
@@ -94,6 +107,7 @@ function ChatBox(props) {
       console.log("this is the data", data);
       addMessage(data);
     });
+    addMessage({content: messageContent, author: "You", room: room});
   };
 
   const getRoomCode = () => {
