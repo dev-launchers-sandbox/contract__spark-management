@@ -47,6 +47,11 @@ function LoginPage(props) {
     if (!form.username.replace(/\s/g, "").length) {
       return notify("Please input a valid username");
     }
+
+    if (form.username.length > 45) {
+      return notify("Usernames must be 45 or less characters");
+    }
+
     sessionStorage.setItem("username", form.username);
     setIsLoading(true); //Lets the user know their code is being processed
     verifyCode();

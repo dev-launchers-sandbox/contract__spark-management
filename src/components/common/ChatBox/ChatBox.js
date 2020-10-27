@@ -9,7 +9,7 @@ import ChatHeader from "./ChatHeader/ChatHeader.js";
 function ChatBox(props) {
   const { messageContent, setMessageContent } = useContext(
     MessageContentContext
-  ); //ANNOYING
+  ); //ANNOYING FORMATTER
   const { messages, setMessages } = useContext(MessagesContext);
 
   let lastMessage = useRef();

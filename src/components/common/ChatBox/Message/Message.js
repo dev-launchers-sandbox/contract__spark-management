@@ -11,14 +11,33 @@ function Message(props) {
 
       return http.status != 404;
     } catch (error) {
+      console.log("No load");
       return false;
     }
+  };
+
+  const getTime = () => {
+    const date = new Date();
+    let hours = date.getHours();
+    let amOrPm = "AM";
+    if (hours > 12) {
+      hours -= 12;
+      amOrPm = "PM";
+    }
+
+    let minutes = date.getMinutes();
+
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    return hours + ":" + minutes + ` ${amOrPm}`;
   };
 
   return (
     <div className={style.messageHolder}>
       <div className={style.author}>
-        <b>{props.message.author}:</b>
+        <b>{props.message.author} </b>{" "}
+        <div className={style.date}> {getTime()} </div>
       </div>
       {imageExists(props.message.content) ? (
         <img className={style.image} src={props.message.content} alt="image" />

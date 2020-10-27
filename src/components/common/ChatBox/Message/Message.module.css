@@ -8,6 +8,13 @@
   padding: 0;
 }
 
+.date {
+  float: right;
+  margin-right: 2em;
+  font-size: 0.8em;
+  color: gray;
+}
+
 .content {
   font-size: 0.8rem;
   margin-left: 0.7rem;
