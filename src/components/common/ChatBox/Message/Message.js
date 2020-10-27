@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./Message.module.css";
 
 function Message(props) {
+  /*
   const imageExists = (image_url) => {
     try {
       var http = new XMLHttpRequest();
@@ -15,6 +16,7 @@ function Message(props) {
       return false;
     }
   };
+  */
 
   const getTime = () => {
     const date = new Date();
@@ -39,11 +41,9 @@ function Message(props) {
         <b>{props.message.author} </b>{" "}
         <div className={style.date}> {getTime()} </div>
       </div>
-      {imageExists(props.message.content) ? (
-        <img className={style.image} src={props.message.content} alt="image" />
-      ) : (
+      
         <div className={style.content}>{props.message.content}</div>
-      )}
+
     </div>
   );
 }
