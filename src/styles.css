@@ -32,27 +32,30 @@ h2 {
   justify-content: space-around;
 }
 
-.container{
+.container {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
 }
 
-.leftColumn{
+.leftColumn {
   width: 75%;
 }
 
-.leftColumnNotActive{
+.leftColumnNotActive {
   width: 100%;
 }
 
-.rightColumn{
+.rightColumn {
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 25%;
   height: 120vh;
 }
 
-.rightColumnNotActive{
+.rightColumnNotActive {
   width: 0%;
   height: 0%;
 }
@@ -69,7 +72,7 @@ h2 {
     justify-content: center;
   }
 
-  .logoHolder{
+  .logoHolder {
     margin-right: 18%;
   }
 }
