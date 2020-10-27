@@ -5,9 +5,7 @@ import { MessageContentContext } from "../../../useContext/MessageContentProvide
 
 import Message from "./Message/Message.js";
 import ChatHeader from "./ChatHeader/ChatHeader.js";
-import socket from "../../../utils/socket.js"
-
-
+import socket from "../../../utils/socket.js";
 
 function ChatBox(props) {
 
@@ -16,13 +14,11 @@ function ChatBox(props) {
     console.log("I AM MOUNTED")
     socket.on("connect", () => {
       console.log("CONNECTED OMG THIS IS ACTUALLY WORKING!!!");
-
     });
 
     socket.emit("room", room);
 
   }, [])
-
 
 
   const { messageContent, setMessageContent } = useContext(
@@ -74,17 +70,39 @@ function ChatBox(props) {
     props.handleCallBack(false);
   };
 
-  const addMessage = data => {
+  const addMessage = (data) => {
     setMessages([...messages, data]);
-  }
+  };
+
+  const getDate = () => {
+    const date = new Date();
+    let hours = date.getHours();
+    let amOrPm = "AM";
+    if (hours > 12) {
+      hours -= 12;
+      amOrPm = "PM";
+    }
+
+    let minutes = date.getMinutes();
+
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    return hours + ":" + minutes + ` ${amOrPm}`;
+  };
 
   const sendMessage = () => {
     const room = getRoomCode();
     const username = sessionStorage.getItem("username") || "No username"; //just in case
-    const message = { content: messageContent, author: username, room: room };
+    const message = {
+      content: messageContent,
+      author: username,
+      room: room,
+      timestamp: getDate(),
+    };
     //setMessages([...messages, message]);
     socket.emit("sendMessage", message);
-    socket.on('receiveMessage', data => {
+    socket.on("receiveMessage", (data) => {
       console.log("I have received the message!");
       console.log("this is the data", data);
       addMessage(data);

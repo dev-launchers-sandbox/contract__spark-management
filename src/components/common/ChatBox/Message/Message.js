@@ -18,28 +18,11 @@ function Message(props) {
   };
   */
 
-  const getTime = () => {
-    const date = new Date();
-    let hours = date.getHours();
-    let amOrPm = "AM";
-    if (hours > 12) {
-      hours -= 12;
-      amOrPm = "PM";
-    }
-
-    let minutes = date.getMinutes();
-
-    if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
-    return hours + ":" + minutes + ` ${amOrPm}`;
-  };
-
   return (
     <div className={style.messageHolder}>
       <div className={style.author}>
         <b>{props.message.author} </b>{" "}
-        <div className={style.date}> {getTime()} </div>
+        <div className={style.date}> {props.message.timestamp} </div>
       </div>
       
         <div className={style.content}>{props.message.content}</div>
