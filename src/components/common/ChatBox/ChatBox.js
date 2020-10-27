@@ -107,7 +107,7 @@ function ChatBox(props) {
       console.log("this is the data", data);
       addMessage(data);
     });
-    addMessage({content: messageContent, author: "You", room: room});
+    addMessage({content: messageContent, author: "You", room: room, timestamp: getDate()});
   };
 
   const getRoomCode = () => {
