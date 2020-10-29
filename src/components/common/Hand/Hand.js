@@ -63,6 +63,16 @@ export default function Hand(props) {
     setFlipStates(initialFlipStates);
   };
 
+  useEffect(() => {
+    const room = getRoomCode();
+    socket.emit("room", room);
+    alert("HAND MOUNTED");
+  }, []);
+
+  socket.on("receiveMessage", (data) => {
+    addMessage(data);
+  });
+
   // discardCardAndDraw() : Discards the supplied card and replaces it with a new one
   const discardCardAndDraw = (card) => {
     // Remove card from the hand

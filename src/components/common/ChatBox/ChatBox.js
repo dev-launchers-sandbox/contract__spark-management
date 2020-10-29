@@ -9,13 +9,10 @@ import socket from "../../../utils/socket.js";
 
 function ChatBox(props) {
   useEffect(() => {
-    const room = getRoomCode();
     console.log("I AM MOUNTED");
     socket.on("connect", () => {
       console.log("CONNECTED OMG THIS IS ACTUALLY WORKING!!!");
     });
-
-    socket.emit("room", room);
   }, []);
 
   const { messageContent, setMessageContent } = useContext(
@@ -98,11 +95,9 @@ function ChatBox(props) {
     };
     //setMessages([...messages, message]);
     socket.emit("sendMessage", message);
-    socket.on("receiveMessage", (data) => {
-      console.log("I have received the message!");
-      console.log("this is the data", data);
+    /*socket.on("receiveMessage", (data) => {
       addMessage(data);
-    });
+    });*/
     addMessage({
       content: messageContent,
       author: "You",
