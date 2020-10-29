@@ -66,7 +66,6 @@ export default function Hand(props) {
   useEffect(() => {
     const room = getRoomCode();
     socket.emit("room", room);
-    alert("HAND MOUNTED");
   }, []);
 
   socket.on("receiveMessage", (data) => {
