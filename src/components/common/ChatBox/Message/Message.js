@@ -20,13 +20,16 @@ function Message(props) {
 
   return (
     <div className={style.messageHolder}>
-      <div className={style.author}>
-        <b>{props.message.author} </b>{" "}
-        <div className={style.date}> {props.message.timestamp} </div>
-      </div>
-      
-        <div className={style.content}>{props.message.content}</div>
+      {!props.message.server && (
+        <div className={style.author}>
+          <b>{props.message.author} </b>{" "}
+          <div className={style.date}> {props.message.timestamp} </div>
+        </div>
+      )}
 
+      <div className={props.message.server ? style.server : style.content}>
+        {props.message.content}
+      </div>
     </div>
   );
 }

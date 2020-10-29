@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import style from "./Hand.module.css";
 import { BrowserRouter as Router, Redirect, useParams } from "react-router-dom";
 import useDeck from "./../useDeck/useDeck";
@@ -7,12 +7,18 @@ import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
 import HowToPlayButton from "./HowToPlayButton/HowToPlayButton";
 import NeedHelpButton from "./NeedHelpButton/NeedHelpButton";
 import queryString from "query-string";
+import { MessagesContext } from "../../../useContext/MessagesProvider";
+
 import sendEvent from "../../../utils/sendEvent.js";
+import getRoomCode from "../../../utils/getRoomCode";
+import socket from "../../../utils/socket";
+
 const NUM_CARDS_IN_HAND = 8;
 let initialFlipStates = [];
 for (let i = 0; i < NUM_CARDS_IN_HAND; i++) initialFlipStates.push(false);
 
 export default function Hand(props) {
+  const { messages, setMessages } = useContext(MessagesContext);
   const { drawCard } = useDeck(props.deck); //Custom hook
   const [cards, setCards] = useState([]); //Cards holds all of the cards that the hand is displaying
   const [flipStates, setFlipStates] = useState(initialFlipStates);
@@ -77,9 +83,52 @@ export default function Hand(props) {
     }, 750);
   };
 
+  const addMessage = (data) => {
+    setMessages([...messages, data]);
+  };
+
+  const sendWelcomeMessage = () => {
+    const username = sessionStorage.getItem("username");
+
+    let user = {
+      username: username,
+      room: getRoomCode(),
+    };
+
+    socket.emit("userJoined", user);
+    let message = {
+      content: "You joined the room",
+      author: "",
+      room: getRoomCode(),
+      server: true,
+    };
+    addMessage(message);
+  };
+
+  socket.on("receiveUserJoined", (user) => {
+    const message = {
+      content: `${user.username} joined the room`,
+      author: "",
+      room: user.room,
+      server: true,
+    };
+    addMessage(message);
+  });
+
+  socket.on("receiveUserLeft", (user) => {
+    const message = {
+      content: `${user.username} left the room`,
+      author: "",
+      room: user.room,
+      server: true,
+    };
+    addMessage(message);
+  });
+
   // When this Hand component mounts:
   //    Draw cards
   useEffect(() => {
+    sendWelcomeMessage();
     let query = window.location.search;
     try {
       const queryParsed = queryString.parse(query);
@@ -90,6 +139,26 @@ export default function Hand(props) {
       populateCards();
     }
   }, []);
+
+  useEffect(() => {
+    const user = {
+      room: getRoomCode(),
+      username: sessionStorage.getItem("username"),
+    };
+    return () => {
+      socket.emit("userLeft", user);
+    };
+  }, []);
+
+  window.onbeforeunload = confirmExit;
+  function confirmExit() {
+    const user = {
+      room: getRoomCode(),
+      username: sessionStorage.getItem("username"),
+    };
+
+    socket.emit("userLeft", user);
+  }
 
   useEffect(() => {
     if (code === "None") return;
