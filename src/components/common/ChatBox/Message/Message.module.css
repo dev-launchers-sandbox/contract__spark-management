@@ -28,3 +28,11 @@
   padding: 0;
   width: 50%;
 }
+
+.server {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-left: 0.7rem;
+  margin-bottom: 5px;
+  padding: 0;
+}
