@@ -18,6 +18,10 @@ function Message(props) {
   };
   */
 
+  useEffect(() => {
+    console.log(props.message.id);
+  }, []);
+
   return (
     <div className={style.messageHolder}>
       {!props.message.server && (

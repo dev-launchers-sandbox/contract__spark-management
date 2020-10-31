@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import style from "./ChatBox.module.css";
 import { MessagesContext } from "../../../useContext/MessagesProvider";
 import { MessageContentContext } from "../../../useContext/MessageContentProvider";
@@ -22,6 +24,8 @@ function ChatBox(props) {
 
   let lastMessage = useRef();
 
+  //Limit keypresses to textarea
+  //REACT
   document.onkeypress = function (event) {
     event = event || window.event;
     if (event.key === "Enter" && !event.shiftKey) {
@@ -84,25 +88,30 @@ function ChatBox(props) {
     return hours + ":" + minutes + ` ${amOrPm}`;
   };
 
+  const getId = () => {
+    return uuidv4();
+  };
+
   const sendMessage = () => {
     const room = getRoomCode();
     const username = sessionStorage.getItem("username") || "No username"; //just in case
+    const id = getId();
     const message = {
       content: messageContent,
       author: username,
       room: room,
       timestamp: getDate(),
+      id: id,
     };
-    //setMessages([...messages, message]);
+
     socket.emit("sendMessage", message);
-    /*socket.on("receiveMessage", (data) => {
-      addMessage(data);
-    });*/
+
     addMessage({
       content: messageContent,
       author: "You",
       room: room,
       timestamp: getDate(),
+      id: id,
     });
   };
 
