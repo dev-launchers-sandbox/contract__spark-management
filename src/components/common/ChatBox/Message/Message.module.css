@@ -2,15 +2,26 @@
   margin-top: 1rem;
 }
 
+.messageHolderServer{
+  margin-top: 1rem;
+}
+
+.messageHolder:hover{
+  background-color: #b3afaf;
+}
+
 .author {
+  display: flex;
+  flex-direction: row;
   font-size: 0.8rem;
   margin-left: 0.7rem;
   padding: 0;
 }
 
+
 .date {
-  float: right;
-  margin-right: 2em;
+  padding-top: .2rem;
+  margin-left: 1rem;
   font-size: 0.8em;
   color: gray;
 }
@@ -21,6 +32,9 @@
   margin-bottom: 5px;
   padding: 0;
 }
+
+
+
 
 .image {
   margin-left: 0.7rem;
