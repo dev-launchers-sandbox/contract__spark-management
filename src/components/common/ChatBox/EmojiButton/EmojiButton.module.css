@@ -1,0 +1,10 @@
+.emojiButton{
+  background: #cab79b;
+  border-radius: 6px;
+  opacity: 0.7;
+}
+
+.emojiButton:hover{
+  cursor: pointer;
+  opacity: 1;
+}
