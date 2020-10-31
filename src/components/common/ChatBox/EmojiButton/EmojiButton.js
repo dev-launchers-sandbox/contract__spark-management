@@ -20,8 +20,8 @@ function EmojiButton(){
 
   return(
     <div className={style.emojiButtonContainer}>
-      <button className={style.emojiButton} onClick={handleClick}>😀+</button>
-      {showEmojiPicker && <Picker title="pick your emoji" onSelect={handleEmojiClick} theme="dark"/>}
+      <button className={style.emojiButton} onClick={handleClick}>😀<b>+</b></button>
+      {showEmojiPicker && <Picker title="pick your emoji" onSelect={handleEmojiClick} theme="dark" set="google"/>}
     </div>
   )
 }

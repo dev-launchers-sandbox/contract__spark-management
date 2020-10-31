@@ -5,21 +5,6 @@ import EmojiButton from "../EmojiButton/EmojiButton.js";
 function Message(props) {
 
   const [showButton, setShowButton] = useState(false);
-  /*
-  const imageExists = (image_url) => {
-    try {
-      var http = new XMLHttpRequest();
-
-      http.open("HEAD", image_url, false);
-      http.send();
-
-      return http.status != 404;
-    } catch (error) {
-      console.log("No load");
-      return false;
-    }
-  };
-  */
 
   useEffect(() => {
     console.log(props.message.id);
