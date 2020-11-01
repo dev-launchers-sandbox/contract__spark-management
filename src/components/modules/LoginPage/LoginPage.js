@@ -62,23 +62,10 @@ function LoginPage(props) {
 
       sessionStorage.setItem(form.code, true); //Marks the code as verified
       //Sets the deck using to later redirect to it
-      if (codeData.data.code.deck_name === "community") {
-        setDeckUsing("CommunityDeck");
-      } else if (codeData.data.code.deck_name === "spanish") {
-        setDeckUsing("SpanishDeck");
-      } else if (codeData.data.code.deck_name === "conversational") {
-        setDeckUsing("ConversationalDeck");
-      } else if (codeData.data.code.deck_name === "youth") {
-        setDeckUsing("YouthDeck");
-      } else {
-        setForm({
-          ...form,
-          code: "",
-        });
-        setIsLoading(false);
-        notify("This code does not exist!");
-        return;
-      }
+      let uppercaseDeckName =
+        codeData.data.code.deck_name.charAt(0).toUpperCase() +
+        codeData.data.code.deck_name.slice(1);
+      setDeckUsing(uppercaseDeckName.concat("Deck"));
       setIsLoading(false);
 
       //Verifies that the code is not expired and allows for the redirect to happen

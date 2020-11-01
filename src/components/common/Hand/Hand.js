@@ -110,8 +110,9 @@ export default function Hand(props) {
                 sendEvent("Yellow Card", "Discards and draw button clicked", "button")
                 discardCardAndDraw(card);
               }}
-              emoji={card.isEmoji}
+              isEmoji={card.isEmoji}
               key={card.answer} // Stops React unique key error
+              emoji={card.emoji || null}
             />
           );
         })}
