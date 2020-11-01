@@ -10,6 +10,11 @@ function Message(props) {
     console.log(props.message.id);
   }, []);
 
+  const getMessageObject = () => {
+    return props.messages.find(message => message.id === props.message.id);
+  }
+
+
   return (
     <div
       className={props.message.server ? style.messageHolderServer : style.messageHolder}
@@ -21,7 +26,7 @@ function Message(props) {
           <b>{props.message.author} </b>{" "}
           <div className={style.date}> {props.message.timestamp} </div>
           <div className={style.emojiButton}>
-            {showButton && <EmojiButton />}
+            {showButton && <EmojiButton getMessageObject={getMessageObject}/>}
           </div>
         </div>
       )}

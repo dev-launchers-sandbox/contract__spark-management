@@ -4,18 +4,25 @@ import "emoji-mart/css/emoji-mart.css";
 
 import style from "./EmojiButton.module.css";
 
-function EmojiButton(){
+function EmojiButton(props){
 
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const [currentEmoji, setCurrentEmoji] = useState(null);
+  const [hasEmojiBeenClicked, setHasEmojiBeenClicked] = useState(false);
 
   const handleClick = () => {
     setShowEmojiPicker(!showEmojiPicker);
+
   }
 
   const handleEmojiClick = (emoji) => {
-    setCurrentEmoji(emoji.native);
-    console.log(emoji.native);
+    const message = props.getMessageObject();
+    const reaction = {
+      emoji: emoji.native,
+      count: 1,
+      clicked: !hasEmojiBeenClicked
+    }
+    message.reactions.push(reaction);
+    console.log("this is the new message with emoji: ", message);
   }
 
   return(

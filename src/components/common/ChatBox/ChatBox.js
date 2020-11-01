@@ -102,6 +102,7 @@ function ChatBox(props) {
       room: room,
       timestamp: getDate(),
       id: id,
+      reactions: []
     };
 
     socket.emit("sendMessage", message);
@@ -112,7 +113,9 @@ function ChatBox(props) {
       room: room,
       timestamp: getDate(),
       id: id,
+      reactions: []
     });
+
   };
 
   const getRoomCode = () => {
@@ -130,7 +133,7 @@ function ChatBox(props) {
         </div>
         <div id="messages" className={style.message}>
           {messages.map((message, key) => {
-            return <Message key={key} message={message} />;
+            return <Message key={key} messages={messages} message={message} />;
           })}
           <div
             style={{ float: "left", clear: "both" }}
