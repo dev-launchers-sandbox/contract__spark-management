@@ -1,16 +1,13 @@
 .messageHolder {
   margin-top: 1rem;
 }
-
-.messageHolderServer{
+.messageHolderServer {
   margin-top: 1rem;
 }
 
-.messageHolder:hover{
+.messageHolder:hover {
   background-color: #b3afaf;
 }
-
-
 
 .author {
   display: flex;
@@ -20,9 +17,8 @@
   padding: 0;
 }
 
-
 .date {
-  padding-top: .2rem;
+  padding-top: 0.2rem;
   margin-left: 1rem;
   font-size: 0.8em;
   color: gray;
@@ -34,9 +30,6 @@
   margin-bottom: 5px;
   padding: 0;
 }
-
-
-
 
 .image {
   margin-left: 0.7rem;
@@ -51,4 +44,9 @@
   margin-left: 0.7rem;
   margin-bottom: 5px;
   padding: 0;
+}
+
+.emojiButton {
+  position: absolute;
+  right: 0;
 }
