@@ -7,12 +7,12 @@ import {
   Route,
   useParams,
   Redirect,
-  useRouterHistory,
+  useLocation
 } from "react-router-dom";
 import ReactModal from "react-modal";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-
+import ReactGA from "react-ga";
 import ResetPasswordRoute from "./routes/ResetPasswordRoute.js";
 import CommunityDeckRoute from "./routes/CommunityDeck.js";
 import ConversationalDeckRoute from "./routes/ConversationalDeck.js";
@@ -92,17 +92,20 @@ const getBasename = (path) => {
 };
 
 function App() {
+
   ReactModal.setAppElement("#root");
-  const init = () => {
-    ReactGA.initialize("UA-176718447-1"); // put your tracking id here
-  };
-  const PageView = () => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  };
-  useEffect(() => {
-    init();
-    PageView();
-  }, []);
+
+    const init = () => {
+      console.log("google analytics is being initialized")
+      ReactGA.initialize("UA-89240419-1"); // put your tracking id here
+      //sends current page to google analytics
+      ReactGA.pageview(window.location.pathname + window.location.search);
+    };
+
+
+    useEffect(() => {
+      init();
+    }, []);
 
   let [statusCode, setStatusCode] = useState(null);
   let [formCode, setFormCode] = useState("");
