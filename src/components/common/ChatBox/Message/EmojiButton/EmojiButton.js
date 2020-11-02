@@ -20,9 +20,27 @@ function EmojiButton(props) {
       count: 1,
       isChecked: true,
     };
-
-    addReaction(reaction);
+    if(!isEmojiThere(reaction, emoji.native)){
+      addReaction(reaction);
+    }
+    else{
+      console.log("it is already there");
+    }
+    //addReaction(reaction);
   };
+
+
+  const isEmojiThere = (reaction, emoji) => {
+    for(let i=0;i<props.message.reactions.length;i++){
+      let reaction = props.message.reactions[i];
+      if(reaction.emoji === emoji){
+        return true;
+      }
+    }
+    return false;
+  }
+
+
 
   const addReaction = (reaction) => {
     setMessages((msgs) => {
