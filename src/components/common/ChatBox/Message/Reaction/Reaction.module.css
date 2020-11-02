@@ -1,6 +1,5 @@
-.notCheckedReaction {
+.reaction {
   font-size: 0.8rem;
-  background-color: #d1c9c9;
   border-radius: 5px;
   width: 2.5em;
   height: 2.5em;
@@ -11,23 +10,6 @@
   align-items: center;
 }
 
-.checkedReaction {
-  font-size: 0.8rem;
-  background-color: #94afeb;
-  border-radius: 5px;
-  width: 2.5em;
-  height: 2.5em;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-right: 0.5em;
-  align-items: center;
-}
-
-.checkedReaction:hover {
-  cursor: pointer;
-}
-
-.notCheckedReaction:hover {
+.reaction:hover {
   cursor: pointer;
 }

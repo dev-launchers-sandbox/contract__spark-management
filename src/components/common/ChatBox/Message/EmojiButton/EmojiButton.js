@@ -13,7 +13,7 @@ function EmojiButton(props) {
     setShowEmojiPicker(!showEmojiPicker);
   };
 
-  const addReaction = (emoji) => {
+  const handleEmojiSelection = (emoji) => {
     setShowEmojiPicker(false);
     const reaction = {
       emoji: emoji.native,
@@ -21,6 +21,10 @@ function EmojiButton(props) {
       isChecked: true,
     };
 
+    addReaction(reaction);
+  };
+
+  const addReaction = (reaction) => {
     setMessages((msgs) => {
       const newMsgs = msgs.concat();
       const index = newMsgs.indexOf(props.message);
@@ -43,7 +47,7 @@ function EmojiButton(props) {
         <div className={style.pickerContainer}>
           <Picker
             title="Pick you emoji"
-            onSelect={addReaction}
+            onSelect={handleEmojiSelection}
             theme="dark"
             set="google"
             perLine={8}

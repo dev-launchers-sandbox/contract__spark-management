@@ -8,10 +8,6 @@ function Message(props) {
   const [showButton, setShowButton] = useState(false);
   const { messages, setMessages } = useContext(MessagesContext); //ANNOYING FORMATTER
 
-  const getMessageObject = () => {
-    return messages.find((message) => message.id === props.message.id);
-  };
-
   const messageReactions = () => {
     return props.message.reactions || [];
   };
@@ -29,12 +25,7 @@ function Message(props) {
           <b>{props.message.author} </b>{" "}
           <div className={style.date}> {props.message.timestamp} </div>
           <div className={style.emojiButton}>
-            {showButton && (
-              <EmojiButton
-                message={props.message}
-                getMessageObject={getMessageObject}
-              />
-            )}
+            {showButton && <EmojiButton message={props.message} />}
           </div>
         </div>
       )}
@@ -43,14 +34,7 @@ function Message(props) {
         {props.message.content}
         <div className={style.reactionsContainer}>
           {messageReactions().map((reaction, key) => {
-            return (
-              <Reaction
-                key={key}
-                emoji={reaction.emoji}
-                count={reaction.count}
-                isChecked={reaction.isChecked}
-              />
-            );
+            return <Reaction key={key} reaction={reaction} />;
           })}
         </div>
       </div>

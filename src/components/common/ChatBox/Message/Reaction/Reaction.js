@@ -4,13 +4,14 @@ import style from "./Reaction.module.css";
 function Reaction(props) {
   return (
     <div
-      className={
-        props.isChecked ? style.checkedReaction : style.notCheckedReaction
-      }
+      style={{
+        backgroundColor: props.reaction.isChecked ? "#94afeb" : "#d1c9c9",
+      }}
+      className={style.reaction}
     >
       <p>
         {" "}
-        {props.emoji} {props.count}
+        {props.reaction.emoji} {props.reaction.count}
       </p>
     </div>
   );
