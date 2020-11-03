@@ -34,7 +34,9 @@ function Message(props) {
         {props.message.content}
         <div className={style.reactionsContainer}>
           {messageReactions().map((reaction, key) => {
-            return <Reaction key={key} reaction={reaction} />;
+            return (
+              <Reaction message={props.message} key={key} reaction={reaction} />
+            );
           })}
         </div>
       </div>

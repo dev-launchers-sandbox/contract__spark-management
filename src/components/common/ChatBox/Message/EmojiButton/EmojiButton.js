@@ -18,29 +18,42 @@ function EmojiButton(props) {
     const reaction = {
       emoji: emoji.native,
       count: 1,
-      isChecked: true,
+      isChecked: false,
     };
-    if(!isEmojiThere(reaction, emoji.native)){
+    if (!isEmojiThere(reaction, emoji.native)) {
       addReaction(reaction);
-    }
-    else{
-      console.log("it is already there");
+    } else {
+      const reaction = props.message.reactions.find(
+        (reaction) => reaction.emoji === emoji.native
+      );
+      if (reaction.isChecked) return;
+
+      setMessages((msgs) => {
+        const messagesClone = messages.concat();
+        const msgClone = { ...props.message };
+        const reactionIndex = props.message.reactions.indexOf(reaction);
+
+        msgClone.reactions[reactionIndex].isChecked = true;
+        msgClone.reactions[reactionIndex].count++;
+
+        const index = messages.indexOf(props.message);
+        messagesClone.splice(index, 1, msgClone);
+
+        return messagesClone;
+      });
     }
     //addReaction(reaction);
   };
 
-
   const isEmojiThere = (reaction, emoji) => {
-    for(let i=0;i<props.message.reactions.length;i++){
+    for (let i = 0; i < props.message.reactions.length; i++) {
       let reaction = props.message.reactions[i];
-      if(reaction.emoji === emoji){
+      if (reaction.emoji === emoji) {
         return true;
       }
     }
     return false;
-  }
-
-
+  };
 
   const addReaction = (reaction) => {
     setMessages((msgs) => {
