@@ -7,7 +7,7 @@ import {
   Route,
   useParams,
   Redirect,
-  useLocation
+  useLocation,
 } from "react-router-dom";
 import ReactModal from "react-modal";
 import axios from "axios";
@@ -28,7 +28,6 @@ import ManageCodesRoute from "./routes/ManageCodesRoute.js";
 import Footer from "../src/components/common/Footer/Footer.js";
 import SelectDeck from "./components/common/SelectDeck/SelectDeck";
 
-import ReactGA from "react-ga";
 // Change axios defaults, to fix cookies being sent (may need a better solution)
 axios.defaults.withCredentials = true;
 
@@ -92,20 +91,18 @@ const getBasename = (path) => {
 };
 
 function App() {
-
   ReactModal.setAppElement("#root");
 
-    const init = () => {
-      console.log("google analytics is being initialized")
-      ReactGA.initialize("UA-89240419-1"); // put your tracking id here
-      //sends current page to google analytics
-      ReactGA.pageview(window.location.pathname + window.location.search);
-    };
+  const init = () => {
+    console.log("google analytics is being initialized");
+    ReactGA.initialize("UA-89240419-1"); // put your tracking id here
+    //sends current page to google analytics
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  };
 
-
-    useEffect(() => {
-      init();
-    }, []);
+  useEffect(() => {
+    init();
+  }, []);
 
   let [statusCode, setStatusCode] = useState(null);
   let [formCode, setFormCode] = useState("");
