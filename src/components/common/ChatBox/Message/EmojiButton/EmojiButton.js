@@ -1,81 +1,60 @@
 import React, { useEffect, useState, useContext } from "react";
+import style from "./EmojiButton.module.css";
+
 import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
+
 import { MessagesContext } from "../../../../../useContext/MessagesProvider";
-import style from "./EmojiButton.module.css";
+
 import socket from "../../../../../utils/socket.js";
+import getRoomCode from "../../../../../utils/getRoomCode";
 
 function EmojiButton(props) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [hasEmojiBeenClicked, setHasEmojiBeenClicked] = useState(false);
   const { messages, setMessages } = useContext(MessagesContext);
 
-
   const handleClick = () => {
     setShowEmojiPicker(!showEmojiPicker);
   };
 
   socket.off("receivedReaction");
+
   socket.on("receivedReaction", (data) => {
-    //console.log("Backend data: ", data);
-
-    setMessages((msgs) => {
-      const newMsgs = msgs.concat();
-      const getMessageObject = newMsgs.find(message => message.id === data.id);
-      const index = newMsgs.indexOf(getMessageObject);
-      const newMsgObj  = {
-        ...getMessageObject,
-        reactions: [...data.reactions]
-      }
-
-      newMsgs.splice(index, 1, newMsgObj);
-      return newMsgs;
-    });
-  })
-
-
-
+    if (isEmojiThere(data.emoji)) {
+      updateCount(data.message, data, 1, false);
+    } else {
+      addReaction(data.message, data);
+    }
+  });
 
   const handleEmojiSelection = (emoji) => {
     setShowEmojiPicker(false);
+
     const reaction = {
+      message: props.message,
       emoji: emoji.native,
       count: 1,
-      isChecked: false,
+      isChecked: true,
+      room: getRoomCode(),
     };
 
-    const newMsg = {
-      ...props.message,
-      reactions: [...props.message.reactions, reaction]
-    };
+    const serverReaction = { ...reaction };
+    serverReaction.isChecked = false;
 
+    socket.emit("addReaction", serverReaction);
 
     if (!isEmojiThere(emoji.native)) {
-      addReaction(reaction);
-
-      socket.emit("addReaction", newMsg);
+      addReaction(props.message, reaction);
     } else {
-      //socket.emit("addReaction", newMsg)
-      const reaction = props.message.reactions.find(
-        (reaction) => reaction.emoji === emoji.native
+      const reactionToUpdate = props.message.reactions.find(
+        (r) => r.emoji === emoji.native
       );
+
       if (reaction.isChecked) return;
 
-      setMessages((msgs) => {
-        const messagesClone = messages.concat();
-        const msgClone = { ...props.message };
-        const reactionIndex = props.message.reactions.indexOf(reaction);
-
-        msgClone.reactions[reactionIndex].isChecked = true;
-        msgClone.reactions[reactionIndex].count++;
-
-        const index = messages.indexOf(props.message);
-        messagesClone.splice(index, 1, msgClone);
-
-        return messagesClone;
-      });
+      updateCount(props.message, reaction, 1, true);
     }
-    //addReaction(reaction);
   };
 
   const isEmojiThere = (emoji) => {
@@ -88,17 +67,34 @@ function EmojiButton(props) {
     return false;
   };
 
-  const addReaction = (reaction) => {
+  const addReaction = (message, reaction) => {
     setMessages((msgs) => {
       const newMsgs = msgs.concat();
-      const index = newMsgs.indexOf(props.message);
+      const index = newMsgs.indexOf(message);
       const newMessage = {
-        ...props.message,
-        reactions: [...props.message.reactions, reaction],
+        ...message,
+        reactions: [...message.reactions, reaction],
       };
 
       newMsgs.splice(index, 1, newMessage);
       return newMsgs;
+    });
+  };
+
+  const updateCount = (message, reaction, num, isChecked) => {
+    setMessages((msgs) => {
+      const messagesClone = messages.concat();
+      const msgClone = { ...message };
+      const reactionIndex = message.reactions.indexOf(reaction);
+      const prevCount = msgClone.reactions[reactionIndex].count;
+
+      msgClone.reactions[reactionIndex].isChecked = isChecked;
+      msgClone.reactions[reactionIndex].count = prevCount + num;
+
+      const index = messages.indexOf(message);
+      messagesClone.splice(index, 1, msgClone);
+
+      return messagesClone;
     });
   };
 

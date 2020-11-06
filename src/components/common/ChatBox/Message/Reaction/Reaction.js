@@ -6,12 +6,11 @@ import socket from "../../../../../utils/socket.js";
 function Reaction(props) {
   const { messages, setMessages } = useContext(MessagesContext);
 
+  socket.off("updateReaction");
+  socket.on("updateReaction", (data) => {
+    console.log("this is the freaking data: ", data);
 
-    socket.off('updateReaction');
-    socket.on("updateReaction", (data) => {
-      console.log("this is the freaking data: ", data);
-
-      /*
+    /*
       setMessages((msgs) => {
         const newMsgs = messages.concat();
         const getMessageObject = newMsgs.find(message => message.id === data.id);
@@ -32,8 +31,7 @@ function Reaction(props) {
         return newMsgs;
       })
       */
-    })
-
+  });
 
   const handleClick = () => {
     socket.emit("clickedReaction", props.message);
