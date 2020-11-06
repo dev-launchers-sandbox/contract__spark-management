@@ -44,9 +44,10 @@ function ChatBox(props) {
       inline: "start",
     });
 
+    socket.off("receiveMessage");
     socket.on("receiveMessage", (data) => {
-      console.log("I have received the message!");
-      console.log("this is the data", data);
+      //console.log("I have received the message!");
+      //console.log("this is the data", data);
       addMessage(data);
     });
   }, [messages]);
