@@ -3,15 +3,38 @@ import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
 import { MessagesContext } from "../../../../../useContext/MessagesProvider";
 import style from "./EmojiButton.module.css";
+import socket from "../../../../../utils/socket.js";
 
 function EmojiButton(props) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [hasEmojiBeenClicked, setHasEmojiBeenClicked] = useState(false);
   const { messages, setMessages } = useContext(MessagesContext);
 
+
   const handleClick = () => {
     setShowEmojiPicker(!showEmojiPicker);
   };
+
+  socket.off("receivedReaction");
+  socket.on("receivedReaction", (data) => {
+    //console.log("Backend data: ", data);
+
+    setMessages((msgs) => {
+      const newMsgs = msgs.concat();
+      const getMessageObject = newMsgs.find(message => message.id === data.id);
+      const index = newMsgs.indexOf(getMessageObject);
+      const newMsgObj  = {
+        ...getMessageObject,
+        reactions: [...data.reactions]
+      }
+
+      newMsgs.splice(index, 1, newMsgObj);
+      return newMsgs;
+    });
+  })
+
+
+
 
   const handleEmojiSelection = (emoji) => {
     setShowEmojiPicker(false);
@@ -20,9 +43,19 @@ function EmojiButton(props) {
       count: 1,
       isChecked: false,
     };
-    if (!isEmojiThere(reaction, emoji.native)) {
+
+    const newMsg = {
+      ...props.message,
+      reactions: [...props.message.reactions, reaction]
+    };
+
+
+    if (!isEmojiThere(emoji.native)) {
       addReaction(reaction);
+
+      socket.emit("addReaction", newMsg);
     } else {
+      //socket.emit("addReaction", newMsg)
       const reaction = props.message.reactions.find(
         (reaction) => reaction.emoji === emoji.native
       );
@@ -45,7 +78,7 @@ function EmojiButton(props) {
     //addReaction(reaction);
   };
 
-  const isEmojiThere = (reaction, emoji) => {
+  const isEmojiThere = (emoji) => {
     for (let i = 0; i < props.message.reactions.length; i++) {
       let reaction = props.message.reactions[i];
       if (reaction.emoji === emoji) {
