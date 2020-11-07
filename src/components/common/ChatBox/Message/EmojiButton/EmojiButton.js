@@ -18,14 +18,30 @@ function EmojiButton(props) {
     setShowEmojiPicker(!showEmojiPicker);
   };
 
-  socket.off("receivedReaction");
+  socket.off("receiveReaction");
+  socket.off("receiveRemoveReaction");
 
-  socket.on("receivedReaction", (data) => {
-    if (isEmojiThere(data.emoji)) {
-      updateCount(data.message, data, 1, false);
+  socket.on("receiveReaction", (message, reaction) => {
+    if (isEmojiThere(reaction.emoji)) {
+      const clientMessageObject = messages.find((msg) => msg.id === message.id);
+      if (!clientMessageObject) return;
+
+      const messageReaction = clientMessageObject.reactions.find(
+        (r) => r.emoji === reaction.emoji
+      );
+      if (!messageReaction) return;
+      updateCount(message, reaction, 1, messageReaction.isChecked);
     } else {
-      addReaction(data.message, data);
+      addReaction(message, reaction);
     }
+  });
+
+  socket.on("receiveRemoveReaction", (message, reaction) => {
+    const clientMessageObject = messages.find((msg) => msg.id === message.id);
+    const reactions = clientMessageObject.reactions;
+    const msgReaction = reactions.find((r) => r.emoji === reaction.emoji);
+
+    updateCount(message, reaction, -1, msgReaction.isChecked);
   });
 
   const handleEmojiSelection = (emoji) => {
@@ -42,7 +58,7 @@ function EmojiButton(props) {
     const serverReaction = { ...reaction };
     serverReaction.isChecked = false;
 
-    socket.emit("addReaction", serverReaction);
+    socket.emit("addReaction", props.message, serverReaction);
 
     if (!isEmojiThere(emoji.native)) {
       addReaction(props.message, reaction);
@@ -82,10 +98,14 @@ function EmojiButton(props) {
   };
 
   const updateCount = (message, reaction, num, isChecked) => {
+    const reactionInArray = message.reactions.find(
+      (r) => r.emoji === reaction.emoji
+    );
+    const reactionIndex = message.reactions.indexOf(reactionInArray);
+
     setMessages((msgs) => {
       const messagesClone = messages.concat();
       const msgClone = { ...message };
-      const reactionIndex = message.reactions.indexOf(reaction);
       const prevCount = msgClone.reactions[reactionIndex].count;
 
       msgClone.reactions[reactionIndex].isChecked = isChecked;
