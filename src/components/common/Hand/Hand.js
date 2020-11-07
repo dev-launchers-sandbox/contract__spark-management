@@ -20,10 +20,13 @@ for (let i = 0; i < NUM_CARDS_IN_HAND; i++) initialFlipStates.push(false);
 export default function Hand(props) {
   const { messages, setMessages } = useContext(MessagesContext);
   const { drawCard } = useDeck(props.deck); //Custom hook
+  //const { addReaction, updateCount } = useReactions(MessagesContext);
+
   const [cards, setCards] = useState([]); //Cards holds all of the cards that the hand is displaying
   const [flipStates, setFlipStates] = useState(initialFlipStates);
   const [code, setCode] = useState("None");
   const [redirect, setRedirect] = useState(false);
+
   // populateHand() : Draws NUM_CARDS_IN_HAND cards into the hand
   const populateCards = () => {
     let newHand = [];
