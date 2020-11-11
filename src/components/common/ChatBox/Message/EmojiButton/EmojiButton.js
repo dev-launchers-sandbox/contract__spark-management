@@ -98,20 +98,26 @@ function EmojiButton(props) {
   };
 
   const updateCount = (message, reaction, num, isChecked) => {
-    const reactionInArray = message.reactions.find(
+    const userMessage = messages.find((msg) => msg.id === message.id);
+    if (!userMessage) return;
+    const reactionInArray = userMessage.reactions.find(
       (r) => r.emoji === reaction.emoji
     );
-    const reactionIndex = message.reactions.indexOf(reactionInArray);
+    if (!reactionInArray) return;
+    const reactionIndex = userMessage.reactions.indexOf(reactionInArray);
 
     setMessages((msgs) => {
       const messagesClone = messages.concat();
-      const msgClone = { ...message };
+      const msgClone = { ...userMessage };
       const prevCount = msgClone.reactions[reactionIndex].count;
 
-      msgClone.reactions[reactionIndex].isChecked = isChecked;
-      msgClone.reactions[reactionIndex].count = prevCount + num;
-
-      const index = messages.indexOf(message);
+      if (prevCount === 1 && num === -1) {
+        msgClone.reactions.splice(reactionIndex, 1);
+      } else {
+        msgClone.reactions[reactionIndex].isChecked = isChecked;
+        msgClone.reactions[reactionIndex].count = prevCount + num;
+      }
+      const index = messages.indexOf(userMessage);
       messagesClone.splice(index, 1, msgClone);
 
       return messagesClone;
