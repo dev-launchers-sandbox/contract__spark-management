@@ -75,6 +75,18 @@ h2 {
   .logoHolder {
     margin-right: 18%;
   }
+
+  .rightColumn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 120vh;
+  }
+
+  .leftColumn{
+    display: none;
+  }
 }
 
 .buttonContainer {
