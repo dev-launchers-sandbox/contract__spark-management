@@ -83,6 +83,13 @@ function LoginPage(props) {
       if (data.data.valid) {
         setRedirect(true);
         sendEvent("Student Login", "student login button clicked", "button");
+      } else {
+        setForm({
+          ...form,
+          code: "",
+        });
+        setIsLoading(false);
+        notify("This code does not exist!");
       }
     } catch (error) {
       // All invalid codes will reach this endpoint
