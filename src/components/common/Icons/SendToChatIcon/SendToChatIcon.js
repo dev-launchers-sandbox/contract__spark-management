@@ -13,7 +13,7 @@ export default function SendToChatIcon(props) {
 
     const isSpaceNeed = spaceNeeded();
     const newContent =
-      messageContent + (isSpaceNeed ? " " : "") + `"${props.text}"`;
+      messageContent + (isSpaceNeed ? " " : "") + `"\uFEFF${props.text}"`;
     setMessageContent(newContent);
   };
 
@@ -24,6 +24,7 @@ export default function SendToChatIcon(props) {
     }
     return true;
   };
+
   return (
     <div>
       <img

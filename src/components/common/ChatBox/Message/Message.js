@@ -12,6 +12,10 @@ function Message(props) {
     return props.message.reactions || [];
   };
 
+  const doesComeFromCard = () => {
+    return props.message.content.indexOf("\uFEFF") != -1;
+  };
+
   return (
     <div
       className={
@@ -30,7 +34,10 @@ function Message(props) {
         </div>
       )}
 
-      <div className={props.message.server ? style.server : style.content}>
+      <div
+        style={{ color: doesComeFromCard() ? "#961a1e" : "black" }}
+        className={props.message.server ? style.server : style.content}
+      >
         {props.message.content}
         <div className={style.reactionsContainer}>
           {messageReactions().map((reaction, key) => {

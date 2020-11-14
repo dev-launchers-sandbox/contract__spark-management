@@ -43,13 +43,15 @@ function ChatBox(props) {
       block: "nearest",
       inline: "start",
     });
-
-    socket.off("receiveMessage");
   }, [messages.length]);
 
-  socket.on("receiveMessage", (data) => {
-    addMessage(data);
-  });
+  useEffect(() => {
+    socket.off("receiveMessage");
+
+    socket.on("receiveMessage", (data) => {
+      addMessage(data);
+    });
+  }, [messages]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
