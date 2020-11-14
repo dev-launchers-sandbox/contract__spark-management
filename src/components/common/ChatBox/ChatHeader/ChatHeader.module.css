@@ -1,12 +1,20 @@
 .chatHeader {
   display: flex;
-  background-color: #96948d;
-  justify-content: space-between;
+  background-color: #961a1e;
+  justify-content: space-around;
   align-items: center;
   padding-left: 1em;
   padding-right: 1em;
+  color: white;
+  height: 4rem;
 }
 
 .closeToggle {
+  transform: scale(0.7);
   cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
+
+/*background-color: #490414;*/
