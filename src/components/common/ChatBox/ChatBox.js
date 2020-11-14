@@ -152,11 +152,9 @@ function ChatBox(props) {
             className={style.chatText}
             placeholder="Type something!"
           />
-          <div className={style.buttonHolder}>
-            <button className={style.button} onClick={handleSubmit}>
-              send
-            </button>
-          </div>
+          <button className={style.button} onClick={handleSubmit}>
+            send
+          </button>
         </form>
       </div>
     </div>

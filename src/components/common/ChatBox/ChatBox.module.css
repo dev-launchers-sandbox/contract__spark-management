@@ -42,12 +42,12 @@
 }
 
 .chatText {
-  width: 80vw;
+  width: 100%;
   resize: none;
 }
 
 .buttonHolder {
-  width: 30%;
+  width: 10%;
   display: flex;
   justify-content: flex-end;
 }
