@@ -45,12 +45,11 @@ function ChatBox(props) {
     });
 
     socket.off("receiveMessage");
-    socket.on("receiveMessage", (data) => {
-      //console.log("I have received the message!");
-      //console.log("this is the data", data);
-      addMessage(data);
-    });
-  }, [messages]);
+  }, [messages.length]);
+
+  socket.on("receiveMessage", (data) => {
+    addMessage(data);
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
