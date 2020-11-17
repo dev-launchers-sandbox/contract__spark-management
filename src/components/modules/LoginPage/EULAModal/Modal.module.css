@@ -18,6 +18,11 @@ label {
   display: flex;
   flex-direction: row;
 }
+
+.check{
+  transform: scale(1.25);
+}
+
 .modalText {
   font-family: "Sue Ellen Francisco";
   font-size: 1em;
