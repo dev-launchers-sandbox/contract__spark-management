@@ -45,6 +45,7 @@ function EmojiButton(props) {
   });
 
   const handleEmojiSelection = (emoji) => {
+    props.setShowButton(false);
     setShowEmojiPicker(false);
 
     const reaction = {
