@@ -29,7 +29,7 @@ function Message(props) {
           <b>{props.message.author} </b>{" "}
           <div className={style.date}> {props.message.timestamp} </div>
           <div className={style.emojiButton}>
-            {showButton && <EmojiButton message={props.message} />}
+            {showButton && <EmojiButton message={props.message} setShowButton={setShowButton}/>}
           </div>
         </div>
       )}
