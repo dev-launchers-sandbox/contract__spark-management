@@ -8,10 +8,15 @@ function ChatHeader(props) {
 
   useEffect(() => {
     const getSubClient = async () => {
-      const res = await axios.get(`https://api.spark4community.com/codes/${props.room()}`);
-      console.log(res)
-      const subClient = res.data.code.sub_client_name === "" ? res.data.code.client_name : res.data.code.sub_client_name;
-      setSubClient(subClient);
+      try{
+        const res = await axios.get(`https://api.spark4community.com/codes/${props.room()}`);
+        console.log(res)
+        const subClient = res.data.code.sub_client_name === "" ? res.data.code.client_name : res.data.code.sub_client_name;
+        setSubClient(subClient);
+      }
+      catch(e){
+        console.error("There is an error: ", e);
+      }
     }
     getSubClient();
   }, [])
