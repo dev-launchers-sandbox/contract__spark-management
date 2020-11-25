@@ -13,6 +13,8 @@ function EmojiButton(props) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [hasEmojiBeenClicked, setHasEmojiBeenClicked] = useState(false);
   const { messages, setMessages } = useContext(MessagesContext);
+  const mediaQuery = window.matchMedia('(orientation: portrait)')
+
 
   const handleClick = () => {
     setShowEmojiPicker(!showEmojiPicker);
@@ -126,23 +128,24 @@ function EmojiButton(props) {
   };
 
   return (
-    <div className={style.emojiButtonContainer}>
-      <button className={style.emojiButton} onClick={handleClick}>
-        😀<b>+</b>
-      </button>
-      {showEmojiPicker && (
-        <div className={style.pickerContainer}>
-          <Picker
-            title="Pick you emoji"
-            onSelect={handleEmojiSelection}
-            theme="dark"
-            set="google"
-            perLine={8}
-            style={{ position: "relative", maxWidth: "100%" }}
-          />
-        </div>
-      )}
-    </div>
+      <div className={style.emojiButtonContainer}>
+        <button className={style.emojiButton} onClick={handleClick}>
+          😀<b>+</b>
+        </button>
+        {showEmojiPicker && (
+          <div className={style.pickerContainer}>
+            <Picker
+              title="Pick you emoji"
+              onSelect={handleEmojiSelection}
+              theme="dark"
+              set="google"
+              perLine={8}
+              style={{width: mediaQuery.matches ? "100%" : "20vw"}}
+
+            />
+          </div>
+        )}
+      </div>
   );
 }
 
