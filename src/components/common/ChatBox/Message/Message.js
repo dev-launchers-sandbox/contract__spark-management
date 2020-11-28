@@ -7,13 +7,19 @@ import { MessagesContext } from "../../../../useContext/MessagesProvider";
 function Message(props) {
   const [showButton, setShowButton] = useState(false);
   const { messages, setMessages } = useContext(MessagesContext); //ANNOYING FORMATTER
-
+  const [openDownwards, setOpenDownwards] = useState();
   const messageReactions = () => {
     return props.message.reactions || [];
   };
 
-  const doesComeFromCard = () => {
+  const comesFromCard = () => {
     return props.message.content.indexOf("\uFEFF") != -1;
+  };
+
+  const handleDivClick = (e) => {
+    const buttonPos = e.target.getBoundingClientRect().y;
+    const fullHeight = props.getFullHeight();
+    setOpenDownwards(buttonPos * 2.2 > fullHeight);
   };
 
   return (
@@ -28,14 +34,24 @@ function Message(props) {
         <div className={style.author}>
           <b>{props.message.author} </b>{" "}
           <div className={style.date}> {props.message.timestamp} </div>
-          <div className={style.emojiButton}>
-            {showButton && <EmojiButton message={props.message} setShowButton={setShowButton}/>}
+          <div
+            id="emojipanel"
+            onClick={handleDivClick}
+            className={style.emojiButton}
+          >
+            {showButton && (
+              <EmojiButton
+                message={props.message}
+                setShowButton={setShowButton}
+                openDownwards={openDownwards}
+              />
+            )}
           </div>
         </div>
       )}
 
       <div
-        style={{ color: doesComeFromCard() ? "#961a1e" : "black" }}
+        style={{ color: comesFromCard() ? "#961a1e" : "black" }}
         className={props.message.server ? style.server : style.content}
       >
         {props.message.content}
