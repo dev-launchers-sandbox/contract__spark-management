@@ -23,7 +23,8 @@ function ChatBox(props) {
   const { messages, setMessages } = useContext(MessagesContext);
 
   let lastMessage = useRef();
-
+  let messagesContainer = useRef();
+  let chatHeader = useRef();
   //Limit keypresses to textarea
   //REACT
   document.onkeypress = function (event) {
@@ -36,8 +37,14 @@ function ChatBox(props) {
     }
   };
 
+  const getFullHeight = () => {
+    return (
+      messagesContainer.getBoundingClientRect().height -
+      chatHeader.getBoundingClientRect().height
+    );
+  };
   useEffect(() => {
-    //lastMessage.scrollIntoView({ behavior: "smooth" });
+    //console.log("2st ", chatHeader.getBoundingClientRect());
     lastMessage.scrollIntoView({
       behavior: "smooth",
       block: "nearest",
@@ -128,13 +135,29 @@ function ChatBox(props) {
 
   return (
     <div className={style.container}>
-      <div className={style.messageArea}>
-        <div className={style.chatHeaderContainer}>
+      <div
+        ref={(ol) => {
+          messagesContainer = ol;
+        }}
+        className={style.messageArea}
+      >
+        <div
+          ref={(ol) => {
+            chatHeader = ol;
+          }}
+          className={style.chatHeaderContainer}
+        >
           <ChatHeader room={getRoomCode} handleClose={handleClose} />
         </div>
         <div id="messages" className={style.message}>
           {messages.map((message, key) => {
-            return <Message key={key} message={message} />;
+            return (
+              <Message
+                getFullHeight={getFullHeight}
+                key={key}
+                message={message}
+              />
+            );
           })}
           <div
             style={{ float: "left", clear: "both" }}
