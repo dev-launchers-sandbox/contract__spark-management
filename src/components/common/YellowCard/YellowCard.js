@@ -7,6 +7,9 @@ import SendToChatIcon from "./../Icons/SendToChatIcon/SendToChatIcon";
 import SelectCardIcon from "./../Icons/SelectCardIcon/SelectCardIcon";
 
 export default function YellowCard(props) {
+
+  const [isYellowCard, setIsYellowCard] = useState(true)
+
   function cardRenderer() {
     if (props.emoji) {
       return (
@@ -56,7 +59,7 @@ export default function YellowCard(props) {
       >
         <div style={{ width: "100%", height: "100%" }}>
           <div>{cardRenderer()}</div>
-          <SendToChatIcon openChat={props.openChat} text={props.answer} />
+          <SendToChatIcon openChat={props.openChat} text={props.answer} isYellowCard={isYellowCard}/>
           <SelectCardIcon onClick={props.onClick} />
         </div>
       </div>

@@ -54,6 +54,7 @@ export default function RedDeck(props) {
                   "button"
                 );
               }}
+              isYellowCard={false}
             />
           </div>
         </div>
