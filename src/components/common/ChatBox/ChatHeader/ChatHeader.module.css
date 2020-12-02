@@ -1,5 +1,4 @@
 .chatHeader {
-  font-family: Sue Ellen Francisco;
   display: flex;
   background-color: #961a1e;
   justify-content: space-around;
@@ -8,7 +7,7 @@
   padding-right: 1em;
   color: #e8e4c2;
   height: 4rem;
-  font-size: 1.6rem;
+  font-size: 1.1rem;
 }
 
 .closeToggle {

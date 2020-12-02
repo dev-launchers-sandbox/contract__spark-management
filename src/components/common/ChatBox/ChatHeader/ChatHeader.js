@@ -6,7 +6,7 @@ function ChatHeader(props) {
 
   return (
     <div className={style.chatHeader}>
-      <p className={style.room}>Spark a conversation</p>
+      <p className={style.room}>SPARK a conversation</p>
       <span className={style.closeToggle} onClick={props.handleClose}>
         ✖️
       </span>
