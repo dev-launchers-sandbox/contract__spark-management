@@ -13,7 +13,15 @@ function Message(props) {
   };
 
   const comesFromCard = () => {
-    return props.message.content.indexOf("\uFEFF") != -1;
+    if(props.message.content.indexOf("\u200B") != -1){
+      return "redCard";
+    }
+    else if(props.message.content.indexOf("\uFEFF") != -1){
+      return "yelloCard"
+    }
+    else{
+      return false;
+    }
   };
 
   const handleDivClick = (e) => {
@@ -51,17 +59,18 @@ function Message(props) {
       )}
 
       <div
-        style={{ color: comesFromCard() ? "#961a1e" : "black" }}
-        className={props.message.server ? style.server : style.content}
+
+        className={props.message.server ? style.server : (comesFromCard() === "yelloCard" ? style.yellowCardText : comesFromCard() === "redCard" ? style.redCardText : style.content)}
       >
         {props.message.content}
-        <div className={style.reactionsContainer}>
-          {messageReactions().map((reaction, key) => {
-            return (
-              <Reaction message={props.message} key={key} reaction={reaction} />
-            );
-          })}
-        </div>
+
+      </div>
+      <div className={style.reactionsContainer}>
+        {messageReactions().map((reaction, key) => {
+          return (
+            <Reaction message={props.message} key={key} reaction={reaction} />
+          );
+        })}
       </div>
     </div>
   );
