@@ -12,6 +12,7 @@ function Message(props) {
     return props.message.reactions || [];
   };
 
+  //checks which card it comes from
   const comesFromCard = () => {
     if(props.message.content.indexOf("\u200B") != -1){
       return "redCard";
