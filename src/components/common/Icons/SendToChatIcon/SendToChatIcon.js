@@ -32,6 +32,7 @@ export default function SendToChatIcon(props) {
         src={sendToChatIcon}
         alt="copy text"
         onClick={sendToChat}
+        title="send to chat"
       />
     </div>
   );

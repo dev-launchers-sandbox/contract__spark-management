@@ -40,7 +40,7 @@ export default function RedDeck(props) {
         flipDirection="vertical"
         isFlipped={isFlipped}
       >
-        <div key="front" className={style.RedDeck}>
+        <div key="front" className={style.RedDeck} title="do not flip if you're not the sparker">
           {/* the key is what makes the ReactCardFlip package to know which part is the front or back part.*/}
           <div>
             <h1> {card} </h1>
@@ -64,6 +64,7 @@ export default function RedDeck(props) {
           style={{ transformStyle: "initial" }}
           className={style.RedDeck}
           onClick={onClick}
+          title="do not flip if you're not the sparker"
         >
           <img
             className={style.whiteLogo}
