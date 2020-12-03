@@ -23,6 +23,8 @@ function EmojiButton(props) {
   socket.off("receiveRemoveReaction");
 
   socket.on("receiveReaction", (message, reaction) => {
+    console.log("this is the message I receive from the server: ", message);
+    console.log("this is the reaction I receive from the server: ", reaction);
     if (isEmojiThere(reaction.emoji)) {
       const clientMessageObject = messages.find((msg) => msg.id === message.id);
       if (!clientMessageObject) return;
@@ -56,6 +58,8 @@ function EmojiButton(props) {
       isChecked: true,
       room: getRoomCode(),
     };
+
+    console.log("this is the reaction I'm sending to the server: ", reaction);
 
     const serverReaction = { ...reaction };
     serverReaction.isChecked = false;
