@@ -8,6 +8,7 @@ import { MessageContentContext } from "../../../useContext/MessageContentProvide
 import Message from "./Message/Message.js";
 import ChatHeader from "./ChatHeader/ChatHeader.js";
 import socket from "../../../utils/socket.js";
+import SendMessageIcon from "./../Icons/SendMessageIcon/SendMessageIcon";
 
 function ChatBox(props) {
   useEffect(() => {
@@ -176,9 +177,7 @@ function ChatBox(props) {
             className={style.chatText}
             placeholder="Type something!"
           />
-          <button className={style.button} onClick={handleSubmit}>
-            send
-          </button>
+          <SendMessageIcon handleSubmit={handleSubmit}/>
         </form>
       </div>
     </div>
