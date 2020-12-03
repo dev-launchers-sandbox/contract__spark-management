@@ -13,7 +13,11 @@ export default function SendToChatIcon(props) {
 
     const isSpaceNeed = spaceNeeded();
     const newContent =
-      messageContent + (isSpaceNeed ? " " : "") + (props.isYellowCard ? `\uFEFF${props.text.toUpperCase()}` : `\u200B${props.text.toUpperCase()}`);
+      messageContent +
+      (isSpaceNeed ? " " : "") +
+      (props.isYellowCard
+        ? `\uFEFF${props.text.toUpperCase()}`
+        : `\u200B${props.text.toUpperCase()}`);
     setMessageContent(newContent);
   };
 
@@ -32,7 +36,7 @@ export default function SendToChatIcon(props) {
         src={sendToChatIcon}
         alt="copy text"
         onClick={sendToChat}
-        title="send to chat"
+        title="Send To Chat"
       />
     </div>
   );
