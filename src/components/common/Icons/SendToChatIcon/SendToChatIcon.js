@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import style from "./SendToChatIcon.module.css";
 import sendToChatIcon from "./../../../../images/send-to-chat-icon.png";
 import { MessageContentContext } from "../../../../useContext/MessageContentProvider";
@@ -8,6 +8,9 @@ export default function SendToChatIcon(props) {
     MessageContentContext
   ); //ANNOYING FORMATTER
 
+  useEffect(() => {
+    console.log(props);
+  }, []);
   const sendToChat = () => {
     props.openChat(true);
 
@@ -17,7 +20,8 @@ export default function SendToChatIcon(props) {
       (isSpaceNeed ? " " : "") +
       (props.isYellowCard
         ? `\uFEFF${props.text.toUpperCase()}`
-        : `\u200B${props.text.toUpperCase()}`);
+        : `\u200B${props.text.toUpperCase()}`) +
+      (props.emoji ? ` ${props.emoji}` : " ");
     setMessageContent(newContent);
   };
 
