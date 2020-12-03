@@ -1,0 +1,9 @@
+
+.sendMessageIcon{
+  width: 8%;
+  height: 13%;
+}
+
+.sendMessageIcon:hover{
+  cursor: pointer;
+}
