@@ -14,13 +14,11 @@ function Message(props) {
 
   //checks which card it comes from
   const comesFromCard = () => {
-    if(props.message.content.indexOf("\u200B") != -1){
+    if (props.message.content.indexOf("\u200B") != -1) {
       return "redCard";
-    }
-    else if(props.message.content.indexOf("\uFEFF") != -1){
-      return "yelloCard"
-    }
-    else{
+    } else if (props.message.content.indexOf("\uFEFF") != -1) {
+      return "yelloCard";
+    } else {
       return false;
     }
   };
@@ -60,11 +58,17 @@ function Message(props) {
       )}
 
       <div
-
-        className={props.message.server ? style.server : (comesFromCard() === "yelloCard" ? style.yellowCardText : comesFromCard() === "redCard" ? style.redCardText : style.content)}
+        className={
+          props.message.server
+            ? style.server
+            : comesFromCard() === "yelloCard"
+            ? style.yellowCardText
+            : comesFromCard() === "redCard"
+            ? style.redCardText
+            : style.content
+        }
       >
         {props.message.content}
-
       </div>
       <div className={style.reactionsContainer}>
         {messageReactions().map((reaction, key) => {
