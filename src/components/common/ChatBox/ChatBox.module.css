@@ -36,9 +36,10 @@
 }
 
 .formContainer {
-  width: 60%;
+  width: 80%;
   display: flex;
   flex-direction: row;
+  margin-top: 5%;
 }
 
 
@@ -50,11 +51,11 @@
   background: none;
   border: none;
   outline: none;
+  border-bottom: 3px solid grey;
 }
 
 .chatText:hover{
-  border-bottom-style: solid;
-  border-bottom-color: white;
+  border-bottom: 3px solid #e6dfdf;
 }
 
 .buttonHolder {
