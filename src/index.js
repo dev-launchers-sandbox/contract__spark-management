@@ -126,7 +126,7 @@ function App() {
             <div className="App">
               <Switch> {routeComponents} </Switch>
             </div>
-            {statusCode === 200 && <Redirect to="/" />}]
+            {statusCode === 200 && <Redirect to="/" />}
           </MessageContentProvider>
         </Router>
       </MessagesProvider>
