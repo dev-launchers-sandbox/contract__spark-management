@@ -3,6 +3,7 @@ import style from "./Message.module.css";
 import EmojiButton from "./EmojiButton/EmojiButton.js";
 import Reaction from "./Reaction/Reaction.js";
 import { MessagesContext } from "../../../../useContext/MessagesProvider";
+import socket from "../../../../utils/socket.js";
 
 function Message(props) {
   const [showButton, setShowButton] = useState(false);
@@ -28,6 +29,92 @@ function Message(props) {
     const fullHeight = props.getFullHeight();
     setOpenDownwards(buttonPos * 2.2 > fullHeight);
   };
+
+  const isEmojiThere = (emoji) => {
+    try{
+      for (let i = 0; i < props.message.reactions.length; i++) {
+        let reaction = props.message.reactions[i];
+        if (reaction.emoji === emoji) {
+          return true;
+        }
+      }
+      return false;
+    }
+    catch(err){
+      console.log("omg there is an error: ", err);
+    }
+
+  };
+
+  const addReaction = (message, reaction) => {
+    setMessages((msgs) => {
+      const newMsgs = msgs.concat();
+      const index = newMsgs.indexOf(message);
+      const newMessage = {
+        ...message,
+        reactions: [...message.reactions, reaction],
+      };
+
+      newMsgs.splice(index, 1, newMessage);
+      return newMsgs;
+    });
+  };
+
+  const updateCount = (message, reaction, num, isChecked) => {
+    const userMessage = messages.find((msg) => msg.id === message.id);
+    if (!userMessage) return;
+    const reactionInArray = userMessage.reactions.find(
+      (r) => r.emoji === reaction.emoji
+    );
+    if (!reactionInArray) return;
+    const reactionIndex = userMessage.reactions.indexOf(reactionInArray);
+
+    setMessages((msgs) => {
+      const messagesClone = messages.concat();
+      const msgClone = { ...userMessage };
+      const prevCount = msgClone.reactions[reactionIndex].count;
+
+      if (prevCount === 1 && num === -1) {
+        msgClone.reactions.splice(reactionIndex, 1);
+      } else {
+        msgClone.reactions[reactionIndex].isChecked = isChecked;
+        msgClone.reactions[reactionIndex].count = prevCount + num;
+      }
+      const index = messages.indexOf(userMessage);
+      messagesClone.splice(index, 1, msgClone);
+
+      return messagesClone;
+    });
+  };
+
+  socket.off("receiveReaction");
+
+  socket.on("receiveReaction", (message, reaction) => {
+    console.log("this is the message I receive from the server: ", message);
+    console.log("this is the reaction I receive from the server: ", reaction);
+    if (isEmojiThere(reaction.emoji)) {
+      const clientMessageObject = messages.find((msg) => msg.id === message.id);
+      if (!clientMessageObject) return;
+
+      const messageReaction = clientMessageObject.reactions.find(
+        (r) => r.emoji === reaction.emoji
+      );
+      if (!messageReaction) return;
+      updateCount(message, reaction, 1, messageReaction.isChecked);
+    } else {
+      addReaction(message, reaction);
+    }
+  });
+
+    socket.off("receiveRemoveReaction");
+
+    socket.on("receiveRemoveReaction", (message, reaction) => {
+      const clientMessageObject = messages.find((msg) => msg.id === message.id);
+      const reactions = clientMessageObject.reactions;
+      const msgReaction = reactions.find((r) => r.emoji === reaction.emoji);
+
+      updateCount(message, reaction, -1, msgReaction.isChecked);
+    });
 
   return (
     <div

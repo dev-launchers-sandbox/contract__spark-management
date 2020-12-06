@@ -19,32 +19,6 @@ function EmojiButton(props) {
     setShowEmojiPicker(!showEmojiPicker);
   };
 
-  socket.off("receiveReaction");
-  socket.off("receiveRemoveReaction");
-
-  socket.on("receiveReaction", (message, reaction) => {
-    if (isEmojiThere(message.id, reaction.emoji)) {
-      const clientMessageObject = messages.find((msg) => msg.id === message.id);
-      if (!clientMessageObject) return;
-
-      const messageReaction = clientMessageObject.reactions.find(
-        (r) => r.emoji === reaction.emoji
-      );
-      if (!messageReaction) return;
-      updateCount(message, reaction, 1, messageReaction.isChecked);
-    } else {
-      addReaction(message, reaction);
-    }
-  });
-
-  socket.on("receiveRemoveReaction", (message, reaction) => {
-    const clientMessageObject = messages.find((msg) => msg.id === message.id);
-    const reactions = clientMessageObject.reactions;
-    const msgReaction = reactions.find((r) => r.emoji === reaction.emoji);
-
-    updateCount(message, reaction, -1, msgReaction.isChecked);
-  });
-
   const handleEmojiSelection = (emoji) => {
     props.setShowButton(false);
     setShowEmojiPicker(false);
