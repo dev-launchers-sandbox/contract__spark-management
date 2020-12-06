@@ -11,6 +11,7 @@ import { Link, useParams } from "react-router-dom";
 
 import YouthDeckYellow from "../data/YouthDeck/YouthDeckYellow.json";
 import YouthDeckRed from "../data/YouthDeck/YouthDeckRed.json";
+import ReactionsManager from "../components/common/ReactionsManager/ReactionsManager.js";
 import usePageView from "../utils/usePageView";
 
 import axios from "axios";
@@ -42,6 +43,7 @@ export default function YouthDeck(props) {
         <div className={chatOpen ? "rightColumn" : "rightColumnNotActive"}>
           {chatOpen && <ChatBox handleCallBack={handleCallBack} />}
         </div>
+        <ReactionsManager />
       </div>
     </PageBody>
   );

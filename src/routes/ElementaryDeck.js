@@ -10,6 +10,7 @@ import ChatBox from "../components/common/ChatBox/ChatBox.js";
 
 import ElementaryRedDeck from "../data/ElementaryDeck/ElementaryDeckRed.json";
 import ElementaryYellowDeck from "../data/ElementaryDeck/ElementaryDeckYellow.json";
+import ReactionsManager from "../components/common/ReactionsManager/ReactionsManager.js";
 import usePageView from "../utils/usePageView";
 import axios from "axios";
 
@@ -40,6 +41,7 @@ export default function ConversationalDeck(props) {
         <div className={chatOpen ? "rightColumn" : "rightColumnNotActive"}>
           {chatOpen && <ChatBox handleCallBack={handleCallBack} />}
         </div>
+        <ReactionsManager />
       </div>
     </PageBody>
   );

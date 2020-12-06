@@ -11,6 +11,7 @@ import { Link, useParams, Redirect } from "react-router-dom";
 
 import CommunityDeckYellow from "../data/CommunityDeck/CommunityDeckYellow.json";
 import CommunityDeckRed from "../data/CommunityDeck/CommunityDeckRed.json";
+import ReactionsManager from "../components/common/ReactionsManager/ReactionsManager.js";
 import usePageView from "../utils/usePageView";
 import axios from "axios";
 
@@ -41,6 +42,7 @@ export default function CommunityDeck(props) {
         <div className={chatOpen ? "rightColumn" : "rightColumnNotActive"}>
           {chatOpen && <ChatBox handleCallBack={handleCallBack} />}
         </div>
+        <ReactionsManager />
       </div>
     </PageBody>
   );

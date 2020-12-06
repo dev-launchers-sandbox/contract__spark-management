@@ -11,6 +11,7 @@ import { Link, useParams } from "react-router-dom";
 
 import ConversationalRedDeck from "../data/ConversationalDeck/ConversationalDeckRed";
 import ConversationalYellowDeck from "../data/ConversationalDeck/ConversationalDeckYellow";
+import ReactionsManager from "../components/common/ReactionsManager/ReactionsManager.js";
 import usePageView from "../utils/usePageView";
 import axios from "axios";
 
@@ -41,6 +42,7 @@ export default function ConversationalDeck(props) {
         <div className={chatOpen ? "rightColumn" : "rightColumnNotActive"}>
           {chatOpen && <ChatBox handleCallBack={handleCallBack} />}
         </div>
+        <ReactionsManager />
       </div>
     </PageBody>
   );
