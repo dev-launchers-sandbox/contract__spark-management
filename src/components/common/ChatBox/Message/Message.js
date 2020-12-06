@@ -31,7 +31,7 @@ function Message(props) {
   };
 
   const isEmojiThere = (emoji) => {
-    try{
+    try {
       for (let i = 0; i < props.message.reactions.length; i++) {
         let reaction = props.message.reactions[i];
         if (reaction.emoji === emoji) {
@@ -39,20 +39,19 @@ function Message(props) {
         }
       }
       return false;
-    }
-    catch(err){
+    } catch (err) {
       console.log("omg there is an error: ", err);
     }
-
   };
 
   const addReaction = (message, reaction) => {
     setMessages((msgs) => {
       const newMsgs = msgs.concat();
-      const index = newMsgs.indexOf(message);
+      const msg = messages.find((m) => m.id === message.id);
+      const index = newMsgs.indexOf(msg);
       const newMessage = {
-        ...message,
-        reactions: [...message.reactions, reaction],
+        ...msg,
+        reactions: [...msg.reactions, reaction],
       };
 
       newMsgs.splice(index, 1, newMessage);
@@ -90,31 +89,29 @@ function Message(props) {
   socket.off("receiveReaction");
 
   socket.on("receiveReaction", (message, reaction) => {
-    console.log("this is the message I receive from the server: ", message);
-    console.log("this is the reaction I receive from the server: ", reaction);
+    const msg = messages.find((m) => m.id === message.id);
     if (isEmojiThere(reaction.emoji)) {
-      const clientMessageObject = messages.find((msg) => msg.id === message.id);
-      if (!clientMessageObject) return;
+      if (!msg) return;
 
-      const messageReaction = clientMessageObject.reactions.find(
+      const messageReaction = msg.reactions.find(
         (r) => r.emoji === reaction.emoji
       );
       if (!messageReaction) return;
-      updateCount(message, reaction, 1, messageReaction.isChecked);
+      updateCount(msg, reaction, 1, messageReaction.isChecked);
     } else {
-      addReaction(message, reaction);
+      addReaction(msg, reaction);
     }
   });
 
-    socket.off("receiveRemoveReaction");
+  socket.off("receiveRemoveReaction");
 
-    socket.on("receiveRemoveReaction", (message, reaction) => {
-      const clientMessageObject = messages.find((msg) => msg.id === message.id);
-      const reactions = clientMessageObject.reactions;
-      const msgReaction = reactions.find((r) => r.emoji === reaction.emoji);
+  socket.on("receiveRemoveReaction", (message, reaction) => {
+    const clientMessageObject = messages.find((msg) => msg.id === message.id);
+    const reactions = clientMessageObject.reactions;
+    const msgReaction = reactions.find((r) => r.emoji === reaction.emoji);
 
-      updateCount(message, reaction, -1, msgReaction.isChecked);
-    });
+    updateCount(message, reaction, -1, msgReaction.isChecked);
+  });
 
   return (
     <div
