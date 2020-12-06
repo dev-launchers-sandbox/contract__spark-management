@@ -28,15 +28,6 @@ function ChatBox(props) {
   let chatHeader = useRef();
   //Limit keypresses to textarea
   //REACT
-  document.onkeypress = function (event) {
-    event = event || window.event;
-    if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault();
-      if (!messageContent.replace(/\s/g, "").length) return;
-      setMessageContent("");
-      sendMessage();
-    }
-  };
 
   const getFullHeight = () => {
     return (
@@ -127,6 +118,14 @@ function ChatBox(props) {
     });
   };
 
+  const onEnterPress = (e) => {
+    if (!e) return;
+    if (e.keyCode == 13 && e.shiftKey == false) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
+
   const getRoomCode = () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -176,8 +175,9 @@ function ChatBox(props) {
             onChange={handleChange}
             className={style.chatText}
             placeholder="Type something!"
+            onKeyDown={onEnterPress}
           />
-          <SendMessageIcon handleSubmit={handleSubmit}/>
+          <SendMessageIcon handleSubmit={handleSubmit} />
         </form>
       </div>
     </div>
