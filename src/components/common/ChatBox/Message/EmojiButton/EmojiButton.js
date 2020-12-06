@@ -19,7 +19,6 @@ function EmojiButton(props) {
     setShowEmojiPicker(!showEmojiPicker);
   };
 
-
   const handleEmojiSelection = (emoji) => {
     props.setShowButton(false);
     setShowEmojiPicker(false);
@@ -32,14 +31,12 @@ function EmojiButton(props) {
       room: getRoomCode(),
     };
 
-    console.log("this is the reaction I'm sending to the server: ", reaction);
-
     const serverReaction = { ...reaction };
     serverReaction.isChecked = false;
 
     socket.emit("addReaction", props.message, serverReaction);
 
-    if (!isEmojiThere(emoji.native)) {
+    if (!isEmojiThere(props.message.id, emoji.native)) {
       addReaction(props.message, reaction);
     } else {
       const reactionToUpdate = props.message.reactions.find(
@@ -52,9 +49,12 @@ function EmojiButton(props) {
     }
   };
 
-  const isEmojiThere = (emoji) => {
-    for (let i = 0; i < props.message.reactions.length; i++) {
-      let reaction = props.message.reactions[i];
+  const isEmojiThere = (msgId, emoji) => {
+    const message = messages.find((msg) => msg.id === msgId);
+    if (!message) return;
+    for (let i = 0; i < message.reactions.length; i++) {
+      let reaction = message.reactions[i];
+      console.log(`through loop #${i + 1}`, reaction.emoji);
       if (reaction.emoji === emoji) {
         return true;
       }
