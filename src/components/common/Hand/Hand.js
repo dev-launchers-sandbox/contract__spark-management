@@ -6,6 +6,7 @@ import YellowCard from "./../YellowCard/YellowCard";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
 import HowToPlayButton from "./HowToPlayButton/HowToPlayButton";
 import NeedHelpButton from "./NeedHelpButton/NeedHelpButton";
+import CardSuggestionButton from "./../CardSuggestionButton/CardSuggestionButton.js"
 import queryString from "query-string";
 import { MessagesContext } from "../../../useContext/MessagesProvider";
 
@@ -204,12 +205,18 @@ export default function Hand(props) {
         })}
       </div>
       <div className={style.buttonHolder}>
-        <HowToPlayButton />
-        <DiscardHandButton
-          populateCards={populateCards}
-          discardCards={discardCards}
-        />
-        <NeedHelpButton />
+        <div className={style.cardSuggestionContainer}>
+          <CardSuggestionButton />
+        </div>
+        <div className={style.multipleButtons}>
+          <HowToPlayButton />
+          <DiscardHandButton
+            populateCards={populateCards}
+            discardCards={discardCards}
+          />
+          <NeedHelpButton />
+        </div>
+        <div className={style.emptyContainer} />
       </div>
       {/* Checks if the code has been verified*/}
       {redirect && <Redirect to="/" />}
