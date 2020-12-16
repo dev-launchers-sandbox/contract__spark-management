@@ -6,7 +6,7 @@ import YellowCard from "./../YellowCard/YellowCard";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
 import HowToPlayButton from "./HowToPlayButton/HowToPlayButton";
 import NeedHelpButton from "./NeedHelpButton/NeedHelpButton";
-import CardSuggestionButton from "./../CardSuggestionButton/CardSuggestionButton.js"
+import CardSuggestionButton from "./CardSuggestionButton/CardSuggestionButton.js"
 import queryString from "query-string";
 import { MessagesContext } from "../../../useContext/MessagesProvider";
 

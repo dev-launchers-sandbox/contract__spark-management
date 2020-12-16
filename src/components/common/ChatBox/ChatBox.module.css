@@ -31,7 +31,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #363333;
+  background-color: #cab79b;
   min-height: 8vh;
 }
 
@@ -45,7 +45,7 @@
 
 
 .chatText {
-  color: white;
+  color: black;
   width: 100%;
   resize: none;
   background: none;
@@ -54,8 +54,12 @@
   border-bottom: 3px solid grey;
 }
 
+.chatText::placeholder{
+  color: black;
+}
+
 .chatText:hover{
-  border-bottom: 3px solid #e6dfdf;
+  border-bottom: 3px solid black;
 }
 
 .buttonHolder {

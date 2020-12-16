@@ -1,11 +1,11 @@
 .chatHeader {
   display: flex;
-  background-color: #363333;
+  background-color: #cab79b;
   justify-content: space-around;
   align-items: center;
   padding-left: 1em;
   padding-right: 1em;
-  color: white;
+  color: black;
   height: 4rem;
   font-size: 1.1rem;
 }
