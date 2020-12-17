@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import style from "./EmojiButton.module.css";
 
+import notify from "../../../../../utils/notify.js";
+
 import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
 
@@ -20,6 +22,10 @@ function EmojiButton(props) {
   };
 
   const handleEmojiSelection = (emoji) => {
+    const userReaction = props.message.reactions.find(
+      (r) => r.emoji === emoji.native
+    );
+    if (userReaction && userReaction.isChecked) return;
     props.setShowButton(false);
     setShowEmojiPicker(false);
 
@@ -34,16 +40,17 @@ function EmojiButton(props) {
     const serverReaction = { ...reaction };
     serverReaction.isChecked = false;
 
-    socket.emit("addReaction", props.message, serverReaction);
-
     if (!isEmojiThere(props.message.id, emoji.native)) {
+      if (props.message.reactions.length >= 10) {
+        return notify("The max number of emojis has been reached.");
+      }
+      socket.emit("addReaction", props.message, serverReaction);
       addReaction(props.message, reaction);
     } else {
       const reactionToUpdate = props.message.reactions.find(
         (r) => r.emoji === emoji.native
       );
-
-      if (reaction.isChecked) return;
+      if (reactionToUpdate.isChecked) return;
 
       updateCount(props.message, reaction, 1, true);
     }

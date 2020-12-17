@@ -89,7 +89,7 @@ function LoginPage(props) {
           code: "",
         });
         setIsLoading(false);
-        notify("This code does not exist!");
+        notify("This code has expired! Purchase a new license at the website!");
       }
     } catch (error) {
       // All invalid codes will reach this endpoint
