@@ -1,9 +1,8 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { MessagesContext } from "../../../useContext/MessagesProvider";
 import socket from "../../../utils/socket.js";
 
-function ReactionsManager(props){
-
+function ReactionsManager(props) {
   const { messages, setMessages } = useContext(MessagesContext); //ANNOYING FORMATTER
 
   const isEmojiThere = (msgId, emoji) => {
@@ -11,7 +10,7 @@ function ReactionsManager(props){
     if (!message) return;
     for (let i = 0; i < message.reactions.length; i++) {
       let reaction = message.reactions[i];
-      console.log(`through loop #${i + 1}`, reaction.emoji);
+
       if (reaction.emoji === emoji) {
         return true;
       }
@@ -23,6 +22,9 @@ function ReactionsManager(props){
     setMessages((msgs) => {
       const newMsgs = msgs.concat();
       const msg = messages.find((m) => m.id === message.id);
+
+      if (!msg) return;
+
       const index = newMsgs.indexOf(msg);
       const newMessage = {
         ...msg,
@@ -35,17 +37,19 @@ function ReactionsManager(props){
   };
 
   const updateCount = (message, reaction, num, isChecked) => {
-    const userMessage = messages.find((msg) => msg.id === message.id);
-    if (!userMessage) return;
-    const reactionInArray = userMessage.reactions.find(
+    const clientMessageObject = messages.find((msg) => msg.id === message.id);
+    if (!clientMessageObject) return;
+    const reactionInArray = clientMessageObject.reactions.find(
       (r) => r.emoji === reaction.emoji
     );
     if (!reactionInArray) return;
-    const reactionIndex = userMessage.reactions.indexOf(reactionInArray);
+    const reactionIndex = clientMessageObject.reactions.indexOf(
+      reactionInArray
+    );
 
     setMessages((msgs) => {
       const messagesClone = messages.concat();
-      const msgClone = { ...userMessage };
+      const msgClone = { ...clientMessageObject };
       const prevCount = msgClone.reactions[reactionIndex].count;
 
       if (prevCount === 1 && num === -1) {
@@ -54,7 +58,7 @@ function ReactionsManager(props){
         msgClone.reactions[reactionIndex].isChecked = isChecked;
         msgClone.reactions[reactionIndex].count = prevCount + num;
       }
-      const index = messages.indexOf(userMessage);
+      const index = messages.indexOf(clientMessageObject);
       messagesClone.splice(index, 1, msgClone);
 
       return messagesClone;
@@ -65,10 +69,8 @@ function ReactionsManager(props){
 
   socket.on("receiveReaction", (message, reaction) => {
     const msg = messages.find((m) => m.id === message.id);
-    console.log("msg: ", msg);
+    if (!msg) return;
     if (isEmojiThere(msg.id, reaction.emoji)) {
-      if (!msg) return;
-
       const messageReaction = msg.reactions.find(
         (r) => r.emoji === reaction.emoji
       );
@@ -83,17 +85,14 @@ function ReactionsManager(props){
 
   socket.on("receiveRemoveReaction", (message, reaction) => {
     const clientMessageObject = messages.find((msg) => msg.id === message.id);
+    if (!clientMessageObject) return;
     const reactions = clientMessageObject.reactions;
     const msgReaction = reactions.find((r) => r.emoji === reaction.emoji);
 
     updateCount(message, reaction, -1, msgReaction.isChecked);
   });
 
-
-
-  return (
-    <div></div>
-  )
+  return <div></div>;
 }
 
 export default ReactionsManager;
