@@ -7,6 +7,7 @@ import socket from "../../../../utils/socket.js";
 
 function Message(props) {
   const [showButton, setShowButton] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const { messages, setMessages } = useContext(MessagesContext); //ANNOYING FORMATTER
   const [openDownwards, setOpenDownwards] = useState();
   const messageReactions = () => {
@@ -31,13 +32,17 @@ function Message(props) {
   };
 
 
+  const handleCallBack = (isEmojiPickerOpen) => {
+    setShowEmojiPicker(isEmojiPickerOpen);
+  }
+
   return (
     <div
       className={
         props.message.server ? style.messageHolderServer : style.messageHolder
       }
       onMouseOver={props.message.server ? null : () => setShowButton(true)}
-      onMouseLeave={props.message.server ? null : () => setShowButton(false)}
+      onMouseLeave={showEmojiPicker ? null : props.message.server ? null : () => setShowButton(false)}
     >
       {!props.message.server && (
         <div className={style.author}>
@@ -53,6 +58,7 @@ function Message(props) {
                 message={props.message}
                 setShowButton={setShowButton}
                 openDownwards={openDownwards}
+                handleCallBack={handleCallBack}
               />
             )}
           </div>

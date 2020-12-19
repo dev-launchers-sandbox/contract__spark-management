@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import style from "./EmojiButton.module.css";
 
 import notify from "../../../../../utils/notify.js";
@@ -13,12 +13,35 @@ import getRoomCode from "../../../../../utils/getRoomCode";
 
 function EmojiButton(props) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const wrapperRef = useRef(null);
   const [hasEmojiBeenClicked, setHasEmojiBeenClicked] = useState(false);
   const { messages, setMessages } = useContext(MessagesContext);
   const mediaQuery = window.matchMedia("(orientation: portrait)");
 
+  useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+            if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+                //alert("You clicked outside of me!");
+                setShowEmojiPicker(false);
+                props.setShowButton(false)
+                props.handleCallBack(false);
+            }
+        }
+
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            // Unbind the event listener on clean up
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [wrapperRef]);
+
   const handleClick = () => {
     setShowEmojiPicker(!showEmojiPicker);
+    props.handleCallBack(!showEmojiPicker)
   };
 
   const handleEmojiSelection = (emoji) => {
@@ -122,6 +145,7 @@ function EmojiButton(props) {
             bottom: props.openDownwards && 0,
           }}
           className={style.pickerContainer}
+          ref={wrapperRef}
         >
           <Picker
             title="Pick you emoji"
