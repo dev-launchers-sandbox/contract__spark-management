@@ -126,6 +126,7 @@ function EULAModal() {
                 onChange={handleChange}
                 name="isChecked"
                 checked={answer.isChecked}
+                className={style.check}
               />
 
               <label>

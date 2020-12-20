@@ -25,14 +25,40 @@ h2 {
   margin-top: 2.5%;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 75%;
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
   justify-content: space-around;
 }
 
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
 
+.leftColumn {
+  width: 75%;
+}
+
+.leftColumnNotActive {
+  width: 100%;
+}
+
+.rightColumn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25%;
+  height: 100vh;
+}
+
+.rightColumnNotActive {
+  width: 0%;
+  height: 0%;
+}
 
 @media (orientation: portrait) {
   .upperRow {
@@ -46,8 +72,20 @@ h2 {
     justify-content: center;
   }
 
-  .logoHolder{
+  .logoHolder {
     margin-right: 18%;
+  }
+
+  .rightColumn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .leftColumn{
+    display: none;
   }
 }
 

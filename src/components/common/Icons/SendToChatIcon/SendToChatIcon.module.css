@@ -1,0 +1,10 @@
+.SendToChatIcon {
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  width: 15%;
+  opacity: 0.50;
+}
+.SendToChatIcon:hover {
+  opacity: 0.75;
+}

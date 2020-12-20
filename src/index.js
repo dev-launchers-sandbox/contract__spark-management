@@ -13,6 +13,7 @@ import ReactModal from "react-modal";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import ReactGA from "react-ga";
+
 import ResetPasswordRoute from "./routes/ResetPasswordRoute.js";
 import CommunityDeckRoute from "./routes/CommunityDeck.js";
 import ConversationalDeckRoute from "./routes/ConversationalDeck.js";
@@ -23,10 +24,14 @@ import LoginPageRoute from "./routes/LoginPageRoute.js";
 import AdminLoginRoute from "./routes/AdminLoginRoute.js";
 import ForgotPasswordRoute from "./routes/ForgotPasswordRoute.js";
 import UserCreationRoute from "./routes/UserCreationRoute.js";
-
 import ManageCodesRoute from "./routes/ManageCodesRoute.js";
+
 import Footer from "../src/components/common/Footer/Footer.js";
 import SelectDeck from "./components/common/SelectDeck/SelectDeck";
+
+import { MessagesProvider } from "./useContext/MessagesProvider";
+import { MessageContentProvider } from "./useContext/MessageContentProvider";
+
 
 // Change axios defaults, to fix cookies being sent (may need a better solution)
 axios.defaults.withCredentials = true;
@@ -94,6 +99,7 @@ function App() {
   ReactModal.setAppElement("#root");
 
   const init = () => {
+
     console.log("google analytics is being initialized");
     ReactGA.initialize("UA-89240419-1"); // put your tracking id here
     //sends current page to google analytics
@@ -104,8 +110,9 @@ function App() {
     init();
   }, []);
 
-  let [statusCode, setStatusCode] = useState(null);
-  let [formCode, setFormCode] = useState("");
+  const [statusCode, setStatusCode] = useState(null);
+  const [formCode, setFormCode] = useState("");
+  const [username, setUsername] = useState("");
 
   //Map of all the paths with its correspoding component. Prevents code repetition
   let routeComponents = routes.map(({ path, component }, key) => (
@@ -113,12 +120,18 @@ function App() {
   ));
 
   return (
-    <Router basename={getBasename(window.location.pathname)}>
-      <div className="App">
-        <Switch> {routeComponents} </Switch>
-      </div>
-      {statusCode === 200 && <Redirect to="/" />}
-    </Router>
+    <MessageContentProvider>
+      <MessagesProvider>
+        <Router basename={getBasename(window.location.pathname)}>
+          <MessageContentProvider>
+            <div className="App">
+              <Switch> {routeComponents} </Switch>
+            </div>
+            {statusCode === 200 && <Redirect to="/" />}
+          </MessageContentProvider>
+        </Router>
+      </MessagesProvider>
+    </MessageContentProvider>
   );
 }
 const rootElement = document.getElementById("root");

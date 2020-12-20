@@ -1,0 +1,21 @@
+.emojiButtonContainer {
+  background: color;
+}
+
+.emojiButton {
+  background: #cab79b;
+  border-radius: 6px;
+  opacity: 0.7;
+}
+
+.emojiButton:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.pickerContainer {
+  position: absolute;
+  bottom: 0;
+  /*top: 0;*/
+  right: 0;
+}

@@ -1,0 +1,23 @@
+.button{
+  background: #cab79b;
+  border-radius: 6px;
+  border: none;
+}
+
+.button:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+@media (orientation: portrait) {
+  .buttonHolder{
+    position: absolute;
+    right: 0;
+    margin-right: 0.3em;
+    margin-top: 0.1em;
+  }
+
+  .button{
+    transform: scale(0.8)
+  }
+}

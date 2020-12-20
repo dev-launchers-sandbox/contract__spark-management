@@ -11,6 +11,7 @@ export default function SelectCardIcon(props) {
         src={drawCardIcon}
         alt="Select Card"
         onClick={props.onClick}
+        title="Draw New Card"
       />
     </div>
   );

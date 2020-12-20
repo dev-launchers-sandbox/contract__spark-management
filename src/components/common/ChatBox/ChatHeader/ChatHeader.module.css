@@ -1,0 +1,21 @@
+.chatHeader {
+  display: flex;
+  background-color: #cab79b;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: 1em;
+  padding-right: 1em;
+  color: black;
+  height: 4rem;
+  font-size: 1.1rem;
+}
+
+.closeToggle {
+  transform: scale(0.7);
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/*background-color: #490414;*/

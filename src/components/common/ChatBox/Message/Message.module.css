@@ -1,0 +1,91 @@
+.messageHolder {
+  margin-top: 1rem;
+}
+.messageHolderServer {
+  margin-top: 1rem;
+}
+
+.messageHolder:hover {
+  background-color: #b3afaf;
+}
+
+.author {
+  display: flex;
+  flex-direction: row;
+  font-size: 0.8rem;
+  margin-left: 0.7rem;
+  padding: 0;
+}
+
+.date {
+  padding-top: 0.2rem;
+  margin-left: 1rem;
+  font-size: 0.8em;
+  color: gray;
+}
+
+.content {
+  font-size: 0.8rem;
+  margin-left: 0.7rem;
+  margin-bottom: 5px;
+  padding: 0;
+}
+
+.image {
+  margin-left: 0.7rem;
+  margin-bottom: 5px;
+  padding: 0;
+  width: 50%;
+}
+
+.server {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-left: 0.7rem;
+  margin-bottom: 5px;
+  padding: 0;
+}
+
+.emojiButton {
+  position: absolute;
+  right: 0;
+}
+
+.reactionsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 3%;
+}
+
+.yellowCardText {
+  font-family: Sue Ellen Francisco;
+  color: black;
+  font-size: 1.2rem;
+  background-color: #fdbd32;
+  padding: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 60%;
+  border-radius: 10px;
+  text-align: center;
+  margin-left: 3%;
+  margin-bottom: 3%;
+}
+
+.redCardText {
+  display: flex;
+  justify-content: center;
+  font-family: Sue Ellen Francisco;
+  color: #ebe8c5;
+  font-size: 1.2rem;
+  background-color: #961a1e;
+  padding: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 60%;
+  border-radius: 10px;
+  text-align: center;
+  margin-left: 3%;
+  margin-bottom: 3%;
+}

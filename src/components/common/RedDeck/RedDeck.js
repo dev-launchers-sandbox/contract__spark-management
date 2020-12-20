@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import style from "./RedDeck.module.css";
 import ReactCardFlip from "react-card-flip";
 
-import CopyTextIcon from "./../Icons/CopyTextIcon/CopyTextIcon";
+import SendToChatIcon from "./../Icons/SendToChatIcon/SendToChatIcon";
 import SelectCardIcon from "./../Icons/SelectCardIcon/SelectCardIcon";
 import useDeck from "./../useDeck/useDeck";
 import whiteLogo from "./../../../images/white-spark-logo.png";
-import sendEvent from "../../../utils/sendEvent.js"
+import sendEvent from "../../../utils/sendEvent.js";
 
 
 export default function RedDeck(props) {
@@ -41,15 +41,27 @@ export default function RedDeck(props) {
         flipDirection="vertical"
         isFlipped={isFlipped}
       >
-        <div key="front" className={style.RedDeck}>
+        <div
+          key="front"
+          className={style.RedDeck}
+          title="do not flip if you're not the sparker"
+        >
           {/* the key is what makes the ReactCardFlip package to know which part is the front or back part.*/}
           <div>
             <h1> {card} </h1>
-            <CopyTextIcon text={card} />
-            <SelectCardIcon onClick={() => {
-              onClick()
-              sendEvent("Red Card", "Discard and draw button clicked", "button")
-            }} />
+            <SendToChatIcon openChat={props.openChat} text={card} />
+            <SelectCardIcon
+              onClick={() => {
+                onClick();
+                sendEvent(
+                  "Red Card",
+                  "Discard and draw button clicked",
+                  "button"
+                );
+              }}
+              isYellowCard={false}
+            />
+
           </div>
         </div>
 
@@ -58,8 +70,13 @@ export default function RedDeck(props) {
           style={{ transformStyle: "initial" }}
           className={style.RedDeck}
           onClick={onClick}
+          title="Only flip if you are the SPARKER"
         >
-          <img className={style.whiteLogo} src={process.env.PUBLIC_URL + "/images/white-spark-logo.png"} alt="logo" />
+          <img
+            className={style.whiteLogo}
+            src={process.env.PUBLIC_URL + "/images/white-spark-logo.png"}
+            alt="logo"
+          />
         </div>
       </ReactCardFlip>
     </div>

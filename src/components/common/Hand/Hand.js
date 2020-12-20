@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import style from "./Hand.module.css";
 import { BrowserRouter as Router, Redirect, useParams } from "react-router-dom";
 import useDeck from "./../useDeck/useDeck";
@@ -6,18 +6,29 @@ import YellowCard from "./../YellowCard/YellowCard";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
 import HowToPlayButton from "./HowToPlayButton/HowToPlayButton";
 import NeedHelpButton from "./NeedHelpButton/NeedHelpButton";
+import CardSuggestionButton from "./CardSuggestionButton/CardSuggestionButton.js"
 import queryString from "query-string";
-import sendEvent from "../../../utils/sendEvent.js"
+import { MessagesContext } from "../../../useContext/MessagesProvider";
+
+import sendEvent from "../../../utils/sendEvent.js";
+import getRoomCode from "../../../utils/getRoomCode";
+import socket from "../../../utils/socket";
+
+
 const NUM_CARDS_IN_HAND = 8;
 let initialFlipStates = [];
 for (let i = 0; i < NUM_CARDS_IN_HAND; i++) initialFlipStates.push(false);
 
 export default function Hand(props) {
+  const { messages, setMessages } = useContext(MessagesContext);
   const { drawCard } = useDeck(props.deck); //Custom hook
+  //const { addReaction, updateCount } = useReactions(MessagesContext);
+
   const [cards, setCards] = useState([]); //Cards holds all of the cards that the hand is displaying
   const [flipStates, setFlipStates] = useState(initialFlipStates);
   const [code, setCode] = useState("None");
   const [redirect, setRedirect] = useState(false);
+
   // populateHand() : Draws NUM_CARDS_IN_HAND cards into the hand
   const populateCards = () => {
     let newHand = [];
@@ -57,6 +68,15 @@ export default function Hand(props) {
     setFlipStates(initialFlipStates);
   };
 
+  useEffect(() => {
+    const room = getRoomCode();
+    socket.emit("room", room);
+  }, []);
+
+  socket.on("receiveMessage", (data) => {
+    addMessage(data);
+  });
+
   // discardCardAndDraw() : Discards the supplied card and replaces it with a new one
   const discardCardAndDraw = (card) => {
     // Remove card from the hand
@@ -77,9 +97,54 @@ export default function Hand(props) {
     }, 750);
   };
 
+  const addMessage = (data) => {
+    setMessages([...messages, data]);
+  };
+
+  const sendWelcomeMessage = () => {
+    const username = sessionStorage.getItem("username");
+
+    let user = {
+      username: username,
+      room: getRoomCode(),
+    };
+
+    socket.emit("userJoined", user);
+    let message = {
+      content: "You joined the room",
+      author: "",
+      room: getRoomCode(),
+      server: true,
+    };
+    addMessage(message);
+  };
+
+  socket.on("receiveUserJoined", (user) => {
+    if(!user.username) return;
+    const message = {
+      content: `${user.username} joined the room`,
+      author: "",
+      room: user.room,
+      server: true,
+    };
+    addMessage(message);
+  });
+
+  socket.on("receiveUserLeft", (user) => {
+    if(!user.username) return;
+    const message = {
+      content: `${user.username} left the room`,
+      author: "",
+      room: user.room,
+      server: true,
+    };
+    addMessage(message);
+  });
+
   // When this Hand component mounts:
   //    Draw cards
   useEffect(() => {
+    sendWelcomeMessage();
     let query = window.location.search;
     try {
       const queryParsed = queryString.parse(query);
@@ -90,6 +155,26 @@ export default function Hand(props) {
       populateCards();
     }
   }, []);
+
+  useEffect(() => {
+    const user = {
+      room: getRoomCode(),
+      username: sessionStorage.getItem("username"),
+    };
+    return () => {
+      socket.emit("userLeft", user);
+    };
+  }, []);
+
+  window.onbeforeunload = confirmExit;
+  function confirmExit() {
+    const user = {
+      room: getRoomCode(),
+      username: sessionStorage.getItem("username"),
+    };
+
+    socket.emit("userLeft", user);
+  }
 
   useEffect(() => {
     if (code === "None") return;
@@ -106,24 +191,36 @@ export default function Hand(props) {
               answer={card.answer}
               onClick={() => {
                 //flipCard(card);
-                console.log("yellow card button has been pressed")
-                sendEvent("Yellow Card", "Discards and draw button clicked", "button")
+                console.log("yellow card button has been pressed");
+                sendEvent(
+                  "Yellow Card",
+                  "Discards and draw button clicked",
+                  "button"
+                );
+
                 discardCardAndDraw(card);
               }}
               isEmoji={card.isEmoji}
               key={card.answer} // Stops React unique key error
               emoji={card.emoji || null}
+              openChat={props.openChat}
             />
           );
         })}
       </div>
       <div className={style.buttonHolder}>
-        <HowToPlayButton />
-        <DiscardHandButton
-          populateCards={populateCards}
-          discardCards={discardCards}
-        />
-        <NeedHelpButton />
+        <div className={style.cardSuggestionContainer}>
+          <CardSuggestionButton />
+        </div>
+        <div className={style.multipleButtons}>
+          <HowToPlayButton />
+          <DiscardHandButton
+            populateCards={populateCards}
+            discardCards={discardCards}
+          />
+          <NeedHelpButton />
+        </div>
+        <div className={style.emptyContainer} />
       </div>
       {/* Checks if the code has been verified*/}
       {redirect && <Redirect to="/" />}

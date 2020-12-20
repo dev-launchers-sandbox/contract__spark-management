@@ -3,10 +3,12 @@ import style from "./YellowCard.module.css";
 import ReactCardFlip from "react-card-flip";
 
 import redLogo from "./../../../images/red-spark-logo.png";
-import CopyTextIcon from "./../Icons/CopyTextIcon/CopyTextIcon";
+import SendToChatIcon from "./../Icons/SendToChatIcon/SendToChatIcon";
 import SelectCardIcon from "./../Icons/SelectCardIcon/SelectCardIcon";
 
 export default function YellowCard(props) {
+  const [isYellowCard, setIsYellowCard] = useState(true);
+
   function cardRenderer() {
     if (props.emoji) {
       return (
@@ -56,7 +58,12 @@ export default function YellowCard(props) {
       >
         <div style={{ width: "100%", height: "100%" }}>
           <div>{cardRenderer()}</div>
-          <CopyTextIcon text={props.answer} />
+          <SendToChatIcon
+            emoji={props.emoji}
+            openChat={props.openChat}
+            text={props.answer}
+            isYellowCard={isYellowCard}
+          />
           <SelectCardIcon onClick={props.onClick} />
         </div>
       </div>

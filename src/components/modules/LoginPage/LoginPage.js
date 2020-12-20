@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import style from "./LoginPage.module.css";
 import {
@@ -23,7 +23,8 @@ import RandomQuote from "../../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../../images/spark_app_logo_transparent.png";
 
 function LoginPage(props) {
-  let [form, setForm] = useState({ code: "" });
+  let [form, setForm] = useState({ code: "", username: "" });
+
   const [isLoading, setIsLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [deckUsing, setDeckUsing] = useState("");
@@ -38,10 +39,21 @@ function LoginPage(props) {
   };
 
   //Starts the process of code verification
-  const handleClick = (event) => {
-    console.log("button clicked")
+  const handleSubmit = (event) => {
+
     //Prevents the page from refreshing after the form submission
     event.preventDefault();
+
+    //Removes all tabs and white spaces and checks if the username is empty (length of 0)
+    if (!form.username.replace(/\s/g, "").length) {
+      return notify("Please input a valid username");
+    }
+
+    if (form.username.length > 45) {
+      return notify("Usernames must be 45 or less characters");
+    }
+
+    sessionStorage.setItem("username", form.username);
     setIsLoading(true); //Lets the user know their code is being processed
     verifyCode();
   };
@@ -72,6 +84,14 @@ function LoginPage(props) {
       if (data.data.valid) {
         setRedirect(true);
         sendEvent("Student Login", "student login button clicked", "button");
+      } else {
+        setForm({
+          ...form,
+          code: "",
+        });
+        setIsLoading(false);
+        notify("This code has expired! Purchase a new license at the website!");
+
       }
     } catch (error) {
       console.log("error omg error")
@@ -123,9 +143,17 @@ function LoginPage(props) {
                   placeholder="code"
                   onChange={handleChange}
                 />
+                <input
+                  type="text"
+                  name="username"
+                  value={form.username}
+                  style={{ width: "19.5em" }}
+                  placeholder="username"
+                  onChange={handleChange}
+                />
               </div>
               <div className={style.buttonContainer}>
-                <button className={style.button} onClick={handleClick}>
+                <button className={style.button} onClick={handleSubmit}>
                   enter
                 </button>
               </div>
@@ -162,7 +190,10 @@ function LoginPage(props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={style.link}
-                  onClick={() => {sendEvent("Waitlist", "Waitlist link clicked", "link")}}
+                  onClick={() => {
+                    sendEvent("Waitlist", "Waitlist link clicked", "link");
+                  }}
+
                 >
                   get on our waitlist
                 </a>{" "}
