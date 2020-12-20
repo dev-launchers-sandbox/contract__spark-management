@@ -119,6 +119,7 @@ export default function Hand(props) {
   };
 
   socket.on("receiveUserJoined", (user) => {
+    if(!user.username) return;
     const message = {
       content: `${user.username} joined the room`,
       author: "",
@@ -129,6 +130,7 @@ export default function Hand(props) {
   });
 
   socket.on("receiveUserLeft", (user) => {
+    if(!user.username) return;
     const message = {
       content: `${user.username} left the room`,
       author: "",
