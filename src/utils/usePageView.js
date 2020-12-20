@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import ReactGA from "react-ga";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,3 +21,4 @@ function usePageViews() {
 }
 
 export default usePageViews;
+

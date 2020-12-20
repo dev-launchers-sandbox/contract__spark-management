@@ -1,5 +1,6 @@
 import ReactGA from "react-ga";
 
+
 /**
  * Event - Add custom tracking event.
  * @param {string} category

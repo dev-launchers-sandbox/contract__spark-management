@@ -8,6 +8,7 @@ import useDeck from "./../useDeck/useDeck";
 import whiteLogo from "./../../../images/white-spark-logo.png";
 import sendEvent from "../../../utils/sendEvent.js";
 
+
 export default function RedDeck(props) {
   const { drawCard } = useDeck(props.deck); // uses the useDeck
   const [card, setCard] = useState(""); //Card that is being dislplayed
@@ -60,6 +61,7 @@ export default function RedDeck(props) {
               }}
               isYellowCard={false}
             />
+
           </div>
         </div>
 

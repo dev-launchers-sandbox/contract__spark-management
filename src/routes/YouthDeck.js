@@ -14,6 +14,7 @@ import YouthDeckRed from "../data/YouthDeck/YouthDeckRed.json";
 import ReactionsManager from "../components/common/ReactionsManager/ReactionsManager.js";
 import usePageView from "../utils/usePageView";
 
+
 import axios from "axios";
 
 //This makes the code cleaner by returning the teen deck route that will get called on index.js

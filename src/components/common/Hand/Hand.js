@@ -14,6 +14,7 @@ import sendEvent from "../../../utils/sendEvent.js";
 import getRoomCode from "../../../utils/getRoomCode";
 import socket from "../../../utils/socket";
 
+
 const NUM_CARDS_IN_HAND = 8;
 let initialFlipStates = [];
 for (let i = 0; i < NUM_CARDS_IN_HAND; i++) initialFlipStates.push(false);
@@ -196,6 +197,7 @@ export default function Hand(props) {
                   "Discards and draw button clicked",
                   "button"
                 );
+
                 discardCardAndDraw(card);
               }}
               isEmoji={card.isEmoji}

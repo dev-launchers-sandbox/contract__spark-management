@@ -32,6 +32,7 @@ import SelectDeck from "./components/common/SelectDeck/SelectDeck";
 import { MessagesProvider } from "./useContext/MessagesProvider";
 import { MessageContentProvider } from "./useContext/MessageContentProvider";
 
+
 // Change axios defaults, to fix cookies being sent (may need a better solution)
 axios.defaults.withCredentials = true;
 
@@ -98,15 +99,15 @@ function App() {
   ReactModal.setAppElement("#root");
 
   const init = () => {
-    ReactGA.initialize("UA-176718447-1"); // put your tracking id here
-  };
 
-  const PageView = () => {
+    console.log("google analytics is being initialized");
+    ReactGA.initialize("UA-89240419-1"); // put your tracking id here
+    //sends current page to google analytics
     ReactGA.pageview(window.location.pathname + window.location.search);
   };
+
   useEffect(() => {
     init();
-    PageView();
   }, []);
 
   const [statusCode, setStatusCode] = useState(null);

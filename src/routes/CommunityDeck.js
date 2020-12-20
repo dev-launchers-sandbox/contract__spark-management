@@ -13,6 +13,7 @@ import CommunityDeckYellow from "../data/CommunityDeck/CommunityDeckYellow.json"
 import CommunityDeckRed from "../data/CommunityDeck/CommunityDeckRed.json";
 import ReactionsManager from "../components/common/ReactionsManager/ReactionsManager.js";
 import usePageView from "../utils/usePageView";
+
 import axios from "axios";
 
 //This makes the code cleaner by returning the community deck route that will get called on index.js
@@ -25,6 +26,7 @@ export default function CommunityDeck(props) {
   const handleCallBack = (isChatOpen) => {
     setChatOpen(isChatOpen);
   };
+
 
   return (
     <PageBody>

@@ -40,6 +40,7 @@ function LoginPage(props) {
 
   //Starts the process of code verification
   const handleSubmit = (event) => {
+
     //Prevents the page from refreshing after the form submission
     event.preventDefault();
 
@@ -90,8 +91,10 @@ function LoginPage(props) {
         });
         setIsLoading(false);
         notify("This code has expired! Purchase a new license at the website!");
+
       }
     } catch (error) {
+      console.log("error omg error")
       // All invalid codes will reach this endpoint
       setForm({
         ...form,
@@ -190,6 +193,7 @@ function LoginPage(props) {
                   onClick={() => {
                     sendEvent("Waitlist", "Waitlist link clicked", "link");
                   }}
+
                 >
                   get on our waitlist
                 </a>{" "}

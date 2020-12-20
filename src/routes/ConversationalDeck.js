@@ -13,6 +13,7 @@ import ConversationalRedDeck from "../data/ConversationalDeck/ConversationalDeck
 import ConversationalYellowDeck from "../data/ConversationalDeck/ConversationalDeckYellow";
 import ReactionsManager from "../components/common/ReactionsManager/ReactionsManager.js";
 import usePageView from "../utils/usePageView";
+
 import axios from "axios";
 
 //This makes the code cleaner by returning the conversational deck route that will get called on index.js
@@ -25,6 +26,7 @@ export default function ConversationalDeck(props) {
   const handleCallBack = (isChatOpen) => {
     setChatOpen(isChatOpen);
   };
+
 
   return (
     <PageBody>
