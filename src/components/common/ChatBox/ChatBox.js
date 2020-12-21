@@ -11,13 +11,6 @@ import socket from "../../../utils/socket.js";
 import SendMessageIcon from "./../Icons/SendMessageIcon/SendMessageIcon";
 
 function ChatBox(props) {
-  useEffect(() => {
-    console.log("I AM MOUNTED");
-    socket.on("connect", () => {
-      console.log("CONNECTED OMG THIS IS ACTUALLY WORKING!!!");
-    });
-  }, []);
-
   const { messageContent, setMessageContent } = useContext(
     MessageContentContext
   ); //ANNOYING FORMATTER
