@@ -6,6 +6,7 @@ function ReactionsManager(props) {
   const { messages, setMessages } = useContext(MessagesContext); //ANNOYING FORMATTER
 
   const isEmojiThere = (msgId, emoji) => {
+    if (!msgId || !emoji) return;
     const message = messages.find((msg) => msg.id === msgId);
     if (!message) return;
     for (let i = 0; i < message.reactions.length; i++) {
@@ -88,7 +89,7 @@ function ReactionsManager(props) {
     if (!clientMessageObject) return;
     const reactions = clientMessageObject.reactions;
     const msgReaction = reactions.find((r) => r.emoji === reaction.emoji);
-
+    if (!msgReaction) return;
     updateCount(message, reaction, -1, msgReaction.isChecked);
   });
 
