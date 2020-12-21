@@ -1,8 +1,8 @@
 .RedDeck {
   position: relative;
   padding: 5%;
-  width: 10vw;
-  height: 10vw;
+  width: 9.9vw;
+  height: 9.9vw;
   min-width: 9rem;
   min-height: 9rem;
   margin: 0;
@@ -21,9 +21,11 @@
   margin-right: auto;
 }
 
+
 .RedDeck:hover {
   transform: scale(1.1);
 }
+
 .RedDeck h1 {
   font-family: Sue Ellen Francisco;
   text-transform: uppercase;
