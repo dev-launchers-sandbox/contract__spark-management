@@ -130,7 +130,7 @@ export default function Hand(props) {
     addMessage(message);
   });
 
-  socket.on("receiveUserLeft", (user) => {
+  /*socket.on("receiveUserLeft", (user) => {
     if(!user.username) return;
     const message = {
       content: `${user.username} left the room`,
@@ -139,7 +139,7 @@ export default function Hand(props) {
       server: true,
     };
     addMessage(message);
-  });
+  });^*/
 
   // When this Hand component mounts:
   //    Draw cards
@@ -156,7 +156,7 @@ export default function Hand(props) {
     }
   }, []);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const user = {
       room: getRoomCode(),
       username: sessionStorage.getItem("username"),
@@ -164,9 +164,9 @@ export default function Hand(props) {
     return () => {
       socket.emit("userLeft", user);
     };
-  }, []);
+  }, []);*/
 
-  window.onbeforeunload = confirmExit;
+  /*window.onbeforeunload = confirmExit;
   function confirmExit() {
     const user = {
       room: getRoomCode(),
@@ -174,7 +174,7 @@ export default function Hand(props) {
     };
 
     socket.emit("userLeft", user);
-  }
+  }*/
 
   useEffect(() => {
     if (code === "None") return;
