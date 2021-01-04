@@ -6,14 +6,13 @@ import YellowCard from "./../YellowCard/YellowCard";
 import DiscardHandButton from "./DiscardHandButton/DiscardHandButton";
 import HowToPlayButton from "./HowToPlayButton/HowToPlayButton";
 import NeedHelpButton from "./NeedHelpButton/NeedHelpButton";
-import CardSuggestionButton from "./CardSuggestionButton/CardSuggestionButton.js"
+import CardSuggestionButton from "./CardSuggestionButton/CardSuggestionButton.js";
 import queryString from "query-string";
 import { MessagesContext } from "../../../useContext/MessagesProvider";
 
 import sendEvent from "../../../utils/sendEvent.js";
 import getRoomCode from "../../../utils/getRoomCode";
 import socket from "../../../utils/socket";
-
 
 const NUM_CARDS_IN_HAND = 8;
 let initialFlipStates = [];
@@ -119,8 +118,9 @@ export default function Hand(props) {
     addMessage(message);
   };
 
+  socket.off("receiveUserJoined");
   socket.on("receiveUserJoined", (user) => {
-    if(!user.username) return;
+    if (!user.username) return;
     const message = {
       content: `${user.username} joined the room`,
       author: "",
