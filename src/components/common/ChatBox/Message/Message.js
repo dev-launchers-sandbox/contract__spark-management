@@ -41,7 +41,7 @@ function Message(props) {
     if (hours > 12) {
       hours -= 12;
       amOrPm = "PM";
-    }
+    } else if (hours === 12) amOrPm = "PM";
 
     let minutes = date.getMinutes();
 
