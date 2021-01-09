@@ -31,10 +31,25 @@ function Message(props) {
     setOpenDownwards(buttonPos * 2.2 > fullHeight);
   };
 
-
   const handleCallBack = (isEmojiPickerOpen) => {
     setShowEmojiPicker(isEmojiPickerOpen);
-  }
+  };
+  const getDate = (unixTime) => {
+    const date = new Date(unixTime);
+    let hours = date.getHours();
+    let amOrPm = "AM";
+    if (hours > 12) {
+      hours -= 12;
+      amOrPm = "PM";
+    }
+
+    let minutes = date.getMinutes();
+
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    return hours + ":" + minutes + ` ${amOrPm}`;
+  };
 
   return (
     <div
@@ -42,12 +57,18 @@ function Message(props) {
         props.message.server ? style.messageHolderServer : style.messageHolder
       }
       onMouseOver={props.message.server ? null : () => setShowButton(true)}
-      onMouseLeave={showEmojiPicker ? null : props.message.server ? null : () => setShowButton(false)}
+      onMouseLeave={
+        showEmojiPicker
+          ? null
+          : props.message.server
+          ? null
+          : () => setShowButton(false)
+      }
     >
       {!props.message.server && (
         <div className={style.author}>
           <b>{props.message.author} </b>{" "}
-          <div className={style.date}> {props.message.timestamp} </div>
+          <div className={style.date}> {getDate(props.message.timestamp)} </div>
           <div
             id="emojipanel"
             onClick={handleDivClick}

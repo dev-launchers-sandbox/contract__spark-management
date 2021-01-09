@@ -67,7 +67,8 @@ function ChatBox(props) {
 
   const getDate = () => {
     const date = new Date();
-    let hours = date.getHours();
+    return date.getTime();
+    /*let hours = date.getHours();
     let amOrPm = "AM";
     if (hours > 12) {
       hours -= 12;
@@ -79,7 +80,7 @@ function ChatBox(props) {
     if (minutes < 10) {
       minutes = "0" + minutes;
     }
-    return hours + ":" + minutes + ` ${amOrPm}`;
+    return hours + ":" + minutes + ` ${amOrPm}`;*/
   };
 
   const getId = () => {
