@@ -21,6 +21,7 @@ import notify from "../../../utils/notify.js";
 import sendEvent from "../../../utils/sendEvent.js";
 import RandomQuote from "../../../components/common/RandomQuote/RandomQuote.js";
 import sparkLogo from "../../../images/spark_app_logo_transparent.png";
+import socket from "../../../utils/socket.js";
 
 function LoginPage(props) {
   let [form, setForm] = useState({ code: "", username: "" });
@@ -40,7 +41,6 @@ function LoginPage(props) {
 
   //Starts the process of code verification
   const handleSubmit = (event) => {
-
     //Prevents the page from refreshing after the form submission
     event.preventDefault();
 
@@ -58,6 +58,9 @@ function LoginPage(props) {
     verifyCode();
   };
 
+  useEffect(() => {
+    if (!socket.connected) socket.connect();
+  });
   //Verifies that the code inputted exists, and redirects the user to the correct game.
   const verifyCode = async () => {
     try {
@@ -91,10 +94,9 @@ function LoginPage(props) {
         });
         setIsLoading(false);
         notify("This code has expired! Purchase a new license at the website!");
-
       }
     } catch (error) {
-      console.log("error omg error")
+      console.log("error omg error");
       // All invalid codes will reach this endpoint
       setForm({
         ...form,
@@ -193,7 +195,6 @@ function LoginPage(props) {
                   onClick={() => {
                     sendEvent("Waitlist", "Waitlist link clicked", "link");
                   }}
-
                 >
                   get on our waitlist
                 </a>{" "}
